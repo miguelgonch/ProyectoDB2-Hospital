@@ -3,25 +3,19 @@
 
 <head>
     <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gio's Company - Login</title>
     <link rel="stylesheet" href="css/foundation.css">
     <link rel="stylesheet" href="css/app.css">
-    <link rel="stylesheet" href="css/css.css">
     <script src="js/vendor/jquery.js"></script>
-    <script src="js/cat.js"></script>
 </head>
 
 <body>
-    <!--Verificar la sesion para seleccionar que navbar mostrar-->
     <header>
-        <!-- Navigation Bar -->
         <div class="top-bar" id="Navigation_Bar">
             <div class="top-bar-left">
                 <ul class="menu">
                     <figure>
-                        <a href="index.html"><img src="Imagenes/logo.jpg" class="logo" id="Navigation_Bar_Logo" /></a>
+                        <a href="index.html"><img src="imagenes/logo.png" class="logo" id="Navigation_Bar_Logo" /></a>
                     </figure>
                     <li><input type="search" placeholder="Search"></li>
                     <li><button type="submit" class="button">Search</button></li>
@@ -30,13 +24,9 @@
             <div class="top-bar-right">
                 <ul class="dropdown menu" data-dropdown-menu>
                     <ul class="dropdown menu" data-accordion-menu>
-                        <li><a href="index.html">Inicio</a></li>
-                        <li><a>Categorías</a>
-                            <ul id='cat' class="menu vertical nested">
-                            </ul>
-                        </li>
-                        <li><a href="login.html">Inicia Sesión</a></li>
-                        <li><a href="register.html">Regístrate</a></li>
+                        <li><a href="index.html">Inicio</a></li>                        
+                        <li><a href="login.html">Inicia Sesion</a></li>
+                        <li><a href="register.html">Registrate</a></li>
                     </ul>
                 </ul>
             </div>
@@ -46,18 +36,19 @@
         <div class="grid-x align-center">
             <div class="cell small-10 medium-5">
                 <form class="log-in-form" action='../controladores/login_c.html' method='post'>
-                    <h4 class="text-center">Inicia sesión</h4>
+                    </hr>
+                    <h4 class="text-center">Inicia sesion</h4>
                     <label class=''>E-mail
                                 <input type="email" placeholder="somebody@example.com" name='email' required>
                             </label>
-                    <label class=''>Contaseña
-                                <input type="password" placeholder="Contaseña" name='pswd' required>
+                    <label class=''>Contasena
+                                <input type="password" placeholder="Contasena" name='pswd' required>
                             </label>
-                    <small class="advice " style="display: none">Por favor, verifica los datos ingresados</small> <input id="show-password" type="checkbox"><label for="show-password">Mostrar contraseña</label>
+                    <small class="advice " style="display: none">Por favor, verifica los datos ingresados</small> <input id="show-password" type="checkbox"><label for="show-password">Mostrar contrasena</label>
                     <p><input type="submit" class="button expanded" value="Submit"></p>
-                    <p class="text-center"><a href="#">¿Olvidaste tu constraseña?</a></p>
+                    <p class="text-center"><a href="#">¿Olvidaste tu constrasena?</a></p>
                 </form>
-                <p>Si todavía no tienes una cuenta haz click <a href="Register.html">aquí</a></p>
+                <p>Si todavia no tienes una cuenta haz click <a href="Register.html">aqui</a></p>
             </div>
         </div>
     </div>
