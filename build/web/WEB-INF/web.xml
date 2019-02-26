@@ -35,7 +35,7 @@
         </session-timeout>
     </session-config>
     <welcome-file-list>
-        <welcome-file>faces/index.xhtml</welcome-file>
+        <welcome-file>faces/vistas/login.html</welcome-file>
         <welcome-file>redirect.jsp</welcome-file>
     </welcome-file-list>
 </web-app>
