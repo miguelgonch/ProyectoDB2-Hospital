@@ -57,8 +57,7 @@ public class Validate extends HttpServlet {
 				RequestDispatcher rd = request.getRequestDispatcher("page2.jsp");
 				rd.forward(request, response);
 			}else {
-				out.println("Invalid Login");
-				response.sendRedirect("index.jsp");
+				response.sendRedirect("index.jsp?val=0");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

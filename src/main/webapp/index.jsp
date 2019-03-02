@@ -7,11 +7,11 @@
 <title>Index</title>
 </head>
 <body>
-	<h1>Welcome</h1>
-	<form action="Validate" method="post">
-			<input type="text" name="user_id" placeholder="User ID"/><br>
-			<input type="password" name="password" placeholder="Password"/><br>
-			<input type="submit" value="Login"/>
-	</form>
+    <h1>Welcome</h1>
+    <form action="Validate" method="post">
+        <input type="text" name="user_id" placeholder="User ID"/><br>
+        <input type="password" name="password" placeholder="Password"/><br>
+        <input type="submit" value="Login"/>
+    </form>
 </body>
 </html>
