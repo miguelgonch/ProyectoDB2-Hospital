@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gio.co.hospitales;
+package gio.co.seguros;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
@@ -61,7 +61,7 @@ public class ValidateMongo extends HttpServlet {
 		usuariow = request.getParameter("user_id").toString();
 		passw = request.getParameter("password").toString();
 		/*try {*/
-			MongoClient conn = gio.co.hospitales.MongoConnectDB.connectMongo();
+			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         MongoDatabase db = conn.getDatabase(db_name);
                         MongoCollection<Document> coll = db.getCollection(db_col_name);
                         try {

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gio.co.hospitales;
+package gio.co.seguros;
 
 import com.mongodb.MongoClient;
 import com.mongodb.MongoClientURI;
