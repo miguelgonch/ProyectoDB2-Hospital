@@ -1,4 +1,4 @@
-package gio.co.proyectodb;
+package gio.co.hospitales;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -49,7 +49,7 @@ public class Validate extends HttpServlet {
 		user = request.getParameter("user_id").toString();
 		password = request.getParameter("password").toString();
 		try {
-			Connection conn = gio.co.proyectodb.JavaConnectDb.connectDb();
+			Connection conn = gio.co.hospitales.JavaConnectDb.connectDb();
 			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
