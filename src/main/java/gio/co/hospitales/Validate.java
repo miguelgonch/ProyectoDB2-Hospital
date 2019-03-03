@@ -45,20 +45,21 @@ public class Validate extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String user, password, hospnum;
+		String user, password;
+                int hospnum;
 		user = request.getParameter("user_id").toString();
 		password = request.getParameter("password").toString();
-                hospnum = request.getParameter("hospitalNum").toString();
+                hospnum = Integer.parseInt(request.getParameter("hospitalNum"));
 		try {
-			Connection conn = gio.co.hospitales.JavaConnectDb.connectDb();
+			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospnum);
 			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			if(rs.next()) {
-				RequestDispatcher rd = request.getRequestDispatcher("page2.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
 				rd.forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?val=0");
+				response.sendRedirect("login_h1.jsp?val=0");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

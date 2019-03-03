@@ -12,7 +12,7 @@
         <title>hola! Este es el index</title>
     </head>
     <body>
-        <h1>Hello prros!</h1>
+        <h1>Hello Amigos!</h1>
         <br>
         <a href="login_h1.jsp">Hospital 1</a>
         <a href="login_h2.jsp">Hospital 2</a>
