@@ -16,5 +16,8 @@
         <br>
         <a href="login_h1.jsp">Hospital 1</a>
         <a href="login_h2.jsp">Hospital 2</a>
+        <a href="login_s1.jsp">Seguro</a>
+
     </body>
 </html>
+
