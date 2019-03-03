@@ -55,7 +55,7 @@ public class Validate extends HttpServlet {
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			if(rs.next()) {
-				RequestDispatcher rd = request.getRequestDispatcher("page2.jsp");
+				RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
 				rd.forward(request, response);
 			}else {
 				response.sendRedirect("index.jsp?val=0");
@@ -66,3 +66,4 @@ public class Validate extends HttpServlet {
 	}
 
 }
+
