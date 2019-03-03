@@ -7,9 +7,9 @@ package gio.co.hospitales;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
+import com.mongodb.MongoException;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoCursor;
 import com.mongodb.client.MongoDatabase;
 import static com.mongodb.client.model.Filters.eq;
 import com.mongodb.client.model.Projections;
@@ -22,6 +22,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
+
 
 
 
@@ -63,16 +64,24 @@ public class ValidateMongo extends HttpServlet {
 			MongoClient conn = gio.co.hospitales.MongoConnectDB.connectMongo();
                         MongoDatabase db = conn.getDatabase(db_name);
                         MongoCollection<Document> coll = db.getCollection(db_col_name);
+                        try {
                         Document document = coll.find(new BasicDBObject("nombre", usuariow)).projection(Projections.fields(Projections.include("pass"), Projections.excludeId())).first();
                         pass = document.getString("pass");
-                        FindIterable<Document> fi = coll.find(eq ("nombre", "Mateo"));
-                        //MongoCursor<Document> cursor = fi.iterator();
-                        
                         if(passw.equals(pass)){
-                                RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
+                                RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
 				rd.forward(request, response);
                         } else {
                                 response.sendRedirect("index.jsp?val=0");                        }
+                        
+                        } catch(MongoException | ClassCastException e){
+                            e.printStackTrace();
+                            //log.error("Exception occurred while insert Value using **BasicDBObject** : " + e, e);
+                        }
+                        
+                        //FindIterable<Document> fi = coll.find(eq ("nombre", "Mateo"));
+                        //MongoCursor<Document> cursor = fi.iterator();
+                        
+                        
                         
 			/*if(rs.next()) {
 				RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
@@ -87,6 +96,11 @@ public class ValidateMongo extends HttpServlet {
 
     
 }
+
+
+
+
+
 
 
 
