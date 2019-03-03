@@ -1,1 +1,56 @@
-db.usuarios.insert({nombre:"Manu", apellido:"Castillo",email:"manu@db.com", puesto:"CEO"});
+db.usuarios.insert({
+    Usuarios:"nosoymanu",
+    nombre:"Manu", 
+    apellido:"Castillo",
+    email:"manu@db.com", 
+    pswd:"1234",
+    puesto:"CEO"
+});
+
+
+db.pacientes.insert({
+    no_poliza:"1234",
+    tipo_poliza: {tipo_poliza_id:"1234"},
+    nombre:"manu", 
+    apellido:"castillo",
+    telefono:"1234",
+    documento_id:"2826", 
+    contacto_emergencia:"5715",
+    servicios_recibidos:{ 
+        servicio_id:"1234", 
+        hospital:"hospiNombre", 
+        fecha:"29/02/2019", 
+        duracion:"7 dias", 
+        subservicio:"blblbl", 
+        diagnostico:"nada", 
+        medicinas:"ninguna", 
+        tratamiento:"dormir", 
+        resultados:"buenos", 
+        observaciones:"muchas", 
+        costo_total:"Q0.00", 
+        costo_cubierto:"10,000 tukis", 
+        costo_pagado:"0.00tukis" } });
+});
+
+
+db.servicios.insert({
+    categoria_id:"1234567890",
+    categoria_servicio:{
+        servicio_id:"12345",nombre_servicio:""}
+    
+});
+
+db.hospitales.insert({
+    hospital_id:"12345",
+    nombre_hospital:"hospital",
+    estado_aprobado:"si o nel",
+    servicios:{
+        id_servicio:"123456",
+        aprobado:"si o no"
+    }
+});
+
+db.polizas.insert({
+    tipopoliza_id:"123456",
+    tipo_poliza:"la poliza"
+});
