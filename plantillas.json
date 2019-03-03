@@ -1,7 +1,13 @@
-db.usuarios.insert({nombre:"Manu", apellido:"Castillo",email:"manu@db.com", puesto:"CEO"});
+db.usuarios.insert({
+    usuario_id:"1345678",
+    nombre:"Manu", 
+    apellido:"Castillo",
+    email:"manu@db.com", 
+    puesto:"CEO"
+});
 
-db.pacientes.insert(
-    {no_poliza:"1234",
+db.pacientes.insert({
+    no_poliza:"1234",
     tipo_poliza: [tipo_poliza_id:"1234"],
     nombre:"manu", 
     apellido:"castillo",
@@ -23,4 +29,9 @@ db.pacientes.insert(
         costo_cubierto:"",
         costo_pagado:""
     ]
+});
+
+db.servicios.insert({
+    categoria_id:"1234567890",
+    categoria_servicio:[servicio_id:"12345",nombre_servicio:""]
 });
