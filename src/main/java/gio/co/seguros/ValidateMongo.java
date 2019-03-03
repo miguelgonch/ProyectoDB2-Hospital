@@ -57,7 +57,7 @@ public class ValidateMongo extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuariow, passw, pass;
+		String usuariow, passw, pass, puesto;
 		usuariow = request.getParameter("user_id").toString();
 		passw = request.getParameter("password").toString();
 		/*try {*/
@@ -65,11 +65,25 @@ public class ValidateMongo extends HttpServlet {
                         MongoDatabase db = conn.getDatabase(db_name);
                         MongoCollection<Document> coll = db.getCollection(db_col_name);
                         try {
-                        Document document = coll.find(new BasicDBObject("nombre", usuariow)).projection(Projections.fields(Projections.include("pass"), Projections.excludeId())).first();
+                        Document document = coll.find(new BasicDBObject("usuario", usuariow)).projection(Projections.fields(Projections.include("pass"), Projections.excludeId())).first();
                         pass = document.getString("pass");
+                        Document document1 = coll.find(new BasicDBObject("usuario", usuariow)).projection(Projections.fields(Projections.include("puesto"), Projections.excludeId())).first();
+                        puesto = document1.getString("puesto");
+                        //puesto = "Admin";
                         if(passw.equals(pass)){
+                            //RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
+                            //rd.forward(request, response);
+                            if(puesto.equals("Admin")){
                                 RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
 				rd.forward(request, response);
+                            } else if(puesto.equals("AdminC")){
+                                RequestDispatcher rd = request.getRequestDispatcher("exitoAdminC.jsp");
+				rd.forward(request, response);
+                            } else if(puesto.equals("CallC")){
+                                RequestDispatcher rd = request.getRequestDispatcher("exitoCallCenter.jsp");
+				rd.forward(request, response);
+                            }
+                                
                         } else {
                                 response.sendRedirect("index.jsp?val=0");                        }
                         
@@ -96,6 +110,21 @@ public class ValidateMongo extends HttpServlet {
 
     
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
