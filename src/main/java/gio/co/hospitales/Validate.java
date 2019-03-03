@@ -8,9 +8,11 @@ import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
@@ -51,15 +53,21 @@ public class Validate extends HttpServlet {
 		password = request.getParameter("password").toString();
                 hospnum = Integer.parseInt(request.getParameter("hospitalNum"));
 		try {
+                        HttpSession session = request.getSession();
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospnum);
 			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			if(rs.next()) {
-				RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
-				rd.forward(request, response);
+                            Cookie cookieUsername = new Cookie("user",user);
+                            cookieUsername.setMaxAge(5*60);
+                            response.addCookie(cookieUsername);
+                            response.sendRedirect("page2_h1.jsp");
+                            conn.close();
+                            //RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
+                            //rd.forward(request, response);
 			}else {
-				response.sendRedirect("index.jsp?val=0");
+                            response.sendRedirect("index.jsp");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

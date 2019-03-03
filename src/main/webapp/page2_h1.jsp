@@ -2,11 +2,14 @@
     pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Home</title>
-</head>
+<jsp:include page="partials/_head.jsp">
+    <jsp:param name="title" value="Home" />
+</jsp:include>
+<%@ include file="partials/_verify.jsp"%>
+<%@ include file="partials/_headerLogged.jsp"%>
+
 <body>
 <h1>Login exitoso!!</h1>
+<h3>Bienvenido <%= user %></h3>
 </body>
 </html>
