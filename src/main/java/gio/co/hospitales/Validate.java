@@ -62,9 +62,9 @@ public class Validate extends HttpServlet {
                             Cookie cookieUsername = new Cookie("user",user);
                             cookieUsername.setMaxAge(5*60);
                             response.addCookie(cookieUsername);
-                            response.sendRedirect("page2_h1.jsp");
+                            response.sendRedirect("home_h.jsp");
                             conn.close();
-                            //RequestDispatcher rd = request.getRequestDispatcher("page2_h1.jsp");
+                            //RequestDispatcher rd = request.getRequestDispatcher("home_h.jsp");
                             //rd.forward(request, response);
 			}else {
                             response.sendRedirect("index.jsp");
