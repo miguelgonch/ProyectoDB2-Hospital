@@ -70,8 +70,11 @@ public class Validate extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			response.sendRedirect("index.jsp?val=0");
 		}
 	}
 
 }
+
+
+
