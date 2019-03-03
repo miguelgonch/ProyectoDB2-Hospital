@@ -15,7 +15,7 @@ public class JavaConnectDb {
                                     break;
                             case 2:
                                     //conexion del abue
-                                    conn = DriverManager.getConnection("jdbc:oracle:thin:@25.65.236.60:1521:oracl","c##hospital2","adminm");
+                                    conn = DriverManager.getConnection("jdbc:oracle:thin:@25.65.236.60:1521:orcl","c##hospital2","adminm");
                                     break;
                             default:
                                     //por defecto es al hospital 1
