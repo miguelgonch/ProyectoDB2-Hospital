@@ -1,5 +1,5 @@
 db.usuarios.insert({
-    usuario:"nosoymanu",
+    Usuarios:"nosoymanu",
     nombre:"Manu", 
     apellido:"Castillo",
     email:"manu@db.com", 
@@ -15,21 +15,20 @@ db.pacientes.insert({
     telefono:"1234",
     documento_id:"2826", 
     contacto_emergencia:"5715",
-    servicios_recibidos:{
-        servicio_id:"1234",
-        hospital:"hospiNombre",
-        fecha:"29/02/2019",
-        duracion:"",
-        subservicio:"",
-        diagnostico:"",
-        medicinas:"",
-        tratamiento:"",
-        resultados:"",
-        observaciones:"",
-        costo_total:"",
-        costo_cubierto:"",
-        costo_pagado:""
-    }
+    servicios_recibidos:{ 
+        servicio_id:"1234", 
+        hospital:"hospiNombre", 
+        fecha:"29/02/2019", 
+        duracion:"7 dias", 
+        subservicio:"blblbl", 
+        diagnostico:"nada", 
+        medicinas:"ninguna", 
+        tratamiento:"dormir", 
+        resultados:"buenos", 
+        observaciones:"muchas", 
+        costo_total:"Q0.00", 
+        costo_cubierto:"10,000 tukis", 
+        costo_pagado:"0.00tukis" } });
 });
 
 db.servicios.insert({
