@@ -45,3 +45,8 @@ db.hospitales.insert({
         aprobado:"si o no"
     ]
 });
+
+db.polizas.insert({
+    tipopoliza_id:"123456",
+    tipo_poliza:"la poliza"
+});
