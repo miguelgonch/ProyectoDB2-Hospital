@@ -1,3 +1,26 @@
 db.usuarios.insert({nombre:"Manu", apellido:"Castillo",email:"manu@db.com", puesto:"CEO"});
 
-db.pacientes({no_poliza:"1234"},[{tipo_poliza:"algo",tipo_poliza_id:"1234"}],{nombre:"manu", apellido:"castillo",telefono:"1234",documento_id:"2826", contacto_emergencia:"5715"});
+db.pacientes.insert(
+    {no_poliza:"1234",
+    tipo_poliza: [tipo_poliza_id:"1234"],
+    nombre:"manu", 
+    apellido:"castillo",
+    telefono:"1234",
+    documento_id:"2826", 
+    contacto_emergencia:"5715",
+    servicios_recibidos:[
+        servicio_id:"1234",
+        hospital:"hospiNombre",
+        fecha:"29/02/2019",
+        duracion:"",
+        subservicio:"",
+        diagnostico:"",
+        medicinas:"",
+        tratamiento:"",
+        resultados:"",
+        observaciones:"",
+        costo_total:"",
+        costo_cubierto:"",
+        costo_pagado:""
+    ]
+});
