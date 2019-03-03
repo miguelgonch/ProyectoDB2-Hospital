@@ -9,6 +9,9 @@
 <body>
     <h1>Welcome</h1>
     <form action="Validate" method="post">
+        <input type="radio" name="hospitalNum" value="1">Hospital1 
+        <input type="radio" name="hospitalNum" value="2">Hospital2 
+        <input type="radio" name="hospitalNum" value="3">Hospital3<br>
         <input type="text" name="user_id" placeholder="User ID"/><br>
         <input type="password" name="password" placeholder="Password"/><br>
         <input type="submit" value="Login"/>
