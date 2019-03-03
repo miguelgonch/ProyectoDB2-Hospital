@@ -1,17 +1,20 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%-- 
+    Document   : index
+    Created on : Mar 2, 2019, 7:06:37 PM
+    Author     : migue
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Index</title>
-</head>
-<body>
-    <h1>Welcome</h1>
-    <form action="Validate" method="post">
-        <input type="text" name="user_id" placeholder="User ID"/><br>
-        <input type="password" name="password" placeholder="Password"/><br>
-        <input type="submit" value="Login"/>
-    </form>
-</body>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>hola! Este es el index</title>
+    </head>
+    <body>
+        <h1>Hello prros!</h1>
+        <br>
+        <a href="login_h1.jsp">Hospital 1</a>
+        <a href="login_h2.jsp">Hospital 2</a>
+    </body>
 </html>
