@@ -7,6 +7,7 @@ db.usuarios.insert({
     puesto:"CEO"
 });
 
+
 db.pacientes.insert({
     no_poliza:"1234",
     tipo_poliza: {tipo_poliza_id:"1234"},
