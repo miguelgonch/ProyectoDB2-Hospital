@@ -32,6 +32,7 @@ db.pacientes.insert({
         costo_pagado:"0.00tukis" } });
 });
 
+
 db.servicios.insert({
     categoria_id:"1234567890",
     categoria_servicio:{
