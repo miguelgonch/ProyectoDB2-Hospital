@@ -1,17 +1,18 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%-- 
+    Document   : index
+    Created on : Mar 3, 2019, 3:25:22 PM
+    Author     : migue
+--%>
+
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="ISO-8859-1">
-<title>Index</title>
-</head>
-<body>
-    <h1>Welcome</h1>
-    <form action="Validate" method="post">
-        <input type="text" name="user_id" placeholder="User ID"/><br>
-        <input type="password" name="password" placeholder="Password"/><br>
-        <input type="submit" value="Login"/>
-    </form>
-</body>
+    <jsp:include page="partials/_head.jsp">
+        <jsp:param name="title" value="Portal de hospitales" />
+    </jsp:include>
+    <body>
+        <h1>Hello World!</h1>
+        <a href="login_h.jsp">Hospitales</a>
+        <a href="login_s1.jsp">Seguros</a>
+    </body>
 </html>

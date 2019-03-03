@@ -1,0 +1,27 @@
+.error {
+  color: red; }
+
+.align {
+  margin: auto; }
+
+.margin-ext {
+  margin: .5rem; }
+
+#Navigation_Bar_Logo {
+  margin-right: 10px; }
+
+footer {
+  padding: 80px 0px 40px 0px;
+  background-color: darkslategray;
+  color: white;
+  margin-top: 10px; }
+
+footer a {
+  display: block; }
+
+header {
+  padding: 0px 0px 20px 0px; }
+
+.login{
+    padding-top: 10%;
+}
