@@ -35,3 +35,13 @@ db.servicios.insert({
     categoria_id:"1234567890",
     categoria_servicio:[servicio_id:"12345",nombre_servicio:""]
 });
+
+db.hospitales.insert({
+    hospital_id:"12345",
+    nombre_hospital:"hospital",
+    estado_aprobado:"si o nel",
+    servicios:[
+        id_servicio:"123456",
+        aprobado:"si o no"
+    ]
+});
