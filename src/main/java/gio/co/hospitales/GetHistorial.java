@@ -50,8 +50,6 @@ public class GetHistorial extends HttpServlet {
                     conn.close();
                 }catch(Exception e){
                     System.err.println(e);
-                }finally{
-                    out.close();
                 }
 	}
 
