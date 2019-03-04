@@ -11,12 +11,15 @@
     <jsp:include page="partials/_head.jsp">
         <jsp:param name="title" value="Historial" />
     </jsp:include>
-    <!--check access through rol-->
-    <jsp:include page="partials/_verifyRol.jsp">
-        <jsp:param name="rol" value="1" />
-    </jsp:include>
     <!--navbar logged-->
     <%@ include file="partials/_headerLogged.jsp"%>
+    <!--Verify if the user has access-->
+    <%@ include file="partials/_getInfo.jsp"%>
+    <%
+        if(!rol.equals("1")){
+            response.sendRedirect("home_h.jsp");
+        }
+    %>
     <body>
         <h1>Historiales</h1>
         <jsp:include page="/GetHistorial" ></jsp:include>

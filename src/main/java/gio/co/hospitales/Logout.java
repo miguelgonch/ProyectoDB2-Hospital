@@ -37,8 +37,10 @@ public class Logout extends HttpServlet {
                     }
                 }
                 if(exCookie!=null){
-                    exCookie.setMaxAge(0);
-                    response.addCookie(exCookie);
+                    for(Cookie excookie : cookies){
+                        excookie.setMaxAge(0);
+                        response.addCookie(excookie);
+                    }
                 }
                 response.sendRedirect("index.jsp");
 	}
