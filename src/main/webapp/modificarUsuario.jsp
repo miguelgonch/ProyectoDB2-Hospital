@@ -18,6 +18,7 @@
                 <h1>Se modificara el usuario  <%= request.getParameter("usuarioS") %> </h1>
                 <h4 class="text-center">Ingresa los datos</h4>
                 Usuario:<br>
+                <input type="hidden" name="usuarioww" value="<%= request.getParameter("usuarioS") %>">                
                 <input type="text" name="usuariow" value="<%= request.getParameter("usuarioS") %>" placeholder="Ingrese el nombre de usuario ej. mige97">
                 <br> Nombre del Usuario:<br>
                 <input type="text" name="nombre" value="<%= request.getParameter("nombreS") %>" placeholder="Ingrese el nombre del empleado">
@@ -39,3 +40,4 @@
 
     </body>
 </html>
+
