@@ -12,5 +12,6 @@
 <h3>Bienvenido <%= user %> </h3>
 <p>rol <%= rol %> </p>
 <p>Hospital # <%= hospitalNum %></p>
+<a href="historial_h.jsp">Acceder al historial</a>
 </body>
 </html>
