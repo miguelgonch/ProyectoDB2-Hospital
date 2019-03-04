@@ -14,8 +14,12 @@
     <body>
         <h1>Exito alta admin!</h1>
         <a href="nuevoUsuario.jsp">Nuevo usuario</a>
+        <br>
+        <a href="modificarUsuario0.jsp">Modificar Usuario</a>
+
     </body>
 </html>
+
 
 
 
