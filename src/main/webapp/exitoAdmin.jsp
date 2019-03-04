@@ -4,8 +4,8 @@
     Author     : C.V
 --%>
 
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,5 +13,9 @@
     </head>
     <body>
         <h1>Exito alta admin!</h1>
+        <a href="nuevoUsuario.jsp">Nuevo usuario</a>
     </body>
 </html>
+
+
+
