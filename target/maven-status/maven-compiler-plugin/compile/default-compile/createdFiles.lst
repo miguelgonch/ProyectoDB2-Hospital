@@ -1,12 +1,7 @@
-gio\co\seguros\MongoConnectDB.class
 gio\co\hospitales\GetHistorial.class
-gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\Logout.class
-<<<<<<< HEAD
-=======
 gio\co\seguros\MongoConnectDB.class
 gio\co\hospitales\GetUsuario.class
 gio\co\seguros\ValidateMongo.class
->>>>>>> master
 gio\co\hospitales\Validate.class
