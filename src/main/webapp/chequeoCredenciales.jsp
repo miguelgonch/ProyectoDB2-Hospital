@@ -7,7 +7,7 @@
 <%
 String id = request.getParameter("usuario_id");
 String driverName = "com.mysql.jdbc.Driver";
-String connectionUrl = "jdbc:mysql://localhost:8080/";
+String connectionUrl = "jdbc:mysql://25.74.104.162:8080/";
 String dbName = "hospital3";
 String userId = "c##hospital3";
 String password = "manu";
