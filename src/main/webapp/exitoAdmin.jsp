@@ -7,10 +7,10 @@
 <!DOCTYPE html>
 
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <jsp:include page="partials/_head.jsp">
+        <jsp:param name="title" value="Exito alta admin!" />
+    </jsp:include>
+    <%@ include file="partials/_headerLogged.jsp"%>
     <body>
         <h1>Exito alta admin!</h1>
         <a href="nuevoUsuario.jsp">Nuevo usuario</a>

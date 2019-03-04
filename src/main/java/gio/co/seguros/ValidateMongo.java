@@ -18,6 +18,7 @@ import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -60,7 +61,7 @@ public class ValidateMongo extends HttpServlet {
 		String usuariow, passw, pass, puesto;
 		usuariow = request.getParameter("user_id").toString();
 		passw = request.getParameter("password").toString();
-		/*try {*/
+		try {
 			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         MongoDatabase db = conn.getDatabase(db_name);
                         MongoCollection<Document> coll = db.getCollection(db_col_name);
@@ -73,16 +74,25 @@ public class ValidateMongo extends HttpServlet {
                         if(passw.equals(pass)){
                             //RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
                             //rd.forward(request, response);
+                            //Creando las cookies para usuarios mongo
+                            Cookie cookieUsername = new Cookie("user",usuariow);
+                            cookieUsername.setMaxAge(5*60);
+                            response.addCookie(cookieUsername);
+                            
                             if(puesto.equals("Admin")){
-                                RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
-				rd.forward(request, response);
+                                response.sendRedirect("exitoAdmin.jsp");
+                                //RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
+				//rd.forward(request, response);
                             } else if(puesto.equals("AdminC")){
-                                RequestDispatcher rd = request.getRequestDispatcher("exitoAdminC.jsp");
-				rd.forward(request, response);
+                                response.sendRedirect("exitoAdminC.jsp");
+                                //RequestDispatcher rd = request.getRequestDispatcher("exitoAdminC.jsp");
+				//rd.forward(request, response);
                             } else if(puesto.equals("CallC")){
-                                RequestDispatcher rd = request.getRequestDispatcher("exitoCallCenter.jsp");
-				rd.forward(request, response);
+                                response.sendRedirect("exitoCallCenter.jsp");
+                                //RequestDispatcher rd = request.getRequestDispatcher("exitoCallCenter.jsp");
+				//rd.forward(request, response);
                             }
+                            conn.close();
                                 
                         } else {
                                 response.sendRedirect("index.jsp?val=0");                        }
@@ -102,10 +112,10 @@ public class ValidateMongo extends HttpServlet {
 				rd.forward(request, response);
 			}else {
 				response.sendRedirect("index.jsp?val=0");
-			}
-		} /*catch (SQLException e) {
+			}*/
+		} catch (Exception e) {
 			e.printStackTrace();
-		}*/
+		}
 	}
 
     

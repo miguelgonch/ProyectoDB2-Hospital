@@ -7,10 +7,10 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>JSP Page</title>
-    </head>
+    <jsp:include page="partials/_head.jsp">
+        <jsp:param name="title" value="Exito Admin clientes" />
+    </jsp:include>
+    <%@ include file="partials/_headerLogged.jsp"%>
     <body>
         <h1>Exito Administracion de clientes!</h1>
     </body>
