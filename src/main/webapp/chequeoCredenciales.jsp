@@ -1,31 +1,27 @@
 <%-- 
-    Document   : chequeoCredenciales
-    Created on : Mar 4, 2019, 4:11:05 PM
-    Author     : manu
+    Document   : historial_h
+    Created on : Mar 4, 2019, 9:46:13 AM
+    Author     : migue
 --%>
 
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
-    pageEncoding="ISO-8859-1"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
-    <!-- head -->
+    <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Inicio de sesion" />
+        <jsp:param name="title" value="Historial" />
     </jsp:include>
+    <!--navbar logged-->
+    <%@ include file="partials/_headerLogged.jsp"%>
+    <!--Verify if the user has access-->
+    <%@ include file="partials/_getInfo.jsp"%>
+    <%
+        if(!rol.equals("1")){
+            response.sendRedirect("home_h.jsp");
+        }
+    %>
     <body>
-        <div class="grid-container">
-                <div class="grid-x align-center-middle login">
-                    <div class="cell small-10 medium-5">
-                        <h2>Usuario</h2>
-                        <br>
-                        <h2>Contraseña</h2>
-                    </div>
-                </div>
-        </div>
+        <h1>Usuarios</h1>
+        <jsp:include page="/GetUsuario" ></jsp:include>
     </body>
-    
-    <script src="js/vendor/what-input.js"></script>
-    <script src="js/vendor/foundation.js"></script>
-    <script src="js/app.js"></script>
-
 </html>
