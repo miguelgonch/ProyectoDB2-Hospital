@@ -16,5 +16,4 @@
     if(user==null){
         response.sendRedirect("index.jsp");
     }
-
 %>
