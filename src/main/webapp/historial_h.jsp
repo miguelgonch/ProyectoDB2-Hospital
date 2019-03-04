@@ -19,5 +19,6 @@
     <%@ include file="partials/_headerLogged.jsp"%>
     <body>
         <h1>Historiales</h1>
+        <jsp:include page="/GetHistorial" ></jsp:include>
     </body>
 </html>
