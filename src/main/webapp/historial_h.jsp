@@ -20,9 +20,6 @@
             response.sendRedirect("home_h.jsp");
         }
     %>
-    
-        <script>alert("Not allowed!");
-    </script>
     <body>
         <h1>Historiales</h1>
         <jsp:include page="/GetHistorial" ></jsp:include>
