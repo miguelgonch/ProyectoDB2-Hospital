@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\seguros\MongoConnectDB.java
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\hospitales\JavaConnectDb.java
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\seguros\ValidateMongo.java
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\hospitales\Validate.java
-C:\Users\manu\Google Drive\UNIS\Semestres\Semestre 9\Sistemas de Bases de Datos 2\Git Proyecto DB 2\ProyectoDB2\src\main\java\gio\co\hospitales\GetHistorial.java
-=======
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\MongoConnectDB.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\ValidateMongo.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\JavaConnectDb.java
@@ -13,4 +5,3 @@ C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Validate.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevoUsuario.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java
->>>>>>> mateo
