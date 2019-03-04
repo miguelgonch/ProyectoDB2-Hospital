@@ -1,6 +1,6 @@
+gio\co\hospitales\JavaConnectDb.class
+gio\co\hospitales\Logout.class
 gio\co\seguros\MongoConnectDB.class
 gio\co\seguros\nuevoUsuario.class
 gio\co\seguros\ValidateMongo.class
-gio\co\hospitales\JavaConnectDb.class
-gio\co\hospitales\Logout.class
 gio\co\hospitales\Validate.class

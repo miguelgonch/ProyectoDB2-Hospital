@@ -27,7 +27,9 @@
                 <br> contraseña:<br>
                 <input type="text" name="passw" value="" placeholder="Ingrese la contraseña para el usuario">
                 <br> Puesto:<br>
-                
+                <select name="puesto">
+                    <option value="Admin">Admin</option><option value="AdminC">AdminC</option><option value="CallC">CallC</option>
+                </select>
                 <input class="button small-12 cell" type="submit" name="submit" value="Crear Usuario" />
             </form>
         </div>
@@ -37,3 +39,6 @@
     
     
 </html>
+
+
+

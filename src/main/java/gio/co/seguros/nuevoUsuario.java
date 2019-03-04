@@ -63,7 +63,7 @@ public class nuevoUsuario extends HttpServlet {
                 apellido = request.getParameter("apellido").toString();
                 email = request.getParameter("email").toString();
                 pass = request.getParameter("passw").toString();
-                //puesto = request.getParameter("puesto").toString();
+                puesto = request.getParameter("puesto").toString();
 		/*try {*/
 			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         MongoDatabase db = conn.getDatabase(db_name);
@@ -74,7 +74,7 @@ public class nuevoUsuario extends HttpServlet {
                             .append("apellido", apellido)
                             .append("pass", pass)
                             .append("email", email)
-                            .append("puesto", "Admin");
+                            .append("puesto", puesto);
                         coll.insertOne(doc);
                         RequestDispatcher rd = request.getRequestDispatcher("index.jsp");
                         rd.forward(request, response);
@@ -103,6 +103,7 @@ public class nuevoUsuario extends HttpServlet {
     
     
 }
+
 
 
 
