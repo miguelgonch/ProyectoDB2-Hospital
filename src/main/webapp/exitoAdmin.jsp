@@ -18,9 +18,12 @@
         <a href="modificarUsuario0.jsp">Modificar Usuario</a>
         <br>
         <a href="eliminarUsuario.jsp">Eliminar Usuario</a>
+        <br>
+        <a href="mongoLista.jsp">lista</a>
 
     </body>
 </html>
+
 
 
 
