@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\MongoConnectDB.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\ValidateMongo.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\JavaConnectDb.java
@@ -6,12 +5,3 @@ C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Validate.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevoUsuario.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java
-=======
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\seguros\ValidateMongo.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\JavaConnectDb.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\seguros\MongoConnectDB.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\GetHistorial.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\Validate.java
-C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\GetUsuario.java
->>>>>>> 3620d28c5226ee6a736ea15a53b98fa3f7af29a4
