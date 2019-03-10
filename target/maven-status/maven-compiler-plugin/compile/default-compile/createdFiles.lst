@@ -2,7 +2,11 @@ gio\co\hospitales\GetHistorial.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\Logout.class
 gio\co\seguros\MongoConnectDB.class
+<<<<<<< HEAD
 gio\co\seguros\nuevoUsuario.class
+=======
+gio\co\hospitales\GetUsuario.class
+>>>>>>> 3620d28c5226ee6a736ea15a53b98fa3f7af29a4
 gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario0.class

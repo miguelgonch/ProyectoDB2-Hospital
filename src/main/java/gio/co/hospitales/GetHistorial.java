@@ -41,9 +41,9 @@ public class GetHistorial extends HttpServlet {
                     String sql = "select * from historial";
                     OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                     OracleResultSet rs = (OracleResultSet) pst.executeQuery();
-                    String outPutTable = "<table><thead><tr><th>ID</th><th>Diagnostico</th><th>Resultados</th><th>Medicinas</th><th>Pasos a seguir</th><th>Observaciones</th></tr></thead>";
+                    String outPutTable = "<table><thead><tr><th>ID</th><th>Diagnostico</th><th>Resultados</th><th>Medicinas</th><th>Pasos a seguir</th><th>Observaciones</th><th>Fecha</th></tr></thead>";
                     while(rs.next()){
-                        outPutTable += "<tr><td>"+rs.getString(1)+"</td>"+"<td>"+rs.getString(3)+"</td>"+"<td>"+rs.getString(4)+"</td>"+"<td>"+rs.getString(5)+"</td>"+"<td>"+rs.getString(6)+"</td>"+"<td>"+rs.getString(7)+"</td></tr>";
+                        outPutTable += "<tr><td>"+rs.getString(1)+"</td>"+"<td>"+rs.getString(3)+"</td>"+"<td>"+rs.getString(4)+"</td>"+"<td>"+rs.getString(5)+"</td>"+"<td>"+rs.getString(6)+"</td>"+"<td>"+rs.getString(7)+"</td>"+"<td>"+rs.getString(8)+"</td></tr>";
                     }
                     outPutTable+="</table>";
                     out.println(outPutTable);
