@@ -3,8 +3,8 @@ gio\co\hospitales\GetHistorial.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\Logout.class
 gio\co\seguros\MongoConnectDB.class
-gio\co\seguros\nuevoUsuario.class
 gio\co\hospitales\GetUsuario.class
+gio\co\seguros\nuevoUsuario.class
 gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario0.class

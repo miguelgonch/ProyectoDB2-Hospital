@@ -16,9 +16,12 @@
         <a href="nuevoUsuario.jsp">Nuevo usuario</a>
         <br>
         <a href="modificarUsuario0.jsp">Modificar Usuario</a>
+        <br>
+        <a href="eliminarUsuario.jsp">Eliminar Usuario</a>
 
     </body>
 </html>
+
 
 
 
