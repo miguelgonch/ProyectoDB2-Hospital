@@ -8,11 +8,8 @@ package gio.co.seguros;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
-import com.mongodb.client.model.Projections;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -23,42 +20,33 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 
-
-
-
-@WebServlet("/nuevoUsuario")
+@WebServlet("/modificarUsuario")
 
 
 /**
  *
  * @author C.V
  */
-public class nuevoUsuario extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class modificarUsuario extends HttpServlet {
     
-    public nuevoUsuario() {
+    public modificarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
     
-    /**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuario, nombre, apellido, pass, email, puesto;
-		usuario = request.getParameter("usuariow").toString();
+		String usuariow, usuario, nombre, apellido, pass, email, puesto;
+		usuariow = request.getParameter("usuarioww").toString();
+                usuario = request.getParameter("usuariow").toString();
 		nombre = request.getParameter("nombre").toString();
                 apellido = request.getParameter("apellido").toString();
                 email = request.getParameter("email").toString();
@@ -69,15 +57,25 @@ public class nuevoUsuario extends HttpServlet {
                         MongoDatabase db = conn.getDatabase(db_name);
                         MongoCollection<Document> coll = db.getCollection(db_col_name);
                         try {
-                        Document doc = new Document("usuario", usuario)
-                            .append("nombre", nombre)
-                            .append("apellido", apellido)
-                            .append("pass", pass)
-                            .append("email", email)
-                            .append("puesto", puesto);
-                        coll.insertOne(doc);
-                        RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
-                        rd.forward(request, response);
+                        
+                            BasicDBObject updateFields = new BasicDBObject();
+                            updateFields.append("usuario", usuario);
+                            updateFields.append("nombre", nombre);
+                            updateFields.append("apellido", apellido);
+                            updateFields.append("email", email);
+                            updateFields.append("pass", pass);
+                            updateFields.append("puesto", puesto);
+                            BasicDBObject searchQuery = new BasicDBObject().append("usuario", usuariow);
+
+                           //coll.replaceOne(searchQuery, updateFields);
+                            
+                           BasicDBObject setQuery = new BasicDBObject();
+                           setQuery.append("$set", updateFields);
+                           coll.updateMany(searchQuery, setQuery);
+                            //coll.upda
+                                                        
+                            RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
+                            rd.forward(request, response);
                         //puesto = "Admin";
                         } catch(MongoException | ClassCastException e){
                             e.printStackTrace();
@@ -101,25 +99,7 @@ public class nuevoUsuario extends HttpServlet {
 	}
 
     
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -31,7 +31,7 @@
                 <input type="text" name="passw" value="<%= request.getParameter("passS") %>" placeholder="Ingrese la contraseña para el usuario">
                 <br> Puesto:<br>
                 <select name="puesto">
-                    <option value="<%= request.getParameter("puestoS") %>">Admin</option><option value="AdminC">AdminC</option><option value="CallC">CallC</option>
+                   <!--<option value="" selected disabled hidden>Seleccione un puesto</option> --><option value="Admin">Admin</option><option value="AdminC">AdminC</option><option value="CallC">CallC</option>
                 </select>
                 <input class="button small-12 cell" type="submit" name="submit" value="Modificar Usuario" />
             </form>
@@ -40,4 +40,7 @@
 
     </body>
 </html>
+
+
+
 
