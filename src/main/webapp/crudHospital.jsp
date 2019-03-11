@@ -9,13 +9,18 @@
 <!DOCTYPE html>
 <html>
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Nuevo Usuario" />
+        <jsp:param name="title" value="Actualización usuario" />
     </jsp:include>
     <body>
          <div class="grid-container">
         <div class="grid-x grid-margin-x align-center">
-            <form class="cell small-12 medium-8" action="nuevoanuncio.html" method="post" enctype="multipart/form-data">
+            
+            
+            <form class="cell small-12 medium-8" action="updateUser_h" method="post" <!--enctype="multipart/form-data"--> >
                 <h4 class="text-center">Panel para actualización de datos</h4>
+                
+                <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
+                <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
                 username:<br>
                 <input type="text" name="usuario" value="" placeholder="Ingrese aqui el username">
                 <br> Nombre:<br>
@@ -37,7 +42,22 @@
                 <br>
                 <input class="button small-12 cell" type="submit" name="submit" value="Actualizar" />
             </form>
+                
+                
         </div>
     </div>
     </body>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+

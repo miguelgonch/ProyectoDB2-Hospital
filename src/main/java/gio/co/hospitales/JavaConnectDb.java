@@ -2,6 +2,7 @@ package gio.co.hospitales;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+//import java.sql.SQLException;
 
 public class JavaConnectDb {
 	public static Connection connectDbH(int num) {
@@ -32,3 +33,5 @@ public class JavaConnectDb {
 		return conn;
 	}
 }
+
+

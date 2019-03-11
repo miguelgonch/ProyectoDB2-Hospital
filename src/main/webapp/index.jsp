@@ -11,9 +11,13 @@
         <jsp:param name="title" value="Portal de hospitales" />
     </jsp:include>
     <body>
-        <h1>Hello World!</h1>
-        <a href="login_h.jsp">Hospitales</a>
-        <a href="login_s1.jsp">Seguros</a>
+        <!--<h1>Hello World!</h1>-->
+        <a href="login_h.jsp">Hospitales</a><br/>
+        <a href="login_s1.jsp">Seguros</a><br/>
+        <a href="manejoUsuarios.jsp">Administración</a><br/>
     </body>
 </html>
+
+
+
 

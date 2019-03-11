@@ -3,30 +3,53 @@
     Created on : Mar 11, 2019, 11:17:32 AM
     Author     : manu
 --%>
-
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <title>Administración ususarios</title>
-    </head>
-    <!--head-->
+    <!-- head -->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Historial" />
+        <jsp:param name="title" value="CRUD usuarios" />
     </jsp:include>
-    <!--navbar logged-->
-    <%@ include file="partials/_headerLogged.jsp"%>
-    <!--Verify if the user has access-->
-    <%@ include file="partials/_getInfo.jsp"%>
-   
     <body>
-      
-        <form action="crudHospital.jsp" method=get>
-	ingrese el id de ususario <input type="text" name="num2"><br>
-	<input type="submit">
-	</form>
-        
+       <div class="grid-container">
+                <div class="grid-x align-center-middle login">
+                    <div class="cell small-10 medium-5">
+                        <form class="form" action='crudUser' method='post'>
+                            <input type="radio" name="hospitalNum" value="1" checked>Hospital1 
+                            <input type="radio" name="hospitalNum" value="2">Hospital2 
+                            <input type="radio" name="hospitalNum" value="3">Hospital3<br>
+                            <label class=''>Usuario a editar
+                                <input type="text" placeholder="Usuario" name='user_id' required>
+                            </label>
+                            
+                            <p><input type="submit" class="button expanded" value="Buscar"></p>
+                            
+                        </form>
+                    </div>
+                </div>
+        </div>
         
     </body>
+     
+    <script src="js/vendor/what-input.js"></script>
+    <script src="js/vendor/foundation.js"></script>
+    <script src="js/app.js"></script>
+    
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
