@@ -24,7 +24,36 @@
         }
     %>
     <body>
-        <h1>Historiales</h1>
-        <jsp:include page="/GetHistorial" ></jsp:include>
+        
+        <div class="grid-container">
+            <div class="grid-x align-center">
+                <div class="cell small-10 medium-12">
+                    <h1>Historial</h1>
+                    <table>
+                        <tbody id="datosPaciente">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cell small-10 medium-12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Cita</th>
+                                <th>Diagnostico</th>
+                                <th>Doctor</th>
+                                <th>Fecha</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody id="historialData">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </body>
+    <script src="js/historial.js"></script>
+    <script src="js/patientInfo.js"></script>
 </html>
