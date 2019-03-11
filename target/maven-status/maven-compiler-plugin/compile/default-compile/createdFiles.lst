@@ -2,6 +2,7 @@ gio\co\seguros\collUsuarios.class
 gio\co\seguros\modificarCliente0.class
 gio\co\seguros\mongoLista.class
 gio\co\seguros\collClientes.class
+gio\co\seguros\modificarPoliza.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\Logout.class
 gio\co\seguros\nuevoCliente.class
