@@ -78,8 +78,8 @@ public class updateUser_h extends HttpServlet {
                 
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "UPDATE usuario SET usuario='"+username+",nombre='"+nombre+",apellido='"+apellido+",telefono='"
-                                +telefono+",tipo_usuario_id='"+tipo_usuario_id+",especialidad_id='"+especialidad_id+"where usuario_id='"+id_usuario+"'";
+			String sql = "UPDATE usuario SET usuario='"+username+" ,nombre='"+nombre+" ,apellido='"+apellido+" ,telefono='"
+                                +telefono+" ,tipo_usuario_id='"+tipo_usuario_id+" ,especialidad_id='"+especialidad_id+" where usuario_id='"+id_usuario+"'";
 			
                         
                         OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -110,11 +110,13 @@ public class updateUser_h extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("index.jsp?val="+id_usuario);
+			response.sendRedirect("index.jsp?val="+id_usuario+"user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
 		}
 	}
 
 }
+
+
 
 
 
