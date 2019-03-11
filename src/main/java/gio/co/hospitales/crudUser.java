@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gio.co.hospitales;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,18 +22,20 @@ import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-
 /**
- * Servlet implementation class Validate
+ *
+ * @author manu
  */
-@WebServlet("/Validate")
-public class Validate extends HttpServlet {
+
+@WebServlet("/crudUser")
+public class crudUser extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Validate() {
+    public crudUser() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,16 +55,19 @@ public class Validate extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String user, password, hospnum;
+		String user, hospnum;
 		user = request.getParameter("user_id").toString();
-		password = request.getParameter("password").toString();
-                hospnum = request.getParameter("hospitalNum");
+		hospnum = request.getParameter("hospitalNum");
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'";
+			String sql = "select * from usuario where usuario='"+user+"'";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
-			if(rs.next()) {
+			
+                        
+                        response.sendRedirect("crudHospital.jsp?user_id="+user+"&hospitalNum="+hospnum);
+                        
+                        /*if(rs.next()) {
                             //Agregar el nombre del usuario
                             Cookie cookieUsername = new Cookie("user",user);
                             cookieUsername.setMaxAge(5*6000);
@@ -76,12 +87,34 @@ public class Validate extends HttpServlet {
                             //rd.forward(request, response);
 			}else {
                             response.sendRedirect("index.jsp");
-			}
+			}*/
 		} catch (SQLException e) {
 			response.sendRedirect("index.jsp?val=0");
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

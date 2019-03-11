@@ -9,6 +9,7 @@ gio\co\hospitales\GetUsuario.class
 gio\co\seguros\nuevoUsuario.class
 gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\GetPatient.class
+<<<<<<< HEAD
 gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario.class
 gio\co\hospitales\GetHistorial.class
@@ -20,3 +21,5 @@ gio\co\seguros\collPoliza.class
 gio\co\seguros\eliminarPoliza.class
 gio\co\seguros\eliminarUsuario.class
 gio\co\seguros\modificarUsuario0.class
+=======
+>>>>>>> manu
