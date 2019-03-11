@@ -8,9 +8,15 @@
 <%@ include file="partials/_headerLogged.jsp"%>
 <%@ include file="partials/_getInfo.jsp"%>
 <body>
-<h3>Bienvenido <%= user %> </h3>
-<p>rol <%= rol %> </p>
-<p>Hospital # <%= hospitalNum %></p>
-<a href="pacientes_h.jsp">Ver pacientes</a>
+    <div class="grid-container">
+        <div class="grid-x align-center">
+            <div class="cell small-10 medium-12">
+                <h3>Bienvenido <%= user %> </h3>
+                <p>rol <%= rol %> </p>
+                <p>Hospital # <%= hospitalNum %></p>
+                <a href="pacientes_h.jsp">Ver pacientes</a>
+            </div>
+        </div>
+    </div>
 </body>
 </html>

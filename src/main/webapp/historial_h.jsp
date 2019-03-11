@@ -41,12 +41,9 @@
                             <tr>
                                 <th>ID Cita</th>
                                 <th>Diagnostico</th>
-                                <th>Resultados</th>
-                                <th>Medicinas</th>
-                                <th>Pasos a seguir</th>
-                                <th>Observaciones</th>
-                                <th>Fecha</th>
                                 <th>Doctor</th>
+                                <th>Fecha</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="historialData">
