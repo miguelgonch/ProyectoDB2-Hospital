@@ -15,17 +15,17 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 /**
- * Servlet implementation class GetPatient
+ * Servlet implementation class GetHistorial
  */
-@WebServlet("/GetPatient")
-public class GetPatient extends HttpServlet {
+@WebServlet("/GetHistorial")
+public class GetHistorial extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         private static String hospitalNum = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetPatient() {
+    public GetHistorial() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,11 +47,11 @@ public class GetPatient extends HttpServlet {
                 if(request.getParameter("pId")!=null){
                     String pId = request.getParameter("pId");
                     //Query con el filtro
-                    sql = "select * from pacientes where paciente_id ="+pId;
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
                 }
                 else{
                     //Query
-                    sql = "select * from pacientes order by paciente_id";
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id =1 order by fecha";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -60,29 +60,28 @@ public class GetPatient extends HttpServlet {
                 int i = 0;
                 while(rs.next()){
                     //obtener parametros
-                    String id = rs.getString("PACIENTE_ID");
-                    String name = rs.getString("Nombre");
-                    String lastN = rs.getString("Apellido");
-                    String tel = rs.getString("TEL");
-                    String dpi = rs.getString("DPI");
-                    String segNum = rs.getString("num_seguro");
-                    String fNacimiento = rs.getString("f_nacimiento");
-                    String dir = rs.getString("dir");
-                    String asegNum = rs.getString("ASEGURADORA_ID");
-                    //Crear objeto json
-                    JSONObject arrayObj = new JSONObject();
-                    arrayObj.put("id",id);
-                    arrayObj.put("nombre",name);
-                    arrayObj.put("apellido",lastN);
-                    arrayObj.put("tel",tel);
-                    arrayObj.put("dpi",dpi);
-                    arrayObj.put("segNum",segNum);
-                    arrayObj.put("fNacimiento",fNacimiento);
-                    arrayObj.put("dir",dir);
-                    arrayObj.put("asegNum",asegNum);
-                    //insertar objeto a array jsons
-                    jArray.add(i,arrayObj);
-                    i++;
+                        String id = rs.getString("CITA_ID");
+                        String diag = rs.getString("Diagnostico");
+                        String res = rs.getString("resultados");
+                        String meds = rs.getString("medicinas");
+                        String pasos = rs.getString("pasosaseguir");
+                        String observ = rs.getString("observaciones");
+                        String fecha = rs.getString("fecha");
+                        String docName = rs.getString("nombre");
+                        //Crear objeto json
+                        JSONObject arrayObj = new JSONObject();
+                        arrayObj.put("id",id);
+                        arrayObj.put("diag",diag);
+                        arrayObj.put("res",res);
+                        arrayObj.put("meds",meds);
+                        arrayObj.put("pasos",pasos);
+                        arrayObj.put("observ",observ);
+                        arrayObj.put("fecha",fecha);
+                        arrayObj.put("docName",docName);
+                       
+                        //insertar objeto a array jsons
+                        jArray.add(i,arrayObj);
+                        i++;
                 }
                 rs.close ();
                 pst.close ();
