@@ -14,7 +14,7 @@
         <h1>Que desea hacer?</h1>
         <a href="nuevaPoliza.jsp">Nueva poliza</a>
         <br>
-        <a href="modificarPoliza.jsp">Modificar poliza</a>
+        <a href="modificarPoliza0.jsp">Modificar poliza</a>
         <br>
         <a href="eliminarPoliza.jsp">Eliminar poliza</a>
     </body>

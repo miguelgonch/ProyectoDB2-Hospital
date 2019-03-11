@@ -12,6 +12,7 @@ gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario.class
 gio\co\hospitales\GetHistorial.class
 gio\co\seguros\eliminarCliente.class
+gio\co\seguros\modificarPoliza0.class
 gio\co\seguros\MongoConnectDB.class
 gio\co\seguros\nuevaPoliza.class
 gio\co\seguros\collPoliza.class
