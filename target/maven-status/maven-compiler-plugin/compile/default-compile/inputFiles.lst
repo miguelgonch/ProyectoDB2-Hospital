@@ -1,12 +1,25 @@
 <<<<<<< HEAD
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\MongoConnectDB.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\eliminarCliente.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarUsuario.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\ValidateMongo.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\mongoLista.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\eliminarUsuario.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevaPoliza.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\collUsuarios.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarUsuario0.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\GetUsuario.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\collClientes.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarCliente0.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevoUsuario.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevoCliente.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\JavaConnectDb.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\GetHistorial.java
-C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarUsuario0.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\eliminarPoliza.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarPoliza0.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Validate.java
-C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\nuevoUsuario.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\modificarPoliza.java
+C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\seguros\collPoliza.java
 C:\Users\C.V\Documents\NetBeansProjects\carpeta\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java
 =======
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\src\main\java\gio\co\hospitales\Logout.java

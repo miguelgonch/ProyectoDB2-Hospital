@@ -17,18 +17,18 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
+import org.bson.types.ObjectId;
 
-
-@WebServlet("/modificarUsuario0")
+@WebServlet("/modificarCliente0")
 
 /**
  *
  * @author C.V
  */
-public class modificarUsuario0 extends HttpServlet {
+public class modificarCliente0 extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    public modificarUsuario0() {
+    public modificarCliente0() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,23 +43,35 @@ public class modificarUsuario0 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 //String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuariow, usuario, nombre, apellido, pass, email, puesto;
-		usuariow = request.getParameter("usuariow").toString();
+		String _id, tipo_poliza, nombre, apellido, telefono, email, dpi, contE, telContE;
+		_id = request.getParameter("poliza").toString();
 		/*try {*/
 			//MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         //MongoDatabase db = conn.getDatabase(db_name);
                         //MongoCollection<Document> coll = db.getCollection(db_col_name);
                         MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
-                        Document document = coll.find(new BasicDBObject("usuario", usuariow)).projection(Projections.fields(Projections.include("usuario","nombre","apellido","pass","email","puesto"), Projections.excludeId())).first();
-                        usuario = document.getString("usuario");
-                        nombre = document.getString("nombre");
-                        apellido = document.getString("apellido");
-                        pass = document.getString("pass");
+                        //Document document = coll.find(new BasicDBObject("_id", new ObjectId(_id))).projection(Projections.fields(Projections.include("tipo_poliza", "nombre","apellido","telefono","email","documentoIdentificacion", "contacto_emergencia", "Telefono-contacto_e"), Projections.excludeId())).first();
+                        Document document = coll.find(new BasicDBObject("_id", "5c85f5dcb78debd92fede7ba")).projection(Projections.fields(Projections.include("tipo_poliza", "nombre","apellido","telefono","email","documentoIdentificacion", "contacto_emergencia", "Telefono-contacto_e"), Projections.excludeId())).first();
+                        tipo_poliza = document.getString("nombre");
+                        //nombre = document.getString("nombre");
+                        /*apellido = document.getString("apellido");
+                        telefono = document.getString("telefono");
                         email = document.getString("email");
-                        puesto = document.getString("puesto");
+                        dpi = document.getString("documentoIdentificacion");
+                        contE = document.getString("contacto_emergencia");
+                        telContE = document.getString("telefono_contacto_e");*/
+                        tipo_poliza ="76";
+                        nombre = "a";
+                        apellido ="b";
+                        telefono ="123";
+                        email ="@@";
+                        dpi ="987";
+                        contE ="pepe";
+                        telContE="5647";
                         
-                        response.sendRedirect(String.format("modificarUsuario.jsp?usuarioS=%s&nombreS=%s&apellidoS=%s&passS=%s&emailS=%s&puestoS=%s", usuario, nombre, apellido, pass, email, puesto));
+                        
+                        response.sendRedirect(String.format("modificarCliente.jsp?_id=%s&tipo_poliza=%s&nombre=%s&apellido=%s&telefono=%s&email=%s&dpi=%s&contE=%s&telContE=%s", _id, tipo_poliza, nombre, apellido, telefono, email, dpi, contE, telContE));
                         
                         //request.setAttribute("usuarioS", usuario);
                         /*request.setAttribute("nombreS", nombre);
@@ -75,8 +87,19 @@ public class modificarUsuario0 extends HttpServlet {
                             e.printStackTrace();
                         }
 	}
+        
     
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

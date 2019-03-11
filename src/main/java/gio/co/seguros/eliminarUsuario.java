@@ -8,7 +8,6 @@ package gio.co.seguros;
 import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.model.Projections;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -19,16 +18,16 @@ import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 
 
-@WebServlet("/modificarUsuario0")
+@WebServlet("/eliminarUsuario")
 
 /**
  *
  * @author C.V
  */
-public class modificarUsuario0 extends HttpServlet {
+public class eliminarUsuario extends HttpServlet {
     
     private static final long serialVersionUID = 1L;
-    public modificarUsuario0() {
+    public eliminarUsuario() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,33 +42,21 @@ public class modificarUsuario0 extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 //String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuariow, usuario, nombre, apellido, pass, email, puesto;
+		String usuariow;
 		usuariow = request.getParameter("usuariow").toString();
 		/*try {*/
 			//MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         //MongoDatabase db = conn.getDatabase(db_name);
-                        //MongoCollection<Document> coll = db.getCollection(db_col_name);
+                        //MongoCollection coll = db.getCollection(db_col_name);
                         MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
-                        Document document = coll.find(new BasicDBObject("usuario", usuariow)).projection(Projections.fields(Projections.include("usuario","nombre","apellido","pass","email","puesto"), Projections.excludeId())).first();
-                        usuario = document.getString("usuario");
-                        nombre = document.getString("nombre");
-                        apellido = document.getString("apellido");
-                        pass = document.getString("pass");
-                        email = document.getString("email");
-                        puesto = document.getString("puesto");
+                            //coll.remove(new BasicDBObject().append("usuario", usuariow));
+                            BasicDBObject document = new BasicDBObject();
+                            document.put("usuario", usuariow);
+                            coll.deleteOne(document);
                         
-                        response.sendRedirect(String.format("modificarUsuario.jsp?usuarioS=%s&nombreS=%s&apellidoS=%s&passS=%s&emailS=%s&puestoS=%s", usuario, nombre, apellido, pass, email, puesto));
+                        response.sendRedirect(String.format("exitoAdmin.jsp"));
                         
-                        //request.setAttribute("usuarioS", usuario);
-                        /*request.setAttribute("nombreS", nombre);
-                        request.setAttribute("apellidoS", apellido);
-                        request.setAttribute("passS", pass);
-                        request.setAttribute("emailS", email);
-                        request.setAttribute("puestoS", puesto);*/
-                        //request.getRequestDispatcher("modificarUsuario.jsp").forward(request, response);
-                        //RequestDispatcher rd = request.getRequestDispatcher("modificarUsuario.jsp");
-                        //rd.forward(request, response);
                         
                         } catch(MongoException | ClassCastException e){
                             e.printStackTrace();
@@ -77,9 +64,6 @@ public class modificarUsuario0 extends HttpServlet {
 	}
     
 }
-
-
-
 
 
 

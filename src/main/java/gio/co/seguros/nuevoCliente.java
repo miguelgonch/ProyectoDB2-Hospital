@@ -17,20 +17,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 
-
-
-
-@WebServlet("/nuevoUsuario")
-
+@WebServlet("/nuevoCliente")
 
 /**
  *
  * @author C.V
  */
-public class nuevoUsuario extends HttpServlet {
-    private static final long serialVersionUID = 1L;
+public class nuevoCliente extends HttpServlet {
     
-    public nuevoUsuario() {
+    public nuevoCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,27 +46,32 @@ public class nuevoUsuario extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 //String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuario, nombre, apellido, pass, email, puesto;
-		usuario = request.getParameter("usuariow").toString();
+		String  tipoPoliza, telefono, nombre, apellido, dpi, email, contactoe, telContE;
+                tipoPoliza = request.getParameter("tPoliza").toString();
+		telefono = request.getParameter("telefono").toString();
 		nombre = request.getParameter("nombre").toString();
                 apellido = request.getParameter("apellido").toString();
                 email = request.getParameter("email").toString();
-                pass = request.getParameter("passw").toString();
-                puesto = request.getParameter("puesto").toString();
+                dpi = request.getParameter("doc").toString();
+                contactoe = request.getParameter("contactoE").toString();
+                telContE = request.getParameter("telEm").toString();
 		/*try {*/
 		//	MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                 //        MongoDatabase db = conn.getDatabase(db_name);
                 //        MongoCollection<Document> coll = db.getCollection(db_col_name);
-                    MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
+                    MongoCollection<Document> coll = gio.co.seguros.collClientes.collclientes();
                         try {
-                        Document doc = new Document("usuario", usuario)
+                        //Document a = new Document("p",new BasicDBObject("x", 203).append("y", 102)); ObjectId().str  BasicDBObject(ObjectId().str)
+                        Document doc = new Document("tipo_poliza", tipoPoliza)
                             .append("nombre", nombre)
                             .append("apellido", apellido)
-                            .append("pass", pass)
+                            .append("telefono", telefono)
                             .append("email", email)
-                            .append("puesto", puesto);
+                            .append("documentoIdentificacion", dpi)
+                            .append("contacto_emergencia", contactoe)
+                            .append("telefono_contacto_e", telContE);
                         coll.insertOne(doc);
-                        RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("exitoAdminC.jsp");
                         rd.forward(request, response);
                         //puesto = "Admin";
                         } catch(MongoException | ClassCastException e){
@@ -96,22 +96,7 @@ public class nuevoUsuario extends HttpServlet {
 	}
 
     
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

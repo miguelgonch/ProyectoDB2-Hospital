@@ -17,20 +17,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 
-
-
-
-@WebServlet("/nuevoUsuario")
-
+@WebServlet("/nuevaPoliza")
 
 /**
  *
  * @author C.V
  */
-public class nuevoUsuario extends HttpServlet {
+public class nuevaPoliza extends HttpServlet {
+    
     private static final long serialVersionUID = 1L;
     
-    public nuevoUsuario() {
+    public nuevaPoliza() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -51,25 +48,17 @@ public class nuevoUsuario extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 //String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuario, nombre, apellido, pass, email, puesto;
-		usuario = request.getParameter("usuariow").toString();
-		nombre = request.getParameter("nombre").toString();
-                apellido = request.getParameter("apellido").toString();
-                email = request.getParameter("email").toString();
-                pass = request.getParameter("passw").toString();
-                puesto = request.getParameter("puesto").toString();
+		String nombrePoliza, coberturaPoliza;
+		nombrePoliza = request.getParameter("tipo_poliza").toString();
+		coberturaPoliza = request.getParameter("cobertura").toString();
 		/*try {*/
 		//	MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                 //        MongoDatabase db = conn.getDatabase(db_name);
                 //        MongoCollection<Document> coll = db.getCollection(db_col_name);
-                    MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
+                    MongoCollection<Document> coll = gio.co.seguros.collPoliza.collpoliza();
                         try {
-                        Document doc = new Document("usuario", usuario)
-                            .append("nombre", nombre)
-                            .append("apellido", apellido)
-                            .append("pass", pass)
-                            .append("email", email)
-                            .append("puesto", puesto);
+                        Document doc = new Document("tipo_poliza", nombrePoliza)
+                            .append("cobertura", coberturaPoliza);
                         coll.insertOne(doc);
                         RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
                         rd.forward(request, response);
@@ -96,30 +85,7 @@ public class nuevoUsuario extends HttpServlet {
 	}
 
     
-    
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

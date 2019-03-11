@@ -6,10 +6,8 @@
 package gio.co.seguros;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -20,16 +18,15 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.bson.Document;
 
-@WebServlet("/modificarUsuario")
-
+@WebServlet("/modificarPoliza")
 
 /**
  *
  * @author C.V
  */
-public class modificarUsuario extends HttpServlet {
+public class modificarPoliza extends HttpServlet {
     
-    public modificarUsuario() {
+    public modificarPoliza() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -44,29 +41,21 @@ public class modificarUsuario extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
                 //String db_name = "SegurosGio", db_col_name = "Usuarios";
-		String usuariow, usuario, nombre, apellido, pass, email, puesto;
-		usuariow = request.getParameter("usuarioww").toString();
-                usuario = request.getParameter("usuariow").toString();
-		nombre = request.getParameter("nombre").toString();
-                apellido = request.getParameter("apellido").toString();
-                email = request.getParameter("email").toString();
-                pass = request.getParameter("passw").toString();
-                puesto = request.getParameter("puesto").toString();
+		String tPoliza, nPoliza, cobertura;
+                tPoliza = request.getParameter("nPoliza").toString();
+		nPoliza = request.getParameter("nPoliza").toString();
+                cobertura = request.getParameter("cobertura").toString();
 		/*try {*/
 			//MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
                         //MongoDatabase db = conn.getDatabase(db_name);
                         //MongoCollection<Document> coll = db.getCollection(db_col_name);
-                        MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
+                        MongoCollection<Document> coll = gio.co.seguros.collPoliza.collpoliza();
                         try {
                         
                             BasicDBObject updateFields = new BasicDBObject();
-                            updateFields.append("usuario", usuario);
-                            updateFields.append("nombre", nombre);
-                            updateFields.append("apellido", apellido);
-                            updateFields.append("email", email);
-                            updateFields.append("pass", pass);
-                            updateFields.append("puesto", puesto);
-                            BasicDBObject searchQuery = new BasicDBObject().append("usuario", usuariow);
+                            updateFields.append("tipo_poliza", nPoliza);
+                            updateFields.append("cobertura", cobertura);
+                            BasicDBObject searchQuery = new BasicDBObject().append("tipo_poliza", nPoliza);
 
                            //coll.replaceOne(searchQuery, updateFields);
                             
@@ -101,10 +90,6 @@ public class modificarUsuario extends HttpServlet {
 
     
 }
-
-
-
-
 
 
 
