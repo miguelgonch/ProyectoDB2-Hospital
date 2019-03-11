@@ -13,17 +13,17 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 /**
- * Servlet implementation class GetHistorial
+ * Servlet implementation class GetCitas
  */
-@WebServlet("/GetHistorial")
-public class GetHistorial extends HttpServlet {
+@WebServlet("/GetCitas")
+public class GetCitas extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         private static String hospitalNum = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetHistorial() {
+    public GetCitas() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,7 +38,7 @@ public class GetHistorial extends HttpServlet {
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
                 try{
-                    String sql = "select * from historial";
+                    String sql = "select * from citas";
                     OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                     OracleResultSet rs = (OracleResultSet) pst.executeQuery();
                     String outPutTable = "<table><thead><tr><th>ID</th><th>Diagnostico</th><th>Resultados</th><th>Medicinas</th><th>Pasos a seguir</th><th>Observaciones</th><th>Fecha</th></tr></thead>";
