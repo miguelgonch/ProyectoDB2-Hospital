@@ -52,9 +52,9 @@ public class modificarCliente0 extends HttpServlet {
                         MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
                         //Document document = coll.find(new BasicDBObject("_id", new ObjectId(_id))).projection(Projections.fields(Projections.include("tipo_poliza", "nombre","apellido","telefono","email","documentoIdentificacion", "contacto_emergencia", "Telefono-contacto_e"), Projections.excludeId())).first();
-                        Document document = coll.find(new BasicDBObject("apellido", "marroquin")).projection(Projections.fields(Projections.include("nombre"/*, "nombre","apellido","telefono","email","documentoIdentificacion", "contacto_emergencia", "Telefono-contacto_e"*/), Projections.excludeId())).first();
-                        //tipo_poliza = document.getString("tipo_poliza");
-                        nombre = document.getString("nombre");
+                        Document document = coll.find(new BasicDBObject("_id", "5c85f5dcb78debd92fede7ba")).projection(Projections.fields(Projections.include("tipo_poliza", "nombre","apellido","telefono","email","documentoIdentificacion", "contacto_emergencia", "Telefono-contacto_e"), Projections.excludeId())).first();
+                        tipo_poliza = document.getString("nombre");
+                        //nombre = document.getString("nombre");
                         /*apellido = document.getString("apellido");
                         telefono = document.getString("telefono");
                         email = document.getString("email");
@@ -62,7 +62,7 @@ public class modificarCliente0 extends HttpServlet {
                         contE = document.getString("contacto_emergencia");
                         telContE = document.getString("telefono_contacto_e");*/
                         tipo_poliza ="76";
-                        //nombre = "a";
+                        nombre = "a";
                         apellido ="b";
                         telefono ="123";
                         email ="@@";
@@ -90,6 +90,10 @@ public class modificarCliente0 extends HttpServlet {
         
     
 }
+
+
+
+
 
 
 
