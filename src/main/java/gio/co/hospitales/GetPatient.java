@@ -47,11 +47,11 @@ public class GetPatient extends HttpServlet {
                 if(request.getParameter("pId")!=null){
                     String pId = request.getParameter("pId");
                     //Query con el filtro
-                    sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes where paciente_id ="+pId;
+                    sql = "select * from pacientes where paciente_id ="+pId;
                 }
                 else{
                     //Query
-                    sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes order by paciente_id";
+                    sql = "select * from pacientes order by paciente_id";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -66,6 +66,9 @@ public class GetPatient extends HttpServlet {
                     String tel = rs.getString("TEL");
                     String dpi = rs.getString("DPI");
                     String segNum = rs.getString("num_seguro");
+                    String fNacimiento = rs.getString("f_nacimiento");
+                    String dir = rs.getString("dir");
+                    String asegNum = rs.getString("ASEGURADORA_ID");
                     //Crear objeto json
                     JSONObject arrayObj = new JSONObject();
                     arrayObj.put("id",id);
@@ -74,6 +77,9 @@ public class GetPatient extends HttpServlet {
                     arrayObj.put("tel",tel);
                     arrayObj.put("dpi",dpi);
                     arrayObj.put("segNum",segNum);
+                    arrayObj.put("fNacimiento",fNacimiento);
+                    arrayObj.put("dir",dir);
+                    arrayObj.put("asegNum",asegNum);
                     //insertar objeto a array jsons
                     jArray.add(i,arrayObj);
                     i++;

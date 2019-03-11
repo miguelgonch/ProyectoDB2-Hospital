@@ -31,5 +31,5 @@
             </tbody>
         </table>
     </body>
-    <script src="js/patientJson.js"></script>
+    <script src="js/patients.js"></script>
 </html>

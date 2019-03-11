@@ -8,7 +8,6 @@
 <%@ include file="partials/_headerLogged.jsp"%>
 <%@ include file="partials/_getInfo.jsp"%>
 <body>
-<h1>Login exitoso!!</h1>
 <h3>Bienvenido <%= user %> </h3>
 <p>rol <%= rol %> </p>
 <p>Hospital # <%= hospitalNum %></p>

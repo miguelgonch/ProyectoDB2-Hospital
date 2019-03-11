@@ -24,25 +24,39 @@
         }
     %>
     <body>
-        <h1>Historiales</h1>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID Cita</th>
-                    <th>Diagnostico</th>
-                    <th>Resultados</th>
-                    <th>Medicinas</th>
-                    <th>Pasos a seguir</th>
-                    <th>Observaciones</th>
-                    <th>Fecha</th>
-                    <th>Doctor</th>
-                    <th>Opciones</th>
-                </tr>
-            </thead>
-            <tbody id="historialData">
-                
-            </tbody>
-        </table>
+        
+        <div class="grid-container">
+            <div class="grid-x align-center">
+                <div class="cell small-10 medium-12">
+                    <h1>Historial</h1>
+                    <table>
+                        <tbody id="datosPaciente">
+
+                        </tbody>
+                    </table>
+                </div>
+                <div class="cell small-10 medium-12">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>ID Cita</th>
+                                <th>Diagnostico</th>
+                                <th>Resultados</th>
+                                <th>Medicinas</th>
+                                <th>Pasos a seguir</th>
+                                <th>Observaciones</th>
+                                <th>Fecha</th>
+                                <th>Doctor</th>
+                            </tr>
+                        </thead>
+                        <tbody id="historialData">
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
     </body>
-    <script src="js/historialJson.js"></script>
+    <script src="js/historial.js"></script>
+    <script src="js/patientInfo.js"></script>
 </html>
