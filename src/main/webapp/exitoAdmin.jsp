@@ -19,10 +19,13 @@
         <br>
         <a href="eliminarUsuario.jsp">Eliminar Usuario</a>
         <br>
+        <a href="tipoSeguro.jsp">administracion de tipo de polizas</a>
+        <br>
         <a href="mongoLista.jsp">lista</a>
 
     </body>
 </html>
+
 
 
 
