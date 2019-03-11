@@ -32,49 +32,59 @@ public class GetPatient extends HttpServlet {
 
 	// Generar jsons
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                //Obtener # del hospital
-                getInfoCookies(request,response);
-                //Conexion con db oracle
-                Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-                //Response info
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                PrintWriter out = response.getWriter();
-                try{
-                    //Query
-                    String sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes order by paciente_id";
-                    OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-                    OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-                    //Array jsons
-                    JSONArray jArray = new JSONArray();
-                    int i = 0;
-                    while(rs.next()){
-                        //obtener parametros
-                        String id = rs.getString("PACIENTE_ID");
-                        String name = rs.getString("Nombre");
-                        String lastN = rs.getString("Apellido");
-                        String tel = rs.getString("TEL");
-                        String dpi = rs.getString("DPI");
-                        String segNum = rs.getString("num_seguro");
-                        //Crear objeto json
-                        JSONObject arrayObj = new JSONObject();
-                        arrayObj.put("id",id);
-                        arrayObj.put("nombre",name);
-                        arrayObj.put("apellido",lastN);
-                        arrayObj.put("tel",tel);
-                        arrayObj.put("dpi",dpi);
-                        arrayObj.put("segNum",segNum);
-                        //insertar objeto a array jsons
-                        jArray.add(i,arrayObj);
-                        i++;
-                    }
-                    rs.close ();
-                    pst.close ();
-                    conn.close();
-                    out.print(jArray);
-                }catch(Exception e){
-                    System.err.println(e);
+            //Obtener # del hospital
+            getInfoCookies(request,response);
+            //Conexion con db oracle
+            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+            //Response info
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            try{
+                //var query sql
+                String sql;
+                //Revisar si hay un request
+                if(request.getParameter("pId")!=null){
+                    String pId = request.getParameter("pId");
+                    //Query con el filtro
+                    sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes where paciente_id ="+pId;
                 }
+                else{
+                    //Query
+                    sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes order by paciente_id";
+                }
+                OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+                OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+                //Array jsons
+                JSONArray jArray = new JSONArray();
+                int i = 0;
+                while(rs.next()){
+                    //obtener parametros
+                    String id = rs.getString("PACIENTE_ID");
+                    String name = rs.getString("Nombre");
+                    String lastN = rs.getString("Apellido");
+                    String tel = rs.getString("TEL");
+                    String dpi = rs.getString("DPI");
+                    String segNum = rs.getString("num_seguro");
+                    //Crear objeto json
+                    JSONObject arrayObj = new JSONObject();
+                    arrayObj.put("id",id);
+                    arrayObj.put("nombre",name);
+                    arrayObj.put("apellido",lastN);
+                    arrayObj.put("tel",tel);
+                    arrayObj.put("dpi",dpi);
+                    arrayObj.put("segNum",segNum);
+                    //insertar objeto a array jsons
+                    jArray.add(i,arrayObj);
+                    i++;
+                }
+                rs.close ();
+                pst.close ();
+                conn.close();
+                out.print(jArray);
+            }catch(Exception e){
+                System.err.println(e);
+            }
 	}
 
 	/**

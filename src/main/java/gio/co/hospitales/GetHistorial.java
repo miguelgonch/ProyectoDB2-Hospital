@@ -15,66 +15,81 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 /**
- * Servlet implementation class GetPatient
+ * Servlet implementation class GetHistorial
  */
-@WebServlet("/GetPatient")
-public class GetPatient extends HttpServlet {
+@WebServlet("/GetHistorial")
+public class GetHistorial extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         private static String hospitalNum = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetPatient() {
+    public GetHistorial() {
         super();
         // TODO Auto-generated constructor stub
     }
 
 	// Generar jsons
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-                //Obtener # del hospital
-                getInfoCookies(request,response);
-                //Conexion con db oracle
-                Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-                //Response info
-                response.setContentType("application/json");
-                response.setCharacterEncoding("UTF-8");
-                PrintWriter out = response.getWriter();
-                try{
+            //Obtener # del hospital
+            getInfoCookies(request,response);
+            //Conexion con db oracle
+            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+            //Response info
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            PrintWriter out = response.getWriter();
+            try{
+                //var query sql
+                String sql;
+                //Revisar si hay un request
+                if(request.getParameter("pId")!=null){
+                    String pId = request.getParameter("pId");
+                    //Query con el filtro
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
+                }
+                else{
                     //Query
-                    String sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes order by paciente_id";
-                    OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-                    OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-                    //Array jsons
-                    JSONArray jArray = new JSONArray();
-                    int i = 0;
-                    while(rs.next()){
-                        //obtener parametros
-                        String id = rs.getString("PACIENTE_ID");
-                        String name = rs.getString("Nombre");
-                        String lastN = rs.getString("Apellido");
-                        String tel = rs.getString("TEL");
-                        String dpi = rs.getString("DPI");
-                        String segNum = rs.getString("num_seguro");
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id =1 order by fecha";
+                }
+                OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+                OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+                //Array jsons
+                JSONArray jArray = new JSONArray();
+                int i = 0;
+                while(rs.next()){
+                    //obtener parametros
+                        String id = rs.getString("CITA_ID");
+                        String diag = rs.getString("Diagnostico");
+                        String res = rs.getString("resultados");
+                        String meds = rs.getString("medicinas");
+                        String pasos = rs.getString("pasosaseguir");
+                        String observ = rs.getString("observaciones");
+                        String fecha = rs.getString("fecha");
+                        String docName = rs.getString("nombre");
                         //Crear objeto json
                         JSONObject arrayObj = new JSONObject();
                         arrayObj.put("id",id);
-                        arrayObj.put("nombre",name);
-                        arrayObj.put("apellido",lastN);
-                        arrayObj.put("tel",tel);
-                        arrayObj.put("dpi",dpi);
-                        arrayObj.put("segNum",segNum);
+                        arrayObj.put("diag",diag);
+                        arrayObj.put("res",res);
+                        arrayObj.put("meds",meds);
+                        arrayObj.put("pasos",pasos);
+                        arrayObj.put("observ",observ);
+                        arrayObj.put("fecha",fecha);
+                        arrayObj.put("docName",docName);
+                       
                         //insertar objeto a array jsons
                         jArray.add(i,arrayObj);
                         i++;
-                    }
-                    rs.close ();
-                    pst.close ();
-                    conn.close();
-                    out.print(jArray);
-                }catch(Exception e){
-                    System.err.println(e);
                 }
+                rs.close ();
+                pst.close ();
+                conn.close();
+                out.print(jArray);
+            }catch(Exception e){
+                System.err.println(e);
+            }
 	}
 
 	/**

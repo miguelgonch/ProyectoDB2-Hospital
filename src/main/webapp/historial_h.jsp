@@ -25,6 +25,24 @@
     %>
     <body>
         <h1>Historiales</h1>
-        <jsp:include page="/GetCitas" ></jsp:include>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Cita</th>
+                    <th>Diagnostico</th>
+                    <th>Resultados</th>
+                    <th>Medicinas</th>
+                    <th>Pasos a seguir</th>
+                    <th>Observaciones</th>
+                    <th>Fecha</th>
+                    <th>Doctor</th>
+                    <th>Opciones</th>
+                </tr>
+            </thead>
+            <tbody id="historialData">
+                
+            </tbody>
+        </table>
     </body>
+    <script src="js/historialJson.js"></script>
 </html>
