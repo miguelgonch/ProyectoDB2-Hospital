@@ -6,11 +6,8 @@
 package gio.co.seguros;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Projections;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.ServletException;
@@ -67,6 +64,7 @@ public class eliminarUsuario extends HttpServlet {
 	}
     
 }
+
 
 
 

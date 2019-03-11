@@ -5,7 +5,6 @@
  */
 package gio.co.seguros;
 
-import com.mongodb.BasicDBObject;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
 import java.io.IOException;
@@ -62,8 +61,8 @@ public class nuevoCliente extends HttpServlet {
                 //        MongoCollection<Document> coll = db.getCollection(db_col_name);
                     MongoCollection<Document> coll = gio.co.seguros.collClientes.collclientes();
                         try {
-                        //Document a = new Document("p",new BasicDBObject("x", 203).append("y", 102));
-                        Document doc = new Document("poliza", new BasicDBObject("no_poliza", "203").append("tipo_poliza", tipoPoliza))
+                        //Document a = new Document("p",new BasicDBObject("x", 203).append("y", 102)); ObjectId().str  BasicDBObject(ObjectId().str)
+                        Document doc = new Document("tipo_poliza", tipoPoliza)
                             .append("nombre", nombre)
                             .append("apellido", apellido)
                             .append("telefono", telefono)
@@ -72,7 +71,7 @@ public class nuevoCliente extends HttpServlet {
                             .append("contacto_emergencia", contactoe)
                             .append("telefono_contacto_e", telContE);
                         coll.insertOne(doc);
-                        RequestDispatcher rd = request.getRequestDispatcher("exitoAdmin.jsp");
+                        RequestDispatcher rd = request.getRequestDispatcher("exitoAdminC.jsp");
                         rd.forward(request, response);
                         //puesto = "Admin";
                         } catch(MongoException | ClassCastException e){
@@ -98,6 +97,11 @@ public class nuevoCliente extends HttpServlet {
 
     
 }
+
+
+
+
+
 
 
 

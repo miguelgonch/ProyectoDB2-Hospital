@@ -6,14 +6,11 @@
 package gio.co.seguros;
 
 import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Projections;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -80,6 +77,7 @@ public class modificarUsuario0 extends HttpServlet {
 	}
     
 }
+
 
 
 
