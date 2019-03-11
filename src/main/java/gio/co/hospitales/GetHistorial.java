@@ -47,11 +47,16 @@ public class GetHistorial extends HttpServlet {
                 if(request.getParameter("pId")!=null){
                     String pId = request.getParameter("pId");
                     //Query con el filtro
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
+                }
+                if(request.getParameter("cId")!=null){
+                    String cId = request.getParameter("pId");
+                    //Query con el filtro
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where cita_id ="+cId+" order by fecha";
                 }
                 else{
                     //Query
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre from citas join usuario on usuario_id = doc_id where paciente_id =1 order by fecha";
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id =1 order by fecha";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -68,6 +73,8 @@ public class GetHistorial extends HttpServlet {
                         String observ = rs.getString("observaciones");
                         String fecha = rs.getString("fecha");
                         String docName = rs.getString("nombre");
+                        String docLastName = rs.getString("apellido");
+                        String pId = rs.getString("paciente_id");
                         //Crear objeto json
                         JSONObject arrayObj = new JSONObject();
                         arrayObj.put("id",id);
@@ -77,7 +84,8 @@ public class GetHistorial extends HttpServlet {
                         arrayObj.put("pasos",pasos);
                         arrayObj.put("observ",observ);
                         arrayObj.put("fecha",fecha);
-                        arrayObj.put("docName",docName);
+                        arrayObj.put("docName",docName+" "+docLastName);
+                        arrayObj.put("pId",pId);
                        
                         //insertar objeto a array jsons
                         jArray.add(i,arrayObj);
