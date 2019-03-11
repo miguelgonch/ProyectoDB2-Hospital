@@ -42,7 +42,7 @@ public class Logout extends HttpServlet {
                         response.addCookie(excookie);
                     }
                 }
-                response.sendRedirect("index.jsp");
+                response.sendRedirect("login_h.jsp");
 	}
 
 	/**
