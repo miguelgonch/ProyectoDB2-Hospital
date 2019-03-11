@@ -5,14 +5,8 @@
  */
 package gio.co.seguros;
 
-import com.mongodb.BasicDBObject;
-import com.mongodb.MongoClient;
 import com.mongodb.MongoException;
-import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import static com.mongodb.client.model.Filters.eq;
-import com.mongodb.client.model.Projections;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -56,7 +50,7 @@ public class nuevoUsuario extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-                String db_name = "SegurosGio", db_col_name = "Usuarios";
+                //String db_name = "SegurosGio", db_col_name = "Usuarios";
 		String usuario, nombre, apellido, pass, email, puesto;
 		usuario = request.getParameter("usuariow").toString();
 		nombre = request.getParameter("nombre").toString();
@@ -65,9 +59,10 @@ public class nuevoUsuario extends HttpServlet {
                 pass = request.getParameter("passw").toString();
                 puesto = request.getParameter("puesto").toString();
 		/*try {*/
-			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
-                        MongoDatabase db = conn.getDatabase(db_name);
-                        MongoCollection<Document> coll = db.getCollection(db_col_name);
+		//	MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
+                //        MongoDatabase db = conn.getDatabase(db_name);
+                //        MongoCollection<Document> coll = db.getCollection(db_col_name);
+                    MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
                         Document doc = new Document("usuario", usuario)
                             .append("nombre", nombre)
@@ -103,6 +98,8 @@ public class nuevoUsuario extends HttpServlet {
     
     
 }
+
+
 
 
 

@@ -44,13 +44,14 @@ public class eliminarUsuario extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-                String db_name = "SegurosGio", db_col_name = "Usuarios";
+                //String db_name = "SegurosGio", db_col_name = "Usuarios";
 		String usuariow;
 		usuariow = request.getParameter("usuariow").toString();
 		/*try {*/
-			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
-                        MongoDatabase db = conn.getDatabase(db_name);
-                        MongoCollection coll = db.getCollection(db_col_name);
+			//MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
+                        //MongoDatabase db = conn.getDatabase(db_name);
+                        //MongoCollection coll = db.getCollection(db_col_name);
+                        MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
                             //coll.remove(new BasicDBObject().append("usuario", usuariow));
                             BasicDBObject document = new BasicDBObject();
@@ -66,6 +67,7 @@ public class eliminarUsuario extends HttpServlet {
 	}
     
 }
+
 
 
 

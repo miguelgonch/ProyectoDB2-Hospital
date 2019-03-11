@@ -13,5 +13,8 @@
     <%@ include file="partials/_headerLogged.jsp"%>
     <body>
         <h1>Exito Administracion de clientes!</h1>
+        <a href="clienteNuevo.jsp"> Registrar paciente<a/>
     </body>
 </html>
+
+

@@ -43,7 +43,7 @@ public class modificarUsuario extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-                String db_name = "SegurosGio", db_col_name = "Usuarios";
+                //String db_name = "SegurosGio", db_col_name = "Usuarios";
 		String usuariow, usuario, nombre, apellido, pass, email, puesto;
 		usuariow = request.getParameter("usuarioww").toString();
                 usuario = request.getParameter("usuariow").toString();
@@ -53,9 +53,10 @@ public class modificarUsuario extends HttpServlet {
                 pass = request.getParameter("passw").toString();
                 puesto = request.getParameter("puesto").toString();
 		/*try {*/
-			MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
-                        MongoDatabase db = conn.getDatabase(db_name);
-                        MongoCollection<Document> coll = db.getCollection(db_col_name);
+			//MongoClient conn = gio.co.seguros.MongoConnectDB.connectMongo();
+                        //MongoDatabase db = conn.getDatabase(db_name);
+                        //MongoCollection<Document> coll = db.getCollection(db_col_name);
+                        MongoCollection<Document> coll = gio.co.seguros.collUsuarios.collUsuarios();
                         try {
                         
                             BasicDBObject updateFields = new BasicDBObject();
@@ -100,6 +101,7 @@ public class modificarUsuario extends HttpServlet {
 
     
 }
+
 
 
 
