@@ -15,6 +15,8 @@
                 <p>rol <%= rol %> </p>
                 <p>Hospital # <%= hospitalNum %></p>
                 <a href="pacientes_h.jsp">Ver pacientes</a>
+                <a href="manejoUsuarios.jsp">Administración</a><br/>
+                
             </div>
         </div>
     </div>

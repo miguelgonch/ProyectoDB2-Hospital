@@ -15,10 +15,11 @@
         <h1>Seleccione un establecimiento</h1>
         <a href="login_h.jsp">Hospitales</a><br>
         <a href="login_s1.jsp">Seguros</a>
-        <a href="manejoUsuarios.jsp">Administración</a><br/>
+        
 
     </body>
 </html>
+
 
 
 
