@@ -1,30 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app id="WebApp_ID" version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
     <display-name>tutorial</display-name>
-    <servlet>
-        <servlet-name>GetPatient</servlet-name>
-        <servlet-class>gio.co.hospitales.GetPatient</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetPatient</servlet-name>
-        <url-pattern>/GetPatient</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>GetCitas</servlet-name>
-        <servlet-class>gio.co.hospitales.GetCitas</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetCitas</servlet-name>
-        <url-pattern>/GetCitas</url-pattern>
-    </servlet-mapping>
-    <servlet>
-        <servlet-name>GetUsuario</servlet-name>
-        <servlet-class>gio.co.hospitales.GetUsuario</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>GetUsuario</servlet-name>
-        <url-pattern>/GetUsuario</url-pattern>
-    </servlet-mapping>
     <welcome-file-list>
         <welcome-file>index.html</welcome-file>
         <welcome-file>index.htm</welcome-file>

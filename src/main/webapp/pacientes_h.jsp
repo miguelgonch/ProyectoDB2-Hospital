@@ -23,9 +23,13 @@
                     <th>Telefono</th>
                     <th>DPI</th>
                     <th>Numero de seguro</th>
-                    <th></th>
+                    <th>Opciones</th>
                 </tr>
             </thead>
+            <tbody id="patientData">
+                
+            </tbody>
         </table>
     </body>
+    <script src="js/patientJson.js"></script>
 </html>

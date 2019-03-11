@@ -42,7 +42,7 @@ public class GetPatient extends HttpServlet {
                 PrintWriter out = response.getWriter();
                 try{
                     //Query
-                    String sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes";
+                    String sql = "select paciente_id,nombre,apellido,tel,dpi,num_seguro from pacientes order by paciente_id";
                     OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                     OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                     //Array jsons
