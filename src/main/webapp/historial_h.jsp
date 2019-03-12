@@ -47,17 +47,13 @@
                             </tr>
                         </thead>
                         <tbody id="historialData">
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </body>
-<<<<<<< HEAD
 </html>
-=======
     <script src="js/historial.js"></script>
     <script src="js/patientInfo.js"></script>
 </html>
->>>>>>> master
