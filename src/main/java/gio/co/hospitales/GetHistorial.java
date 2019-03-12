@@ -49,14 +49,14 @@ public class GetHistorial extends HttpServlet {
                     //Query con el filtro
                     sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
                 }
-                if(request.getParameter("cId")!=null){
-                    String cId = request.getParameter("pId");
+                else if(request.getParameter("cId")!=null){
+                    String cId = request.getParameter("cId");
                     //Query con el filtro
                     sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where cita_id ="+cId+" order by fecha";
                 }
                 else{
                     //Query
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id =1 order by fecha";
+                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id order by fecha";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    

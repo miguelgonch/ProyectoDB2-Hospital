@@ -1,3 +1,4 @@
+gio\co\hospitales\AddPatient.class
 gio\co\seguros\collUsuarios.class
 gio\co\seguros\modificarCliente0.class
 gio\co\seguros\mongoLista.class
@@ -17,6 +18,7 @@ gio\co\seguros\collPoliza.class
 gio\co\seguros\collClientes.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\deleteUser_h.class
+gio\co\hospitales\DocInfo.class
 gio\co\seguros\nuevoCliente.class
 gio\co\seguros\eliminarCliente.class
 gio\co\seguros\modificarPoliza0.class

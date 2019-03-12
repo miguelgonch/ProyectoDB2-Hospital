@@ -14,6 +14,6 @@
         }
     }
     if(user==null){
-        response.sendRedirect("login_h.jsp");
+        response.sendRedirect("login_h1.jsp");
     }
 %>

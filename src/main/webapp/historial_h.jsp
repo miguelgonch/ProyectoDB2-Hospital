@@ -54,6 +54,6 @@
         </div>
     </body>
 </html>
-    <script src="js/historial.js"></script>
     <script src="js/patientInfo.js"></script>
+    <script src="js/historial.js"></script>
 </html>
