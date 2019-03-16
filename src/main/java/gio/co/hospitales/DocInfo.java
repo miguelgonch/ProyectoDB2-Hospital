@@ -15,17 +15,17 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 /**
- * Servlet implementation class GetHistorial
+ * Servlet implementation class DocInfo
  */
-@WebServlet("/GetHistorial")
-public class GetHistorial extends HttpServlet {
+@WebServlet("/DocInfo")
+public class DocInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         private static String hospitalNum = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetHistorial() {
+    public DocInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,21 +43,7 @@ public class GetHistorial extends HttpServlet {
             try{
                 //var query sql
                 String sql;
-                //Revisar si hay un request
-                if(request.getParameter("pId")!=null){
-                    String pId = request.getParameter("pId");
-                    //Query con el filtro
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
-                }
-                else if(request.getParameter("cId")!=null){
-                    String cId = request.getParameter("cId");
-                    //Query con el filtro
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where cita_id ="+cId+" order by fecha";
-                }
-                else{
-                    //Query
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,subcat,nombre,apellido from citas join usuario on usuario_id = doc_id order by fecha";
-                }
+                sql = "select * from usuario where tipo_usuario_id = 3";
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                 //Array jsons
@@ -65,31 +51,22 @@ public class GetHistorial extends HttpServlet {
                 int i = 0;
                 while(rs.next()){
                     //obtener parametros
-                        String id = rs.getString("CITA_ID");
-                        String diag = rs.getString("Diagnostico");
-                        String res = rs.getString("resultados");
-                        String meds = rs.getString("medicinas");
-                        String pasos = rs.getString("pasosaseguir");
-                        String observ = rs.getString("observaciones");
-                        String fecha = rs.getString("fecha");
-                        String docName = rs.getString("nombre");
-                        String docLastName = rs.getString("apellido");
-                        String pId = rs.getString("paciente_id");
-                        //Crear objeto json
-                        JSONObject arrayObj = new JSONObject();
-                        arrayObj.put("id",id);
-                        arrayObj.put("diag",diag);
-                        arrayObj.put("res",res);
-                        arrayObj.put("meds",meds);
-                        arrayObj.put("pasos",pasos);
-                        arrayObj.put("observ",observ);
-                        arrayObj.put("fecha",fecha);
-                        arrayObj.put("docName",docName+" "+docLastName);
-                        arrayObj.put("pId",pId);
-                       
-                        //insertar objeto a array jsons
-                        jArray.add(i,arrayObj);
-                        i++;
+                    String id = rs.getString("usuario_id");
+                    String name = rs.getString("Nombre");
+                    String lastN = rs.getString("Apellido");
+                    String idType = rs.getString("tipo_usuario_id");
+                    String especialidadId = rs.getString("especialidad_id");
+                    String tel = rs.getString("telefono");
+                    //Crear objeto json
+                    JSONObject arrayObj = new JSONObject();
+                    arrayObj.put("id",id);
+                    arrayObj.put("name",name+" "+lastN);
+                    arrayObj.put("idType",idType);
+                    arrayObj.put("especialidadId",especialidadId);
+                    arrayObj.put("tel",tel);
+                    //insertar objeto a array jsons
+                    jArray.add(i,arrayObj);
+                    i++;
                 }
                 rs.close ();
                 pst.close ();

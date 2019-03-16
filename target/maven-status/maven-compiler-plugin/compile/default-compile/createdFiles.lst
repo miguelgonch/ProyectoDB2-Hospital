@@ -1,3 +1,4 @@
+gio\co\hospitales\AddPatient.class
 gio\co\seguros\collUsuarios.class
 gio\co\seguros\modificarCliente0.class
 gio\co\seguros\mongoLista.class
@@ -5,15 +6,19 @@ gio\co\seguros\modificarPoliza.class
 gio\co\hospitales\Logout.class
 gio\co\hospitales\GetUsuario.class
 gio\co\seguros\nuevoUsuario.class
+gio\co\hospitales\updateUser_h.class
 gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\GetPatient.class
 gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario.class
 gio\co\hospitales\GetHistorial.class
+gio\co\hospitales\crudUser.class
 gio\co\seguros\nuevaPoliza.class
 gio\co\seguros\collPoliza.class
 gio\co\seguros\collClientes.class
 gio\co\hospitales\JavaConnectDb.class
+gio\co\hospitales\deleteUser_h.class
+gio\co\hospitales\DocInfo.class
 gio\co\seguros\nuevoCliente.class
 gio\co\seguros\eliminarCliente.class
 gio\co\seguros\modificarPoliza0.class

@@ -28,6 +28,7 @@
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
                     <h1>Pacientes</h1>
+                    <a class="button" href="aggregarP_h.jsp">Agregar paciente</a>
                     <table>
                         <thead>
                             <tr>

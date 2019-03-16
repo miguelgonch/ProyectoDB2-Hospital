@@ -14,13 +14,9 @@
                 <h3>Bienvenido <%= user %> </h3>
                 <p>rol <%= rol %> </p>
                 <p>Hospital # <%= hospitalNum %></p>
-                <a href="pacientes_h.jsp">Ver pacientes</a><br/>
-                <a href="manejoUsuarios.jsp">Administración</a><br/>
-                
+                <a href="pacientes_h.jsp">Ver pacientes</a>
             </div>
         </div>
     </div>
 </body>
 </html>
-
-

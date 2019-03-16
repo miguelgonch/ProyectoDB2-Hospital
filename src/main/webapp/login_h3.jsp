@@ -11,9 +11,7 @@
                 <div class="grid-x align-center-middle login">
                     <div class="cell small-10 medium-5">
                         <form class="log-in-form" action='Validate' method='post'>
-                            <input type="radio" name="hospitalNum" value="1" checked>Hospital1 
-                            <input type="radio" name="hospitalNum" value="2">Hospital2 
-                            <input type="radio" name="hospitalNum" value="3">Hospital3<br>
+                            <input style="visibility:hidden" type="radio" name="hospitalNum" value="3" checked>
                             <h4 class="text-center">Inicia sesión</h4>
                             <label class=''>Usuario
                                 <input type="text" placeholder="Usuario" name='user_id' required>

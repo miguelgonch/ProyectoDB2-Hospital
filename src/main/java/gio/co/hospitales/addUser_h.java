@@ -1,4 +1,10 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package gio.co.hospitales;
+
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -16,18 +22,20 @@ import javax.servlet.http.HttpSession;
 
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-
 /**
- * Servlet implementation class Validate
+ *
+ * @author manu
  */
-@WebServlet("/Validate")
-public class Validate extends HttpServlet {
+
+@WebServlet("/addUser_h")
+public class addUser_h extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public Validate() {
+    public addUser_h() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -47,16 +55,41 @@ public class Validate extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String user, password, hospnum;
-		user = request.getParameter("user_id").toString();
-		password = request.getParameter("password").toString();
-                hospnum = request.getParameter("hospitalNum");
+		String hospnum, username, nombre,apellido, pass;
+                
+                int id_usuario, telefono, tipo_usuario_id, especialidad_id;
+                
+		
+                username = request.getParameter("usuario").toString();
+                
+		hospnum = request.getParameter("hospNum");
+                
+                nombre = request.getParameter("nombre");
+                
+                apellido = request.getParameter("apellido");
+                
+                pass = request.getParameter("pass");
+                
+                id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+                
+                telefono = Integer.parseInt(request.getParameter("telefono"));
+                
+                tipo_usuario_id = Integer.parseInt(request.getParameter("tipodeusuario"));
+                
+                especialidad_id = Integer.parseInt(request.getParameter("especialidad"));
+                
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'";
-			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+			String sql = "INSERT into usuario (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"','"+nombre+"','"+apellido+"',"+tipo_usuario_id+","+especialidad_id+","+telefono+",'"+pass+"')";
+			
+                        
+                        OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
-			if(rs.next()) {
+			
+                        
+                       response.sendRedirect("exitoUpdateUser_h.jsp");
+                        
+                        /*if(rs.next()) {
                             //Agregar el nombre del usuario
                             Cookie cookieUsername = new Cookie("user",user);
                             cookieUsername.setMaxAge(5*6000);
@@ -75,13 +108,22 @@ public class Validate extends HttpServlet {
                             //RequestDispatcher rd = request.getRequestDispatcher("home_h.jsp");
                             //rd.forward(request, response);
 			}else {
-                            response.sendRedirect("login_h1.jsp?log=0");
-			}
+                            response.sendRedirect("index.jsp");
+			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("login_h1.jsp");
+			response.sendRedirect("index.jsp?val="+id_usuario+"user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
 
 
