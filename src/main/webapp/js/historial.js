@@ -10,7 +10,6 @@ function query_string(variable)
 }
 $(document).ready(
         function() {
-            var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8080/proyectoDB2/GetHistorial',
@@ -23,8 +22,10 @@ $(document).ready(
                     var $pData = $('#historialData');
                     $pData.empty();
                     for (var i = 0; i < data.length; i++) {
-                        //$pData.append("holaa 1");
-                        $pData.append("<tr><td>"+data[i].id+"</td><td>"+data[i].diag+"</td><td>"+data[i].res+"</td><td>"+data[i].meds+"</td><td>"+data[i].pasos+"</td><td>"+data[i].observ+"</td><td>"+data[i].fecha+"</td><td>"+data[i].docName+"</td></tr>");
+                        $pData.append("<tr><td>"+data[i].id+"</td><td>"+data[i].diag+"</td><td>"+data[i].docName+"</td><td>"+data[i].fecha+"</td><td><a href=\"cita_h.jsp?cId="+data[i].id+"&pId="+data[i].pId+"\">Ver detalles</a></td></tr>");
+                    }
+                    if(data.length==0){
+                        $pData.append("<p>No hay datos disponibles</p>");
                     }
 
                 },

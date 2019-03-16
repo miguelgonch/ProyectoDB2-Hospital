@@ -41,26 +41,19 @@
                             <tr>
                                 <th>ID Cita</th>
                                 <th>Diagnostico</th>
-                                <th>Resultados</th>
-                                <th>Medicinas</th>
-                                <th>Pasos a seguir</th>
-                                <th>Observaciones</th>
-                                <th>Fecha</th>
                                 <th>Doctor</th>
+                                <th>Fecha</th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody id="historialData">
-
                         </tbody>
                     </table>
                 </div>
             </div>
         </div>
     </body>
-<<<<<<< HEAD
 </html>
-=======
-    <script src="js/historial.js"></script>
     <script src="js/patientInfo.js"></script>
+    <script src="js/historial.js"></script>
 </html>
->>>>>>> master
