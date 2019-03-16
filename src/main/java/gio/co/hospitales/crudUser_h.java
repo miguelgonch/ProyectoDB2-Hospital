@@ -27,15 +27,15 @@ import oracle.jdbc.OracleResultSet;
  * @author manu
  */
 
-@WebServlet("/addUser_h")
-public class addUser_h extends HttpServlet {
+@WebServlet("/crudUser_h")
+public class crudUser_h extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public addUser_h() {
+    public crudUser_h() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -55,39 +55,17 @@ public class addUser_h extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-                
-		String hospnum, username, nombre,apellido, pass;
-                
-                int telefono, tipo_usuario_id, especialidad_id;
-                
-		
-                username = request.getParameter("usuario");    
-                
-		hospnum = request.getParameter("hospitalNum"); 
-                
-                nombre = request.getParameter("nombre");                
-                
-                apellido = request.getParameter("apellido");
-                
-                pass = request.getParameter("pass");   
-                                
-                telefono = Integer.parseInt(request.getParameter("telefono"));     
-                
-                tipo_usuario_id = Integer.parseInt(request.getParameter("tipodeusuario"));   
-                
-                especialidad_id = Integer.parseInt(request.getParameter("especialidad"));
-
-                
+		String user, hospnum;
+		user = request.getParameter("user_id").toString();
+		hospnum = request.getParameter("hospitalNum");
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "INSERT into usuario (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"','"+nombre+"','"+apellido+"','"+tipo_usuario_id+"','"+especialidad_id+"','"+telefono+"','"+pass+"')";
-			
-                        
-                        OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+			String sql = "select * from usuario where usuario='"+user+"'";
+			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			
                         
-                       response.sendRedirect("exitoUpdateUser_h.jsp");
+                        response.sendRedirect("crudHospital.jsp?user_id="+user+"&hospitalNum="+hospnum);
                         
                         /*if(rs.next()) {
                             //Agregar el nombre del usuario
@@ -111,29 +89,11 @@ public class addUser_h extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("index.jsp?user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
+			response.sendRedirect("index.jsp?val=0");
 		}
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

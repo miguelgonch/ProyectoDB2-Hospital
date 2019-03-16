@@ -12,7 +12,6 @@ gio\co\hospitales\GetPatient.class
 gio\co\hospitales\Validate.class
 gio\co\seguros\modificarUsuario.class
 gio\co\hospitales\GetHistorial.class
-gio\co\hospitales\crudUser.class
 gio\co\seguros\nuevaPoliza.class
 gio\co\seguros\collPoliza.class
 gio\co\seguros\collClientes.class

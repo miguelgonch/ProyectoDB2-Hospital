@@ -15,7 +15,7 @@
        <div class="grid-container">
                 <div class="grid-x align-center-middle login">
                     <div class="cell small-10 medium-5">
-                        <form class="form" action='crudUser' method='post'>
+                        <form class="form" action='crudUser_h' method='post'>
                             <input type="radio" name="hospitalNum" value="1" checked>Hospital1 
                             <input type="radio" name="hospitalNum" value="2">Hospital2 
                             <input type="radio" name="hospitalNum" value="3">Hospital3<br>
@@ -26,6 +26,8 @@
                             <p><input type="submit" class="button expanded" value="Buscar"></p>
                             
                         </form>
+                        
+                        <a class="button expanded" href="addUser_h.jsp">Agregar usuario</a>
                     </div>
                 </div>
         </div>
@@ -37,6 +39,13 @@
     <script src="js/app.js"></script>
     
 </html>
+
+
+
+
+
+
+
 
 
 
