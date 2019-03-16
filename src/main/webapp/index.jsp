@@ -15,9 +15,10 @@
         <a href="login_h1.jsp">Hospital 1</a><br>
         <a href="login_h2.jsp">Hospital 2</a><br>
         <a href="login_h3.jsp">Hospital 3</a><br>
-        <a href="manejoUsuarios.jsp">Administración</a>
+        <a href="crudUsers_h.jsp">Administración</a>
     </body>
 </html>
+
 
 
 

@@ -55,32 +55,32 @@ public class addUser_h extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
+                
 		String hospnum, username, nombre,apellido, pass;
                 
-                int id_usuario, telefono, tipo_usuario_id, especialidad_id;
+                int telefono, tipo_usuario_id, especialidad_id;
                 
 		
-                username = request.getParameter("usuario").toString();
+                username = request.getParameter("usuario");    
                 
-		hospnum = request.getParameter("hospNum");
+		hospnum = request.getParameter("hospitalNum"); 
                 
-                nombre = request.getParameter("nombre");
+                nombre = request.getParameter("nombre");                
                 
                 apellido = request.getParameter("apellido");
                 
-                pass = request.getParameter("pass");
+                pass = request.getParameter("pass");   
+                                
+                telefono = Integer.parseInt(request.getParameter("telefono"));     
                 
-                id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
-                
-                telefono = Integer.parseInt(request.getParameter("telefono"));
-                
-                tipo_usuario_id = Integer.parseInt(request.getParameter("tipodeusuario"));
+                tipo_usuario_id = Integer.parseInt(request.getParameter("tipodeusuario"));   
                 
                 especialidad_id = Integer.parseInt(request.getParameter("especialidad"));
+
                 
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "INSERT into usuario (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"','"+nombre+"','"+apellido+"',"+tipo_usuario_id+","+especialidad_id+","+telefono+",'"+pass+"')";
+			String sql = "INSERT into usuario (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"','"+nombre+"','"+apellido+"','"+tipo_usuario_id+"','"+especialidad_id+"','"+telefono+"','"+pass+"')";
 			
                         
                         OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -111,11 +111,21 @@ public class addUser_h extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("index.jsp?val="+id_usuario+"user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
+			response.sendRedirect("index.jsp?user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
 		}
 	}
 
 }
+
+
+
+
+
+
+
+
+
+
 
 
 

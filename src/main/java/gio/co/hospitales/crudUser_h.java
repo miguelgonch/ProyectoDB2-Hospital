@@ -27,15 +27,15 @@ import oracle.jdbc.OracleResultSet;
  * @author manu
  */
 
-@WebServlet("/crudUser")
-public class crudUser extends HttpServlet {
+@WebServlet("/crudUser_h")
+public class crudUser_h extends HttpServlet {
 
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public crudUser() {
+    public crudUser_h() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -94,27 +94,6 @@ public class crudUser extends HttpServlet {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
