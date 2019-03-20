@@ -20,9 +20,22 @@ $(document).ready(
                     
                 },
                 success: function(data) {
-                    var $pData = $('#datosPaciente');
-                    $pData.empty();
-                    $pData.append("<tr><td>Nombre: "+data[0].nombre+"</td><td>Apellido: "+data[0].apellido+"</td></tr><tr><td>Fecha de nacimiento: "+data[0].fNacimiento+"</td><td>Direccion: "+data[0].dir+"</td></tr><tr><td>Telefono: "+data[0].tel+"</td><td>Numero de identificacion (DPI/pasaporte): "+data[0].dpi+"</td></tr><tr><td>Numero de seguro: "+data[0].segNum+"</td><td>Aseguradora: </td></tr>");
+                    var $name = $('#nombreP');
+                    $name.append(data[0].nombre);
+                    var $lastName = $('#apellidoP');
+                    $lastName.append(data[0].apellido);
+                    var $fNac = $('#fNac');
+                    $fNac.append(data[0].fNacimiento);
+                    var $dir = $('#dir');
+                    $dir.append(data[0].dir);
+                    var $tel = $('#tel');
+                    $tel.append(data[0].tel);
+                    var $dpi = $('#dpi');
+                    $dpi.append(data[0].dpi);
+                    var $segNum = $('#segNum');
+                    $segNum.append(data[0].segNum);
+                    var $aseguradora = $('#aseguradora');
+                    $aseguradora.append("");
 
                 },
                 error : function() {

@@ -1,4 +1,4 @@
-package gio.co.hospitales;
+package gio.co.hospitales.pacientes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -60,7 +60,16 @@ public class AddPatient extends HttpServlet {
                     segNum = request.getParameter("segNum");
                     docId = request.getParameter("docId");
                     //Armar el query
-                    sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"')";
+                    if(request.getParameter("pId")!=null){
+                        String pId = request.getParameter("pId");
+                        //Query con el filtro
+                        sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+" WHERE paciente_id = "+pId;
+                    }
+                    else{
+                        //Query
+                        sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"')";
+                    }
+                    //OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                     OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                     OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                     //Redireccionar

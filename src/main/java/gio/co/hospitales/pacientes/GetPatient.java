@@ -1,4 +1,4 @@
-package gio.co.hospitales;
+package gio.co.hospitales.pacientes;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -47,7 +47,7 @@ public class GetPatient extends HttpServlet {
                 if(request.getParameter("pId")!=null){
                     String pId = request.getParameter("pId");
                     //Query con el filtro
-                    sql = "select * from pacientes where paciente_id ="+pId;
+                    sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
                 }
                 else{
                     //Query
