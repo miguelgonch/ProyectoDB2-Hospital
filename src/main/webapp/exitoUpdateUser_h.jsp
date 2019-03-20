@@ -13,5 +13,7 @@
     </head>
     <body>
         <h1>Exito al actualizar</h1>
+        <a href="index.jsp">Index</a><br>
     </body>
 </html>
+
