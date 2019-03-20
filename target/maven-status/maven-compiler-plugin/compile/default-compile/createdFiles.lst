@@ -19,10 +19,7 @@ gio\co\hospitales\deleteUser_h.class
 gio\co\hospitales\DocInfo.class
 gio\co\seguros\nuevoCliente.class
 gio\co\hospitales\addUser_h.class
-<<<<<<< HEAD
-=======
 gio\co\hospitales\pacientes\GetPatient.class
->>>>>>> e42f65f4454869c4c6695d64bda1b748aa7537f2
 gio\co\seguros\eliminarCliente.class
 gio\co\seguros\modificarPoliza0.class
 gio\co\seguros\MongoConnectDB.class

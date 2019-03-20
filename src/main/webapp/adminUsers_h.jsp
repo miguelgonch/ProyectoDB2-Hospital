@@ -43,11 +43,22 @@
                 <input class="button small-12 cell" type="submit" name="submit" value="Actualizar" />
             </form>
                 
+                <form class="cell small-12 medium-8" action="deleteUser_h" method="post">
+                    <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
+                    <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
+                    
+                    <br>
+                    <input class="button small-12 cell" type="submit" name="submit" value="Eliminar" />
+                    
+                </form>
+                
                 
         </div>
     </div>
     </body>
 </html>
+
+
 
 
 
