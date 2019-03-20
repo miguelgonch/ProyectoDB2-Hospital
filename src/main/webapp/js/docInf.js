@@ -16,7 +16,7 @@ $(document).ready(
                     }
                 },
                 error : function() {
-                    var $pData = $('#patientData');
+                    var $pData = $('#doctoresData');
                     $pData.empty();
                     $pData.append("<p>No hay datos disponibles</p>");
                 }

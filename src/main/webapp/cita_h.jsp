@@ -29,8 +29,23 @@
                 <div class="cell small-10 medium-12">
                     <h1>Historial:</h1>
                     <table>
-                        <tbody id="datosPaciente">
-
+                        <tbody>
+                            <tr>
+                                <td id="nombreP">Nombre: </td>
+                                <td id="apellidoP">Apellido: </td>
+                            </tr>
+                            <tr>
+                                <td id="fNac">Fecha de nacimiento: </td>
+                                <td id="dir">Direccion: </td>
+                            </tr>
+                            <tr>
+                                <td id="tel">Telefono: </td>
+                                <td id="dpi">Numero de identificacion (DPI/pasaporte): </td>
+                            </tr>
+                            <tr>
+                                <td id="segNum">Numero de seguro: </td>
+                                <td id="aseguradora">Aseguradora: </td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
