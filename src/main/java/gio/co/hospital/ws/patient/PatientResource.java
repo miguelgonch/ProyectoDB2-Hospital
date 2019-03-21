@@ -10,8 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import net.sf.json.JSONArray;
@@ -25,37 +25,36 @@ import oracle.jdbc.OracleResultSet;
  */
 @Path("/patient")
 public class PatientResource {
+    //Duda resolver con Gio (el dato lo tengo almacenado en una cookie, no se como leerlo desde el REST)
     private static String hospitalNum = "1";
     protected List<Patients> patientsList = new ArrayList<Patients>();
-    
+
     @GET
     @Path("/getPatient")
     @Produces(MediaType.APPLICATION_JSON)
-    public List<Patients> getPatients(){
-        //Obtener # del hospital
-        makeList();
+    public Response getMsg(@QueryParam("pId") String pId) {
         
-        return patientsList;
+        makeList(pId);
+        return Response.status(200).entity(patientsList).build();
     }
     
-    @GET
-    @Path("/getPatient/{pId}")
-    @Produces(MediaType.APPLICATION_JSON)
-    public Response getMsg(@PathParam("pId") String name) {
-        String output = "<html> " + "<title>" + "Java WebService Example" + "</title>"  + "<body><h1><div style='font-size: larger;'>"
-                + "Hello <span style='text-transform: capitalize; color: green;'>" + name + "</span></div></h1></body>" + "</html>";
-        return Response.status(200).entity(output).build();
-    }
-    
-    protected void makeList(){
+    protected void makeList(String pId){
         
         //Conexion con db oracle
-            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
             try{
                 //var query sql
                 String sql;
-                sql = "select * from pacientes order by paciente_id";
+                //Revisar si hay un request
+                if(pId!=null){
+                    //Query con el filtro
+                    sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
+                }
+                else{
+                    //Query
+                    sql = "select * from pacientes order by paciente_id";
+                }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                 while(rs.next()){

@@ -10,14 +10,12 @@ function query_string(variable)
 }
 $(document).ready(
         function() {
-            var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetPatient',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient',
                 dataType: 'json',
                 data: { 
                     pId: query_string('pId') 
-                    
                 },
                 success: function(data) {
                     var $name = $('#nombreP');
