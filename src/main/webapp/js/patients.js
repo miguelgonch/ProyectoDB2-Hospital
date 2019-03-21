@@ -1,9 +1,19 @@
+function query_string(variable)
+{
+   var query = window.location.search.substring(1);
+   var vars = query.split("&");
+   for (var i=0;i<vars.length;i++) {
+           var pair = vars[i].split("=");
+           if(pair[0] == variable){return pair[1];}
+   }
+   return(false);
+}
 $(document).ready(
         function() {
             var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetPatient',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient/pId=1',
                 dataType: 'json',
                 success: function(data) {
                     var $pData = $('#patientData');

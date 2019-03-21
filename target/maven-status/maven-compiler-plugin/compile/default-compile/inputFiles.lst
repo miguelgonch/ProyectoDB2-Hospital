@@ -2,6 +2,7 @@ C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\m
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\Logout.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\modificarUsuario0.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\modificarUsuario.java
+C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospital\ws\Calls.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\modificarCliente0.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\updateUser_h.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\pacientes\GetPatient.java
@@ -19,9 +20,11 @@ C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\m
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\modificarPoliza.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\collClientes.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\DocInfo.java
+C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospital\ws\patient\PatientResource.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\mongoLista.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\deleteUser_h.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\mavenproject1\test\resource\CallResource.java
+C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospital\ws\CallResource.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\MongoConnectDB.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\modificarPoliza0.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\crudUser_h.java
@@ -33,3 +36,4 @@ C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\m
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospitales\GetHistorial.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\eliminarPoliza.java
 C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\seguros\nuevoCliente.java
+C:\Users\migue\Documents\NetBeansProjects\ProyectoDB2\ProyectoDB2-Hospital\src\main\java\gio\co\hospital\ws\patient\Patients.java
