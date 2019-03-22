@@ -35,18 +35,20 @@ public class PatientResource {
     @GET
     @Path("/getPatient")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getPatient(@QueryParam("pId") String pId) {
+    public Response getPatient(
+            @QueryParam("pId") String pId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+        
         makeList(pId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(patientsList).build();
     }
     
-    //Insertar un paciente
+    //Insertar o Actualizar un paciente
     @POST
     @Path("/addPatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response addPatient(
         @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
-        @FormParam("nameP") String name,    
+        @FormParam("nameP") String name,                                    //Aquí uso @FormParam para recibir los parametros de un form
         @FormParam("lastNameP") String lastName,
         @FormParam("dir") String dir,
         @FormParam("tel") int tel,
@@ -80,8 +82,8 @@ public class PatientResource {
     @Path("/updatePatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updatePatient(
-        @QueryParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
-        @QueryParam("nameP") String name,    
+        @QueryParam("pId") int pId,                                         //Aquí obtengo los parametros 
+        @QueryParam("nameP") String name,                                   //Aquí uso @QueryParam para recibir los parametros como query
         @QueryParam("lastNameP") String lastName,
         @QueryParam("dir") String dir,
         @QueryParam("tel") int tel,
