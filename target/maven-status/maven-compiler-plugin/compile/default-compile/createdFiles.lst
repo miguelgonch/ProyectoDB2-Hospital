@@ -5,7 +5,6 @@ gio\co\seguros\modificarPoliza.class
 gio\co\hospital\ws\patient\Patients.class
 mavenproject1\test\resource\Calls.class
 gio\co\hospitales\Logout.class
-gio\co\hospitales\test\Configuracion.class
 gio\co\hospitales\pacientes\AddPatient.class
 gio\co\hospitales\GetUsuario.class
 gio\co\seguros\nuevoUsuario.class
@@ -18,8 +17,6 @@ gio\co\seguros\nuevaPoliza.class
 gio\co\hospital\ws\patient\PatientResource.class
 gio\co\seguros\collPoliza.class
 gio\co\hospital\ws\CallResource.class
-gio\co\hospitales\test\DAO.class
-gio\co\hospitales\test\ProductoServicio.class
 gio\co\seguros\collClientes.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\deleteUser_h.class
@@ -34,6 +31,5 @@ gio\co\hospitales\crudUser_h.class
 gio\co\hospital\ws\Calls.class
 gio\co\seguros\eliminarPoliza.class
 mavenproject1\test\resource\CallResource.class
-gio\co\hospitales\test\Producto.class
 gio\co\seguros\eliminarUsuario.class
 gio\co\seguros\modificarUsuario0.class

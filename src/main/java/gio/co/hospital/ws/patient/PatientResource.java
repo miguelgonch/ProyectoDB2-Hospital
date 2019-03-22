@@ -5,11 +5,9 @@
  */
 package gio.co.hospital.ws.patient;
 
-import java.io.PrintWriter;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
-import javax.ws.rs.DefaultValue;
 import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
@@ -20,6 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
+import gio.co.hospitales.pacientes.GetPatient;
 
 /**
  *
@@ -36,7 +35,7 @@ public class PatientResource {
     @Path("/getPatient")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPatient(@QueryParam("pId") String pId) {
-        
+        //Crear la lista de la info solicitada
         makeList(pId);
         return Response.status(200).entity(patientsList).build();
     }
@@ -44,54 +43,23 @@ public class PatientResource {
     //Insertar un paciente
     @POST
     @Path("/addPatient")
-    public Boolean addPatient(
-        @FormParam("pId") String pId,
+    public Response addPatient(
+        @FormParam("pId") int pId,
         @FormParam("nameP") String name,
         @FormParam("lastNameP") String lastName,
         @FormParam("dir") String dir,
-        @FormParam("tel") String tel,
+        @FormParam("tel") int tel,
         @FormParam("bDate") String bDate,
-        @FormParam("dpi") String dpi,
+        @FormParam("dpi") float dpi,
         @FormParam("segNum") String segNum,
-        @FormParam("docId") String docId) {
+        @FormParam("docId") int docId){
         
         //Respuesta del addPatient
-        Boolean respuesta = false;
-        
-        //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-        try{
-            //var query sql
-            String sql;
-            //Armar el query
-            if(pId!=null){
-                //Query con el filtro
-                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+" WHERE paciente_id = "+pId;
-            }
-            else{
-                //Query
-                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"')";
-            }
-            //OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-            rs.close ();
-            pst.close ();
-            conn.close();
-            respuesta = true;
-        }catch(Exception e){
-            System.err.println(e);
-            respuesta = false;
-        }
-        
-        
-        return respuesta;
+        String respuesta = "Fallido!";
+        respuesta = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId);
+        return Response.status(200).entity(respuesta).build();
     }
-    
-    
-    
-    
-    
+
     protected void makeList(String pId){
         
         //Conexion con db oracle
@@ -135,5 +103,33 @@ public class PatientResource {
                 System.err.println(e);
             }
     }
-    
+
+    private String addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId) {
+        String respuesta = "Fallido!";
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        try{
+            //var query sql
+            String sql;
+            //Armar el query
+            if(pId!=0){
+                //Query con el filtro
+                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+" WHERE paciente_id = "+pId;
+            }
+            else{
+                //Query
+                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"')";
+            }
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+            rs.close ();
+            pst.close ();
+            conn.close();
+            respuesta = "Lo lograste!";
+        }catch(Exception e){
+            System.err.println(e);
+            respuesta = "Fallido!";
+        }
+        return respuesta;
+    }
 }
