@@ -43,6 +43,7 @@ public class PatientResource {
     //Insertar un paciente
     @POST
     @Path("/addPatient")
+    @Produces(MediaType.TEXT_PLAIN)
     public Response addPatient(
         @FormParam("pId") int pId,
         @FormParam("nameP") String name,
@@ -55,13 +56,18 @@ public class PatientResource {
         @FormParam("docId") int docId){
         
         //Respuesta del addPatient
-        String respuesta = "Fallido!";
-        respuesta = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId);
-        return Response.status(200).entity(respuesta).build();
+        Boolean answ = false;
+        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId);
+        if(answ){
+            return Response.status(200).entity("Success").build();
+        }
+        else{
+            return Response.status(200).entity("Failure").build();
+        }
     }
 
+    //Metodo para crear la lista de pacientes
     protected void makeList(String pId){
-        
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
@@ -104,8 +110,9 @@ public class PatientResource {
             }
     }
 
-    private String addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId) {
-        String respuesta = "Fallido!";
+    //Metodo para realizar un insert o un update dependiendo del caso
+    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId) {
+        Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
         try{
@@ -125,10 +132,10 @@ public class PatientResource {
             rs.close ();
             pst.close ();
             conn.close();
-            respuesta = "Lo lograste!";
+            respuesta = true;
         }catch(Exception e){
             System.err.println(e);
-            respuesta = "Fallido!";
+            respuesta = false;
         }
         return respuesta;
     }
