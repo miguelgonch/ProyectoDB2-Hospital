@@ -15,17 +15,17 @@ import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 
 /**
- * Servlet implementation class DocInfo
+ * Servlet implementation class AsegInfo
  */
-@WebServlet("/DocInfo")
-public class DocInfo extends HttpServlet {
+@WebServlet("/AsegInfo")
+public class AsegInfo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
         private static String hospitalNum = null;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DocInfo() {
+    public AsegInfo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -43,7 +43,7 @@ public class DocInfo extends HttpServlet {
             try{
                 //var query sql
                 String sql;
-                sql = "select * from usuario where tipo_usuario_id = 4 order by usuario_id";
+                sql = "select * from aseguradora order by id_aseguradora";
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                 //Array jsons
@@ -51,19 +51,12 @@ public class DocInfo extends HttpServlet {
                 int i = 0;
                 while(rs.next()){
                     //obtener parametros
-                    String id = rs.getString("usuario_id");
-                    String name = rs.getString("Nombre");
-                    String lastN = rs.getString("Apellido");
-                    String idType = rs.getString("tipo_usuario_id");
-                    String especialidadId = rs.getString("especialidad_id");
-                    String tel = rs.getString("telefono");
+                    String id = rs.getString("id_aseguradora");
+                    String name = rs.getString("aseguradora");
                     //Crear objeto json
                     JSONObject arrayObj = new JSONObject();
-                    arrayObj.put("id",id);
-                    arrayObj.put("name",name+" "+lastN);
-                    arrayObj.put("idType",idType);
-                    arrayObj.put("especialidadId",especialidadId);
-                    arrayObj.put("tel",tel);
+                    arrayObj.put("aId",id);
+                    arrayObj.put("aName",name);
                     //insertar objeto a array jsons
                     jArray.add(i,arrayObj);
                     i++;

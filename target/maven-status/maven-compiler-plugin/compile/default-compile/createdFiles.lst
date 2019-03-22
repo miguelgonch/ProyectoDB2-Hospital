@@ -27,6 +27,7 @@ gio\co\hospitales\pacientes\GetPatient.class
 gio\co\seguros\eliminarCliente.class
 gio\co\seguros\modificarPoliza0.class
 gio\co\seguros\MongoConnectDB.class
+gio\co\hospitales\AsegInfo.class
 gio\co\hospitales\crudUser_h.class
 gio\co\hospital\ws\Calls.class
 gio\co\seguros\eliminarPoliza.class

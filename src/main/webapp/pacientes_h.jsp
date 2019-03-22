@@ -38,6 +38,14 @@
                 out.println("<script>alert(\"No se ha logrado actualizar el paciente, vuelve a intentarlo\");</script>");
             }
         }
+        if((request.getParameter("del")!=null)){
+            if(request.getParameter("del").equals("1")){
+                out.println("<script>alert(\"Paciente eliminado exitosamente!\");</script>");
+            }
+            else if(request.getParameter("del").equals("0")){
+                out.println("<script>alert(\"No se ha logrado eliminar el paciente, vuelve a intentarlo\");</script>");
+            }
+        }
 
     %>
     <body>

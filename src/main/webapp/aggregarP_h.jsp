@@ -53,6 +53,10 @@
                             <select id="doctoresData" name="docId">
                             </select>
                         </label>
+                        <label>Aseguradora:
+                            <select id="asegData" name="asegNum">
+                            </select>
+                        </label>
                         <br>
                         <input type="submit" class="cell button medium-8" value="Agregar">
                     </form>
@@ -61,4 +65,5 @@
         </div>
     </body>
     <script src="js/docInf.js"></script>
+    <script src="js/asegInf.js"></script>
 </html>

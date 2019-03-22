@@ -24,8 +24,9 @@ public class Patients {
     private String dir;
     //id de aseguradora
     private int asegNum;
+    private String asegName;
 
-    public Patients(int id, String nombre, String apellido, int tel, float dpi, String segNum, String fNacimiento, String dir, int asegNum) {
+    public Patients(int id, String nombre, String apellido, int tel, float dpi, String segNum, String fNacimiento, String dir, int asegNum, String asegName) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -35,6 +36,7 @@ public class Patients {
         this.fNacimiento = fNacimiento;
         this.dir = dir;
         this.asegNum = asegNum;
+        this.asegName = asegName;
     }
 
     public int getId() {
@@ -108,6 +110,15 @@ public class Patients {
     public void setAsegNum(int asegNum) {
         this.asegNum = asegNum;
     }
+
+    public String getAsegName() {
+        return asegName;
+    }
+
+    public void setAsegName(String asegName) {
+        this.asegName = asegName;
+    }
     
     
+
 }

@@ -33,8 +33,7 @@ $(document).ready(
                     var $segNum = $('#segNum');
                     $segNum.append(data[0].segNum);
                     var $aseguradora = $('#aseguradora');
-                    $aseguradora.append("");
-
+                    $aseguradora.append(data[0].asegName);
                 },
                 error : function() {
                     var $pData = $('#patientData');

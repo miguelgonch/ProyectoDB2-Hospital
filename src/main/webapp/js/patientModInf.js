@@ -35,7 +35,7 @@ $(document).ready(
                     var $segNum = 'segNum';
                     document.getElementById($segNum).value= data[0].segNum;
                     var $aseguradora = 'aseguradora';
-                    document.getElementById($aseguradora).value= data[0].segName;
+                    document.getElementById($aseguradora).value= data[0].asegNum;
                 },
                 error : function() {
                     var $pData = $('#patientData');
