@@ -29,7 +29,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="AddPatient" method="post">
+                    <form class="form" action="restP/patient/addPatient" method="post">
                         <h4>Modificar Paciente</h4>
                         <label>Nombre:
                             <input type="number" value="<%=request.getParameter("pId")%>" style="display:none" name="pId">

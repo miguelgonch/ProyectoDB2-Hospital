@@ -22,6 +22,23 @@
         else{
             response.sendRedirect("home_h.jsp");
         }
+        if((request.getParameter("in")!=null)){
+            if(request.getParameter("in").equals("1")){
+                out.println("<script>alert(\"Paciente agregado exitosamente!\");</script>");
+            }
+            else if(request.getParameter("in").equals("0")){
+                out.println("<script>alert(\"No se ha logrado agregar el paciente, vuelve a intentarlo\");</script>");
+            }
+        }
+        if((request.getParameter("up")!=null)){
+            if(request.getParameter("up").equals("1")){
+                out.println("<script>alert(\"Paciente actualizado exitosamente!\");</script>");
+            }
+            else if(request.getParameter("up").equals("0")){
+                out.println("<script>alert(\"No se ha logrado actualizar el paciente, vuelve a intentarlo\");</script>");
+            }
+        }
+
     %>
     <body>
         <div class="grid-container">

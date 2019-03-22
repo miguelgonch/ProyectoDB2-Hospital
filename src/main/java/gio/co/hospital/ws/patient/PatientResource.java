@@ -18,7 +18,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-import gio.co.hospitales.pacientes.GetPatient;
+import java.net.URI;
+import javax.ws.rs.PUT;
+
 
 /**
  *
@@ -26,8 +28,7 @@ import gio.co.hospitales.pacientes.GetPatient;
  */
 @Path("/patient")
 public class PatientResource {
-    //Duda resolver con Gio (el dato lo tengo almacenado en una cookie, no se como leerlo desde el REST)
-    private static String hospitalNum = "1";
+    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
 
     //Realizar una consulta
@@ -35,8 +36,7 @@ public class PatientResource {
     @Path("/getPatient")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPatient(@QueryParam("pId") String pId) {
-        //Crear la lista de la info solicitada
-        makeList(pId);
+        makeList(pId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(patientsList).build();
     }
     
@@ -45,8 +45,8 @@ public class PatientResource {
     @Path("/addPatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response addPatient(
-        @FormParam("pId") int pId,
-        @FormParam("nameP") String name,
+        @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
+        @FormParam("nameP") String name,    
         @FormParam("lastNameP") String lastName,
         @FormParam("dir") String dir,
         @FormParam("tel") int tel,
@@ -55,14 +55,52 @@ public class PatientResource {
         @FormParam("segNum") String segNum,
         @FormParam("docId") int docId){
         
-        //Respuesta del addPatient
-        Boolean answ = false;
+        Boolean answ;                                                       //Respuesta del addUpdatePatient
+        answ = false;
         answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId);
-        if(answ){
-            return Response.status(200).entity("Success").build();
+        if(pId!=1){
+            if(answ){
+                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+            }
+            else{
+                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+            }
         }
         else{
-            return Response.status(200).entity("Failure").build();
+            if(answ){
+                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+            }
+            else{
+                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+            }
+        }
+    }
+    
+    @PUT                                                                    //Insertar un paciente pero jsp ni html5 funcionan con put
+    @Path("/updatePatient")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updatePatient(
+        @QueryParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
+        @QueryParam("nameP") String name,    
+        @QueryParam("lastNameP") String lastName,
+        @QueryParam("dir") String dir,
+        @QueryParam("tel") int tel,
+        @QueryParam("bDate") String bDate,
+        @QueryParam("dpi") float dpi,
+        @QueryParam("segNum") String segNum,
+        @QueryParam("docId") int docId){
+        
+        //Respuesta del addPatient
+        Boolean answ;
+        answ = false;
+        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId);
+        if(answ){
+            //return Response.status(200).entity("Success").build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+        }
+        else{
+            //return Response.status(200).entity("Failure").build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
         }
     }
 
