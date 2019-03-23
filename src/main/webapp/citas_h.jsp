@@ -9,7 +9,7 @@
 <html>
     <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Historial" />
+        <jsp:param name="title" value="Citas" />
     </jsp:include>
     <!--navbar logged-->
     <%@ include file="partials/_headerLogged.jsp"%>
@@ -28,36 +28,14 @@
         <div class="grid-container">
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
-                    <h1>Historial:</h1>
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td id="nombreP">Nombre: </td>
-                                <td id="apellidoP">Apellido: </td>
-                            </tr>
-                            <tr>
-                                <td id="fNac">Fecha de nacimiento: </td>
-                                <td id="dir">Direccion: </td>
-                            </tr>
-                            <tr>
-                                <td id="tel">Telefono: </td>
-                                <td id="dpi">Numero de identificacion (DPI/pasaporte): </td>
-                            </tr>
-                            <tr>
-                                <td id="segNum">Numero de seguro: </td>
-                                <td id="aseguradora">Aseguradora: </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                <div class="cell small-10 medium-12">
-                    <h3>Citas:</h3>
+                    <h1>Citas:</h1>
                     <table>
                         <thead>
                             <tr>
                                 <th>ID Cita</th>
                                 <th>Diagnostico</th>
                                 <th>Doctor</th>
+                                <th>Paciente</th>
                                 <th>Fecha</th>
                                 <th></th>
                             </tr>
@@ -70,6 +48,5 @@
         </div>
     </body>
 </html>
-    <script src="js/patientInfo.js"></script>
-    <script src="js/historial.js"></script>
+    <script src="js/citas.js"></script>
 </html>

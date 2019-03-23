@@ -3,7 +3,6 @@ gio\co\seguros\modificarCliente0.class
 gio\co\seguros\mongoLista.class
 gio\co\seguros\modificarPoliza.class
 gio\co\hospital\ws\patient\Patients.class
-mavenproject1\test\resource\Calls.class
 gio\co\hospitales\Logout.class
 gio\co\hospitales\pacientes\AddPatient.class
 gio\co\hospitales\GetUsuario.class
@@ -31,6 +30,5 @@ gio\co\hospitales\AsegInfo.class
 gio\co\hospitales\crudUser_h.class
 gio\co\hospital\ws\Calls.class
 gio\co\seguros\eliminarPoliza.class
-mavenproject1\test\resource\CallResource.class
 gio\co\seguros\eliminarUsuario.class
 gio\co\seguros\modificarUsuario0.class

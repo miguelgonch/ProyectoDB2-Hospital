@@ -47,16 +47,16 @@ public class GetHistorial extends HttpServlet {
                 if(request.getParameter("pId")!=null){
                     String pId = request.getParameter("pId");
                     //Query con el filtro
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,id_subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where paciente_id ="+pId+" order by fecha";
+                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where pa.paciente_id ="+pId+" order by fecha";
                 }
                 else if(request.getParameter("cId")!=null){
                     String cId = request.getParameter("cId");
                     //Query con el filtro
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,id_subcat,nombre,apellido from citas join usuario on usuario_id = doc_id where cita_id ="+cId+" order by fecha";
+                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where c.cita_id ="+cId+" order by fecha";
                 }
                 else{
                     //Query
-                    sql = "select cita_id,diagnostico,resultados,medicinas,pasosaseguir,observaciones,fecha,paciente_id,doc_id,id_subcat,nombre,apellido from citas join usuario on usuario_id = doc_id order by fecha";
+                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id order by fecha";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -71,10 +71,12 @@ public class GetHistorial extends HttpServlet {
                         String meds = rs.getString("medicinas");
                         String pasos = rs.getString("pasosaseguir");
                         String observ = rs.getString("observaciones");
-                        String fecha = rs.getString("fecha");
-                        String docName = rs.getString("nombre");
-                        String docLastName = rs.getString("apellido");
+                        String fecha = rs.getString(7);
+                        String docName = rs.getString(13);
+                        String docLastName = rs.getString(14);
                         String pId = rs.getString("paciente_id");
+                        String pName = rs.getString("nombre");
+                        String pLastName = rs.getString("apellido");
                         //Crear objeto json
                         JSONObject arrayObj = new JSONObject();
                         arrayObj.put("id",id);
@@ -86,6 +88,7 @@ public class GetHistorial extends HttpServlet {
                         arrayObj.put("fecha",fecha);
                         arrayObj.put("docName",docName+" "+docLastName);
                         arrayObj.put("pId",pId);
+                        arrayObj.put("pName",pName+" "+pLastName);
                        
                         //insertar objeto a array jsons
                         jArray.add(i,arrayObj);

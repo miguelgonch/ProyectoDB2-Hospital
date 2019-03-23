@@ -16,7 +16,6 @@ $(document).ready(
                 dataType: 'json',
                 data: { 
                     pId: query_string('pId') 
-                    
                 },
                 success: function(data) {
                     var $pData = $('#historialData');
@@ -30,7 +29,7 @@ $(document).ready(
 
                 },
                 error : function() {
-                    var $pData = $('#patientData');
+                    var $pData = $('#historialData');
                     $pData.empty();
                     $pData.append("<p>No hay datos disponibles</p>");
                 }
