@@ -27,7 +27,7 @@
                 <div class="grid-x align-center-middle login">
                     <div class="cell small-10 medium-5">
                         <form class="form" action='crudUser_h' method='post'>
-                           <input type="hidden" name="hospNum" value="<%= request.getParameter("hospnum") %>">
+                           <input type="hidden" name="hospNum" value="3" >
                            <!-- <input type="radio" name="hospitalNum" value="1" checked>Hospital1 
                             <input type="radio" name="hospitalNum" value="2">Hospital2 
                             <input type="radio" name="hospitalNum" value="3">Hospital3<br>
@@ -45,6 +45,14 @@
                 </div>
         </div>
         
+                           <h1>Cookies</h1>
+                           <% 
+                               Cookie ck[] = request.getCookies();
+                               for(int i=0;i<ck.length;i++)
+                               {
+                               out.println("Cookie name: "+ck[i].getName()+" y valor: "+ck[i].getValue()+"</br>");
+                               }
+                           %>
         <table>
                         <thead>
                             <tr>
@@ -68,6 +76,22 @@
     <script src="js/app.js"></script>
     
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
