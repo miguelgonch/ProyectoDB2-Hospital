@@ -8,9 +8,22 @@
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <!--head-->
     <jsp:include page="partials/_head.jsp">
         <jsp:param name="title" value="Actualización usuario" />
     </jsp:include>
+    <!--navbar logged-->
+    <%@ include file="partials/_headerLogged.jsp"%>
+    <!--Verify if the user has access-->
+    <%@ include file="partials/_getInfo.jsp"%>
+    <%
+        if(rol.equals("1")||rol.equals("1")){
+        }
+        else{
+            response.sendRedirect("home_h.jsp");
+        }
+    %>
+    
     <body>
          <div class="grid-container">
         <div class="grid-x grid-margin-x align-center">
@@ -19,7 +32,7 @@
             <form class="cell small-12 medium-8" action="updateUser_h" method="post">
                 <h4 class="text-center">Panel para actualización de datos</h4>
                 
-                <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
+                <input type="hidden" name="user" value="<%= request.getParameter("user") %>">
                 <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
                 username:<br>
                 <input type="text" name="usuario" value="" placeholder="Ingrese aqui el username">
@@ -44,7 +57,7 @@
             </form>
                 
                 <form class="cell small-12 medium-8" action="deleteUser_h" method="post">
-                    <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
+                    <input type="hidden" name="user" value="<%= request.getParameter("user") %>">
                     <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
                     
                     <br>
@@ -57,6 +70,12 @@
     </div>
     </body>
 </html>
+
+
+
+
+
+
 
 
 

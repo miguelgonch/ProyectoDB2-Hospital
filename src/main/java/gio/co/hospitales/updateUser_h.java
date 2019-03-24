@@ -55,10 +55,11 @@ public class updateUser_h extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String hospnum, username, nombre,apellido;
+		String hospnum, username, user, nombre,apellido;
                 
-                int id_usuario, telefono, tipo_usuario_id, especialidad_id;
+                int telefono, tipo_usuario_id, especialidad_id;
                 
+                user = request.getParameter("user").toString();
 		
                 username = request.getParameter("usuario").toString();
                 
@@ -68,7 +69,7 @@ public class updateUser_h extends HttpServlet {
                 
                 apellido = request.getParameter("apellido");
                 
-                id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+                //id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
                 
                 telefono = Integer.parseInt(request.getParameter("telefono"));
                 
@@ -78,7 +79,7 @@ public class updateUser_h extends HttpServlet {
                 
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "UPDATE usuario SET USUARIO='"+username+"' ,NOMBRE='"+nombre+"' ,APELLIDO='"+apellido+"' ,TELEFONO='"+telefono+"' ,TIPO_USUARIO_ID='"+tipo_usuario_id+"' ,ESPECIALIDAD_ID='"+especialidad_id+"' where USUARIO_ID='"+id_usuario+"'";
+			String sql = "UPDATE usuario SET USUARIO='"+username+"' ,NOMBRE='"+nombre+"' ,APELLIDO='"+apellido+"' ,TELEFONO='"+telefono+"' ,TIPO_USUARIO_ID='"+tipo_usuario_id+"' ,ESPECIALIDAD_ID='"+especialidad_id+"' where USUARIO='"+user+"'";
 			
                         
                         OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -109,11 +110,16 @@ public class updateUser_h extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("index.jsp?val="+id_usuario+"&user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
+			response.sendRedirect("index.jsp?user="+username+"&hospitalNum="+hospnum+"&nombre="+nombre+"&apellido="+apellido);
 		}
 	}
 
 }
+
+
+
+
+
 
 
 

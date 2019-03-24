@@ -11,13 +11,20 @@
     <div class="grid-container">
         <div class="grid-x align-center">
             <div class="cell small-10 medium-12">
-                <h3>Bienvenido <%= user %> </h3>
+                <h3>Bienvenido <%=user %> </h3>
                 <p>rol <%= rol %> </p>
                 <p>Hospital # <%= hospitalNum %></p>
                 <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
+                </br>
+                <h2>Administración</h2>
+                <a class="button" href="crudUsers_h.jsp">Administración</a>
             </div>
         </div>
     </div>
 </body>
 </html>
+
+
+
+

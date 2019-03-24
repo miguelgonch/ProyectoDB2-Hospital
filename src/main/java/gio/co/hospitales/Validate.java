@@ -75,7 +75,7 @@ public class Validate extends HttpServlet {
                             //RequestDispatcher rd = request.getRequestDispatcher("home_h.jsp");
                             //rd.forward(request, response);
 			}else {
-                            response.sendRedirect("login_h1.jsp?log=0");
+                            response.sendRedirect("login_h"+hospnum+".jsp?log=0");
 			}
 		} catch (SQLException e) {
 			response.sendRedirect("login_h1.jsp");
@@ -83,5 +83,6 @@ public class Validate extends HttpServlet {
 	}
 
 }
+
 
 

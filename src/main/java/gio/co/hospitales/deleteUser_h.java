@@ -55,22 +55,23 @@ public class deleteUser_h extends HttpServlet {
 
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
-		String hospnum;
+		String hospnum, user;
                 
-                int id_usuario;
+                //int id_usuario;
                 
 		
                
                 
 		hospnum = request.getParameter("hospNum");
                 
+                user = request.getParameter("user").toString();
                 
-                id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
+                //id_usuario = Integer.parseInt(request.getParameter("id_usuario"));
                 
                 
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "DELETE FROM usuario WHERE usuario_id='"+id_usuario+"'";
+			String sql = "DELETE FROM usuario WHERE usuario='"+user+"'";
 			
                         
                         OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
@@ -101,11 +102,16 @@ public class deleteUser_h extends HttpServlet {
                             response.sendRedirect("index.jsp");
 			}*/
 		} catch (SQLException e) {
-			response.sendRedirect("index.jsp?val="+id_usuario);
+			response.sendRedirect("index.jsp?user="+user);
 		}
 	}
 
 }
+
+
+
+
+
 
 
 
