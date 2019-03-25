@@ -51,7 +51,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-<<<<<<< HEAD
     
     <servlet>
         <servlet-name>WS cobertura</servlet-name>
@@ -59,14 +58,12 @@
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>gio.co.hospital.ws.cobertura</param-value>
-=======
     <servlet>
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>gio.co.hospital.ws.usuario</param-value>
->>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
@@ -92,17 +89,14 @@
         <url-pattern>/restC/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-<<<<<<< HEAD
         <servlet-name>WS cobertura</servlet-name>
         <url-pattern>/restCo/*</url-pattern>
     </servlet-mapping>
 </web-app>
 
-=======
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <url-pattern>/restU/*</url-pattern>
     </servlet-mapping>
 </web-app>
 
 
->>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf

@@ -16,23 +16,17 @@
                 <p>Hospital # <%= hospitalNum %></p>
                 <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
-<<<<<<< HEAD
                 <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
-=======
                 </br>
-                <h2>Administración</h2>
-                <a class="button" href="usuarios_h.jsp">Administración</a>
->>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf
+                <h2>Administraciï¿½n</h2>
+                <a class="button" href="usuarios_h.jsp">Administraciï¿½n</a>
             </div>
         </div>
     </div>
 </body>
 </html>
-<<<<<<< HEAD
-=======
 
 
 
 
 
->>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf
