@@ -56,16 +56,16 @@ public class crudUser_h extends HttpServlet {
 		PrintWriter out = response.getWriter();
 		response.setContentType("text/html");
 		String user, hospnum;
-		user = request.getParameter("user_id").toString();
+		user = request.getParameter("user").toString();
 		hospnum = request.getParameter("hospitalNum");
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "select * from usuario where usuario_id='"+user+"'";
+			String sql = "select * from usuario where usuario='"+user+"'";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			
                         
-                        response.sendRedirect("adminUsers_h.jsp?user_id="+user+"&hospitalNum="+hospnum);
+                        response.sendRedirect("adminUsers_h.jsp?user="+user+"&hospitalNum="+hospnum);
                         
                         /*if(rs.next()) {
                             //Agregar el nombre del usuario
@@ -94,6 +94,8 @@ public class crudUser_h extends HttpServlet {
 	}
 
 }
+
+
 
 
 

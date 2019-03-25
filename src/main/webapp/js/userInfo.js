@@ -12,35 +12,34 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'restP/patient/getPatient',
+                url: 'http://localhost:6901/proyectoDB2-Hospitales/restU/usuarios/getUsuarios',
                 dataType: 'json',
                 data: { 
-                    pId: query_string('pId') 
+                    pId: query_string('uId') 
                 },
                 success: function(data) {
                     var $name = $('#nombreP');
-                    $name.append(data[0].nombre);
+                    $name.append(data[0].firstName);
                     var $lastName = $('#apellidoP');
-                    $lastName.append(data[0].apellido);
-                    var $fNac = $('#fNac');
-                    $fNac.append(data[0].fNacimiento);
-                    var $dir = $('#dir');
-                    $dir.append(data[0].dir);
+                    $lastName.append(data[0].lastName);
+                    var $uTy = $('#uTy');
+                    $uTy.append(data[0].usType);
+                    var $uSpe = $('#uSpe');
+                    $uSpe.append(data[0].usSpecial);
                     var $tel = $('#tel');
-                    $tel.append(data[0].tel);
-                    var $dpi = $('#dpi');
-                    $dpi.append(data[0].dpi);
-                    var $segNum = $('#segNum');
-                    $segNum.append(data[0].segNum);
-                    var $aseguradora = $('#aseguradora');
-                    $aseguradora.append(data[0].asegName);
+                    $tel.append(data[0].phone);
+                    var $dpi = $('#user');
+                    $dpi.append(data[0].username);
                 },
                 error : function() {
-                    var $pData = $('#patientData');
+                    var $pData = $('#usuariosData');
                     $pData.empty();
                     $pData.append("<tr><td>No hay datos disponibles</td></tr>");
                 }
             });
 });
+
+
+
 
 

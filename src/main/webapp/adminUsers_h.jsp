@@ -1,62 +1,117 @@
-<%-- 
-    Document   : crudHospital
-    Created on : Mar 11, 2019, 11:39:34 AM
-    Author     : manu
---%>
 
 
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
+    <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Actualización usuario" />
+        <jsp:param name="title" value="Modificar Usuario" />
     </jsp:include>
+    
+    <!--navbar logged-->
+    <%@ include file="partials/_headerLogged.jsp"%>
+    
+    <!--Verify if the user has access-->
+    <%@ include file="partials/_getInfo.jsp"%>
+    <%
+        if(rol.equals("1")||rol.equals("1")){
+        }
+        else{
+            response.sendRedirect("home_h.jsp");
+        }
+    %>
+    
     <body>
-         <div class="grid-container">
-        <div class="grid-x grid-margin-x align-center">
-            
-            
-            <form class="cell small-12 medium-8" action="updateUser_h" method="post">
-                <h4 class="text-center">Panel para actualización de datos</h4>
-                
-                <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
-                <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
-                username:<br>
-                <input type="text" name="usuario" value="" placeholder="Ingrese aqui el username">
-                <br> Nombre:<br>
-                <input type="text" name="nombre" value="" placeholder="Ingrese aqui el nombre">
-                <br> Apellido
-                <br>
-                <textarea type="text" name="apellido" value="" placeholder="Ingrese aqui el apellido"></textarea>
-                <br> Teléfono de contacto:<br>
-                <input type="text" name="telefono" value="" placeholder="ej: 54638126" pattern="[0-9]+">
-                <br> Especialidad
-                <br>
-                <select name="especialidad">
-                    <optgroup label=categoria1><option value=1>onto</option><option value=2>pedia</option><optgroup label=categoria2><option value=4>neuro</option><option value=5>cardio</option><option value=6>general</option><option value=7>enfermera</option>            </select>
-                <br> Tipo de usuario
-                <br>
-                <select name="tipodeusuario">
-                    <option value=1>admin</option><option value=2>asistente</option><option value=3>algo</option></select>
-                
-                <br>
-                <input class="button small-12 cell" type="submit" name="submit" value="Actualizar" />
-            </form>
-                
-                <form class="cell small-12 medium-8" action="deleteUser_h" method="post">
-                    <input type="hidden" name="id_usuario" value="<%= request.getParameter("user_id") %>">
-                    <input type="hidden" name="hospNum" value="<%= request.getParameter("hospitalNum") %>">
-                    
-                    <br>
-                    <input class="button small-12 cell" type="submit" name="submit" value="Eliminar" />
-                    
-                </form>
-                
-                
+        <div class="grid-container">
+            <div class="grid-x align-center-middle">
+                <div class="cell small-10 medium-8">
+                    <form class="form" action="http://localhost:6901/proyectoDB2-Hospitales/restU/usuarios/addUsuarios" method="post">
+                        <!--<h4>Modificar <%=request.getParameter("username")%></h4>-->
+                         <label>username: 
+                            <input id="username" type="text" placeholder="Coloque el nuevo username del usuario" name="username" required>
+                        </label>
+                        <label>contrasenia 
+                            <input id="contra" type="text" placeholder="Coloque el nuevo contrasenia del usuario" name="passw" required>
+                        </label>
+                        <label>Nombre:
+                            <input type="number" value="<%=request.getParameter("uId")%>" style="display:none" name="uId">
+                            <input id="nombreU" type="text" placeholder="Coloque el nuevo nombre del usuario" name="name" required>
+                        </label>
+                        <label>Apellido: 
+                            <input id="apellidoU" type="text" placeholder="Coloque el nuevo apellido del usuario" name="lastName" required>
+                        </label>
+                       
+                        <label>Telefono: 
+                            <input id="tel" type="number" placeholder="Coloque el nuevo telefono del usuario" name="tel" required>
+                        </label>
+                        <label>Especialidad: 
+                            <select id="especialidadData" name="usSpecial">
+                            </select>
+                        </label>
+                        <label>Tipo de usuario:
+                            <select id="typeData" name="usType">
+                            </select>
+                        </label> 
+                       
+                        <br>
+                        
+                            
+                        <input type="submit" class="cell button medium-8" value="Modificar">
+                    </form>
+                </div>
+            </div>
         </div>
-    </div>
     </body>
+    <script src="js/especialidadInf.js"></script>
+    <script src="js/typeInf.js"></script>
+    <script src="js/userModInf.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

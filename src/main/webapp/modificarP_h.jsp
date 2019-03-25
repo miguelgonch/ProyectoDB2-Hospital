@@ -61,6 +61,10 @@
                             <select id="asegData" name="asegNum">
                             </select>
                         </label>
+                        <label>Tipo de seguro:
+                            <select id="typeAseg" name="asegNum">
+                            </select>
+                        </label>
                         <br>
                         <input type="submit" class="cell button medium-8" value="Modificar">
                     </form>
@@ -68,7 +72,10 @@
             </div>
         </div>
     </body>
+    <script src="js/AsegTypeInf.js"></script>
     <script src="js/docInf.js"></script>
     <script src="js/asegInf.js"></script>
     <script src="js/patientModInf.js"></script>
 </html>
+
+

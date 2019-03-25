@@ -11,13 +11,30 @@
         for(Cookie cookie : cookiesInf){
             if(cookie.getName().equals("hospNum")){
                 hospitalNum = cookie.getValue();
+                
             }
             if(cookie.getName().equals("rol")){
                 rol = cookie.getValue();
             }
+            
+            
         }
     }
+    
+    
     if(rol==null){
         rol = "not assigned yet";
     }
+        
+        //out.println(hospitalNum);
 %>
+
+
+
+
+
+
+
+
+
+

@@ -11,14 +11,28 @@
     <div class="grid-container">
         <div class="grid-x align-center">
             <div class="cell small-10 medium-12">
-                <h3>Bienvenido <%= user %> </h3>
+                <h3>Bienvenido <%=user %> </h3>
                 <p>rol <%= rol %> </p>
                 <p>Hospital # <%= hospitalNum %></p>
                 <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
+<<<<<<< HEAD
                 <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
+=======
+                </br>
+                <h2>Administración</h2>
+                <a class="button" href="usuarios_h.jsp">Administración</a>
+>>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf
             </div>
         </div>
     </div>
 </body>
 </html>
+<<<<<<< HEAD
+=======
+
+
+
+
+
+>>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf

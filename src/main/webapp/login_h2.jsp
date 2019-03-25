@@ -23,6 +23,8 @@
                             <p><input type="submit" class="button expanded" value="Login"></p>
                             <p class="text-center"><a href="#">¿Olvidaste tu constraseña?</a></p>
                         </form>
+                         </br>
+                         <a class="button expanded" href="index.jsp">Volver a la pantalla principal</a><br>
                     </div>
                 </div>
         </div>
@@ -33,4 +35,7 @@
     <script src="js/app.js"></script>
 
 </html>
+
+
+
 
