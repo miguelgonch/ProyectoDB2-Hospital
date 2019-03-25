@@ -63,6 +63,7 @@
                                 <th>Telefono</th>
                                 <th>DPI</th>
                                 <th>Numero de seguro</th>
+                                <th>Tipo de Seguro</th>                                
                                 <th>Opciones</th>
                             </tr>
                         </thead>
@@ -75,3 +76,4 @@
     </body>
     <script src="js/patients.js"></script>
 </html>
+

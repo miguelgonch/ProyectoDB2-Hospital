@@ -25,10 +25,10 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="restU/usuarios/addUsuarios" method="post">
-                        <h4>Modificar Paciente</h4>
+                    <form class="form" action="http://localhost:6901/proyectoDB2-Hospitales/restU/usuarios/addUsuarios" method="post">
+                        <!--<h4>Modificar <%=request.getParameter("username")%></h4>-->
                          <label>username: 
-                            <input id="usernombre" type="text" placeholder="Coloque el nuevo username del usuario" name="username" required>
+                            <input id="username" type="text" placeholder="Coloque el nuevo username del usuario" name="username" required>
                         </label>
                         <label>contrasenia 
                             <input id="contra" type="text" placeholder="Coloque el nuevo contrasenia del usuario" name="passw" required>
@@ -44,25 +44,17 @@
                         <label>Telefono: 
                             <input id="tel" type="number" placeholder="Coloque el nuevo telefono del usuario" name="tel" required>
                         </label>
-                         <!--   <label>Tipo Usuario 
-                            <input id="usType" type="number" placeholder="Coloque el nuevo telefono del usuario" name="usType" required>
+                        <label>Especialidad: 
+                            <select id="especialidadData" name="usSpecial">
+                            </select>
                         </label>
-                            <label>Especialidad 
-                            <input id="usSpecial" type="number" placeholder="Coloque el nuevo telefono del usuario" name="usSpecial" required>
-                        </label>-->
+                        <label>Tipo de usuario:
+                            <select id="typeData" name="usType">
+                            </select>
+                        </label> 
                        
                         <br>
-                        <label>Especialidad
-                            <br>
-                            <select id="usSpecial" name="usSpecial">
-                                <optgroup label=categoria1><option value=1>onto</option><option value=2>pedia</option><optgroup label=categoria2><option value=4>neuro</option><option value=5>cardio</option><option value=6>general</option><option value=7>enfermera</option>            </select>
-                        </label>
-                            <br> 
-                            <label>Tipo de usuario
-                            <br>
-                            <select id="usType" name="usType">
-                                <option value=1>doctor</option><option value=2>practicante</option><option value=3>asistente</option></select>
-                            </label>
+                        
                             
                         <input type="submit" class="cell button medium-8" value="Modificar">
                     </form>
@@ -70,9 +62,25 @@
             </div>
         </div>
     </body>
-
-    <script src="js/patientModInf.js"></script>
+    <script src="js/especialidadInf.js"></script>
+    <script src="js/typeInf.js"></script>
+    <script src="js/userModInf.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

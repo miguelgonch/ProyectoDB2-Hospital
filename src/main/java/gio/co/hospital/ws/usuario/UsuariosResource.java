@@ -177,7 +177,7 @@ public class UsuariosResource {
             //Armar el query
             if(uId!=0){
                 //Query con el filtro
-                sql = "UPDATE USUARIO SET USUARIO = '"+username+"',NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', TIPO_USUARIO_ID = '"+usType+"', ESPECIALIDAD_ID = "+usSpecial+", TELEFONO = "+tel+", PASS = "+passw+" WHERE usuario_id = "+uId;
+                sql = "UPDATE USUARIO SET USUARIO = '"+username+"', NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', TIPO_USUARIO_ID = '"+usType+"', ESPECIALIDAD_ID = "+usSpecial+", TELEFONO = "+tel+", PASS = "+passw+" WHERE usuario_id = "+uId;
             }
             else{
                 //Query
@@ -218,6 +218,10 @@ public class UsuariosResource {
         return respuesta;
     }
 }
+
+
+
+
 
 
 

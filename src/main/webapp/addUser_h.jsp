@@ -43,27 +43,39 @@
                         <label>Telefono: 
                             <input type="number" placeholder="Coloque el telefono del usuario" name="tel" required>
                         </label>
-                                             
-                        <br> 
-                        <label>Especialidad
-                            <br>
-                            <select name="usSpecial">
-                                <optgroup label=categoria1><option value=1>onto</option><option value=2>pedia</option><optgroup label=categoria2><option value=4>neuro</option><option value=5>cardio</option><option value=6>general</option><option value=7>enfermera</option>            </select>
+                          
+                        <label>Especialidad: 
+                            <select id="especialidadData" name="usSpecial">
+                            </select>
                         </label>
-                            <br> 
-                            <label>Tipo de usuario
-                            <br>
-                            <select name="usType">
-                                <option value=1>admin</option><option value=2>asistente</option><option value=3>algo</option></select>
-                            </label>
+                        <label>Tipo de usuario:
+                            <select id="typeData" name="usType">
+                            </select>
+                        </label> 
+                      
                         <input type="submit" class="cell button medium-8" value="Agregar">
                     </form>
                 </div>
             </div>
         </div>
     </body>
-    
+    <script src="js/especialidadInf.js"></script>
+    <script src="js/typeInf.js"></script>
 </html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -16,6 +16,7 @@ gio\co\seguros\nuevaPoliza.class
 gio\co\hospital\ws\patient\PatientResource.class
 gio\co\seguros\collPoliza.class
 gio\co\hospital\ws\CallResource.class
+gio\co\hospitales\TypeSeguro.class
 gio\co\seguros\collClientes.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\deleteUser_h.class
@@ -29,6 +30,7 @@ gio\co\hospitales\pacientes\GetPatient.class
 gio\co\seguros\eliminarCliente.class
 gio\co\hospital\ws\usuario\Usuarios.class
 gio\co\seguros\modificarPoliza0.class
+gio\co\hospitales\SpecialTypeInfo.class
 gio\co\seguros\MongoConnectDB.class
 gio\co\hospitales\AsegInfo.class
 gio\co\hospitales\crudUser_h.class

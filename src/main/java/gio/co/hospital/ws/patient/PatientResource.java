@@ -56,11 +56,12 @@ public class PatientResource {
         @FormParam("dpi") float dpi,
         @FormParam("segNum") String segNum,
         @FormParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
+        @FormParam("asegNum") int asegNum,
+        @FormParam("asegType") int asegType){
         
         Boolean answ;                                                       //Respuesta del addUpdatePatient
         answ = false;
-        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
+        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum, asegType);
         if(pId!=1){
             if(answ){
                 return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
@@ -109,12 +110,13 @@ public class PatientResource {
         @QueryParam("dpi") float dpi,
         @QueryParam("segNum") String segNum,
         @QueryParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
+        @FormParam("asegNum") int asegNum,
+        @FormParam("asegType") int asegType){
         
         //Respuesta del addPatient
         Boolean answ;
         answ = false;
-        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
+        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum, asegType);
         if(answ){
             //return Response.status(200).entity("Success").build();
             return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
@@ -137,12 +139,12 @@ public class PatientResource {
                 if(pId!=null){
                     //Query con el filtro para seleccionar un paciente
                     //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
-                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora  where paciente_id ="+pId+" order by paciente_id";
+                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora join tipo_seguro ts on p.id_tipo_seguro=ts.id_tipo_seguro where paciente_id ="+pId+" order by paciente_id";
                 }
                 else{
                     //Query de todos los pacientes
                     //sql = "select * from pacientes order by paciente_id";
-                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora order by paciente_id";
+                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora join tipo_seguro ts on p.id_tipo_seguro=ts.id_tipo_seguro order by paciente_id";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -159,8 +161,10 @@ public class PatientResource {
                     //id de la aseguradora
                     int asegNum = rs.getInt("ASEGURADORA_ID");
                     String asegName = rs.getString("ASEGURADORA");
+                    int asegType = rs.getInt("ID_TIPO_SEGURO");
+                    String asegTypeName = rs.getString("TIPO_SEGURO");
                     //Crear clase paciente
-                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName);
+                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName, asegType, asegTypeName);
                     //Agregar paciente a la lista
                     patientsList.add(patients);
                 }
@@ -173,7 +177,7 @@ public class PatientResource {
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId, int asegNum) {
+    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId, int asegNum, int asegType) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
@@ -183,11 +187,11 @@ public class PatientResource {
             //Armar el query
             if(pId!=0){
                 //Query con el filtro
-                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
+                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+", ID_TIPO_SEGURO = "+asegType+" WHERE paciente_id = "+pId;
             }
             else{
                 //Query
-                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"')";
+                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id, ID_TIPO_SEGURO) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"', '"+asegType+"')";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -224,3 +228,16 @@ public class PatientResource {
         return respuesta;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
