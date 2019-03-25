@@ -29,7 +29,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <h4>Eliminar Paciente?</h4>
+                    <h4>¿Eliminar Paciente?</h4>
                     <table>
                         <tbody>
                             <tr>
