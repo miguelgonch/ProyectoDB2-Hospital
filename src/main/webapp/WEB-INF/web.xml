@@ -58,6 +58,8 @@
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>gio.co.hospital.ws.cobertura</param-value>
+        </init-param>
+    </servlet>
     <servlet>
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -72,10 +74,6 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-<<<<<<< HEAD
-    
-=======
->>>>>>> 0d999425fb5b9ad2a57e7aa2dbacb5286428ccdf
     <servlet-mapping>
         <servlet-name>WS App</servlet-name>
         <url-pattern>/rest/*</url-pattern>
@@ -92,8 +90,7 @@
         <servlet-name>WS cobertura</servlet-name>
         <url-pattern>/restCo/*</url-pattern>
     </servlet-mapping>
-</web-app>
-
+    <servlet-mapping>    
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <url-pattern>/restU/*</url-pattern>
     </servlet-mapping>
