@@ -18,12 +18,13 @@
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
                 </br>
                 <h2>Administración</h2>
-                <a class="button" href="crudUsers_h.jsp">Administración</a>
+                <a class="button" href="usuarios_h.jsp">Administración</a>
             </div>
         </div>
     </div>
 </body>
 </html>
+
 
 
 

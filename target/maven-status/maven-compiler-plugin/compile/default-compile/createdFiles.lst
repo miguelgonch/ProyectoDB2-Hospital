@@ -21,11 +21,13 @@ gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\deleteUser_h.class
 gio\co\hospitales\DocInfo.class
 gio\co\seguros\nuevoCliente.class
+gio\co\hospital\ws\usuario\UsuariosResource.class
 gio\co\hospital\ws\cita\Citas.class
 gio\co\hospital\ws\cita\CitasResource.class
 gio\co\hospitales\addUser_h.class
 gio\co\hospitales\pacientes\GetPatient.class
 gio\co\seguros\eliminarCliente.class
+gio\co\hospital\ws\usuario\Usuarios.class
 gio\co\seguros\modificarPoliza0.class
 gio\co\seguros\MongoConnectDB.class
 gio\co\hospitales\AsegInfo.class

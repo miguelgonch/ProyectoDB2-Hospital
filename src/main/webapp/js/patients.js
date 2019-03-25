@@ -12,7 +12,7 @@ $(document).ready(
                     }
                     if(data.length==0){
                         $pData.append("<p>No hay datos disponibles</p>");
-                    }
+                    }n
                 },
                 error : function() {
                     var $pData = $('#patientData');
@@ -21,3 +21,4 @@ $(document).ready(
                 }
             });
 });
+

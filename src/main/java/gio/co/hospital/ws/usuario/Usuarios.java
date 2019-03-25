@@ -3,136 +3,98 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gio.co.hospital.ws.cita;
+package gio.co.hospital.ws.usuario;
 
-/**
- *
- * @author migue
- */
-public class Citas {
-    private int id;
-    private String diag;
-    private String res;
-    private String meds;
-    private String pasos;
-    private String observ;
-    private String fecha;
-    private String docName;
-    private String docLastName;
-    private int pId;
-    private String pName;
-    private String pLastName;
+public class Usuarios {
+    private int uId;
+    private String username;
+    private String firstName;
+    private String lastName;
+    private int usType;
+    private int usSpecial;
+    private int phone;   
+    private String pass;
 
-    public Citas(int id, String diag, String res, String meds, String pasos, String observ, String fecha, String docName, String docLastName, int pId, String pName, String pLastName) {
-        this.id = id;
-        this.diag = diag;
-        this.res = res;
-        this.meds = meds;
-        this.pasos = pasos;
-        this.observ = observ;
-        this.fecha = fecha;
-        this.docName = docName;
-        this.docLastName = docLastName;
-        this.pId = pId;
-        this.pName = pName;
-        this.pLastName = pLastName;
+    public Usuarios(int uId, String username, String firstName, String lastName, int usType, int usSpecial, int phone, String pass) {
+        this.uId = uId;
+        this.username = username;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.usType = usType;
+        this.usSpecial = usSpecial;
+        this.phone = phone;
+        this.pass = pass;
     }
 
     public int getId() {
-        return id;
+        return uId;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public void setId(int uId) {
+        this.uId = uId;
     }
 
-    public String getDiag() {
-        return diag;
+    public String getUsername() {
+        return username;
     }
 
-    public void setDiag(String diag) {
-        this.diag = diag;
+    public void setUsername(String username) {
+        this.username = username;
     }
 
-    public String getRes() {
-        return res;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setRes(String res) {
-        this.res = res;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public String getMeds() {
-        return meds;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setMeds(String meds) {
-        this.meds = meds;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public String getPasos() {
-        return pasos;
+    public int getUsType() {
+        return usType;
     }
 
-    public void setPasos(String pasos) {
-        this.pasos = pasos;
+    public void setUsType(int usType) {
+        this.usType = usType;
     }
 
-    public String getObserv() {
-        return observ;
+    public int getUsSpecial() {
+        return usSpecial;
     }
 
-    public void setObserv(String observ) {
-        this.observ = observ;
+    public void setUsSpecial(int usSpecial) {
+        this.usSpecial = usSpecial;
     }
 
-    public String getFecha() {
-        return fecha;
+    public int getPhone() {
+        return phone;
     }
 
-    public void setFecha(String fecha) {
-        this.fecha = fecha;
+    public void setPhone(int phone) {
+        this.phone = phone;
     }
 
-    public String getDocName() {
-        return docName;
+    public String getPass() {
+        return pass;
     }
 
-    public void setDocName(String docName) {
-        this.docName = docName;
+    public void setPass(String pass) {
+        this.pass = pass;
     }
+    
+    
 
-    public String getDocLastName() {
-        return docLastName;
-    }
-
-    public void setDocLastName(String docLastName) {
-        this.docLastName = docLastName;
-    }
-
-    public int getpId() {
-        return pId;
-    }
-
-    public void setpId(int pId) {
-        this.pId = pId;
-    }
-
-    public String getpName() {
-        return pName;
-    }
-
-    public void setpName(String pName) {
-        this.pName = pName;
-    }
-
-    public String getpLastName() {
-        return pLastName;
-    }
-
-    public void setpLastName(String pLastName) {
-        this.pLastName = pLastName;
-    }
     
     
 }
+
+
+

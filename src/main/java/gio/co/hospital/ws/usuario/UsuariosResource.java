@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gio.co.hospital.ws.cita;
+package gio.co.hospital.ws.usuario;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -23,111 +23,106 @@ import javax.ws.rs.PUT;
 
 
 /**
- * ESTE WS TODAVIA NO ESTA TERMINADO SE ESTRA TRABAJANDO
+ *
  * @author migue
  */
-@Path("/cita")
-public class CitasResource {
-    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
-    protected List<Citas> citasList = new ArrayList<Citas>();
+@Path("/usuarios")
+public class UsuariosResource {
+    private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
+    protected List<Usuarios> usuariosList = new ArrayList<Usuarios>();
 
     //Realizar una consulta
     @GET
-    @Path("/getCita")
+    @Path("/getUsuarios")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCita(
-            @QueryParam("pId") String pId,
-            @QueryParam("cId") String cId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+    public Response getUsuarios(
+            @QueryParam("uId") String uId) {                                //Aquí uso @QueryParam para recibir los parametros como query
         
-        makeList(pId,cId);                                                      //Crear la lista de la info solicitada
-        return Response.status(200).entity(citasList).build();
+        makeList(uId);                                                      //Crear la lista de la info solicitada
+        return Response.status(200).entity(usuariosList).build();
     }
     
-   /* //Insertar o Actualizar una cita
+    //Insertar o Actualizar un paciente
     @POST
-    @Path("/addCita")
+    @Path("/addUsuarios")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response addCita(
-        @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
-        @FormParam("nameP") String name,                                    //Aquí uso @FormParam para recibir los parametros de un form
-        @FormParam("lastNameP") String lastName,
-        @FormParam("dir") String dir,
+    public Response addUsuarios(
+        @FormParam("uId") int uId,                                          //Aquí obtengo los parametros del formulario
+        @FormParam("username") String username,
+        @FormParam("name") String name,                                    //Aquí uso @FormParam para recibir los parametros de un form
+        @FormParam("lastName") String lastName,
+        @FormParam("usType") int usType,
+        @FormParam("usSpecial") int usSpecial,
         @FormParam("tel") int tel,
-        @FormParam("bDate") String bDate,
-        @FormParam("dpi") float dpi,
-        @FormParam("segNum") String segNum,
-        @FormParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
+        @FormParam("passw") String passw){
         
-        Boolean answ;                                                       //Respuesta del addUpdateCita
+        Boolean answ;                                                       //Respuesta del addUpdatePatient
         answ = false;
-        answ = addUpdateCita(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
-        if(pId!=1){
+        answ = addUpdateUsuarios(uId,username, name,lastName,usType, usSpecial, tel, passw);
+        if(uId!=1){
             if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+                return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?in=1")).build();
             }
             else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+                return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?in=0")).build();
             }
         }
         else{
             if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+                return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?up=1")).build();
             }
             else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+                return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?up=0")).build();
             }
         }
     }
     
     //Eliminar un paciente
     @POST
-    @Path("/deleteCita")
+    @Path("/deleteUsuario")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response deleteCita(
-        @FormParam("delId") int pId){
-        Boolean answ;                                                       //Respuesta del delCita
+    public Response deleteUsuario(
+        @FormParam("delId") int uId){
+        Boolean answ;                                                       //Respuesta del delPatient
         answ = false;
-        answ = delCita(pId);
+        answ = delUsuario(uId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?del=1")).build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?del=0")).build();
         }
     }
     
     @PUT                                                                    //Insertar un paciente pero jsp ni html5 funcionan con put
-    @Path("/updateCita")
+    @Path("/updateUsuario")
     @Produces(MediaType.TEXT_PLAIN)
-    public Response updateCita(
-        @QueryParam("pId") int pId,                                         //Aquí obtengo los parametros 
-        @QueryParam("nameP") String name,                                   //Aquí uso @QueryParam para recibir los parametros como query
-        @QueryParam("lastNameP") String lastName,
-        @QueryParam("dir") String dir,
+    public Response updateUsuario(
+        @QueryParam("uId") int uId,                                         //Aquí obtengo los parametros 
+        @QueryParam("username") String username,
+        @QueryParam("name") String name,                                   //Aquí uso @QueryParam para recibir los parametros como query
+        @QueryParam("lastName") String lastName,
+        @QueryParam("usType") int usType,
+        @QueryParam("uSpecal") int usSpecial,
         @QueryParam("tel") int tel,
-        @QueryParam("bDate") String bDate,
-        @QueryParam("dpi") float dpi,
-        @QueryParam("segNum") String segNum,
-        @QueryParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
+        @QueryParam("passw") String passw){
         
-        //Respuesta del addCita
+        //Respuesta del addPatient
         Boolean answ;
         answ = false;
-        answ = addUpdateCita(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
+        answ = addUpdateUsuarios(uId,username, name,lastName,usType, usSpecial, tel, passw);
         if(answ){
             //return Response.status(200).entity("Success").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?up=1")).build();
         }
         else{
             //return Response.status(200).entity("Failure").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:6901/proyectoDB2-Hospitales/usuarios_h.jsp?up=0")).build();
         }
-    }*/
+    }
 
-    //Metodo para crear la lista de citas
-    protected void makeList(String pId,String cId){
+    //Metodo para crear la lista de pacientes
+    protected void makeList(String uId){
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
@@ -135,39 +130,33 @@ public class CitasResource {
                 //var query sql
                 String sql;
                 //Revisar si hay un request
-                if(pId!=null){
-                    //Query con el filtro
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where pa.paciente_id ="+pId+" order by fecha";
-                }
-                else if(cId!=null){
-                    //Query con el filtro
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where c.cita_id ="+cId+" order by fecha";
+                if(uId!=null){
+                    //Query con el filtro para seleccionar un paciente
+                    //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
+                    sql = "select * from usuario where usuario_id ="+uId+" order by usuario_id";
                 }
                 else{
-                    //Query
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id order by fecha";
+                    //Query de todos los pacientes
+                    //sql = "select * from pacientes order by paciente_id";
+                    sql = "select * from usuario order by usuario_id";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-                //Array jsons
                 while(rs.next()){
                     //obtener parametros
-                        int id = rs.getInt("CITA_ID");
-                        String diag = rs.getString("Diagnostico");
-                        String res = rs.getString("resultados");
-                        String meds = rs.getString("medicinas");
-                        String pasos = rs.getString("pasosaseguir");
-                        String observ = rs.getString("observaciones");
-                        String fecha = rs.getString(7);
-                        String docName = rs.getString(13);
-                        String docLastName = rs.getString(14);
-                        int paId = rs.getInt("paciente_id");
-                        String pName = rs.getString("nombre");
-                        String pLastName = rs.getString("apellido");
+                    int id = rs.getInt("USUARIO_ID");
+                    String username = rs.getString("USUARIO");
+                    String firstName = rs.getString("NOMBRE");
+                    String lastName = rs.getString("APELLIDO");
+                    int usType = rs.getInt("TIPO_USUARIO_ID");
+                    int usSpecial = rs.getInt("ESPECIALIDAD_ID");
+                    int phone = rs.getInt("TELEFONO");
+                    String pass = rs.getString("PASS");
+                    
                     //Crear clase paciente
-                    Citas citas = new Citas(id,diag,res,meds,pasos,observ,fecha,docName,docLastName,paId,pName,pLastName);
+                    Usuarios usuarios = new Usuarios(id,username, firstName,lastName,usType, usSpecial, phone, pass);
                     //Agregar paciente a la lista
-                    citasList.add(citas);
+                    usuariosList.add(usuarios);
                 }
                 rs.close ();
                 pst.close ();
@@ -178,7 +167,7 @@ public class CitasResource {
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdateCita(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId, int asegNum) {
+    private Boolean addUpdateUsuarios(int uId, String username, String name, String lastName, int usType, int usSpecial, int tel, String passw) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
@@ -186,13 +175,13 @@ public class CitasResource {
             //var query sql
             String sql;
             //Armar el query
-            if(pId!=0){
+            if(uId!=0){
                 //Query con el filtro
-                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
+                sql = "UPDATE USUARIO SET USUARIO = '"+username+"',NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', TIPO_USUARIO_ID = '"+usType+"', ESPECIALIDAD_ID = "+usSpecial+", TELEFONO = "+tel+", PASS = "+passw+" WHERE usuario_id = "+uId;
             }
             else{
                 //Query
-                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"')";
+                sql = "INSERT INTO USUARIO (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"', '"+name+"', '"+lastName+"', '"+usType+"', '"+usSpecial+"', '"+tel+"', '"+passw+"')";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -207,7 +196,7 @@ public class CitasResource {
         return respuesta;
     }
 
-    private Boolean delCita(int pId) {
+    private Boolean delUsuario(int uId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
@@ -215,7 +204,7 @@ public class CitasResource {
             //var query sql
             String sql;
             //Query
-            sql = "DELETE FROM PACIENTES WHERE paciente_id="+pId;
+            sql = "DELETE FROM USUARIO WHERE USUARIO_ID="+uId;
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
             rs.close ();
@@ -229,3 +218,68 @@ public class CitasResource {
         return respuesta;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

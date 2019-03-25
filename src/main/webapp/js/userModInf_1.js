@@ -13,34 +13,41 @@ $(document).ready(
             var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetPatient',
+                url: 'http://localhost:6901/proyectoDB2-Hospitales/restU/usuarios/getUsuarios',
                 dataType: 'json',
                 data: { 
-                    pId: query_string('pId') 
+                    uId: query_string('uId') 
                     
                 },
                 success: function(data) {
+                    var $username = 'usernombre';
+                    document.getElementById($username).value= data[0].username;
+                    var $passw = 'contra';
+                    document.getElementById($passw).value= data[0].pass;
                     var $name = 'nombreP';
-                    document.getElementById($name).value= data[0].nombre;
+                    document.getElementById($name).value= data[0].firstName;
                     var $lastName = 'apellidoP';
-                    document.getElementById($lastName).value= data[0].apellido;
-                    var $fNac = 'fNac';
-                    document.getElementById($fNac).value= data[0].fNacimiento;
-                    var $dir = 'dir';
-                    document.getElementById($dir).value= data[0].dir;
+                    document.getElementById($lastName).value= data[0].lastName;
+                    
+                    var $usType = 'usType';
+                    document.getElementById($usType).value= data[0].usType;
                     var $tel = 'tel';
-                    document.getElementById($tel).value= data[0].tel;
-                    var $dpi = 'dpi';
-                    document.getElementById($dpi).value= data[0].dpi;
-                    var $segNum = 'segNum';
-                    document.getElementById($segNum).value= data[0].segNum;
-                    var $aseguradora = 'aseguradora';
-                    document.getElementById($aseguradora).value= data[0].asegNum;
+                    document.getElementById($tel).value= data[0].phone;
+                    var $usSpecial = 'usSpecial';
+                    document.getElementById($usSpecial).value= data[0].usSpecial;
+                    
                 },
                 error : function() {
-                    var $pData = $('#patientData');
+                    var $pData = $('#usuarioData');
                     $pData.empty();
                     $pData.append("<tr><td>No hay datos disponibles</td></tr>");
                 }
             });
 });
+
+
+
+
+
+
+
