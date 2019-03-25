@@ -17,13 +17,18 @@ public class Citas {
     private String pasos;
     private String observ;
     private String fecha;
+    private int docId;
     private String docName;
     private String docLastName;
     private int pId;
     private String pName;
     private String pLastName;
+    private int idSubCat;
+    private String subCat;
+    private int idCat;
+    private String Cat;
 
-    public Citas(int id, String diag, String res, String meds, String pasos, String observ, String fecha, String docName, String docLastName, int pId, String pName, String pLastName) {
+    public Citas(int id, String diag, String res, String meds, String pasos, String observ, String fecha, int docId, String docName, String docLastName, int pId, String pName, String pLastName, int idSubCat, String subCat, int idCat, String Cat) {
         this.id = id;
         this.diag = diag;
         this.res = res;
@@ -31,11 +36,16 @@ public class Citas {
         this.pasos = pasos;
         this.observ = observ;
         this.fecha = fecha;
+        this.docId = docId;
         this.docName = docName;
         this.docLastName = docLastName;
         this.pId = pId;
         this.pName = pName;
         this.pLastName = pLastName;
+        this.idSubCat = idSubCat;
+        this.subCat = subCat;
+        this.idCat = idCat;
+        this.Cat = Cat;
     }
 
     public int getId() {
@@ -94,6 +104,14 @@ public class Citas {
         this.fecha = fecha;
     }
 
+    public int getDocId() {
+        return docId;
+    }
+
+    public void setDocId(int docId) {
+        this.docId = docId;
+    }
+
     public String getDocName() {
         return docName;
     }
@@ -133,6 +151,39 @@ public class Citas {
     public void setpLastName(String pLastName) {
         this.pLastName = pLastName;
     }
+
+    public int getIdSubCat() {
+        return idSubCat;
+    }
+
+    public void setIdSubCat(int idSubCat) {
+        this.idSubCat = idSubCat;
+    }
+
+    public String getSubCat() {
+        return subCat;
+    }
+
+    public void setSubCat(String subCat) {
+        this.subCat = subCat;
+    }
+
+    public int getIdCat() {
+        return idCat;
+    }
+
+    public void setIdCat(int idCat) {
+        this.idCat = idCat;
+    }
+
+    public String getCat() {
+        return Cat;
+    }
+
+    public void setCat(String Cat) {
+        this.Cat = Cat;
+    }
+
     
     
 }

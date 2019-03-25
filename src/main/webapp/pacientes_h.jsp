@@ -46,7 +46,6 @@
                 out.println("<script>alert(\"No se ha logrado eliminar el paciente, vuelve a intentarlo\");</script>");
             }
         }
-
     %>
     <body>
         <div class="grid-container">

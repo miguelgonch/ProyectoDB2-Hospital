@@ -37,46 +37,60 @@ public class CitasResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCita(
             @QueryParam("pId") String pId,
-            @QueryParam("cId") String cId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+            @QueryParam("citaId") String citaId) {                                    //Aquí uso @QueryParam para recibir los parametros como query
         
-        makeList(pId,cId);                                                      //Crear la lista de la info solicitada
+        makeList(pId,citaId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(citasList).build();
     }
     
-   /* //Insertar o Actualizar una cita
+    //Insertar una cita
     @POST
     @Path("/addCita")
     @Produces(MediaType.TEXT_PLAIN)
     public Response addCita(
         @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
-        @FormParam("nameP") String name,                                    //Aquí uso @FormParam para recibir los parametros de un form
-        @FormParam("lastNameP") String lastName,
-        @FormParam("dir") String dir,
-        @FormParam("tel") int tel,
-        @FormParam("bDate") String bDate,
-        @FormParam("dpi") float dpi,
-        @FormParam("segNum") String segNum,
-        @FormParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
+        @FormParam("fechaCita") String dateCita,                                    //Aquí uso @FormParam para recibir los parametros de un form
+        @FormParam("hora") String hora,
+        @FormParam("servicioId") int sId,
+        @FormParam("citaId") int citaId,
+        @FormParam("docId") int docId){
         
         Boolean answ;                                                       //Respuesta del addUpdateCita
         answ = false;
-        answ = addUpdateCita(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
-        if(pId!=1){
-            if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
-            }
-            else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
-            }
+        answ = addUpdateCita(pId,dateCita,hora,sId,docId,citaId);
+        if(answ){
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1")).build();
         }
         else{
-            if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
-            }
-            else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
-            }
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0")).build();
+        }
+        
+    }
+    
+    //Insertar una cita
+    @POST
+    @Path("/updateCita")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response updateCita(
+        @FormParam("citaId") int citaId,                                          //Aquí obtengo los parametros del formulario
+        @FormParam("fechaCita") String dateCita,                                    //Aquí uso @FormParam para recibir los parametros de un form
+        @FormParam("hora") String hora,
+        @FormParam("servicioId") int sId,
+        @FormParam("diag") String diag,
+        @FormParam("pasosASeguir") String pasos,
+        @FormParam("res") String res,
+        @FormParam("obsrv") String obsrv,
+        @FormParam("meds") String meds,
+        @FormParam("docId") int docId){
+        
+        Boolean answ;                                                       //Respuesta del addUpdateCita
+        answ = false;
+        answ = addUpdateCita(citaId,dateCita,hora,sId,diag,pasos,res,obsrv,meds,docId);
+        if(answ){
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1")).build();
+        }
+        else{
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=0")).build();
         }
     }
     
@@ -85,18 +99,18 @@ public class CitasResource {
     @Path("/deleteCita")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteCita(
-        @FormParam("delId") int pId){
+        @FormParam("delId") int citaId){
         Boolean answ;                                                       //Respuesta del delCita
         answ = false;
-        answ = delCita(pId);
+        answ = delCita(citaId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=1")).build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=0")).build();
         }
     }
-    
+    /*
     @PUT                                                                    //Insertar un paciente pero jsp ni html5 funcionan con put
     @Path("/updateCita")
     @Produces(MediaType.TEXT_PLAIN)
@@ -127,7 +141,7 @@ public class CitasResource {
     }*/
 
     //Metodo para crear la lista de citas
-    protected void makeList(String pId,String cId){
+    protected void makeList(String pId,String citaId){
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
@@ -137,15 +151,15 @@ public class CitasResource {
                 //Revisar si hay un request
                 if(pId!=null){
                     //Query con el filtro
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where pa.paciente_id ="+pId+" order by fecha";
+                    sql = "select * from citas_full where paciente_id ="+pId+" order by CITA_ID";
                 }
-                else if(cId!=null){
+                else if(citaId!=null){
                     //Query con el filtro
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where c.cita_id ="+cId+" order by fecha";
+                    sql = "select * from citas_full where cita_id ="+citaId+" order by CITA_ID";
                 }
                 else{
                     //Query
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id order by fecha";
+                    sql = "select * from citas_full order by CITA_ID";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -159,13 +173,18 @@ public class CitasResource {
                         String pasos = rs.getString("pasosaseguir");
                         String observ = rs.getString("observaciones");
                         String fecha = rs.getString(7);
-                        String docName = rs.getString(13);
-                        String docLastName = rs.getString(14);
+                        int docId = rs.getInt("doc_id");
+                        String docName = rs.getString("nombre_doc");
+                        String docLastName = rs.getString("apellido_doc");
                         int paId = rs.getInt("paciente_id");
                         String pName = rs.getString("nombre");
                         String pLastName = rs.getString("apellido");
+                        int subCatId = rs.getInt("ID_SUBCAT");
+                        String subCat = rs.getString("subcat");
+                        int catId = rs.getInt("ID_CAT");
+                        String cat = rs.getString("categoria");
                     //Crear clase paciente
-                    Citas citas = new Citas(id,diag,res,meds,pasos,observ,fecha,docName,docLastName,paId,pName,pLastName);
+                    Citas citas = new Citas(id,diag,res,meds,pasos,observ,fecha,docId,docName,docLastName,paId,pName,pLastName,subCatId,subCat,catId,cat);
                     //Agregar paciente a la lista
                     citasList.add(citas);
                 }
@@ -177,8 +196,30 @@ public class CitasResource {
             }
     }
 
+    private Boolean delCita(int citaId) {
+        Boolean respuesta = false;
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        try{
+            //var query sql
+            String sql;
+            //Query
+            sql = "DELETE FROM CITAS WHERE cita_id="+citaId;
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+            rs.close ();
+            pst.close ();
+            conn.close();
+            respuesta = true;
+        }catch(Exception e){
+            System.err.println(e);
+            respuesta = false;
+        }
+        return respuesta;
+    }
+
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdateCita(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId, int asegNum) {
+    private Boolean addUpdateCita(int pId, String dateCita, String hora, int sId, int docId,int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
@@ -186,13 +227,14 @@ public class CitasResource {
             //var query sql
             String sql;
             //Armar el query
-            if(pId!=0){
+            if(citaId!=0){
                 //Query con el filtro
-                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
+                //sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
+                sql = "UPDATE CITAS SET DIAGNOSTICO = '', RESULTADOS = 'resultados', MEDICINAS = 'panadol forte', PASOSASEGUIR = 'venir en 2 meses', OBSERVACIONES = 'consumir ibuprofeno', FECHA = TO_DATE('2019-03-25 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '5', PACIENTE_ID = '45', ID_SUBCAT = '1' WHERE cita_id="+citaId;
             }
             else{
                 //Query
-                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"')";
+                sql = "INSERT INTO CITAS (FECHA, DOC_ID, PACIENTE_ID, ID_SUBCAT) VALUES (TO_DATE('"+dateCita+" "+hora+"', 'YYYY-MM-DD HH24:MI:SS'), '"+docId+"', '"+pId+"', '"+sId+"')";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -207,15 +249,15 @@ public class CitasResource {
         return respuesta;
     }
 
-    private Boolean delCita(int pId) {
+    private Boolean addUpdateCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
         try{
             //var query sql
             String sql;
-            //Query
-            sql = "DELETE FROM PACIENTES WHERE paciente_id="+pId;
+            //Armar el query
+            sql = "UPDATE CITAS SET DIAGNOSTICO = '"+diag+"', RESULTADOS = '"+res+"', MEDICINAS = '"+meds+"', PASOSASEGUIR = '"+pasos+"', OBSERVACIONES = '"+obsrv+"', FECHA = TO_DATE('"+dateCita+" "+hora+"', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '"+docId+"', ID_SUBCAT = '"+sId+"' WHERE cita_id="+citaId;
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
             rs.close ();
