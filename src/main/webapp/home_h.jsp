@@ -16,6 +16,7 @@
                 <p>Hospital # <%= hospitalNum %></p>
                 <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
+                <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
             </div>
         </div>
     </div>

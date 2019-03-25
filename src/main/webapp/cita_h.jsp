@@ -49,6 +49,9 @@
                         </tbody>
                     </table>
                 </div>
+                <div id="cob">
+                    
+                </div>
                 <div class="cell small-10 medium-12" id="historialData">
                 </div>
             </div>
@@ -56,5 +59,8 @@
     </body>
     <script src="js/infoCitas.js"></script>
     <script src="js/patientInfo.js"></script>
+    <script src="js/infoCobertura.js"></script>
 </html>
+
+
 
