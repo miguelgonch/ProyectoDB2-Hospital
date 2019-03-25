@@ -12,7 +12,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:6901/proyectoDB2-Hospitales/restU/usuarios/getUsuarios',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/restU/usuarios/getUsuarios',
                 dataType: 'json',
                 data: { 
                     pId: query_string('uId') 
