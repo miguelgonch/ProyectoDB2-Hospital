@@ -18,8 +18,8 @@
                 <a class="button" href="citas_h.jsp">Ver Citas</a>
                 <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
                 </br>
-                <h2>Administraci�n</h2>
-                <a class="button" href="usuarios_h.jsp">Administraci�n</a>
+                <h2>Administracion</h2>
+                <a class="button" href="usuarios_h.jsp">Administracion</a>
             </div>
         </div>
     </div>
