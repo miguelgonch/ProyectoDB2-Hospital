@@ -50,9 +50,11 @@
                     </table>
                 </div>
                 <div id="cob">
-                    
                 </div>
-                <div class="cell small-10 medium-12" id="historialData">
+                <div class="cell small-10 medium-12">
+                    <a class="button" href="modificarC_h.jsp?citaId=<%= request.getParameter("citaId")%>" >Modificar Cita</a>
+                    <div id="historialData">
+                    </div>
                 </div>
             </div>
         </div>

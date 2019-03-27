@@ -16,7 +16,7 @@ $(document).ready(
                 url: 'http://localhost:8080/proyectoDB2-Hospitales/restCo/cobertura/getCobertura',
                 dataType: 'json',
                 data: { 
-                    cId: query_string('cId') 
+                    citaId: query_string('citaId') 
                     
                 },
                 success: function(data) {

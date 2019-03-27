@@ -1,22 +1,22 @@
 $(document).ready(
         function() {
+            var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/getHorario',
                 dataType: 'json',
                 success: function(data) {
-                    var $pData = $('#historialData');
+                    var $pData = $('#horariosData');
                     $pData.empty();
                     for (var i = 0; i < data.length; i++) {
-                        $pData.append("<tr><td>"+data[i].id+"</td><td>"+data[i].cat+"</td><td>"+data[i].docName+" "+data[i].docLastName+"</td><td>"+data[i].pName+" "+data[i].pLastName+"</td><td>"+data[i].fecha+"</td><td><a class=\"button\" href=\"cita_h.jsp?citaId="+data[i].id+"&pId="+data[i].pId+"\">Ver detalles</a> <a class=\"button\" href=\"deleteC_h.jsp?citaId="+data[i].id+"\">Eliminar Cita</a></td></tr>");
+                        $pData.append("<option value="+data[i].hora+">"+data[i].hora+"</option>");
                     }
                     if(data.length==0){
                         $pData.append("<p>No hay datos disponibles</p>");
                     }
-
                 },
                 error : function() {
-                    var $pData = $('#historialData');
+                    var $pData = $('#horariosData');
                     $pData.empty();
                     $pData.append("<p>No hay datos disponibles</p>");
                 }

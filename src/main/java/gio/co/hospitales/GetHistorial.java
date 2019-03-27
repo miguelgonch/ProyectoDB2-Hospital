@@ -49,10 +49,10 @@ public class GetHistorial extends HttpServlet {
                     //Query con el filtro
                     sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where pa.paciente_id ="+pId+" order by fecha";
                 }
-                else if(request.getParameter("cId")!=null){
-                    String cId = request.getParameter("cId");
+                else if(request.getParameter("citaId")!=null){
+                    String citaId = request.getParameter("citaId");
                     //Query con el filtro
-                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where c.cita_id ="+cId+" order by fecha";
+                    sql = "select c.cita_id ,c.diagnostico,c.resultados,c.medicinas,c.pasosaseguir,c.observaciones,c.fecha,c.paciente_id,pa.nombre,pa.apellido,doc_id,id_subcat,u.nombre,u.apellido from citas c join usuario u on u.usuario_id = c.doc_id join pacientes pa on c.paciente_id = pa.paciente_id where c.cita_id ="+citaId+" order by fecha";
                 }
                 else{
                     //Query

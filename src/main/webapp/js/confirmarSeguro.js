@@ -15,7 +15,7 @@ $(document).ready(
                 url: 'http://localhost:8080/proyectoDB2/restC/cliente/getCliente/',
                 dataType: 'json',
                 data: { 
-                    cId: query_string('dpi') 
+                    citaId: query_string('dpi') 
                 },
                 success: function(data) {
                     var $cData = $('#consulta');
