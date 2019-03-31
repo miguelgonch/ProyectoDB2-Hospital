@@ -48,33 +48,31 @@ public class UpdateCita extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String name, lastName, dir, bDate, segNum, tel, dpi, docId, asegNum, pId,asegType;
-            name = request.getParameter("nameP");
-            lastName = request.getParameter("lastNameP");
-            dir = request.getParameter("dir");
-            tel = request.getParameter("tel");
-            bDate = request.getParameter("bDate");
-            dpi = request.getParameter("dpi");
-            segNum = request.getParameter("segNum");
+            String citaId,dateCita,hora,sId,diag,pasos,res,obsrv,meds,docId;
+            citaId = request.getParameter("citaId");
+            dateCita = request.getParameter("fechaCita");
+            hora = request.getParameter("hora");
+            sId = request.getParameter("servicioId");
+            diag = request.getParameter("diag");
+            pasos = request.getParameter("pasosASeguir");
+            res = request.getParameter("res");
+            obsrv = request.getParameter("obsrv");
+            meds = request.getParameter("meds");
             docId = request.getParameter("docId");
-            asegNum = request.getParameter("asegNum");
-            pId = request.getParameter("pId");
-            asegType = request.getParameter("asegType");
             // Construct data
             StringBuilder dataBuilder = new StringBuilder();
-            dataBuilder.append(URLEncoder.encode("nameP", "UTF-8")).append('=').append(URLEncoder.encode(name, "UTF-8")).append("&").
-                    append(URLEncoder.encode("lastNameP", "UTF-8")).append('=').append(URLEncoder.encode(lastName, "UTF-8")).append("&").
-                    append(URLEncoder.encode("dir", "UTF-8")).append('=').append(URLEncoder.encode(dir, "UTF-8")).append("&").
-                    append(URLEncoder.encode("tel", "UTF-8")).append('=').append(URLEncoder.encode(tel, "UTF-8")).append("&").
-                    append(URLEncoder.encode("bDate", "UTF-8")).append('=').append(URLEncoder.encode(bDate, "UTF-8")).append("&").
-                    append(URLEncoder.encode("dpi", "UTF-8")).append('=').append(URLEncoder.encode(dpi, "UTF-8")).append("&").
-                    append(URLEncoder.encode("segNum", "UTF-8")).append('=').append(URLEncoder.encode(segNum, "UTF-8")).append("&").
-                    append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8")).append("&").
-                    append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8")).append("&").
-                    append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8")).append("&").
-                    append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
+            dataBuilder.append(URLEncoder.encode("citaId", "UTF-8")).append('=').append(URLEncoder.encode(citaId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("fechaCita", "UTF-8")).append('=').append(URLEncoder.encode(dateCita, "UTF-8")).append("&").
+                    append(URLEncoder.encode("hora", "UTF-8")).append('=').append(URLEncoder.encode(hora, "UTF-8")).append("&").
+                    append(URLEncoder.encode("servicioId", "UTF-8")).append('=').append(URLEncoder.encode(sId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("diag", "UTF-8")).append('=').append(URLEncoder.encode(diag, "UTF-8")).append("&").
+                    append(URLEncoder.encode("pasosASeguir", "UTF-8")).append('=').append(URLEncoder.encode(pasos, "UTF-8")).append("&").
+                    append(URLEncoder.encode("res", "UTF-8")).append('=').append(URLEncoder.encode(res, "UTF-8")).append("&").
+                    append(URLEncoder.encode("obsrv", "UTF-8")).append('=').append(URLEncoder.encode(obsrv, "UTF-8")).append("&").
+                    append(URLEncoder.encode("meds", "UTF-8")).append('=').append(URLEncoder.encode(meds, "UTF-8")).append("&").
+                    append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restP/patient/updatePatient");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restC/cita/updateCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
@@ -93,9 +91,9 @@ public class UpdateCita extends HttpServlet {
             int answ = obj.getInt("up");
 
             if (answ == 1) {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1");
             } else {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=0");
             }
 
             //out.println(answ);

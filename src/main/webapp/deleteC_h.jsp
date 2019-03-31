@@ -34,7 +34,7 @@
                         <div id="historialData">
                         </div>
                     </div>
-                    <form class="form" action="restC/cita/deleteCita" method="post">
+                    <form class="form" action="DeleteCita" method="post">
                         <input type="number" value="<%=request.getParameter("citaId")%>" style="display:none" name="delId">
                         <input type="submit" class="cell button medium-8" value="Eliminar">
                         <a class="button expanded" href="citas_h.jsp">Cancelar</a>

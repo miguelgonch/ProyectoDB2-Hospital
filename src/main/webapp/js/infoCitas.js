@@ -13,7 +13,7 @@ $(document).ready(
             var $idNum = $('#idNum');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCita',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 

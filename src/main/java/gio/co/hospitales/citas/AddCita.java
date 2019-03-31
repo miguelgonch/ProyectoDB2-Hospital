@@ -1,6 +1,5 @@
 package gio.co.hospitales.citas;
 
-import gio.co.hospitales.pacientes.*;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -8,11 +7,9 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -51,31 +48,21 @@ public class AddCita extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String name,lastName,dir,bDate,segNum,tel,dpi,docId,asegNum,asegType;
-            name = request.getParameter("nameP");
-            lastName = request.getParameter("lastNameP");
-            dir = request.getParameter("dir");
-            tel = request.getParameter("tel");
-            bDate = request.getParameter("bDate");
-            dpi = request.getParameter("dpi");
-            segNum = request.getParameter("segNum");
+            String pId,dateCita,hora,sId,citaId,docId;
+            pId = request.getParameter("pId");
+            dateCita = request.getParameter("fechaCita");
+            hora = request.getParameter("hora");
+            sId = request.getParameter("servicioId");
             docId = request.getParameter("docId");
-            asegNum = request.getParameter("asegNum");
-            asegType = request.getParameter("asegType");
             // Construct data
             StringBuilder dataBuilder = new StringBuilder();
-            dataBuilder.append(URLEncoder.encode("nameP", "UTF-8")).append('=').append(URLEncoder.encode(name, "UTF-8")).append("&").
-                    append(URLEncoder.encode("lastNameP", "UTF-8")).append('=').append(URLEncoder.encode(lastName, "UTF-8")).append("&").
-                    append(URLEncoder.encode("dir", "UTF-8")).append('=').append(URLEncoder.encode(dir, "UTF-8")).append("&").
-                    append(URLEncoder.encode("tel", "UTF-8")).append('=').append(URLEncoder.encode(tel, "UTF-8")).append("&").
-                    append(URLEncoder.encode("bDate", "UTF-8")).append('=').append(URLEncoder.encode(bDate, "UTF-8")).append("&").
-                    append(URLEncoder.encode("dpi", "UTF-8")).append('=').append(URLEncoder.encode(dpi, "UTF-8")).append("&").
-                    append(URLEncoder.encode("segNum", "UTF-8")).append('=').append(URLEncoder.encode(segNum, "UTF-8")).append("&").
-                    append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8")).append("&").
-                    append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8")).append("&").
-                    append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
+            dataBuilder.append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("fechaCita", "UTF-8")).append('=').append(URLEncoder.encode(dateCita, "UTF-8")).append("&").
+                    append(URLEncoder.encode("hora", "UTF-8")).append('=').append(URLEncoder.encode(hora, "UTF-8")).append("&").
+                    append(URLEncoder.encode("servicioId", "UTF-8")).append('=').append(URLEncoder.encode(sId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restP/patient/addPatient");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restC/cita/addCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -94,28 +81,15 @@ public class AddCita extends HttpServlet {
             int answ = obj.getInt("in");
             
             if(answ==1){
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1");
             }
             else{
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0");
             }
-            //out.println(answ);
-            //out.println(response2.toString());
             wr.close();
             rd.close();
         } catch (Exception e) {
             System.err.println(e);
-        }
-    }
-
-    protected void getInfoCookies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cookie[] cookiesInf = request.getCookies();
-        if (cookiesInf != null) {
-            for (Cookie cookie : cookiesInf) {
-                if (cookie.getName().equals("hospNum")) {
-                    hospitalNum = cookie.getValue();
-                }
-            }
         }
     }
 }

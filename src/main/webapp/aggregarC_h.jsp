@@ -26,7 +26,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="restC/cita/addCita" method="post">
+                    <form class="form" action="AddCita" method="post">
                         <h4>Nueva Cita</h4>
                         <label>Paciente: 
                             <select id="patients" name="pId" required>

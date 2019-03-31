@@ -26,7 +26,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="restC/cita/updateCita" method="post">
+                    <form class="form" action="UpdateCita" method="post">
                         <h4>Modificar Cita</h4>
                         <label>Paciente: 
                             <input type="int" name="citaId" value="<%= request.getParameter("citaId")%>" style="display:none">

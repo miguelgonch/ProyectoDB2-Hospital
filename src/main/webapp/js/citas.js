@@ -2,7 +2,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCita',
                 dataType: 'json',
                 success: function(data) {
                     var $pData = $('#historialData');
