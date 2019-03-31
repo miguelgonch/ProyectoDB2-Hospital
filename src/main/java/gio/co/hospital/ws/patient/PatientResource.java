@@ -63,10 +63,12 @@ public class PatientResource {
         answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
         if(pId==0){
             if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+                //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+                return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
             }
             else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+                //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+                return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
             }
         }
         else{
@@ -80,7 +82,7 @@ public class PatientResource {
     }
     
     //Eliminar un paciente
-    @POST
+    @POST                                                                   //@DELETE
     @Path("/deletePatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deletePatient(
