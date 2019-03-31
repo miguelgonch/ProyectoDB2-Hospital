@@ -1,5 +1,6 @@
-package gio.co.hospitales.pacientes;
+package gio.co.hospitales.citas;
 
+import gio.co.hospitales.pacientes.*;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -17,17 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 /**
- * Servlet implementation class UpdatePatient
+ * Servlet implementation class UpdateCita
  */
-@WebServlet("/UpdatePatient")
-public class UpdatePatient extends HttpServlet {
+@WebServlet("/UpdateCita")
+public class UpdateCita extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public UpdatePatient() {
+    public UpdateCita() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -96,6 +97,9 @@ public class UpdatePatient extends HttpServlet {
             } else {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0");
             }
+
+            //out.println(answ);
+            //out.println(response2.toString());
             wr.close();
             rd.close();
         } catch (Exception e) {

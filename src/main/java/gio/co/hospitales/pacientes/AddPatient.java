@@ -98,8 +98,6 @@ public class AddPatient extends HttpServlet {
             else{
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0");
             }
-            //out.println(answ);
-            //out.println(response2.toString());
             wr.close();
             rd.close();
         } catch (Exception e) {

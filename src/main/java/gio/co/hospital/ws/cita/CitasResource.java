@@ -19,17 +19,18 @@ import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import java.net.URI;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 
 
 /**
- * ESTE WS TODAVIA NO ESTA TERMINADO SE ESTRA TRABAJANDO
+ * 
  * @author migue
  */
 @Path("/cita")
 public class CitasResource {
-    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
-    protected List<Citas> citasList = new ArrayList<Citas>();
+    private static String hospitalNum = "1";                                        //Este va a estar cambiado para cada hospital
+    protected List<Citas> citasList = new ArrayList<Citas>();   
 
     //Realizar una consulta
     @GET
@@ -37,9 +38,9 @@ public class CitasResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCita(
             @QueryParam("pId") String pId,
-            @QueryParam("citaId") String citaId) {                                    //Aquí uso @QueryParam para recibir los parametros como query
+            @QueryParam("citaId") String citaId) {                                  //Aquí uso @QueryParam para recibir los parametros como query
         
-        makeList(pId,citaId);                                                      //Crear la lista de la info solicitada
+        makeList(pId,citaId);                                                       //Crear la lista de la info solicitada
         return Response.status(200).entity(citasList).build();
     }
     
@@ -48,31 +49,33 @@ public class CitasResource {
     @Path("/addCita")
     @Produces(MediaType.TEXT_PLAIN)
     public Response addCita(
-        @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
+        @FormParam("pId") int pId,                                                  //Aquí obtengo los parametros del formulario
         @FormParam("fechaCita") String dateCita,                                    //Aquí uso @FormParam para recibir los parametros de un form
         @FormParam("hora") String hora,
         @FormParam("servicioId") int sId,
         @FormParam("citaId") int citaId,
         @FormParam("docId") int docId){
         
-        Boolean answ;                                                       //Respuesta del addUpdateCita
+        Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
         answ = addUpdateCita(pId,dateCita,hora,sId,docId,citaId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
         
     }
     
     //Insertar una cita
-    @POST
+    @PUT
     @Path("/updateCita")
     @Produces(MediaType.TEXT_PLAIN)
     public Response updateCita(
-        @FormParam("citaId") int citaId,                                          //Aquí obtengo los parametros del formulario
+        @FormParam("citaId") int citaId,                                            //Aquí obtengo los parametros del formulario
         @FormParam("fechaCita") String dateCita,                                    //Aquí uso @FormParam para recibir los parametros de un form
         @FormParam("hora") String hora,
         @FormParam("servicioId") int sId,
@@ -83,63 +86,38 @@ public class CitasResource {
         @FormParam("meds") String meds,
         @FormParam("docId") int docId){
         
-        Boolean answ;                                                       //Respuesta del addUpdateCita
+        Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
         answ = addUpdateCita(citaId,dateCita,hora,sId,diag,pasos,res,obsrv,meds,docId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
     
     //Eliminar un paciente
-    @POST
+    @DELETE
     @Path("/deleteCita")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deleteCita(
         @FormParam("delId") int citaId){
-        Boolean answ;                                                       //Respuesta del delCita
+        Boolean answ;                                                               //Respuesta del delCita
         answ = false;
         answ = delCita(citaId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
-    /*
-    @PUT                                                                    //Insertar un paciente pero jsp ni html5 funcionan con put
-    @Path("/updateCita")
-    @Produces(MediaType.TEXT_PLAIN)
-    public Response updateCita(
-        @QueryParam("pId") int pId,                                         //Aquí obtengo los parametros 
-        @QueryParam("nameP") String name,                                   //Aquí uso @QueryParam para recibir los parametros como query
-        @QueryParam("lastNameP") String lastName,
-        @QueryParam("dir") String dir,
-        @QueryParam("tel") int tel,
-        @QueryParam("bDate") String bDate,
-        @QueryParam("dpi") double dpi,
-        @QueryParam("segNum") String segNum,
-        @QueryParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
-        
-        //Respuesta del addCita
-        Boolean answ;
-        answ = false;
-        answ = addUpdateCita(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
-        if(answ){
-            //return Response.status(200).entity("Success").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
-        }
-        else{
-            //return Response.status(200).entity("Failure").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
-        }
-    }*/
-
+    
     //Metodo para crear la lista de citas
     protected void makeList(String pId,String citaId){
         //Conexion con db oracle

@@ -1,5 +1,6 @@
-package gio.co.hospitales.pacientes;
+package gio.co.hospitales.citas;
 
+import gio.co.hospitales.pacientes.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -13,10 +14,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GetPatient
+ * Servlet implementation class GetCita
  */
-@WebServlet("/GetPatient")
-public class GetPatient extends HttpServlet {
+@WebServlet("/GetCita")
+public class GetCita extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
     public static String hospitalNum = "1";
@@ -24,7 +25,7 @@ public class GetPatient extends HttpServlet {
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetPatient() {
+    public GetCita() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,11 +39,15 @@ public class GetPatient extends HttpServlet {
         try {
             String url;
             String parPId = request.getParameter("pId");
-            if ((parPId != null) && !(parPId.equals(""))) {
-                int pId = Integer.parseInt(request.getParameter("pId"));
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient?pId=" + pId;
+            String parCitaId = request.getParameter("citaId");
+            if (((parPId != null) && !(parPId.equals("")))) {
+                int pId = Integer.parseInt(parPId);
+                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita?pId=" + pId;
+            } else if (((parCitaId != null) && !(parCitaId.equals("")))) {
+                int citaId = Integer.parseInt(parCitaId);
+                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita?citaId=" + citaId;
             } else {
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient";
+                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
