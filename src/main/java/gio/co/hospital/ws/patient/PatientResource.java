@@ -19,8 +19,8 @@ import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import java.net.URI;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
-
 
 /**
  *
@@ -28,6 +28,7 @@ import javax.ws.rs.PUT;
  */
 @Path("/patient")
 public class PatientResource {
+
     private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
 
@@ -37,141 +38,129 @@ public class PatientResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getPatient(
             @QueryParam("pId") String pId) {                                //Aquí uso @QueryParam para recibir los parametros como query
-        
+
         makeList(pId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(patientsList).build();
     }
-    
+
     //Insertar o Actualizar un paciente
     @POST
     @Path("/addPatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response addPatient(
-        @FormParam("pId") int pId,                                          //Aquí obtengo los parametros del formulario
-        @FormParam("nameP") String name,                                    //Aquí uso @FormParam para recibir los parametros de un form
-        @FormParam("lastNameP") String lastName,
-        @FormParam("dir") String dir,
-        @FormParam("tel") int tel,
-        @FormParam("bDate") String bDate,
-        @FormParam("dpi") float dpi,
-        @FormParam("segNum") String segNum,
-        @FormParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
-        
+            @FormParam("pId") int pId, //Aquí obtengo los parametros del formulario
+            @FormParam("nameP") String name, //Aquí uso @FormParam para recibir los parametros de un form
+            @FormParam("lastNameP") String lastName,
+            @FormParam("dir") String dir,
+            @FormParam("tel") int tel,
+            @FormParam("bDate") String bDate,
+            @FormParam("dpi") float dpi,
+            @FormParam("segNum") String segNum,
+            @FormParam("docId") int docId,
+            @FormParam("asegNum") int asegNum) {
+
         Boolean answ;                                                       //Respuesta del addUpdatePatient
         answ = false;
-        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
-        if(pId==0){
-            if(answ){
-                //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
-                return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
-            }
-            else{
-                //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
-                return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
-            }
-        }
-        else{
-            if(answ){
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
-            }
-            else{
-                return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
-            }
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum);
+        if (answ) {
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
+        } else {
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
     }
-    
+
     //Eliminar un paciente
-    @POST                                                                   //@DELETE
+    @DELETE
     @Path("/deletePatient")
     @Produces(MediaType.TEXT_PLAIN)
     public Response deletePatient(
-        @FormParam("delId") int pId){
+            @FormParam("delId") int pId) {
         Boolean answ;                                                       //Respuesta del delPatient
         answ = false;
         answ = delPatient(pId);
-        if(answ){
+        if (answ) {
             return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
-        }
-        else{
+        } else {
             return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
         }
     }
-    
-    @PUT                                                                    //Insertar un paciente pero jsp ni html5 funcionan con put
+
+    @PUT                                                                    //Update un paciente pero jsp ni html5 funcionan con put
     @Path("/updatePatient")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response updatePatient(
-        @QueryParam("pId") int pId,                                         //Aquí obtengo los parametros 
-        @QueryParam("nameP") String name,                                   //Aquí uso @QueryParam para recibir los parametros como query
-        @QueryParam("lastNameP") String lastName,
-        @QueryParam("dir") String dir,
-        @QueryParam("tel") int tel,
-        @QueryParam("bDate") String bDate,
-        @QueryParam("dpi") float dpi,
-        @QueryParam("segNum") String segNum,
-        @QueryParam("docId") int docId,
-        @FormParam("asegNum") int asegNum){
-        
+            @FormParam("pId") int pId, //Aquí obtengo los parametros 
+            @FormParam("nameP") String name, //Aquí uso @QueryParam para recibir los parametros como query
+            @FormParam("lastNameP") String lastName,
+            @FormParam("dir") String dir,
+            @FormParam("tel") int tel,
+            @FormParam("bDate") String bDate,
+            @FormParam("dpi") float dpi,
+            @FormParam("segNum") String segNum,
+            @FormParam("docId") int docId,
+            @FormParam("asegNum") int asegNum) {
+
         //Respuesta del addPatient
         Boolean answ;
         answ = false;
-        answ = addUpdatePatient(pId,name,lastName,dir,tel,bDate,dpi,segNum,docId,asegNum);
-        if(answ){
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum);
+        if (answ) {
             //return Response.status(200).entity("Success").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
-        }
-        else{
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
+        } else {
             //return Response.status(200).entity("Failure").build();
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
 
     //Metodo para crear la lista de pacientes
-    protected void makeList(String pId){
+    protected void makeList(String pId) {
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-            //Response info
-            try{
-                //var query sql
-                String sql;
-                //Revisar si hay un request
-                if(pId!=null){
-                    //Query con el filtro para seleccionar un paciente
-                    //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
-                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora  where paciente_id ="+pId+" order by paciente_id";
-                }
-                else{
-                    //Query de todos los pacientes
-                    //sql = "select * from pacientes order by paciente_id";
-                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora order by paciente_id";
-                }
-                OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-                OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-                while(rs.next()){
-                    //obtener parametros
-                    int id = rs.getInt("PACIENTE_ID");
-                    String name = rs.getString("Nombre");
-                    String lastN = rs.getString("Apellido");
-                    int tel = rs.getInt("TEL");
-                    float dpi = rs.getFloat("DPI");
-                    String segNum = rs.getString("num_seguro");
-                    String fNacimiento = rs.getString("f_nacimiento");
-                    String dir = rs.getString("dir");
-                    //id de la aseguradora
-                    int asegNum = rs.getInt("ASEGURADORA_ID");
-                    String asegName = rs.getString("ASEGURADORA");
-                    //Crear clase paciente
-                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName);
-                    //Agregar paciente a la lista
-                    patientsList.add(patients);
-                }
-                rs.close ();
-                pst.close ();
-                conn.close();
-            }catch(Exception e){
-                System.err.println(e);
+        //Response info
+        try {
+            //var query sql
+            String sql;
+            //Revisar si hay un request
+            if (pId != null) {
+                //Query con el filtro para seleccionar un paciente
+                //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
+                sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora  where paciente_id =" + pId + " order by paciente_id";
+            } else {
+                //Query de todos los pacientes
+                //sql = "select * from pacientes order by paciente_id";
+                sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora order by paciente_id";
             }
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            while (rs.next()) {
+                //obtener parametros
+                int id = rs.getInt("PACIENTE_ID");
+                String name = rs.getString("Nombre");
+                String lastN = rs.getString("Apellido");
+                int tel = rs.getInt("TEL");
+                float dpi = rs.getFloat("DPI");
+                String segNum = rs.getString("num_seguro");
+                String fNacimiento = rs.getString("f_nacimiento");
+                String dir = rs.getString("dir");
+                //id de la aseguradora
+                int asegNum = rs.getInt("ASEGURADORA_ID");
+                String asegName = rs.getString("ASEGURADORA");
+                //Crear clase paciente
+                Patients patients = new Patients(id, name, lastN, tel, dpi, segNum, fNacimiento, dir, asegNum, asegName);
+                //Agregar paciente a la lista
+                patientsList.add(patients);
+            }
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
@@ -179,25 +168,24 @@ public class PatientResource {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-        try{
+        try {
             //var query sql
             String sql;
             //Armar el query
-            if(pId!=0){
+            if (pId != 0) {
                 //Query con el filtro
-                sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
-            }
-            else{
+                sql = "UPDATE PACIENTES SET NOMBRE = '" + name + "', APELLIDO = '" + lastName + "', DIR = '" + dir + "', TEL = " + tel + ", F_NACIMIENTO = TO_DATE('" + bDate + " 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = " + dpi + ", NUM_SEGURO = " + segNum + ", DOCTOR_ID = " + docId + ",aseguradora_id = " + asegNum + " WHERE paciente_id = " + pId;
+            } else {
                 //Query
-                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"')";
+                sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('" + name + "', '" + lastName + "', '" + dir + "', '" + tel + "', TO_DATE('" + bDate + " 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '" + dpi + "', '" + segNum + "', '" + docId + "','" + asegNum + "')";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-            rs.close ();
-            pst.close ();
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            rs.close();
+            pst.close();
             conn.close();
             respuesta = true;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
             respuesta = false;
         }
@@ -208,18 +196,18 @@ public class PatientResource {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
-        try{
+        try {
             //var query sql
             String sql;
             //Query
-            sql = "DELETE FROM PACIENTES WHERE paciente_id="+pId;
+            sql = "DELETE FROM PACIENTES WHERE paciente_id=" + pId;
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
-            rs.close ();
-            pst.close ();
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            rs.close();
+            pst.close();
             conn.close();
             respuesta = true;
-        }catch(Exception e){
+        } catch (Exception e) {
             System.err.println(e);
             respuesta = false;
         }
