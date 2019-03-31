@@ -23,7 +23,6 @@ import org.json.JSONObject;
 public class UpdatePatient extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String hospitalNum = "1";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -95,24 +94,13 @@ public class UpdatePatient extends HttpServlet {
             } else {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0");
             }
-            
+
             //out.println(answ);
             //out.println(response2.toString());
             wr.close();
             rd.close();
         } catch (Exception e) {
             System.err.println(e);
-        }
-    }
-
-    protected void getInfoCookies(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        Cookie[] cookiesInf = request.getCookies();
-        if (cookiesInf != null) {
-            for (Cookie cookie : cookiesInf) {
-                if (cookie.getName().equals("hospNum")) {
-                    hospitalNum = cookie.getValue();
-                }
-            }
         }
     }
 }

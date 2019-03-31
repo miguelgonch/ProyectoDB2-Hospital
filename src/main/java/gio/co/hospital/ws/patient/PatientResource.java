@@ -74,16 +74,18 @@ public class PatientResource {
     //Eliminar un paciente
     @DELETE
     @Path("/deletePatient")
-    @Produces(MediaType.TEXT_PLAIN)
+    @Produces(MediaType.APPLICATION_JSON)
     public Response deletePatient(
             @FormParam("delId") int pId) {
         Boolean answ;                                                       //Respuesta del delPatient
         answ = false;
         answ = delPatient(pId);
         if (answ) {
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         } else {
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
+            return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
 
