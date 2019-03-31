@@ -62,7 +62,7 @@
                             </select>
                         </label>
                         <label>Tipo de seguro:
-                            <select id="typeAseg" name="asegNum">
+                            <select id="typeAseg" name="asegType">
                             </select>
                         </label>
                         <br>

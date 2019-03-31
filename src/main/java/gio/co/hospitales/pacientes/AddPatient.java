@@ -5,6 +5,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLConnection;
 import java.net.URLEncoder;
@@ -49,7 +50,7 @@ public class AddPatient extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String name,lastName,dir,bDate,segNum,tel,dpi,docId,asegNum;
+            String name,lastName,dir,bDate,segNum,tel,dpi,docId,asegNum,asegType;
             name = request.getParameter("nameP");
             lastName = request.getParameter("lastNameP");
             dir = request.getParameter("dir");
@@ -59,6 +60,7 @@ public class AddPatient extends HttpServlet {
             segNum = request.getParameter("segNum");
             docId = request.getParameter("docId");
             asegNum = request.getParameter("asegNum");
+            asegType = request.getParameter("asegType");
             // Construct data
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(URLEncoder.encode("nameP", "UTF-8")).append('=').append(URLEncoder.encode(name, "UTF-8")).append("&").
@@ -69,11 +71,13 @@ public class AddPatient extends HttpServlet {
                     append(URLEncoder.encode("dpi", "UTF-8")).append('=').append(URLEncoder.encode(dpi, "UTF-8")).append("&").
                     append(URLEncoder.encode("segNum", "UTF-8")).append('=').append(URLEncoder.encode(segNum, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8")).append("&").
-                    append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8"));
+                    append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8")).append("&").
+                    append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
             // Send data
             URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restP/patient/addPatient");
-            URLConnection conn = url.openConnection();
+            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
+            conn.setRequestMethod("POST");
             OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
             wr.write(dataBuilder.toString());
             wr.flush();

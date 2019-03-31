@@ -57,11 +57,12 @@ public class PatientResource {
             @FormParam("dpi") float dpi,
             @FormParam("segNum") String segNum,
             @FormParam("docId") int docId,
-            @FormParam("asegNum") int asegNum) {
+            @FormParam("asegNum") int asegNum,
+            @FormParam("asegType") int asegType) {
 
         Boolean answ;                                                       //Respuesta del addUpdatePatient
         answ = false;
-        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum);
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
@@ -102,12 +103,13 @@ public class PatientResource {
             @FormParam("dpi") float dpi,
             @FormParam("segNum") String segNum,
             @FormParam("docId") int docId,
+            @FormParam("asegType") int asegType,
             @FormParam("asegNum") int asegNum) {
 
         //Respuesta del addPatient
         Boolean answ;
         answ = false;
-        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum);
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
         if (answ) {
             //return Response.status(200).entity("Success").build();
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();

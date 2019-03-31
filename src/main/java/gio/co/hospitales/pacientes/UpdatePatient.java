@@ -47,7 +47,7 @@ public class UpdatePatient extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String name, lastName, dir, bDate, segNum, tel, dpi, docId, asegNum, pId;
+            String name, lastName, dir, bDate, segNum, tel, dpi, docId, asegNum, pId,asegType;
             name = request.getParameter("nameP");
             lastName = request.getParameter("lastNameP");
             dir = request.getParameter("dir");
@@ -58,6 +58,7 @@ public class UpdatePatient extends HttpServlet {
             docId = request.getParameter("docId");
             asegNum = request.getParameter("asegNum");
             pId = request.getParameter("pId");
+            asegType = request.getParameter("asegType");
             // Construct data
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(URLEncoder.encode("nameP", "UTF-8")).append('=').append(URLEncoder.encode(name, "UTF-8")).append("&").
@@ -69,7 +70,8 @@ public class UpdatePatient extends HttpServlet {
                     append(URLEncoder.encode("segNum", "UTF-8")).append('=').append(URLEncoder.encode(segNum, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8")).append("&").
                     append(URLEncoder.encode("asegNum", "UTF-8")).append('=').append(URLEncoder.encode(asegNum, "UTF-8")).append("&").
-                    append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8"));
+                    append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
             // Send data
             URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restP/patient/updatePatient");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
