@@ -11,6 +11,7 @@ gio\co\hospitales\updateUser_h.class
 gio\co\seguros\ValidateMongo.class
 gio\co\hospitales\GetServicios.class
 gio\co\hospitales\Validate.class
+ConsultaCobertura\ConsultarCobertura0.class
 gio\co\seguros\modificarUsuario.class
 gio\co\hospitales\GetHistorial.class
 gio\co\seguros\nuevaPoliza.class
@@ -19,6 +20,7 @@ gio\co\seguros\collPoliza.class
 gio\co\hospital\ws\CallResource.class
 gio\co\hospitales\TypeSeguro.class
 gio\co\seguros\collClientes.class
+gio\co\hospital\ws\cobertura\Coberturas.class
 gio\co\hospitales\JavaConnectDb.class
 gio\co\hospitales\deleteUser_h.class
 gio\co\hospitales\DocInfo.class
@@ -26,8 +28,10 @@ gio\co\seguros\nuevoCliente.class
 gio\co\hospital\ws\usuario\UsuariosResource.class
 gio\co\hospital\ws\cita\Citas.class
 gio\co\hospital\ws\cita\CitasResource.class
+gio\co\hospitales\GetHorarios.class
 gio\co\hospitales\addUser_h.class
 gio\co\hospitales\pacientes\GetPatient.class
+gio\co\hospital\ws\cobertura\coberturaResource.class
 gio\co\seguros\eliminarCliente.class
 gio\co\hospital\ws\usuario\Usuarios.class
 gio\co\seguros\modificarPoliza0.class

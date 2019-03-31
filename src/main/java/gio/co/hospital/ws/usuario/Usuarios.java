@@ -14,8 +14,9 @@ public class Usuarios {
     private int usSpecial;
     private int phone;   
     private String pass;
+    private int state;
 
-    public Usuarios(int uId, String username, String firstName, String lastName, int usType, int usSpecial, int phone, String pass) {
+    public Usuarios(int uId, String username, String firstName, String lastName, int usType, int usSpecial, int phone, String pass, int state) {
         this.uId = uId;
         this.username = username;
         this.firstName = firstName;
@@ -24,6 +25,7 @@ public class Usuarios {
         this.usSpecial = usSpecial;
         this.phone = phone;
         this.pass = pass;
+        this.state = state;
     }
 
     public int getId() {
@@ -90,11 +92,22 @@ public class Usuarios {
         this.pass = pass;
     }
     
+        public int getState() {
+        return state;
+    }
+
+    public void setState(int state) {
+        this.state = state;
+    }
+    
     
 
     
     
 }
+
+
+
 
 
 

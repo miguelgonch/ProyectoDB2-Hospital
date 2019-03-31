@@ -64,6 +64,7 @@
                                 <th>Tipo de usuario</th>
                                 <th>Especialidad</th>
                                 <th>telefono</th>
+                                <th>Estado</th>
                             </tr>
                         </thead>
                         <tbody id="usuarioData">
@@ -75,3 +76,4 @@
     </body>
     <script src="js/usuarios.js"></script>
 </html>
+

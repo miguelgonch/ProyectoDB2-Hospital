@@ -152,9 +152,10 @@ public class UsuariosResource {
                     int usSpecial = rs.getInt("ESPECIALIDAD_ID");
                     int phone = rs.getInt("TELEFONO");
                     String pass = rs.getString("PASS");
+                    int state = rs.getInt("ESTADO");
                     
                     //Crear clase paciente
-                    Usuarios usuarios = new Usuarios(id,username, firstName,lastName,usType, usSpecial, phone, pass);
+                    Usuarios usuarios = new Usuarios(id,username, firstName,lastName,usType, usSpecial, phone, pass, state);
                     //Agregar paciente a la lista
                     usuariosList.add(usuarios);
                 }
@@ -174,14 +175,15 @@ public class UsuariosResource {
         try{
             //var query sql
             String sql;
+            int num1 = 1;
             //Armar el query
             if(uId!=0){
                 //Query con el filtro
-                sql = "UPDATE USUARIO SET USUARIO = '"+username+"', NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', TIPO_USUARIO_ID = '"+usType+"', ESPECIALIDAD_ID = "+usSpecial+", TELEFONO = "+tel+", PASS = "+passw+" WHERE usuario_id = "+uId;
+                sql = "UPDATE USUARIO SET USUARIO = '"+username+"', NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', TIPO_USUARIO_ID = '"+usType+"', ESPECIALIDAD_ID = "+usSpecial+", TELEFONO = "+tel+", PASS = '"+passw+"' WHERE usuario_id = '"+uId+"'";
             }
             else{
                 //Query
-                sql = "INSERT INTO USUARIO (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS) VALUES ('"+username+"', '"+name+"', '"+lastName+"', '"+usType+"', '"+usSpecial+"', '"+tel+"', '"+passw+"')";
+                sql = "INSERT INTO USUARIO (USUARIO, NOMBRE, APELLIDO, TIPO_USUARIO_ID, ESPECIALIDAD_ID, TELEFONO, PASS, ESTADO) VALUES ('"+username+"', '"+name+"', '"+lastName+"', '"+usType+"', '"+usSpecial+"', '"+tel+"', '"+passw+"', "+num1+")";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
@@ -204,7 +206,7 @@ public class UsuariosResource {
             //var query sql
             String sql;
             //Query
-            sql = "DELETE FROM USUARIO WHERE USUARIO_ID="+uId;
+            sql = "CALL inhabilitarUser("+uId+")";
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
             rs.close ();
@@ -218,6 +220,13 @@ public class UsuariosResource {
         return respuesta;
     }
 }
+
+
+
+
+
+
+
 
 
 
