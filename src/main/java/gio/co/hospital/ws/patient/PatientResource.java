@@ -54,7 +54,7 @@ public class PatientResource {
             @FormParam("dir") String dir,
             @FormParam("tel") int tel,
             @FormParam("bDate") String bDate,
-            @FormParam("dpi") float dpi,
+            @FormParam("dpi") double dpi,
             @FormParam("segNum") String segNum,
             @FormParam("docId") int docId,
             @FormParam("asegNum") int asegNum,
@@ -100,7 +100,7 @@ public class PatientResource {
             @FormParam("dir") String dir,
             @FormParam("tel") int tel,
             @FormParam("bDate") String bDate,
-            @FormParam("dpi") float dpi,
+            @FormParam("dpi") double dpi,
             @FormParam("segNum") String segNum,
             @FormParam("docId") int docId,
             @FormParam("asegType") int asegType,
@@ -148,7 +148,7 @@ public class PatientResource {
                     String name = rs.getString("Nombre");
                     String lastN = rs.getString("Apellido");
                     int tel = rs.getInt("TEL");
-                    float dpi = rs.getFloat("DPI");
+                    double dpi = rs.getDouble("DPI");
                     String segNum = rs.getString("num_seguro");
                     String fNacimiento = rs.getString("f_nacimiento");
                     String dir = rs.getString("dir");
@@ -171,7 +171,7 @@ public class PatientResource {
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, float dpi, String segNum, int docId, int asegNum, int asegType) {
+    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, double dpi, String segNum, int docId, int asegNum, int asegType) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));

@@ -16,7 +16,7 @@ public class Patients {
     private String nombre;
     private String apellido;
     private int tel;
-    private float dpi;
+    private double dpi;
     //Numero de seguro
     private String segNum;
     //Cumpleanos
@@ -28,7 +28,7 @@ public class Patients {
     private int asegType;
     private String asegTypeName;
 
-    public Patients(int id, String nombre, String apellido, int tel, float dpi, String segNum, String fNacimiento, String dir, int asegNum, String asegName, int asegType, String asegTypeName) {
+    public Patients(int id, String nombre, String apellido, int tel, double dpi, String segNum, String fNacimiento, String dir, int asegNum, String asegName, int asegType, String asegTypeName) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -75,11 +75,11 @@ public class Patients {
         this.tel = tel;
     }
 
-    public float getDpi() {
+    public double getDpi() {
         return dpi;
     }
 
-    public void setDpi(float dpi) {
+    public void setDpi(double dpi) {
         this.dpi = dpi;
     }
 

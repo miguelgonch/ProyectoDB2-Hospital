@@ -121,7 +121,7 @@ public class CitasResource {
         @QueryParam("dir") String dir,
         @QueryParam("tel") int tel,
         @QueryParam("bDate") String bDate,
-        @QueryParam("dpi") float dpi,
+        @QueryParam("dpi") double dpi,
         @QueryParam("segNum") String segNum,
         @QueryParam("docId") int docId,
         @FormParam("asegNum") int asegNum){

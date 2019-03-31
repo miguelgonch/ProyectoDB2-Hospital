@@ -16,7 +16,7 @@ public class Coberturas {
     int id_subcat;
     String subcat;
     int costo;
-    float pCobertura;
+    double pCobertura;
     String tipoSeguro;
     int id_tipo_seguro;
 
@@ -68,11 +68,11 @@ public class Coberturas {
         this.costo = costo;
     }
 
-    public float getpCobertura() {
+    public double getpCobertura() {
         return pCobertura;
     }
 
-    public void setpCobertura(float pCobertura) {
+    public void setpCobertura(double pCobertura) {
         this.pCobertura = pCobertura;
     }
 
@@ -92,7 +92,7 @@ public class Coberturas {
         this.id_tipo_seguro = id_tipo_seguro;
     }
 
-    public Coberturas(int paciente_id, int cita_id, String aseguradora, int id_subcat, String subcat, int costo, float pCobertura, String tipoSeguro, int id_tipo_seguro) {
+    public Coberturas(int paciente_id, int cita_id, String aseguradora, int id_subcat, String subcat, int costo, double pCobertura, String tipoSeguro, int id_tipo_seguro) {
         this.paciente_id = paciente_id;
         this.cita_id = cita_id;
         this.aseguradora = aseguradora;

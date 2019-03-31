@@ -68,7 +68,7 @@ public class coberturaResource {
                     int id_subcat = rs.getInt("id_subcat");
                     String subcat = rs.getString("subcat");
                     int costo = rs.getInt("costo");
-                    float pCobertura = rs.getFloat("p_cobertura");
+                    double pCobertura = rs.getDouble("p_cobertura");
                     String tipoSeguro = rs.getString("tipo_seguro");
                     int id_tipo_seguro = rs.getInt("id_tipo_seguro");
                     //Crear clase paciente
