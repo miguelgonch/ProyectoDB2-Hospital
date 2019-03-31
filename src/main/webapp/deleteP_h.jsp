@@ -50,7 +50,7 @@
                             </tr>
                         </tbody>
                     </table>
-                    <form class="form" action="restP/patient/deletePatient" method="post">
+                    <form class="form" action="DeletePatient" method="post">
                         <input type="number" value="<%=request.getParameter("pId")%>" style="display:none" name="delId">
                         <input type="submit" class="cell button medium-8" value="Eliminar">
                         <a class="button expanded" href="pacientes_h.jsp">Cancelar</a>

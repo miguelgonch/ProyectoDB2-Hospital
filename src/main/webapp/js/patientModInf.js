@@ -20,12 +20,14 @@ $(document).ready(
                     
                 },
                 success: function(data) {
+                    var $fullFecha = data[0].fNacimiento;
+                    var $fecha = $fullFecha.split(" ")[0];                              //obtener el dia
                     var $name = 'nombreP';
                     document.getElementById($name).value= data[0].nombre;
                     var $lastName = 'apellidoP';
                     document.getElementById($lastName).value= data[0].apellido;
                     var $fNac = 'fNac';
-                    document.getElementById($fNac).value= data[0].fNacimiento;
+                    document.getElementById($fNac).value= $fecha;                       //Enviar el dia
                     var $dir = 'dir';
                     document.getElementById($dir).value= data[0].dir;
                     var $tel = 'tel';

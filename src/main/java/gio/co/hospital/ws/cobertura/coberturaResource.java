@@ -34,13 +34,13 @@ public class coberturaResource {
     @Path("/getCobertura")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCobertura(
-            @QueryParam("cId") String cId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+            @QueryParam("citaId") String citaId) {                                //Aquí uso @QueryParam para recibir los parametros como query
         
-        makeList(cId);                                                      //Crear la lista de la info solicitada
+        makeList(citaId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(coberturasList).build();
     }
     
-    protected void makeList(String cId){
+    protected void makeList(String citaId){
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
@@ -48,10 +48,10 @@ public class coberturaResource {
                 //var query sql
                 String sql;
                 //Revisar si hay un request
-                if(cId!=null){
+                if(citaId!=null){
                     //Query con el filtro para seleccionar un paciente
                     //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
-                    sql = "select * from coberturas_view  where cita_id ="+cId+" order by cita_id";
+                    sql = "select * from coberturas_view  where cita_id ="+citaId+" order by cita_id";
                 }
                 else{
                     //Query de todos los pacientes
