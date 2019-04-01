@@ -24,7 +24,7 @@
         }
         if((request.getParameter("in")!=null)){
             if(request.getParameter("in").equals("1")){
-                out.println("<script>alert(\"Paciente agregado exitosamente!\");</script>");
+                out.println("<script>alert(\"Usuario agregado exitosamente!\");</script>");
             }
             else if(request.getParameter("in").equals("0")){
                 out.println("<script>alert(\"No se ha logrado agregar el usuario, vuelve a intentarlo\");</script>");
@@ -32,7 +32,7 @@
         }
         if((request.getParameter("up")!=null)){
             if(request.getParameter("up").equals("1")){
-                out.println("<script>alert(\"Paciente actualizado exitosamente!\");</script>");
+                out.println("<script>alert(\"Usuario actualizado exitosamente!\");</script>");
             }
             else if(request.getParameter("up").equals("0")){
                 out.println("<script>alert(\"No se ha logrado actualizar el usuario, vuelve a intentarlo\");</script>");
@@ -40,10 +40,18 @@
         }
         if((request.getParameter("del")!=null)){
             if(request.getParameter("del").equals("1")){
-                out.println("<script>alert(\"Paciente eliminado exitosamente!\");</script>");
+                out.println("<script>alert(\"Usuario eliminado exitosamente!\");</script>");
             }
             else if(request.getParameter("del").equals("0")){
                 out.println("<script>alert(\"No se ha logrado eliminar el usuario, vuelve a intentarlo\");</script>");
+            }
+        }
+        if((request.getParameter("readd")!=null)){
+            if(request.getParameter("readd").equals("1")){
+                out.println("<script>alert(\"Usuario habilitado exitosamente!\");</script>");
+            }
+            else if(request.getParameter("readd").equals("0")){
+                out.println("<script>alert(\"No se ha logrado habilitar el usuario, vuelve a intentarlo\");</script>");
             }
         }
 
@@ -65,6 +73,7 @@
                                 <th>Especialidad</th>
                                 <th>telefono</th>
                                 <th>Estado</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody id="usuarioData">
@@ -76,4 +85,5 @@
     </body>
     <script src="js/usuarios.js"></script>
 </html>
+
 

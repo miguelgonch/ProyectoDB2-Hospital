@@ -22,13 +22,9 @@ import java.net.URI;
 import javax.ws.rs.PUT;
 
 
-/**
- *
- * @author migue
- */
 @Path("/usuarios")
 public class UsuariosResource {
-    private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
+    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
     protected List<Usuarios> usuariosList = new ArrayList<Usuarios>();
 
     //Realizar una consulta
@@ -77,7 +73,7 @@ public class UsuariosResource {
         }
     }
     
-    //Eliminar un paciente
+    //Inhabilitar un paciente
     @POST
     @Path("/deleteUsuario")
     @Produces(MediaType.TEXT_PLAIN)
@@ -91,6 +87,23 @@ public class UsuariosResource {
         }
         else{
             return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?del=0")).build();
+        }
+    }
+    
+    //Habilitar un paciente
+    @POST
+    @Path("/readdUsuario")
+    @Produces(MediaType.TEXT_PLAIN)
+    public Response readdUsuario(
+        @FormParam("readdId") int uId){
+        Boolean answ;                                                       //Respuesta del delPatient
+        answ = false;
+        answ = habilitarUsuario(uId);
+        if(answ){
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?readd=1")).build();
+        }
+        else{
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?readd=0")).build();
         }
     }
     
@@ -219,7 +232,34 @@ public class UsuariosResource {
         }
         return respuesta;
     }
+    
+    private Boolean habilitarUsuario(int uId) {
+        Boolean respuesta = false;
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        try{
+            //var query sql
+            String sql;
+            //Query
+            sql = "CALL habilitarUser("+uId+")";
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+            rs.close ();
+            pst.close ();
+            conn.close();
+            respuesta = true;
+        }catch(Exception e){
+            System.err.println(e);
+            respuesta = false;
+        }
+        return respuesta;
+    }
 }
+
+
+
+
+
 
 
 

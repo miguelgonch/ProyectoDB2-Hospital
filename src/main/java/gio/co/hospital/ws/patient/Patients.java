@@ -27,8 +27,9 @@ public class Patients {
     private String asegName;
     private int asegType;
     private String asegTypeName;
+    private int docId;
 
-    public Patients(int id, String nombre, String apellido, int tel, double dpi, String segNum, String fNacimiento, String dir, int asegNum, String asegName, int asegType, String asegTypeName) {
+    public Patients(int id, String nombre, String apellido, int tel, double dpi, String segNum, String fNacimiento, String dir, int asegNum, String asegName, int asegType, String asegTypeName, int docId) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -41,6 +42,7 @@ public class Patients {
         this.asegName = asegName;
         this.asegType = asegType;
         this.asegTypeName = asegTypeName;
+        this.docId = docId;
     }
 
     public int getId() {
@@ -122,7 +124,7 @@ public class Patients {
     public void setAsegName(String asegName) {
         this.asegName = asegName;
     }
-    
+
     public int getAsegType() {
         return asegType;
     }
@@ -137,6 +139,14 @@ public class Patients {
 
     public void setAsegTypeName(String asegTypeName) {
         this.asegTypeName = asegTypeName;
+    }
+
+    public int getDocId() {
+        return docId;
+    }
+
+    public void setDocId(int docId) {
+        this.docId = docId;
     }
     
     
