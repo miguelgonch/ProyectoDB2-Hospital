@@ -9,7 +9,7 @@
 <html>
     <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Nueva Cita" />
+        <jsp:param name="title" value="Modificar Cita" />
     </jsp:include>
     <!--navbar logged-->
     <%@ include file="partials/_headerLogged.jsp"%>
