@@ -36,8 +36,12 @@ $(document).ready(
                     document.getElementById($dpi).value= data[0].dpi;
                     var $segNum = 'segNum';
                     document.getElementById($segNum).value= data[0].segNum;
-                    var $aseguradora = 'aseguradora';
+                    var $aseguradora = 'asegData';
                     document.getElementById($aseguradora).value= data[0].asegNum;
+                    var $docId = 'doctoresData';
+                    document.getElementById($docId).value= data[0].docId;
+                    var $asegType = 'typeAseg';
+                    document.getElementById($asegType).value= data[0].asegType;
                 },
                 error : function() {
                     var $pData = $('#patientData');

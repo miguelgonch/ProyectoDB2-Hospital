@@ -8,7 +8,24 @@ $(document).ready(
                     var $pData = $('#usuarioData');
                     $pData.empty();
                     for (var i = 0; i < data.length; i++) {
-                        $pData.append("<tr><td>"+data[i].id+"</td>"+"<td>"+data[i].username+"</td>"+"<td>"+data[i].firstName+"</td>"+"<td>"+data[i].lastName+"</td>"+"<td>"+data[i].usType+"</td>"+"<td>"+data[i].usSpecial+"</td><td>"+data[i].phone+"</td><td>"+data[i].state+"</td><td><a href=\"adminUsers_h.jsp?uId="+data[i].id+"\" class=\"button pLink expanded\">Modificar</a><a href=\"http://localhost:8080/proyectoDB2-Hospitales/deleteUser_h.jsp?uId="+data[i].id+"\" class=\"pLink button expanded \">Inhabilitar</a></td></tr>");
+                        if(data[i].state==1){
+                        $pData.append("<tr><td>"+data[i].id+"</td>"+"<td>"+data[i].username+"</td>"
+                                +"<td>"+data[i].firstName+"</td>"+"<td>"+data[i].lastName+"</td>"+"<td>"+data[i].usType+
+                                "</td>"+"<td>"+data[i].usSpecial+"</td><td>"+data[i].phone+"</td><td>"+data[i].state+
+                                "</td><td><a href=\"adminUsers_h.jsp?uId="+data[i].id+
+                                "\" class=\"button pLink expanded\">Modificar</a><a href=\"http://localhost:8080/proyectoDB2-Hospitales/deleteUser_h.jsp?uId="+data[i].id+
+                                "\" class=\"pLink button expanded \">Inhabilitar</a></td></tr>");}
+                    else {
+                        $pData.append("<tr><td>"+data[i].id+"</td>"+"<td>"+data[i].username+"</td>"
+                                +"<td>"+data[i].firstName+"</td>"+"<td>"+data[i].lastName+"</td>"+"<td>"+data[i].usType+
+                                "</td>"+"<td>"+data[i].usSpecial+"</td><td>"+data[i].phone+"</td><td>"+data[i].state+
+                                "</td><td><a href=\"adminUsers_h.jsp?uId="+data[i].id+
+                                "\" class=\"button pLink expanded\">Modificar</a><a href=\"http://localhost:8080/proyectoDB2-Hospitales/habilitarU_h.jsp?uId="+data[i].id+
+                                "\" class=\"pLink button expanded \">Habilitar</a></td></tr>");
+                    }
+                    
+                    
+                    
                     }
                     if(data.length==0){
                         $pData.append("<p>No hay datos disponibles</p>");
@@ -21,6 +38,7 @@ $(document).ready(
                 }
             });
 });
+
 
 
 

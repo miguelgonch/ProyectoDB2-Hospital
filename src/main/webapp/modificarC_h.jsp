@@ -9,14 +9,14 @@
 <html>
     <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Nueva Cita" />
+        <jsp:param name="title" value="Modificar Cita" />
     </jsp:include>
     <!--navbar logged-->
     <%@ include file="partials/_headerLogged.jsp"%>
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||rol.equals("3")){
+        if(rol.equals("1")||(rolNum<=3)){
         }
         else{
             response.sendRedirect("home_h.jsp");
@@ -63,7 +63,7 @@
                             <input id="observ" type="text" name="obsrv" required>
                         </label>
                         <br>
-                        <input type="submit" class="cell button medium-8" value="Agregar">
+                        <input type="submit" class="cell button medium-8" value="Modificar">
                     </form>
                 </div>
             </div>

@@ -13,7 +13,7 @@ $(document).ready(
             var $idNum = $('#cob');
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/restCo/cobertura/getCobertura',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/getCobertura',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 
@@ -39,6 +39,7 @@ $(document).ready(
                 }
             });
 });
+
 
 
 

@@ -6,6 +6,7 @@
 
 <%
     String hospitalNum = null,rol = null;
+    int rolNum = 0;
     Cookie[] cookiesInf = request.getCookies();
     if(cookiesInf !=null){
         for(Cookie cookie : cookiesInf){
@@ -15,6 +16,7 @@
             }
             if(cookie.getName().equals("rol")){
                 rol = cookie.getValue();
+                rolNum = Integer.parseInt(rol);
             }
             
             

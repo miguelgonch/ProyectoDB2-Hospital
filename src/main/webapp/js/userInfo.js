@@ -15,7 +15,7 @@ $(document).ready(
                 url: 'http://localhost:8080/proyectoDB2-Hospitales/restU/usuarios/getUsuarios',
                 dataType: 'json',
                 data: { 
-                    pId: query_string('uId') 
+                    uId: query_string('uId') 
                 },
                 success: function(data) {
                     var $name = $('#nombreP');

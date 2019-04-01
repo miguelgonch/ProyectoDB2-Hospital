@@ -152,13 +152,14 @@ public class PatientResource {
                     String segNum = rs.getString("num_seguro");
                     String fNacimiento = rs.getString("f_nacimiento");
                     String dir = rs.getString("dir");
+                    int docId = rs.getInt("doctor_id");
                     //id de la aseguradora
                     int asegNum = rs.getInt("ASEGURADORA_ID");
                     String asegName = rs.getString("ASEGURADORA");
                     int asegType = rs.getInt("ID_TIPO_SEGURO");
                     String asegTypeName = rs.getString("TIPO_SEGURO");
                     //Crear clase paciente
-                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName, asegType, asegTypeName);
+                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName, asegType, asegTypeName,docId);
                     //Agregar paciente a la lista
                     patientsList.add(patients);
                 }
