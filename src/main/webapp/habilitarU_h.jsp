@@ -9,7 +9,7 @@
 <html>
     <!--head-->
     <jsp:include page="partials/_head.jsp">
-        <jsp:param name="title" value="Eliminar Usuario" />
+        <jsp:param name="title" value="Habilitar Usuario" />
     </jsp:include>
     
     <!--navbar logged-->
@@ -49,7 +49,7 @@
                     </table>
                     <form class="form" action="restU/usuarios/readdUsuario" method="post">
                         <input type="number" value="<%=request.getParameter("uId")%>" style="display:none" name="delId">
-                        <input type="submit" class="cell button medium-8" value="Eliminar">
+                        <input type="submit" class="cell button medium-8" value="Habilitar">
                         <a class="button expanded" href="usuarios_h.jsp">Cancelar</a>
                     </form>
                 </div>
@@ -58,3 +58,5 @@
     </body>
     <script src="js/userInfo.js"></script>
     </html>
+
+
