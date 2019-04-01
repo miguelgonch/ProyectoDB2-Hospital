@@ -28,7 +28,7 @@ import javax.ws.rs.PUT;
  */
 @Path("/usuarios")
 public class UsuariosResource {
-    private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
+    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
     protected List<Usuarios> usuariosList = new ArrayList<Usuarios>();
 
     //Realizar una consulta

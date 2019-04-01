@@ -65,6 +65,7 @@
                                 <th>Especialidad</th>
                                 <th>telefono</th>
                                 <th>Estado</th>
+                                <th>Opciones</th>
                             </tr>
                         </thead>
                         <tbody id="usuarioData">
