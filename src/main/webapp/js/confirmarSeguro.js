@@ -12,7 +12,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2/GetCliente',
+                url: 'http://25.65.236.60:8080/proyectoDB2/GetCliente',
                 dataType: 'json',
                 data: { 
                     dpi: query_string('dpi') 
