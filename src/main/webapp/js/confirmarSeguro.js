@@ -12,10 +12,10 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2/restC/cliente/getCliente/',
+                url: 'http://localhost:8080/proyectoDB2/GetCliente',
                 dataType: 'json',
                 data: { 
-                    citaId: query_string('dpi') 
+                    dpi: query_string('dpi') 
                 },
                 success: function(data) {
                     var $cData = $('#consulta');
@@ -39,6 +39,8 @@ $(document).ready(
                 }
             });
 });
+
+
 
 
 
