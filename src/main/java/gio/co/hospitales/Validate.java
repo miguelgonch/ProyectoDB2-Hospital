@@ -53,7 +53,7 @@ public class Validate extends HttpServlet {
                 hospnum = request.getParameter("hospitalNum");
 		try {
 			Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospnum));
-			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'and estado = 1;";
+			String sql = "select * from usuario where usuario='"+user+"' and pass='"+password+"'and estado = 1";
 			OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
 			OracleResultSet rs = (OracleResultSet) pst.executeQuery();
 			if(rs.next()) {
