@@ -1,1 +1,3 @@
 /target/*
+/src/main/java/gio/co/hospitales/JavaConnectDb.java
+/pom.xml
