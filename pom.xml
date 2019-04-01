@@ -3,11 +3,19 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>gio.co</groupId>
+<<<<<<< HEAD
     <artifactId>proyectoDB2-Hospital2</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>war</packaging>
 
     <name>proyectoDB2-Hospital2</name>
+=======
+    <artifactId>proyectoDB2-Hospital1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>war</packaging>
+
+    <name>proyectoDB2-Hospital1</name>
+>>>>>>> a0f9a65ff2a5f0508633abeec07f50f4ca20ac0a
 
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
