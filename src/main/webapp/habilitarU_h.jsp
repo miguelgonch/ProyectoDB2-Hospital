@@ -48,7 +48,7 @@
                         </tbody>
                     </table>
                     <form class="form" action="restU/usuarios/readdUsuario" method="post">
-                        <input type="number" value="<%=request.getParameter("uId")%>" style="display:none" name="delId">
+                        <input type="number" value="<%=request.getParameter("uId")%>" style="display:none" name="readdId">
                         <input type="submit" class="cell button medium-8" value="Habilitar">
                         <a class="button expanded" href="usuarios_h.jsp">Cancelar</a>
                     </form>
@@ -58,5 +58,6 @@
     </body>
     <script src="js/userInfo.js"></script>
     </html>
+
 
 

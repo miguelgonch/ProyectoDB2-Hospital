@@ -95,15 +95,15 @@ public class UsuariosResource {
     @Path("/readdUsuario")
     @Produces(MediaType.TEXT_PLAIN)
     public Response readdUsuario(
-        @FormParam("delId") int uId){
+        @FormParam("readdId") int uId){
         Boolean answ;                                                       //Respuesta del delPatient
         answ = false;
         answ = habilitarUsuario(uId);
         if(answ){
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?del=1")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?readd=1")).build();
         }
         else{
-            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?del=0")).build();
+            return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/usuarios_h.jsp?readd=0")).build();
         }
     }
     
@@ -255,6 +255,9 @@ public class UsuariosResource {
         return respuesta;
     }
 }
+
+
+
 
 
 

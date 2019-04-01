@@ -46,6 +46,14 @@
                 out.println("<script>alert(\"No se ha logrado eliminar el usuario, vuelve a intentarlo\");</script>");
             }
         }
+        if((request.getParameter("readd")!=null)){
+            if(request.getParameter("readd").equals("1")){
+                out.println("<script>alert(\"Usuario habilitado exitosamente!\");</script>");
+            }
+            else if(request.getParameter("readd").equals("0")){
+                out.println("<script>alert(\"No se ha logrado habilitar el usuario, vuelve a intentarlo\");</script>");
+            }
+        }
 
     %>
     <body>
@@ -77,4 +85,5 @@
     </body>
     <script src="js/usuarios.js"></script>
 </html>
+
 
