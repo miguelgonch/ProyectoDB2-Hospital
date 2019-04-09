@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import gio.co.hospitales.JavaConnectDb;
 
 /**
  * Servlet implementation class AddCita
@@ -22,7 +23,9 @@ import org.json.JSONObject;
 public class AddCita extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String hospitalNum = "1";
+    private static int hospitalNum = JavaConnectDb.getHospNum();
+
+    ;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -48,7 +51,7 @@ public class AddCita extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String pId,dateCita,hora,sId,citaId,docId;
+            String pId, dateCita, hora, sId, citaId, docId;
             pId = request.getParameter("pId");
             dateCita = request.getParameter("fechaCita");
             hora = request.getParameter("hora");
@@ -79,11 +82,10 @@ public class AddCita extends HttpServlet {
             }
             JSONObject obj = new JSONObject(response2.toString());
             int answ = obj.getInt("in");
-            
-            if(answ==1){
+
+            if (answ == 1) {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1");
-            }
-            else{
+            } else {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0");
             }
             wr.close();

@@ -18,7 +18,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-import java.net.URI;
+import gio.co.hospitales.JavaConnectDb;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
 
@@ -29,7 +29,7 @@ import javax.ws.rs.PUT;
  */
 @Path("/cita")
 public class CitasResource {
-    private static String hospitalNum = "1";                                        //Este va a estar cambiado para cada hospital
+    private static int hospitalNum = JavaConnectDb.getHospNum();;                                        //Este va a estar cambiado para cada hospital
     protected List<Citas> citasList = new ArrayList<Citas>();   
 
     //Realizar una consulta
@@ -121,7 +121,7 @@ public class CitasResource {
     //Metodo para crear la lista de citas
     protected void makeList(String pId,String citaId){
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //Response info
             try{
                 //var query sql
@@ -177,7 +177,7 @@ public class CitasResource {
     private Boolean delCita(int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try{
             //var query sql
             String sql;
@@ -200,7 +200,7 @@ public class CitasResource {
     private Boolean addUpdateCita(int pId, String dateCita, String hora, int sId, int docId,int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try{
             //var query sql
             String sql;
@@ -230,7 +230,7 @@ public class CitasResource {
     private Boolean addUpdateCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
         Boolean respuesta = false;
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try{
             //var query sql
             String sql;
