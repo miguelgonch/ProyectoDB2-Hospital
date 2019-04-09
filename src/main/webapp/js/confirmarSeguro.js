@@ -13,7 +13,7 @@ $(document).ready(
             $.ajax({
                 type: 'GET',
                 //url: 'http://25.65.236.60:8080/proyectoDB2/restC/cliente/getCliente',
-                url: 'http://localhost:8080/proyectoDB2/GetCliente',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCliente',
                 dataType: 'json',
                 data: { 
                     dpi: query_string('dpi') 
@@ -40,6 +40,7 @@ $(document).ready(
                 }
             });
 });
+
 
 
 
