@@ -16,6 +16,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
+import gio.co.hospitales.JavaConnectDb;
 
 /**
  *
@@ -26,7 +27,7 @@ import oracle.jdbc.OracleResultSet;
 
 public class coberturaResource {
     
-    private static String hospitalNum = "1";                                //Este va a estar cambiado para cada hospital
+    private static int hospitalNum = JavaConnectDb.getHospNum();;                                //Este va a estar cambiado para cada hospital
     protected List<Coberturas> coberturasList = new ArrayList<Coberturas>();
 
     //Realizar una consulta
@@ -42,7 +43,7 @@ public class coberturaResource {
     
     protected void makeList(String citaId){
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //Response info
             try{
                 //var query sql

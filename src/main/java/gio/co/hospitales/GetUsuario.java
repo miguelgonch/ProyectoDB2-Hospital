@@ -18,7 +18,7 @@ import oracle.jdbc.OracleResultSet;
 @WebServlet("/GetUsuario")
 public class GetUsuario extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        private static String hospitalNum = null;
+        private static int hospitalNum = JavaConnectDb.getHospNum();;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -34,7 +34,7 @@ public class GetUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
                 getInfoCookies(request,response);
-                Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+                Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
                 try{
@@ -68,7 +68,7 @@ public class GetUsuario extends HttpServlet {
             if(cookiesInf !=null){
                 for(Cookie cookie : cookiesInf){
                     if(cookie.getName().equals("hospNum")){
-                        hospitalNum = cookie.getValue();
+                        hospitalNum = Integer.parseInt(cookie.getValue());
                     }
                 }
             }
