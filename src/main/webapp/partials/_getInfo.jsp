@@ -18,17 +18,11 @@
                 rol = cookie.getValue();
                 rolNum = Integer.parseInt(rol);
             }
-            
-            
         }
     }
-    
-    
     if(rol==null){
         rol = "not assigned yet";
     }
-        
-        //out.println(hospitalNum);
 %>
 
 
