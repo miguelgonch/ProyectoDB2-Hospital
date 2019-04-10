@@ -25,6 +25,9 @@ $(document).ready(
                     var $hora = $fullFecha.split(" ")[1];
                     var $fechaC = 'fecha';
                     document.getElementById($fechaC).value= $fecha;
+                    //agregar la hora de la cita
+                    var $pData = $('#horariosData');
+                    $pData.append("<option value=" + $hora + ">" + $hora + "</option>");
                     var $horariosData = 'horariosData';
                     document.getElementById($horariosData).value= $hora;
                     var $pInfo = 'patients';

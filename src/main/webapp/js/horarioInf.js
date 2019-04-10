@@ -19,7 +19,6 @@ function getHorario() {
         },
         success: function (data) {
             var $pData = $('#horariosData');
-            $pData.empty();
             for (var i = 0; i < data.length; i++) {
                 $pData.append("<option value=" + data[i].hora + ">" + data[i].hora + "</option>");
             }
