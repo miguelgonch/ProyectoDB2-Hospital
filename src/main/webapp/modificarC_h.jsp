@@ -32,19 +32,19 @@
                             <input type="int" name="citaId" value="<%= request.getParameter("citaId")%>" style="display:none">
                             <input id="patients" type="text" name="pId" disabled>
                         </label>
-                        <label>Fecha: 
-                            <input type="date" name="fechaCita" id="fechaC" required>
-                        </label>
-                        <label>Hora: 
-                            <select id="horariosData" name="hora" required>
+                        <label>Doctor / Encargado: 
+                            <select id="doctoresData" name="docId" required>
                             </select>
                         </label>
                         <label>Servicio: 
                             <select id="serviciosData" name="servicioId" required>
                             </select>
                         </label>
-                        <label>Doctor / Encargado: 
-                            <select id="doctoresData" name="docId" required>
+                        <label>Fecha: 
+                            <input type="date" name="fechaCita" id="fechaC" required>
+                        </label>
+                        <label>Hora: 
+                            <select id="horariosData" name="hora" required>
                             </select>
                         </label>
                         <label>Diagnostico: 

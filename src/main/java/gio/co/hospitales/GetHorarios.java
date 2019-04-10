@@ -3,6 +3,7 @@ package gio.co.hospitales;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -65,7 +66,7 @@ public class GetHorarios extends HttpServlet {
                 pst.close ();
                 conn.close();
                 out.print(jArray);
-            }catch(Exception e){
+            }catch(SQLException e){
                 System.err.println(e);
             }
 	}

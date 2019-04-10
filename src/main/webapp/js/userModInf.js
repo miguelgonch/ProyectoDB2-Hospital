@@ -10,7 +10,7 @@ function query_string(variable)
 }
 $(document).ready(
         function() {
-            var $idNum = $('#idNum');
+            
             $.ajax({
                 type: 'GET',
                 url: 'restU/usuarios/getUsuarios',
