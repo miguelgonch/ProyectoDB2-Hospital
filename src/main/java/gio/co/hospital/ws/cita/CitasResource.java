@@ -282,7 +282,10 @@ public class CitasResource {
                 //obtener parametros
                 int idHorario = rs.getInt(1);
                 String horario = rs.getString(2);
-                String fechaOcupada = rs.getString(3);                
+                String fechaOcupada = null;
+                if(fecha!=null&&doc_id>0){
+                fechaOcupada = rs.getString(3);     
+                }
                 Horario horarioObj;
                 if (fechaOcupada == null) {
                     horarioObj = new Horario(idHorario,horario);

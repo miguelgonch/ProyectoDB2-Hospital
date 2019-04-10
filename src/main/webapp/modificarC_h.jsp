@@ -41,7 +41,7 @@
                             </select>
                         </label>
                         <label>Fecha: 
-                            <input type="date" name="fechaCita" id="fechaC" required>
+                            <input type="date" name="fechaCita" id="fecha" required>
                         </label>
                         <label>Hora: 
                             <select id="horariosData" name="hora" required>

@@ -32,6 +32,9 @@
                             <select id="patients" name="pId" required>
                             </select>
                         </label>
+                        <label>Fecha: 
+                            <input id="fecha" type="date" name="fechaCita" required>
+                        </label>
                         <label>Doctor / Encargado: 
                             <select id="doctoresData" name="docId" required>
                             </select>
@@ -39,9 +42,6 @@
                         <label>Servicio: 
                             <select id="serviciosData" name="servicioId" required>
                             </select>
-                        </label>
-                        <label>Fecha: 
-                            <input type="date" name="fechaCita" required>
                         </label>
                         <label>Hora: 
                             <select id="horariosData" name="hora" required>
@@ -54,8 +54,8 @@
             </div>
         </div>
     </body>
-    <script src="js/docInf.js"></script>
-    <script src="js/horarioInf.js"></script>
-    <script src="js/serviciosList.js"></script>
-    <script src="js/patientsList.js"></script>
+    <script type="text/javascript" src="js/docInf.js"></script>
+    <script type="text/javascript" src="js/horarioInf.js"></script>
+    <script type="text/javascript" src="js/serviciosList.js"></script>
+    <script type="text/javascript" src="js/patientsList.js"></script>
 </html>
