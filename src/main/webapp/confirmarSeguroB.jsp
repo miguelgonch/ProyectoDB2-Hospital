@@ -23,6 +23,7 @@
                     <th>Nombre del Asegurado</th>
                     <th>Apellido del asegurado</th>
                     <th>Tipo de seguro</th>
+                    <th>porcentaje de cobertura</th>
                     
                 </tr>
             </thead>
@@ -38,3 +39,4 @@
     <!--<script src="js/patients.js"></script>-->
     <script src="js/confirmarSeguro.js"></script>
 </html>
+

@@ -25,7 +25,7 @@ $(document).ready(
                     for (var i = 0; i < data.length; i++) {
                         //$cData.append(data[i]._id); Aqui me quede
                         
-                        $cData.append("<tr><td>"+data[i].nombre+"</td>"+"<td>"+data[i].apellido+"</td>"+"<td>"+data[i].tipo_poliza+"</td></tr>");
+                        $cData.append("<tr><td>"+data[i].nombre+"</td>"+"<td>"+data[i].apellido+"</td>"+"<td>"+data[i].tipo_poliza+"</td><td>"+data[i].cobertura+"</tr>");
                     }
                     if(data.length===0){
                         $cData.append("<p>No hay datos disponibles</p>");
@@ -39,6 +39,7 @@ $(document).ready(
                 }
             });
 });
+
 
 
 
