@@ -70,8 +70,8 @@
         </div>
     </body>
     <script src="js/docInf.js"></script>
-    <script src="js/horarioInf.js"></script>
     <script src="js/serviciosList.js"></script>
     <script src="js/citasModInf.js"></script>
     <script src="js/patientsList.js"></script>
+    <script src="js/horarioInf.js"></script>
 </html>
