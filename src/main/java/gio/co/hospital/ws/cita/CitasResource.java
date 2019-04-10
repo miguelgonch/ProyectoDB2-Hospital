@@ -19,9 +19,9 @@ import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import gio.co.hospitales.JavaConnectDb;
+import java.sql.SQLException;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
-import org.json.JSONObject;
 
 /**
  *
@@ -30,9 +30,8 @@ import org.json.JSONObject;
 @Path("/cita")
 public class CitasResource {
 
-    private static int hospitalNum = JavaConnectDb.getHospNum();
-    ;                                        //Este va a estar cambiado para cada hospital
-    protected List<Citas> citasList = new ArrayList<Citas>();
+    private static final int hospitalNum = JavaConnectDb.getHospNum();               //Este va a estar cambiado para cada hospital
+    protected List<Citas> citasList = new ArrayList<>();
 
     //Realizar una consulta
     @GET
@@ -51,9 +50,10 @@ public class CitasResource {
     @Path("/getDisp")
     @Produces(MediaType.APPLICATION_JSON)
     public Response getDisp(
-            @QueryParam("fecha") String fecha) {
-        List<Horario> horarios = new ArrayList<Horario>();
-        horarios = checkDisp(fecha);                                                      //Crear la lista de los horarios
+            @QueryParam("fecha") String fecha,
+            @QueryParam("docId") int docId) {
+        List<Horario> horarios = new ArrayList<>();
+        horarios = checkDisp(fecha,docId);                                                      //Crear la lista de los horarios
         return Response.status(200).entity(horarios).build();
     }
 
@@ -177,7 +177,7 @@ public class CitasResource {
             rs.close();
             pst.close();
             conn.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
         }
     }
@@ -197,7 +197,7 @@ public class CitasResource {
             pst.close();
             conn.close();
             respuesta = true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             respuesta = false;
         }
@@ -227,7 +227,7 @@ public class CitasResource {
             pst.close();
             conn.close();
             respuesta = true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             respuesta = false;
         }
@@ -249,36 +249,40 @@ public class CitasResource {
             pst.close();
             conn.close();
             respuesta = true;
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.err.println(e);
             respuesta = false;
         }
         return respuesta;
     }
 
-    private List<Horario> checkDisp(String fecha) {
-        List<Horario> horariosList = new ArrayList<Horario>();
+    private List<Horario> checkDisp(String fecha, int doc_id) {
+        List<Horario> horariosList = new ArrayList<>();
         try {
             //Conexion con db oracle
             Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //var query sql
             String sql;
-            sql = "select id_horario,to_char(fecha,'hh24:mi:ss'),to_char(horario,'hh24:mi:ss') "
+            if(fecha!=null&&doc_id>0){
+                sql = "select id_horario,to_char(horario,'hh24:mi:ss'),to_char(fecha,'hh24:mi:ss') "
                     + "from horarios h "
                     + "left join "
                     + "("
-                    + "select * from citas where fecha between TO_DATE('"+fecha+" 00:00', 'YYYY-MM-DD HH24:MI') and TO_DATE('"+fecha+" 23:59', 'YYYY-MM-DD HH24:MI')"
+                    + "select * from citas where fecha between TO_DATE('"+fecha+" 00:00', 'YYYY-MM-DD HH24:MI') and TO_DATE('"+fecha+" 23:59', 'YYYY-MM-DD HH24:MI') and doc_id ="+doc_id
                     + ")"
                     + "on to_char(h.horario,'hh24:mi:ss') = to_char(fecha,'hh24:mi:ss')  "
                     + "order by to_char(horario,'hh24:mi:ss') asc";
+            }else{
+                sql = "select id_horario,to_char(horario,'hh24:mi:ss') from horarios order by horario";
+            }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();
             //Array jsons
             while (rs.next()) {
                 //obtener parametros
                 int idHorario = rs.getInt(1);
-                String fechaOcupada = rs.getString(2);
-                String horario = rs.getString(3);
+                String horario = rs.getString(2);
+                String fechaOcupada = rs.getString(3);                
                 Horario horarioObj;
                 if (fechaOcupada == null) {
                     horarioObj = new Horario(idHorario,horario);
