@@ -204,7 +204,7 @@ public class CitasResource {
         return respuesta;
     }
 
-    //Metodo para realizar un insert o un update dependiendo del caso
+    //Metodo para realizar un insert
     private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
@@ -212,15 +212,7 @@ public class CitasResource {
         try {
             //var query sql
             String sql;
-            //Armar el query
-            if (citaId != 0) {
-                //Query con el filtro
-                //sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
-                sql = "UPDATE CITAS SET DIAGNOSTICO = '', RESULTADOS = 'resultados', MEDICINAS = 'panadol forte', PASOSASEGUIR = 'venir en 2 meses', OBSERVACIONES = 'consumir ibuprofeno', FECHA = TO_DATE('2019-03-25 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '5', PACIENTE_ID = '45', ID_SUBCAT = '1' WHERE cita_id=" + citaId;
-            } else {
-                //Query
-                sql = "INSERT INTO CITAS (FECHA, DOC_ID, PACIENTE_ID, ID_SUBCAT) VALUES (TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), '" + docId + "', '" + pId + "', '" + sId + "')";
-            }
+            sql = "INSERT INTO CITAS (FECHA, DOC_ID, PACIENTE_ID, ID_SUBCAT) VALUES (TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), '" + docId + "', '" + pId + "', '" + sId + "')";
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();
             rs.close();
