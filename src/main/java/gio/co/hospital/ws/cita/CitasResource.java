@@ -71,7 +71,7 @@ public class CitasResource {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
-        answ = addUpdateCita(pId, dateCita, hora, sId, docId, citaId);
+        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
@@ -100,7 +100,7 @@ public class CitasResource {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
-        answ = addUpdateCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
+        answ = upCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
@@ -205,7 +205,7 @@ public class CitasResource {
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdateCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
+    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
@@ -234,7 +234,7 @@ public class CitasResource {
         return respuesta;
     }
 
-    private Boolean addUpdateCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
+    private Boolean upCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
