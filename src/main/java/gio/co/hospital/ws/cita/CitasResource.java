@@ -19,9 +19,16 @@ import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import gio.co.hospitales.JavaConnectDb;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -219,6 +226,46 @@ public class CitasResource {
             pst.close();
             conn.close();
             respuesta = true;
+            
+            conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+            sql = "Select * from CITAS_FULL where PACIENTE_ID ="+ pId+" AND FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS') and ID_SUBCAT ="+ sId;
+            pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            rs = (OracleResultSet) pst.executeQuery();
+            while (rs.next()) {
+                //obtener parametros
+                int cId = rs.getInt("CITA_ID");
+                String servicio = rs.getString("SUBCAT");
+                int monto = rs.getInt("COSTO");
+                long DPI = rs.getLong("DPI");
+                String DPI2 = String.valueOf(DPI);
+                String a = "a";
+                    try {
+                        // Send data
+                        URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI);
+                        HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
+                        conn2.setDoOutput(true);
+
+                        // Get the response
+                        BufferedReader rd = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+                        String line;
+                        StringBuffer response2 = new StringBuffer();
+                        while ((line = rd.readLine()) != null) {
+                            response2.append(line);
+                        }
+                        JSONArray arrObj = new JSONArray(response2.toString());
+                        JSONObject obj = arrObj.getJSONObject(0);
+                        String porcentaje = obj.getString("cobertura");
+                        rd.close();
+                        double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
+                        a= "c";
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                
+            }
+            String a="b";
+            //select * from citas_full where paciente_id =" + pId + " order by CITA_ID"
+            
         } catch (SQLException e) {
             System.err.println(e);
             respuesta = false;
@@ -294,3 +341,22 @@ public class CitasResource {
         return horariosList;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

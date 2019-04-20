@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class JavaConnectDb {
 
-    public static int hospNum = 1;
+    public static int hospNum = 2;
 
     public static int getHospNum() {
         return hospNum;
@@ -40,3 +40,4 @@ public class JavaConnectDb {
         return conn;
     }
 }
+

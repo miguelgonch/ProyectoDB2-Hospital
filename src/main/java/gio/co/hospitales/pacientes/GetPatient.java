@@ -19,7 +19,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetPatient extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    public static String hospitalNum = "1";
+    public static String hospitalNum = "2";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -71,3 +71,4 @@ public class GetPatient extends HttpServlet {
     }
 
 }
+
