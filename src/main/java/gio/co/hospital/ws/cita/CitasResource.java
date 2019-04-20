@@ -237,7 +237,6 @@ public class CitasResource {
                 String servicio = rs.getString("SUBCAT");
                 int monto = rs.getInt("COSTO");
                 long DPI = rs.getLong("DPI");
-                String DPI2 = String.valueOf(DPI);
                 String a = "a";
                     try {
                         // Send data
@@ -256,8 +255,36 @@ public class CitasResource {
                         JSONObject obj = arrObj.getJSONObject(0);
                         String porcentaje = obj.getString("cobertura");
                         rd.close();
-                        double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
+                        //double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
+                        porcentaje = porcentaje.substring(0, porcentaje.length() - 1);
+                        
                         a= "c";
+                            try {
+                                // Send data
+                                String rStmt= "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital="+hospitalNum+"&fecha="+dateCita+"&servicio="+servicio+"&dpi="+DPI+"&monto="+monto+"&porcentaje="+porcentaje+"&idCita="+cId;
+                                //String rStmt="http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI;
+                                URL urlr = new URL(rStmt);
+                                HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
+                                connr.setRequestMethod("POST");
+                                connr.setDoOutput(true);
+                                a="d";
+
+                                // Get the response
+                                BufferedReader rdr = new BufferedReader(new InputStreamReader(connr.getInputStream()));
+                                a="e";
+                                String liner;
+                                StringBuffer responser = new StringBuffer();
+                                while ((liner = rdr.readLine()) != null) {
+                                    response2.append(liner);
+                                }
+                                JSONArray arrObjr = new JSONArray(responser.toString());
+                                JSONObject objr = arrObjr.getJSONObject(0);
+                                String res = obj.getString("in");
+                                rd.close();
+                            }catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -341,22 +368,6 @@ public class CitasResource {
         return horariosList;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
