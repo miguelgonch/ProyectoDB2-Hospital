@@ -255,7 +255,7 @@ public class CitasResource {
                         JSONObject obj = arrObj.getJSONObject(0);
                         String porcentaje = obj.getString("cobertura");
                         rd.close();
-                        //double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
+                        double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
                         porcentaje = porcentaje.substring(0, porcentaje.length() - 1);
                         
                         a= "c";
@@ -275,12 +275,57 @@ public class CitasResource {
                                 String liner;
                                 StringBuffer responser = new StringBuffer();
                                 while ((liner = rdr.readLine()) != null) {
-                                    response2.append(liner);
+                                    responser.append(liner);
                                 }
-                                JSONArray arrObjr = new JSONArray(responser.toString());
-                                JSONObject objr = arrObjr.getJSONObject(0);
-                                String res = obj.getString("in");
+                                //JSONArray arrObjr = new JSONArray(responser.toString());
+                                //JSONObject objr = arrObjr.getJSONObject(0);
+                                JSONObject objr = new JSONObject(responser.toString());
+                                //JSONObject objr = arrObjr.getJSONObject(0);
+                                int res = objr.getInt("in");
                                 rd.close();
+                                if(res == 1){
+                                    try{
+                                        // Send data
+                                        URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId);
+                                        HttpURLConnection connauth = (HttpURLConnection) urlauth.openConnection();
+                                        connauth.setDoOutput(true);
+                                        // Get the response
+                                        BufferedReader rdauth = new BufferedReader(new InputStreamReader(connauth.getInputStream()));
+                                        String lineauth;
+                                        StringBuffer responseauth = new StringBuffer();
+                                        while ((lineauth = rdauth.readLine()) != null) {
+                                            responseauth.append(lineauth);
+                                        }
+                                        JSONArray arrObjAuth = new JSONArray(responseauth.toString());
+                                        JSONObject objauth = arrObjAuth.getJSONObject(0);
+                                        int aId = objauth.getInt("_id");
+                                        a="a";
+                                        rd.close();
+                                        Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+                                        String sqlFac;
+                                        double cobroCliente = monto - (monto * pct);
+                                        sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+aId+"','"+cobroCliente+"')";
+                                        OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+                                        OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+                                        rsFac.close();
+                                        pstFac.close();
+                                        connFac.close();
+                                        a="a";
+                                    
+                                    }catch(Exception e){
+                                        e.printStackTrace();
+                                    }
+                                } else{
+                                    Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+                                    String sqlFac;
+                                    sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','NULL','"+monto+"')";
+                                    OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+                                    OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+                                    rsFac.close();
+                                    pstFac.close();
+                                    connFac.close();
+                                }
+                                a="f";
                             }catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -368,6 +413,22 @@ public class CitasResource {
         return horariosList;
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
