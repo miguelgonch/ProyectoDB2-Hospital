@@ -49,10 +49,10 @@
                         </tbody>
                     </table>
                 </div>
-                <div id="cob">
                 </div>
                 <div class="cell small-10 medium-12">
                     <a class="button" href="modificarC_h.jsp?citaId=<%= request.getParameter("citaId")%>" >Modificar Cita</a>
+                    <a class="button" href="facturaC_h.jsp?cId=<%= request.getParameter("citaId")%>" >Ver Factura</a>
                     <div id="historialData">
                     </div>
                 </div>
@@ -63,6 +63,9 @@
     <script src="js/patientInfo.js"></script>
     <script src="js/infoCobertura.js"></script>
 </html>
+
+
+
 
 
 

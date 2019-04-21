@@ -66,6 +66,20 @@
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
+        <servlet-name>WS factura</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>gio.co.hospital.ws.factura</param-value>
+        </init-param>
+        <!-- this is only required if using json -->
+        <init-param>
+                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+                <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -95,10 +109,16 @@
         <servlet-name>WS cobertura</servlet-name>
         <url-pattern>/restCo/*</url-pattern>
     </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>WS factura</servlet-name>
+        <url-pattern>/restFac/*</url-pattern>
+    </servlet-mapping>
     <servlet-mapping>    
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <url-pattern>/restU/*</url-pattern>
     </servlet-mapping>
 </web-app>
+
+
 
 
