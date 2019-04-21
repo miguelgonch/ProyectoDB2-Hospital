@@ -226,17 +226,104 @@ public class CitasResource {
             pst.close();
             conn.close();
             respuesta = true;
+            String[] datos = datosCita(pId, dateCita, hora, sId);
+            String a ="a";
+            //select * from citas_full where paciente_id =" + pId + " order by CITA_ID"
             
-            conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-            sql = "Select * from CITAS_FULL where PACIENTE_ID ="+ pId+" AND FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS') and ID_SUBCAT ="+ sId;
-            pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            rs = (OracleResultSet) pst.executeQuery();
+        } catch (SQLException e) {
+            System.err.println(e);
+            respuesta = false;
+        }
+        return respuesta;
+    }
+
+    private Boolean upCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
+        Boolean respuesta = false;
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        try {
+            //var query sql
+            String sql;
+            //Armar el query
+            sql = "UPDATE CITAS SET DIAGNOSTICO = '" + diag + "', RESULTADOS = '" + res + "', MEDICINAS = '" + meds + "', PASOSASEGUIR = '" + pasos + "', OBSERVACIONES = '" + obsrv + "', FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '" + docId + "', ID_SUBCAT = '" + sId + "' WHERE cita_id=" + citaId;
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            rs.close();
+            pst.close();
+            conn.close();
+            respuesta = true;
+        } catch (SQLException e) {
+            System.err.println(e);
+            respuesta = false;
+        }
+        return respuesta;
+    }
+
+    private List<Horario> checkDisp(String fecha, int doc_id) {
+        List<Horario> horariosList = new ArrayList<>();
+        try {
+            //Conexion con db oracle
+            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+            //var query sql
+            String sql;
+            if(fecha!=null&&doc_id>0){
+                sql = "select id_horario,to_char(horario,'hh24:mi:ss'),to_char(fecha,'hh24:mi:ss') "
+                    + "from horarios h "
+                    + "left join "
+                    + "("
+                    + "select * from citas where fecha between TO_DATE('"+fecha+" 00:00', 'YYYY-MM-DD HH24:MI') and TO_DATE('"+fecha+" 23:59', 'YYYY-MM-DD HH24:MI') and doc_id ="+doc_id
+                    + ")"
+                    + "on to_char(h.horario,'hh24:mi:ss') = to_char(fecha,'hh24:mi:ss')  "
+                    + "order by to_char(horario,'hh24:mi:ss') asc";
+            }else{
+                sql = "select id_horario,to_char(horario,'hh24:mi:ss') from horarios order by horario";
+            }
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            //Array jsons
+            while (rs.next()) {
+                //obtener parametros
+                int idHorario = rs.getInt(1);
+                String horario = rs.getString(2);
+                String fechaOcupada = null;
+                if(fecha!=null&&doc_id>0){
+                fechaOcupada = rs.getString(3);     
+                }
+                Horario horarioObj;
+                if (fechaOcupada == null) {
+                    horarioObj = new Horario(idHorario,horario);
+                    horariosList.add(horarioObj);
+                }
+                //citasList.add(citas);
+            }
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+        return horariosList;
+    }
+    
+    private String[] datosCita(int pId, String dateCita, String hora, int sId){
+        String[] datos = new String[4];
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        try{    
+            String sql = "Select * from CITAS_FULL where PACIENTE_ID ="+ pId+" AND FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS') and ID_SUBCAT ="+ sId;
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
             while (rs.next()) {
                 //obtener parametros
                 int cId = rs.getInt("CITA_ID");
                 String servicio = rs.getString("SUBCAT");
                 int monto = rs.getInt("COSTO");
                 long DPI = rs.getLong("DPI");
+                
+                datos[0] = Integer.toString(cId);
+                datos[1] = servicio;
+                datos[2] = Integer.toString(monto);
+                datos[3] = Long.toString(DPI);
+                
                 String a = "a";
                     try {
                         // Send data
@@ -336,98 +423,12 @@ public class CitasResource {
                 
             }
             String a="b";
-            //select * from citas_full where paciente_id =" + pId + " order by CITA_ID"
-            
-        } catch (SQLException e) {
-            System.err.println(e);
-            respuesta = false;
+        } catch(Exception e){
+            e.printStackTrace();
         }
-        return respuesta;
-    }
-
-    private Boolean upCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
-        Boolean respuesta = false;
-        //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-        try {
-            //var query sql
-            String sql;
-            //Armar el query
-            sql = "UPDATE CITAS SET DIAGNOSTICO = '" + diag + "', RESULTADOS = '" + res + "', MEDICINAS = '" + meds + "', PASOSASEGUIR = '" + pasos + "', OBSERVACIONES = '" + obsrv + "', FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '" + docId + "', ID_SUBCAT = '" + sId + "' WHERE cita_id=" + citaId;
-            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
-            rs.close();
-            pst.close();
-            conn.close();
-            respuesta = true;
-        } catch (SQLException e) {
-            System.err.println(e);
-            respuesta = false;
-        }
-        return respuesta;
-    }
-
-    private List<Horario> checkDisp(String fecha, int doc_id) {
-        List<Horario> horariosList = new ArrayList<>();
-        try {
-            //Conexion con db oracle
-            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-            //var query sql
-            String sql;
-            if(fecha!=null&&doc_id>0){
-                sql = "select id_horario,to_char(horario,'hh24:mi:ss'),to_char(fecha,'hh24:mi:ss') "
-                    + "from horarios h "
-                    + "left join "
-                    + "("
-                    + "select * from citas where fecha between TO_DATE('"+fecha+" 00:00', 'YYYY-MM-DD HH24:MI') and TO_DATE('"+fecha+" 23:59', 'YYYY-MM-DD HH24:MI') and doc_id ="+doc_id
-                    + ")"
-                    + "on to_char(h.horario,'hh24:mi:ss') = to_char(fecha,'hh24:mi:ss')  "
-                    + "order by to_char(horario,'hh24:mi:ss') asc";
-            }else{
-                sql = "select id_horario,to_char(horario,'hh24:mi:ss') from horarios order by horario";
-            }
-            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
-            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
-            //Array jsons
-            while (rs.next()) {
-                //obtener parametros
-                int idHorario = rs.getInt(1);
-                String horario = rs.getString(2);
-                String fechaOcupada = null;
-                if(fecha!=null&&doc_id>0){
-                fechaOcupada = rs.getString(3);     
-                }
-                Horario horarioObj;
-                if (fechaOcupada == null) {
-                    horarioObj = new Horario(idHorario,horario);
-                    horariosList.add(horarioObj);
-                }
-                //citasList.add(citas);
-            }
-            rs.close();
-            pst.close();
-            conn.close();
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-        return horariosList;
+        return datos;
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
