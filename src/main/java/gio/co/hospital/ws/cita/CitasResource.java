@@ -227,7 +227,20 @@ public class CitasResource {
             conn.close();
             respuesta = true;
             String[] datos = datosCita(pId, dateCita, hora, sId);
+            int cId = Integer.parseInt(datos[0]);
+            String servicio = datos[1];
+            int monto = Integer.parseInt(datos[2]);
+            long DPI = Long.parseLong(datos[3]);
             String a ="a";
+            String[] porcentajes = getPorcentaje(DPI);
+            double pct = Double.parseDouble(porcentajes[1]);
+            String porcentaje = porcentajes[0];
+            a ="b";
+            int res = instertAuth(dateCita, servicio, DPI, monto, porcentaje, cId);
+            a ="c";
+            insertFactura(res, cId, monto, pct);
+
+            a ="d";
             //select * from citas_full where paciente_id =" + pId + " order by CITA_ID"
             
         } catch (SQLException e) {
@@ -325,7 +338,16 @@ public class CitasResource {
                 datos[3] = Long.toString(DPI);
                 
                 String a = "a";
-                    try {
+            }
+            String a="b";
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return datos;
+    }
+    private String[] getPorcentaje(long DPI){
+    String [] porcentajes = new String[2];
+        try {//a
                         // Send data
                         URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI);
                         HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
@@ -344,92 +366,100 @@ public class CitasResource {
                         rd.close();
                         double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
                         porcentaje = porcentaje.substring(0, porcentaje.length() - 1);
+                        porcentajes[0]= porcentaje;
+                        porcentajes[1]= Double.toString(pct);
                         
-                        a= "c";
-                            try {
-                                // Send data
-                                String rStmt= "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital="+hospitalNum+"&fecha="+dateCita+"&servicio="+servicio+"&dpi="+DPI+"&monto="+monto+"&porcentaje="+porcentaje+"&idCita="+cId;
-                                //String rStmt="http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI;
-                                URL urlr = new URL(rStmt);
-                                HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
-                                connr.setRequestMethod("POST");
-                                connr.setDoOutput(true);
-                                a="d";
-
-                                // Get the response
-                                BufferedReader rdr = new BufferedReader(new InputStreamReader(connr.getInputStream()));
-                                a="e";
-                                String liner;
-                                StringBuffer responser = new StringBuffer();
-                                while ((liner = rdr.readLine()) != null) {
-                                    responser.append(liner);
-                                }
-                                //JSONArray arrObjr = new JSONArray(responser.toString());
-                                //JSONObject objr = arrObjr.getJSONObject(0);
-                                JSONObject objr = new JSONObject(responser.toString());
-                                //JSONObject objr = arrObjr.getJSONObject(0);
-                                int res = objr.getInt("in");
-                                rd.close();
-                                if(res == 1){
-                                    try{
-                                        // Send data
-                                        URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId);
-                                        HttpURLConnection connauth = (HttpURLConnection) urlauth.openConnection();
-                                        connauth.setDoOutput(true);
-                                        // Get the response
-                                        BufferedReader rdauth = new BufferedReader(new InputStreamReader(connauth.getInputStream()));
-                                        String lineauth;
-                                        StringBuffer responseauth = new StringBuffer();
-                                        while ((lineauth = rdauth.readLine()) != null) {
-                                            responseauth.append(lineauth);
-                                        }
-                                        JSONArray arrObjAuth = new JSONArray(responseauth.toString());
-                                        JSONObject objauth = arrObjAuth.getJSONObject(0);
-                                        int aId = objauth.getInt("_id");
-                                        a="a";
-                                        rd.close();
-                                        Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-                                        String sqlFac;
-                                        double cobroCliente = monto - (monto * pct);
-                                        sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+aId+"','"+cobroCliente+"')";
-                                        OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
-                                        OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
-                                        rsFac.close();
-                                        pstFac.close();
-                                        connFac.close();
-                                        a="a";
-                                    
-                                    }catch(Exception e){
-                                        e.printStackTrace();
-                                    }
-                                } else{
-                                    Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-                                    String sqlFac;
-                                    sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','NULL','"+monto+"')";
-                                    OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
-                                    OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
-                                    rsFac.close();
-                                    pstFac.close();
-                                    connFac.close();
-                                }
-                                a="f";
-                            }catch (Exception e) {
-                                e.printStackTrace();
-                            }
+                        String a= "c";
+                            
                         
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                
-            }
-            String a="b";
-        } catch(Exception e){
-            e.printStackTrace();
+    return porcentajes;
+    }
+    
+    private int instertAuth(String dateCita, String servicio, long DPI, int monto, String porcentaje, int cId){
+    int res =0;
+    try {//b
+        // Send data
+        String rStmt= "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital="+hospitalNum+"&fecha="+dateCita+"&servicio="+servicio+"&dpi="+DPI+"&monto="+monto+"&porcentaje="+porcentaje+"&idCita="+cId;
+        //String rStmt="http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI;
+        URL urlr = new URL(rStmt);
+        HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
+        connr.setRequestMethod("POST");
+        connr.setDoOutput(true);
+        String a="d";
+
+        // Get the response
+        BufferedReader rdr = new BufferedReader(new InputStreamReader(connr.getInputStream()));
+        a="e";
+        String liner;
+        StringBuffer responser = new StringBuffer();
+        while ((liner = rdr.readLine()) != null) {
+            responser.append(liner);
         }
-        return datos;
+        //JSONArray arrObjr = new JSONArray(responser.toString());
+        //JSONObject objr = arrObjr.getJSONObject(0);
+        JSONObject objr = new JSONObject(responser.toString());
+        //JSONObject objr = arrObjr.getJSONObject(0);
+        res = objr.getInt("in");
+        rdr.close();
+        a="f";
+    }catch (Exception e) {
+        e.printStackTrace();
+    }
+    return res;
+    }
+    
+    private void insertFactura(int res, int cId, int monto, double pct){
+        if(res == 1){
+            try{
+                // Send data
+                URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId);
+                HttpURLConnection connauth = (HttpURLConnection) urlauth.openConnection();
+                connauth.setDoOutput(true);
+                // Get the response
+                BufferedReader rdauth = new BufferedReader(new InputStreamReader(connauth.getInputStream()));
+                String lineauth;
+                StringBuffer responseauth = new StringBuffer();
+                while ((lineauth = rdauth.readLine()) != null) {
+                    responseauth.append(lineauth);
+                }
+                JSONArray arrObjAuth = new JSONArray(responseauth.toString());
+                JSONObject objauth = arrObjAuth.getJSONObject(0);
+                int aId = objauth.getInt("_id");
+                String a="a";
+                rdauth.close();
+                Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+                String sqlFac;
+                double cobroCliente = monto - (monto * pct);
+                sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+aId+"','"+cobroCliente+"')";
+                OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+                OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+                rsFac.close();
+                pstFac.close();
+                connFac.close();
+                a="a";
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        } else{
+            try{
+            Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+            String sqlFac;
+            sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','NULL','"+monto+"')";
+            OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+            OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+            rsFac.close();
+            pstFac.close();
+            connFac.close();
+            }catch(Exception e){
+               e.printStackTrace(); 
+            }
+        }
     }
 }
-
 
 
 
