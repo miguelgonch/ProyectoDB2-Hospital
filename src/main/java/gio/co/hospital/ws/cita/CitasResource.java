@@ -360,6 +360,11 @@ public class CitasResource {
                         while ((line = rd.readLine()) != null) {
                             response2.append(line);
                         }
+                        if(response2.toString().equals("[]")){
+                            porcentajes[0]= "0";
+                            porcentajes[1]= "0";
+                            return porcentajes;
+                        }
                         JSONArray arrObj = new JSONArray(response2.toString());
                         JSONObject obj = arrObj.getJSONObject(0);
                         String porcentaje = obj.getString("cobertura");
@@ -380,6 +385,9 @@ public class CitasResource {
     
     private int instertAuth(String dateCita, String servicio, long DPI, int monto, String porcentaje, int cId){
     int res =0;
+    if(porcentaje.equals("0")){
+        return res;
+    }
     try {//b
         // Send data
         String rStmt= "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital="+hospitalNum+"&fecha="+dateCita+"&servicio="+servicio+"&dpi="+DPI+"&monto="+monto+"&porcentaje="+porcentaje+"&idCita="+cId;
@@ -448,7 +456,7 @@ public class CitasResource {
             try{
             Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             String sqlFac;
-            sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','NULL','"+monto+"')";
+            sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+monto+"')";
             OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
             OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
             rsFac.close();
@@ -460,6 +468,14 @@ public class CitasResource {
         }
     }
 }
+
+
+
+
+
+
+
+
 
 
 
