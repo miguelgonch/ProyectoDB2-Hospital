@@ -189,7 +189,7 @@ public class PatientResource {
     //Metodo para crear la lista de pacientes con DPI
     protected void makeList2(String dpiP) {
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //Response info
             try{
                 //var query sql
@@ -301,20 +301,3 @@ public class PatientResource {
 
 
 
-
-<<<<<<< HEAD
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
->>>>>>> dev

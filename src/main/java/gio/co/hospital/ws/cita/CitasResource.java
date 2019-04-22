@@ -470,15 +470,3 @@ public class CitasResource {
 }
 
 
-<<<<<<< HEAD
-=======
-
-
-
-
-
-
-
-
-
->>>>>>> dev
