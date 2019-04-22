@@ -61,8 +61,8 @@
     </body>
     <script src="js/infoCitas.js"></script>
     <script src="js/patientInfo.js"></script>
-    <script src="js/infoCobertura.js"></script>
 </html>
+
 
 
 
