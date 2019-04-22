@@ -28,8 +28,8 @@ import gio.co.hospitales.JavaConnectDb;
  */
 @Path("/patient")
 public class PatientResource {
-    private static int hospitalNum = 1;
-    //private static int hospitalNum = JavaConnectDb.getHospNum();                                //Este va a estar cambiado para cada hospital
+    //private static int hospitalNum = 1;
+    private static int hospitalNum = JavaConnectDb.getHospNum();                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
     
     protected List<Patients> patientsList2 = new ArrayList<Patients>();
