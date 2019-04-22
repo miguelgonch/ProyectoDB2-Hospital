@@ -9,7 +9,7 @@
         <div class="top-bar-left">
             <ul class="menu">
                 <figure>
-                    <a href="index.jsp"><img src="Imagenes/logo.jpg" class="logo" id="Navigation_Bar_Logo" /></a>
+                    <a href="index.jsp"><img src="https://foundation.zurb.com/sites/docs/assets/img/logos/foundation-sites-nuget-icon-128x128.jpg" class="logo" id="Navigation_Bar_Logo" /></a>
                 </figure>
             </ul>
         </div>
@@ -22,3 +22,6 @@
         </div>
     </div>
 </header>
+
+
+
