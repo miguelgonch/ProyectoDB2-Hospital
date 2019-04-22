@@ -3,8 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package gio.co.hospital.ws.cobertura;
+package gio.co.hospital.ws.factura;
 
+import gio.co.hospital.ws.cobertura.Coberturas;
+import gio.co.hospitales.JavaConnectDb;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -16,29 +18,27 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-import gio.co.hospitales.JavaConnectDb;
 
 /**
  *
  * @author C.V
  */
 
-@Path("/cobertura")
-
-public class coberturaResource {
+@Path("/factura")
+public class FacturaResource {
     
-    private static int hospitalNum = JavaConnectDb.getHospNum();;                                //Este va a estar cambiado para cada hospital
-    protected List<Coberturas> coberturasList = new ArrayList<Coberturas>();
-
+    private static int hospitalNum = JavaConnectDb.getHospNum();;
+    protected List<Factura> facturaList = new ArrayList<Factura>();
+    
     //Realizar una consulta
     @GET
-    @Path("/getCobertura")
+    @Path("/getFactura")
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getCobertura(
-            @QueryParam("citaId") String citaId) {                                //Aquí uso @QueryParam para recibir los parametros como query
-        
-        makeList(citaId);                                                      //Crear la lista de la info solicitada
-        return Response.status(200).entity(coberturasList).build();
+    public Response getPatient(
+            @QueryParam("cId") String cId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+
+        makeList(cId);                                                      //Crear la lista de la info solicitada
+        return Response.status(200).entity(facturaList).build();
     }
     
     protected void makeList(String citaId){
@@ -52,30 +52,31 @@ public class coberturaResource {
                 if(citaId!=null){
                     //Query con el filtro para seleccionar un paciente
                     //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
-                    sql = "select * from coberturas_view  where cita_id ="+citaId+" order by cita_id";
+                    sql = "select * from FACTURA_FULL where cita_id ="+citaId+" order by cita_id";
                 }
                 else{
                     //Query de todos los pacientes
                     //sql = "select * from pacientes order by paciente_id";
-                    sql = "select * from coberturas_view order by cita_id";
+                    sql = "select * from FACTURA_FULL order by cita_id";
                 }
                 OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
                 OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
                 while(rs.next()){
                     //obtener parametros
-                    int paciente_id = rs.getInt("PACIENTE_ID");
-                    int cita_id = rs.getInt("cita_id");
-                    String aseguradora = rs.getString("aseguradora");
-                    int id_subcat = rs.getInt("id_subcat");
-                    String subcat = rs.getString("subcat");
-                    int costo = rs.getInt("costo");
-                    double pCobertura = rs.getDouble("p_cobertura");
-                    String tipoSeguro = rs.getString("tipo_seguro");
-                    int id_tipo_seguro = rs.getInt("id_tipo_seguro");
+                    int id = rs.getInt("ID_FACTURA");
+                    int auth = rs.getInt("AUTORIZACION");
+                    int cobroCliente = rs.getInt("COBRO_CLIENTE");
+                    int cita = rs.getInt("CITA_ID");
+                    String fecha = rs.getString("FECHA");
+                    String nombre = rs.getString("NOMBRE");
+                    String apellido = rs.getString("APELLIDO");
+                    String subcat = rs.getString("SUBCAT");
+                    String cat = rs.getString("CATEGORIA");
+                    int costo = rs.getInt("COSTO");
                     //Crear clase paciente
-                    Coberturas coberturas = new Coberturas(paciente_id,cita_id,aseguradora,id_subcat,subcat,costo,pCobertura,tipoSeguro,id_tipo_seguro);
+                    Factura factura = new Factura(id, auth, cobroCliente, cita, fecha, nombre, apellido, subcat, cat, costo);
                     //Agregar paciente a la lista
-                    coberturasList.add(coberturas);
+                    facturaList.add(factura);
                 }
                 rs.close ();
                 pst.close ();

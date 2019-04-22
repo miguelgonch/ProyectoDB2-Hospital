@@ -52,6 +52,7 @@
                 </div>
                 <div class="cell small-10 medium-12">
                     <h3>Citas:</h3>
+                    <a class="button" href="aggregarC_h.jsp?pId=<%=request.getParameter("pId")%>">Nueva Cita</a>
                     <table>
                         <thead>
                             <tr>

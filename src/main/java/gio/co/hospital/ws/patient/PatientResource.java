@@ -18,9 +18,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
-import java.net.URI;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
+import gio.co.hospitales.JavaConnectDb;
 
 /**
  *
@@ -28,8 +28,8 @@ import javax.ws.rs.PUT;
  */
 @Path("/patient")
 public class PatientResource {
-    //CAMBIADO PARA PRUBAS
-    private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
+
+    private static int hospitalNum = JavaConnectDb.getHospNum();;                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
     
     protected List<Patients> patientsList2 = new ArrayList<Patients>();
@@ -138,7 +138,7 @@ public class PatientResource {
     //Metodo para crear la lista de pacientes
     protected void makeList(String pId) {
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //Response info
             try{
                 //var query sql
@@ -240,7 +240,7 @@ public class PatientResource {
     private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, double dpi, String segNum, int docId, int asegNum, int asegType) {
         Boolean respuesta = false;
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try {
             //var query sql
             String sql;
@@ -269,7 +269,7 @@ public class PatientResource {
     private Boolean delPatient(int pId) {
         Boolean respuesta = false;
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try {
             //var query sql
             String sql;
@@ -302,6 +302,7 @@ public class PatientResource {
 
 
 
+<<<<<<< HEAD
 
 
 
@@ -315,3 +316,5 @@ public class PatientResource {
 
 
 
+=======
+>>>>>>> dev

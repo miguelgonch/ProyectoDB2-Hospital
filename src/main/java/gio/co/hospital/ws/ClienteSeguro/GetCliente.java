@@ -1,4 +1,9 @@
-package gio.co.hospitales.pacientes;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gio.co.hospital.ws.ClienteSeguro;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -13,22 +18,22 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GetPatient
+ *
+ * @author C.V
  */
-@WebServlet("/GetPatient")
-public class GetPatient extends HttpServlet {
 
-    private static final long serialVersionUID = 1L;
-    public static String hospitalNum = "2";
+@WebServlet("/GetCliente")
 
+public class GetCliente extends HttpServlet {
+    
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetPatient() {
+    public GetCliente() {
         super();
         // TODO Auto-generated constructor stub
     }
-
+    
     // Generar jsons
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Response info
@@ -37,12 +42,14 @@ public class GetPatient extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String url;
-            String parPId = request.getParameter("pId");
-            if ((parPId != null) && !(parPId.equals(""))) {
-                int pId = Integer.parseInt(request.getParameter("pId"));
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient?pId=" + pId;
+            String parClienteId = request.getParameter("dpi");
+            if ((parClienteId != null) && !(parClienteId.equals(""))) {
+                long cId = Long.parseLong(request.getParameter("dpi"));
+                url = "http://25.65.236.60:8080/proyectoDB2-seguro/restC/cliente/getCliente?dpi=" + cId;
+                //url = "http://localhost:8080/proyectoDB2-seguro/restC/cliente/getCliente?dpi=" + cId;
             } else {
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restP/patient/getPatient";
+                url = "http://25.65.236.60:8080/proyectoDB2-seguro/restC/cliente/getCliente/";
+                //url = "http://localhost:8080/proyectoDB2-seguro/restC/cliente/getCliente/";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -69,6 +76,18 @@ public class GetPatient extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
     }
-
+    
 }
+
+
+
+
+
+
+
+
+
+
+
+
 

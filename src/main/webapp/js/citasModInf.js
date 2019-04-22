@@ -23,7 +23,7 @@ $(document).ready(
                     //dividir la fecha en dia y hora
                     var $fecha = $fullFecha.split(" ")[0];
                     var $hora = $fullFecha.split(" ")[1];
-                    var $fechaC = 'fechaC';
+                    var $fechaC = 'fecha';
                     document.getElementById($fechaC).value= $fecha;
                     var $horariosData = 'horariosData';
                     document.getElementById($horariosData).value= $hora;

@@ -7,7 +7,6 @@ import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -16,6 +15,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
+import gio.co.hospitales.JavaConnectDb;
 
 /**
  * Servlet implementation class AddPatient
@@ -24,7 +24,9 @@ import org.json.JSONObject;
 public class AddPatient extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    private static String hospitalNum = "1";
+    private static int hospitalNum = JavaConnectDb.getHospNum();
+
+    ;
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -50,7 +52,7 @@ public class AddPatient extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String name,lastName,dir,bDate,segNum,tel,dpi,docId,asegNum,asegType;
+            String name, lastName, dir, bDate, segNum, tel, dpi, docId, asegNum, asegType;
             name = request.getParameter("nameP");
             lastName = request.getParameter("lastNameP");
             dir = request.getParameter("dir");
@@ -91,11 +93,10 @@ public class AddPatient extends HttpServlet {
             }
             JSONObject obj = new JSONObject(response2.toString());
             int answ = obj.getInt("in");
-            
-            if(answ==1){
+
+            if (answ == 1) {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1");
-            }
-            else{
+            } else {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0");
             }
             wr.close();
@@ -110,7 +111,7 @@ public class AddPatient extends HttpServlet {
         if (cookiesInf != null) {
             for (Cookie cookie : cookiesInf) {
                 if (cookie.getName().equals("hospNum")) {
-                    hospitalNum = cookie.getValue();
+                    hospitalNum = Integer.parseInt(cookie.getValue());
                 }
             }
         }

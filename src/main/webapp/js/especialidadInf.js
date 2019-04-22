@@ -1,6 +1,6 @@
 $(document).ready(
         function() {
-            var $idNum = $('#idNum');
+            
             $.ajax({
                 type: 'GET',
                 url: 'http://localhost:8080/proyectoDB2-Hospitales/SpecialTypeInfo',

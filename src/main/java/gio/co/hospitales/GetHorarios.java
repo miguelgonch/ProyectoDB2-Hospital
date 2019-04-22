@@ -3,6 +3,7 @@ package gio.co.hospitales;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
+import java.sql.SQLException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -20,7 +21,7 @@ import oracle.jdbc.OracleResultSet;
 @WebServlet("/getHorario")
 public class GetHorarios extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-        private static String hospitalNum = null;
+        private static int hospitalNum = JavaConnectDb.getHospNum();;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -35,7 +36,7 @@ public class GetHorarios extends HttpServlet {
             //Obtener # del hospital
             getInfoCookies(request,response);
             //Conexion con db oracle
-            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+            Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
             //Response info
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
@@ -65,7 +66,7 @@ public class GetHorarios extends HttpServlet {
                 pst.close ();
                 conn.close();
                 out.print(jArray);
-            }catch(Exception e){
+            }catch(SQLException e){
                 System.err.println(e);
             }
 	}
@@ -83,7 +84,7 @@ public class GetHorarios extends HttpServlet {
             if(cookiesInf !=null){
                 for(Cookie cookie : cookiesInf){
                     if(cookie.getName().equals("hospNum")){
-                        hospitalNum = cookie.getValue();
+                        hospitalNum = Integer.parseInt(cookie.getValue());
                     }
                 }
             }

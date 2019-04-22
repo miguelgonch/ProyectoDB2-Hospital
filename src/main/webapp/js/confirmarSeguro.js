@@ -13,7 +13,7 @@ $(document).ready(
             $.ajax({
                 type: 'GET',
                 //url: 'http://25.65.236.60:8080/proyectoDB2/restC/cliente/getCliente',
-                url: 'http://localhost:8080/proyectoDB2/GetCliente',
+                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCliente',
                 dataType: 'json',
                 data: { 
                     dpi: query_string('dpi') 
@@ -26,7 +26,7 @@ $(document).ready(
                     for (var i = 0; i < data.length; i++) {
                         //$cData.append(data[i]._id); Aqui me quede
                         
-                        $cData.append("<tr><td>"+data[i].nombre+"</td>"+"<td>"+data[i].apellido+"</td>"+"<td>"+data[i].tipo_poliza+"</td></tr>");
+                        $cData.append("<tr><td>"+data[i].nombre+"</td>"+"<td>"+data[i].apellido+"</td>"+"<td>"+data[i].tipo_poliza+"</td><td>"+data[i].cobertura+"</tr>");
                     }
                     if(data.length===0){
                         $cData.append("<p>No hay datos disponibles</p>");
@@ -40,6 +40,7 @@ $(document).ready(
                 }
             });
 });
+
 
 
 
