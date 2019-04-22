@@ -6,6 +6,7 @@
 package gio.co.hospital.ws.servicios;
 
 import gio.co.hospital.ws.patient.Patients;
+import gio.co.hospitales.JavaConnectDb;
 import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
@@ -19,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
+import gio.co.hospitales.JavaConnectDb;
 import java.net.URI;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
@@ -30,8 +32,9 @@ import javax.ws.rs.PUT;
 @Path("/servicios")
 public class ServiciosResourse {
     
+    private static final int hospitalNum = JavaConnectDb.getHospNum();
     //CAMBIADO PARA PRUBAS
-    private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
+    //private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
     
     protected List<Servicios> serviceList = new ArrayList<Servicios>();
     
@@ -50,7 +53,8 @@ public class ServiciosResourse {
     //Metodo para crear la lista de servicios
     protected void makeList(String sId) {
         //Conexion con db oracle
-        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        //Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
             //Response info
             try{
                 //var query sql
@@ -90,6 +94,9 @@ public class ServiciosResourse {
     
     
 }
+
+
+
 
 
 
