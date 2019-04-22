@@ -73,10 +73,10 @@ public class CitasResource {
         answ = false;
         answ = addUpdateCita(pId, dateCita, hora, sId, docId, citaId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
 
@@ -102,10 +102,10 @@ public class CitasResource {
         answ = false;
         answ = addUpdateCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?up=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
@@ -120,10 +120,10 @@ public class CitasResource {
         answ = false;
         answ = delCita(citaId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?del=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?del=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
