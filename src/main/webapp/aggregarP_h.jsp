@@ -57,8 +57,8 @@
                             <select id="asegData" name="asegNum">
                             </select>
                         </label>
-                        <label>Tipo de seguro:
-                            <select id="typeAseg" name="asegType">
+                        <label style="display:none">Tipo de seguro:
+                            <select id="typeAseg" name="asegType" style="display:none">
                             </select>
                         </label>
                         <br>
