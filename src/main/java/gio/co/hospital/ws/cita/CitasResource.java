@@ -19,9 +19,16 @@ import javax.ws.rs.core.Response;
 import oracle.jdbc.OraclePreparedStatement;
 import oracle.jdbc.OracleResultSet;
 import gio.co.hospitales.JavaConnectDb;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.PUT;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  *
@@ -71,7 +78,7 @@ public class CitasResource {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
-        answ = addUpdateCita(pId, dateCita, hora, sId, docId, citaId);
+        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
@@ -100,7 +107,7 @@ public class CitasResource {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = false;
-        answ = addUpdateCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
+        answ = upCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
@@ -204,29 +211,38 @@ public class CitasResource {
         return respuesta;
     }
 
-    //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdateCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
+    //Metodo para realizar un insert
+    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try {
             //var query sql
             String sql;
-            //Armar el query
-            if (citaId != 0) {
-                //Query con el filtro
-                //sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
-                sql = "UPDATE CITAS SET DIAGNOSTICO = '', RESULTADOS = 'resultados', MEDICINAS = 'panadol forte', PASOSASEGUIR = 'venir en 2 meses', OBSERVACIONES = 'consumir ibuprofeno', FECHA = TO_DATE('2019-03-25 13:00:00', 'YYYY-MM-DD HH24:MI:SS'), DOC_ID = '5', PACIENTE_ID = '45', ID_SUBCAT = '1' WHERE cita_id=" + citaId;
-            } else {
-                //Query
-                sql = "INSERT INTO CITAS (FECHA, DOC_ID, PACIENTE_ID, ID_SUBCAT) VALUES (TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), '" + docId + "', '" + pId + "', '" + sId + "')";
-            }
+            sql = "INSERT INTO CITAS (FECHA, DOC_ID, PACIENTE_ID, ID_SUBCAT) VALUES (TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS'), '" + docId + "', '" + pId + "', '" + sId + "')";
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();
             rs.close();
             pst.close();
             conn.close();
             respuesta = true;
+            String[] datos = datosCita(pId, dateCita, hora, sId);
+            int cId = Integer.parseInt(datos[0]);
+            String servicio = datos[1];
+            int monto = Integer.parseInt(datos[2]);
+            long DPI = Long.parseLong(datos[3]);
+            String a ="a";
+            String[] porcentajes = getPorcentaje(DPI);
+            double pct = Double.parseDouble(porcentajes[1]);
+            String porcentaje = porcentajes[0];
+            a ="b";
+            int res = instertAuth(dateCita, servicio, DPI, monto, porcentaje, cId);
+            a ="c";
+            insertFactura(res, cId, monto, pct);
+
+            a ="d";
+            //select * from citas_full where paciente_id =" + pId + " order by CITA_ID"
+            
         } catch (SQLException e) {
             System.err.println(e);
             respuesta = false;
@@ -234,7 +250,7 @@ public class CitasResource {
         return respuesta;
     }
 
-    private Boolean addUpdateCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
+    private Boolean upCita(int citaId, String dateCita, String hora, int sId, String diag, String pasos, String res, String obsrv, String meds, int docId) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
@@ -301,4 +317,156 @@ public class CitasResource {
         }
         return horariosList;
     }
+    
+    private String[] datosCita(int pId, String dateCita, String hora, int sId){
+        String[] datos = new String[4];
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        try{    
+            String sql = "Select * from CITAS_FULL where PACIENTE_ID ="+ pId+" AND FECHA = TO_DATE('" + dateCita + " " + hora + "', 'YYYY-MM-DD HH24:MI:SS') and ID_SUBCAT ="+ sId;
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            while (rs.next()) {
+                //obtener parametros
+                int cId = rs.getInt("CITA_ID");
+                String servicio = rs.getString("SUBCAT");
+                int monto = rs.getInt("COSTO");
+                long DPI = rs.getLong("DPI");
+                
+                datos[0] = Integer.toString(cId);
+                datos[1] = servicio;
+                datos[2] = Integer.toString(monto);
+                datos[3] = Long.toString(DPI);
+                
+                String a = "a";
+            }
+            String a="b";
+        } catch(Exception e){
+            e.printStackTrace();
+        }
+        return datos;
+    }
+    private String[] getPorcentaje(long DPI){
+    String [] porcentajes = new String[2];
+        try {//a
+                        // Send data
+                        URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI);
+                        HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
+                        conn2.setDoOutput(true);
+
+                        // Get the response
+                        BufferedReader rd = new BufferedReader(new InputStreamReader(conn2.getInputStream()));
+                        String line;
+                        StringBuffer response2 = new StringBuffer();
+                        while ((line = rd.readLine()) != null) {
+                            response2.append(line);
+                        }
+                        if(response2.toString().equals("[]")){
+                            porcentajes[0]= "0";
+                            porcentajes[1]= "0";
+                            return porcentajes;
+                        }
+                        JSONArray arrObj = new JSONArray(response2.toString());
+                        JSONObject obj = arrObj.getJSONObject(0);
+                        String porcentaje = obj.getString("cobertura");
+                        rd.close();
+                        double pct = DecimalFormat.getNumberInstance().parse(porcentaje).doubleValue()/100;
+                        porcentaje = porcentaje.substring(0, porcentaje.length() - 1);
+                        porcentajes[0]= porcentaje;
+                        porcentajes[1]= Double.toString(pct);
+                        
+                        String a= "c";
+                            
+                        
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+    return porcentajes;
+    }
+    
+    private int instertAuth(String dateCita, String servicio, long DPI, int monto, String porcentaje, int cId){
+    int res =0;
+    if(porcentaje.equals("0")){
+        return res;
+    }
+    try {//b
+        // Send data
+        String rStmt= "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital="+hospitalNum+"&fecha="+dateCita+"&servicio="+servicio+"&dpi="+DPI+"&monto="+monto+"&porcentaje="+porcentaje+"&idCita="+cId;
+        //String rStmt="http://localhost:8080/proyectoDB2-Hospitales/GetCliente?dpi=" + DPI;
+        URL urlr = new URL(rStmt);
+        HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
+        connr.setRequestMethod("POST");
+        connr.setDoOutput(true);
+        String a="d";
+
+        // Get the response
+        BufferedReader rdr = new BufferedReader(new InputStreamReader(connr.getInputStream()));
+        a="e";
+        String liner;
+        StringBuffer responser = new StringBuffer();
+        while ((liner = rdr.readLine()) != null) {
+            responser.append(liner);
+        }
+        //JSONArray arrObjr = new JSONArray(responser.toString());
+        //JSONObject objr = arrObjr.getJSONObject(0);
+        JSONObject objr = new JSONObject(responser.toString());
+        //JSONObject objr = arrObjr.getJSONObject(0);
+        res = objr.getInt("in");
+        rdr.close();
+        a="f";
+    }catch (Exception e) {
+        e.printStackTrace();
+    }
+    return res;
+    }
+    
+    private void insertFactura(int res, int cId, int monto, double pct){
+        if(res == 1){
+            try{
+                // Send data
+                URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId);
+                HttpURLConnection connauth = (HttpURLConnection) urlauth.openConnection();
+                connauth.setDoOutput(true);
+                // Get the response
+                BufferedReader rdauth = new BufferedReader(new InputStreamReader(connauth.getInputStream()));
+                String lineauth;
+                StringBuffer responseauth = new StringBuffer();
+                while ((lineauth = rdauth.readLine()) != null) {
+                    responseauth.append(lineauth);
+                }
+                JSONArray arrObjAuth = new JSONArray(responseauth.toString());
+                JSONObject objauth = arrObjAuth.getJSONObject(0);
+                int aId = objauth.getInt("_id");
+                String a="a";
+                rdauth.close();
+                Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+                String sqlFac;
+                double cobroCliente = monto - (monto * pct);
+                sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, AUTORIZACION, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+aId+"','"+cobroCliente+"')";
+                OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+                OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+                rsFac.close();
+                pstFac.close();
+                connFac.close();
+                a="a";
+
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+        } else{
+            try{
+            Connection connFac = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+            String sqlFac;
+            sqlFac = "INSERT INTO facturas (CITA_ID, MONTO, COBRO_CLIENTE) VALUES ('"+cId+"','"+monto+"','"+monto+"')";
+            OraclePreparedStatement pstFac = (OraclePreparedStatement) connFac.prepareStatement(sqlFac);
+            OracleResultSet rsFac = (OracleResultSet) pstFac.executeQuery();
+            rsFac.close();
+            pstFac.close();
+            connFac.close();
+            }catch(Exception e){
+               e.printStackTrace(); 
+            }
+        }
+    }
 }
+
+

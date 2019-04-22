@@ -28,9 +28,11 @@ import gio.co.hospitales.JavaConnectDb;
  */
 @Path("/patient")
 public class PatientResource {
-
-    private static int hospitalNum = JavaConnectDb.getHospNum();;                                //Este va a estar cambiado para cada hospital
+    private static int hospitalNum = 1;
+    //private static int hospitalNum = JavaConnectDb.getHospNum();                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
+    
+    protected List<Patients> patientsList2 = new ArrayList<Patients>();
 
     //Realizar una consulta
     @GET
@@ -41,6 +43,18 @@ public class PatientResource {
 
         makeList(pId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(patientsList).build();
+    }
+    
+    //AGREGUE ESTO PARA HACER LA CONSULTA DEL DPI
+     //Realizar una consulta con DPI
+    @GET
+    @Path("/getPatientDPI")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getPatientDPI(
+            @QueryParam("dpi") String dpiP) {                                //Aquí uso @QueryParam para recibir los parametros como query
+
+        makeList2(dpiP);                                                      //Crear la lista de la info solicitada
+        return Response.status(200).entity(patientsList2).build();
     }
 
     //Insertar o Actualizar un paciente
@@ -170,6 +184,57 @@ public class PatientResource {
             System.err.println(e);
         }
     }
+    
+    //AGREGUE ESTO PARA HACER LA CONSULTA DEL DPI
+    //Metodo para crear la lista de pacientes con DPI
+    protected void makeList2(String dpiP) {
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+            //Response info
+            try{
+                //var query sql
+                String sql;
+                //Revisar si hay un request
+                if(dpiP!=null){
+                    //Query con el filtro para seleccionar un paciente
+                    //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
+                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora join tipo_seguro ts on p.id_tipo_seguro=ts.id_tipo_seguro where dpi ="+dpiP+" order by dpi";
+                }
+                else{
+                    //Query de todos los pacientes
+                    //sql = "select * from pacientes order by paciente_id";
+                    sql = "select * from pacientes p join aseguradora a on p.aseguradora_id = a.id_aseguradora join tipo_seguro ts on p.id_tipo_seguro=ts.id_tipo_seguro order by dpi";
+                }
+                OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+                OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+                while(rs.next()){
+                    //obtener parametros
+                    int id = rs.getInt("PACIENTE_ID");
+                    String name = rs.getString("Nombre");
+                    String lastN = rs.getString("Apellido");
+                    int tel = rs.getInt("TEL");
+                    double dpi = rs.getDouble("DPI");
+                    String segNum = rs.getString("num_seguro");
+                    String fNacimiento = rs.getString("f_nacimiento");
+                    String dir = rs.getString("dir");
+                    int docId = rs.getInt("doctor_id");
+                    //id de la aseguradora
+                    int asegNum = rs.getInt("ASEGURADORA_ID");
+                    String asegName = rs.getString("ASEGURADORA");
+                    int asegType = rs.getInt("ID_TIPO_SEGURO");
+                    String asegTypeName = rs.getString("TIPO_SEGURO");
+                    //Crear clase paciente
+                    Patients patients = new Patients(id,name,lastN,tel,dpi,segNum,fNacimiento,dir,asegNum,asegName, asegType, asegTypeName,docId);
+                    //Agregar paciente a la lista
+                    patientsList2.add(patients);
+                }
+                rs.close ();
+                pst.close ();
+                conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
 
     //Metodo para realizar un insert o un update dependiendo del caso
     private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, double dpi, String segNum, int docId, int asegNum, int asegType) {
@@ -223,6 +288,9 @@ public class PatientResource {
         return respuesta;
     }
 }
+
+
+
 
 
 
