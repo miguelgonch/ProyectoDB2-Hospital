@@ -29,7 +29,8 @@ import javax.ws.rs.PUT;
  */
 @Path("/cita")
 public class CitasResource {
-    private static String hospitalNum = "1";                                        //Este va a estar cambiado para cada hospital
+    //CAMBIADO SOLO PARA PRUEBAS
+    private static String hospitalNum = "3";                                        //Este va a estar cambiado para cada hospital
     protected List<Citas> citasList = new ArrayList<Citas>();   
 
     //Realizar una consulta
@@ -249,3 +250,5 @@ public class CitasResource {
         return respuesta;
     }
 }
+
+
