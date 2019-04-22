@@ -12,7 +12,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://25.65.236.60:8080/proyectoDB2-Hospital1/GetPatient',
+                url: 'http://25.74.104.162:8080/proyectoDB2-Hospital1/GetPatient',
                 dataType: 'json',
                 success: function(data) {
                     var $pData = $('#patients');

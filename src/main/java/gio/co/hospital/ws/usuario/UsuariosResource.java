@@ -59,15 +59,15 @@ public class UsuariosResource {
         answ = addUpdateUsuarios(uId, username, name, lastName, usType, usSpecial, tel, passw);
         if (uId != 1) {
             if (answ) {
-                return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?in=1")).build();
+                return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?in=1")).build();
             } else {
-                return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?in=0")).build();
+                return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?in=0")).build();
             }
         } else {
             if (answ) {
-                return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=1")).build();
+                return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=1")).build();
             } else {
-                return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=0")).build();
+                return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=0")).build();
             }
         }
     }
@@ -82,9 +82,9 @@ public class UsuariosResource {
         answ = false;
         answ = delUsuario(uId);
         if (answ) {
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?del=1")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?del=1")).build();
         } else {
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?del=0")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?del=0")).build();
         }
     }
 
@@ -98,9 +98,9 @@ public class UsuariosResource {
         answ = false;
         answ = habilitarUsuario(uId);
         if (answ) {
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?readd=1")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?readd=1")).build();
         } else {
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?readd=0")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?readd=0")).build();
         }
     }
 
@@ -123,10 +123,10 @@ public class UsuariosResource {
         answ = addUpdateUsuarios(uId, username, name, lastName, usType, usSpecial, tel, passw);
         if (answ) {
             //return Response.status(200).entity("Success").build();
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=1")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=1")).build();
         } else {
             //return Response.status(200).entity("Failure").build();
-            return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=0")).build();
+            return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/usuarios_h.jsp?up=0")).build();
         }
     }
 
