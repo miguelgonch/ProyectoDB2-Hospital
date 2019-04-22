@@ -78,10 +78,10 @@ public class CitasResource {
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = addNewCita(pId, dateCita, hora, sId, docId, citaId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
 
@@ -106,10 +106,10 @@ public class CitasResource {
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = upCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?up=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
@@ -123,10 +123,10 @@ public class CitasResource {
         Boolean answ;                                                               //Respuesta del delCita
         answ = delCita(citaId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?del=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?del=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
@@ -347,7 +347,7 @@ public class CitasResource {
         String[] porcentajes = new String[2];
         try {//a
             // Send data
-            URL url = new URL("http://25.66.75.32:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI);
+            URL url = new URL("http://25.65.236.60:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI);
             HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
             conn2.setDoOutput(true);
 
@@ -388,7 +388,7 @@ public class CitasResource {
         try {//b
             // Send data
             String rStmt = "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital=" + hospitalNum + "&fecha=" + dateCita + "&servicio=" + servicio + "&dpi=" + DPI + "&monto=" + monto + "&porcentaje=" + porcentaje + "&idCita=" + cId;
-            //String rStmt="http://25.66.75.32:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI;
+            //String rStmt="http://25.65.236.60:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI;
             URL urlr = new URL(rStmt);
             HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
             connr.setRequestMethod("POST");

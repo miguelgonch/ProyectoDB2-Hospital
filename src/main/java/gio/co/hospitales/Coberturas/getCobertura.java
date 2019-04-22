@@ -46,9 +46,9 @@ public class getCobertura extends HttpServlet {
             String parCitaId = request.getParameter("citaId");
             if ((parCitaId != null) && !(parCitaId.equals(""))) {
                 int citaId = Integer.parseInt(request.getParameter("citaId"));
-                url = "http://25.66.75.32:8080/proyectoDB2-Hospital1/restCo/cobertura/getCobertura?citaId=" + citaId;
+                url = "http://25.65.236.60:8080/proyectoDB2-Hospital1/restCo/cobertura/getCobertura?citaId=" + citaId;
             } else {
-                url = "http://25.66.75.32:8080/proyectoDB2-Hospital1/restCo/cobertura/getCobertura";
+                url = "http://25.65.236.60:8080/proyectoDB2-Hospital1/restCo/cobertura/getCobertura";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();

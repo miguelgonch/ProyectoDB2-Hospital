@@ -42,12 +42,12 @@ public class GetCita extends HttpServlet {
             String parCitaId = request.getParameter("citaId");
             if (((parPId != null) && !(parPId.equals("")))) {
                 int pId = Integer.parseInt(parPId);
-                url = "http://25.66.75.32:8080/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
+                url = "http://25.65.236.60:8080/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
             } else if (((parCitaId != null) && !(parCitaId.equals("")))) {
                 int citaId = Integer.parseInt(parCitaId);
-                url = "http://25.66.75.32:8080/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
+                url = "http://25.65.236.60:8080/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
             } else {
-                url = "http://25.66.75.32:8080/proyectoDB2-Hospital1/restC/cita/getCita";
+                url = "http://25.65.236.60:8080/proyectoDB2-Hospital1/restC/cita/getCita";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();

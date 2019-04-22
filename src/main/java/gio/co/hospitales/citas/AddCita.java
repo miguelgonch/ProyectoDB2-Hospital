@@ -65,7 +65,7 @@ public class AddCita extends HttpServlet {
                     append(URLEncoder.encode("servicioId", "UTF-8")).append('=').append(URLEncoder.encode(sId, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://25.66.75.32:8080/proyectoDB2-Hospital1/restC/cita/addCita");
+            URL url = new URL("http://25.65.236.60:8080/proyectoDB2-Hospital1/restC/cita/addCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -84,9 +84,9 @@ public class AddCita extends HttpServlet {
             int answ = obj.getInt("in");
 
             if (answ == 1) {
-                response.sendRedirect("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1");
+                response.sendRedirect("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1");
             } else {
-                response.sendRedirect("http://25.66.75.32:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0");
+                response.sendRedirect("http://25.65.236.60:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0");
             }
             wr.close();
             rd.close();

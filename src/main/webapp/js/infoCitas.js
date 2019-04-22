@@ -13,7 +13,7 @@ $(document).ready(
             
             $.ajax({
                 type: 'GET',
-                url: 'http://25.66.75.32:8080/proyectoDB2-Hospital1/GetCita',
+                url: 'http://25.65.236.60:8080/proyectoDB2-Hospital1/GetCita',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 
