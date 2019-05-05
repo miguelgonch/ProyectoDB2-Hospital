@@ -9,6 +9,9 @@ package gio.co.hospitales;
  *
  * @author migue
  */
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -17,13 +20,22 @@ public class Scheduler implements ServletContextListener {
     private Thread t = null;
     private ServletContext context;
     public void contextInitialized(ServletContextEvent contextEvent) {
+	//System.out.println(dateFormat.format(date)); //2016/11/16 12:08:43
         t =  new Thread(){
             //task
-            public void run(){                
+            public void run(){  
+                DateFormat dateFormat = new SimpleDateFormat("HH:mm");
                 try {
                     while(true){
-                        System.out.println("Thread running every second");
-                        Thread.sleep(1000);
+                        Date date = new Date();
+                        String formated = dateFormat.format(date).toString();
+                        Date date2 = new Date("2016/11/16 00:00:00");
+                        String formated2 = dateFormat.format(date2).toString();
+                        if(formated.equals(formated2)){
+                            System.out.println("Funcionaaaa!!! WUJUUUUU");
+                            //Cada 24 horas 86400 segundos
+                            Thread.sleep(86400000);
+                        }
                     }
                 } catch (InterruptedException e) {}
             }            
