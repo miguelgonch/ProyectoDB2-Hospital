@@ -32,6 +32,7 @@ public class Scheduler implements ServletContextListener {
                         Date date2 = new Date("2016/11/16 00:00:00");
                         String formated2 = dateFormat.format(date2).toString();
                         if(formated.equals(formated2)){
+                            //Aqui va el metodo en vez del println
                             System.out.println("Funcionaaaa!!! WUJUUUUU");
                             //Cada 24 horas 86400 segundos
                             Thread.sleep(86400000);
