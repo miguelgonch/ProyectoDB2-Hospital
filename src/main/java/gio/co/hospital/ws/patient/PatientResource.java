@@ -28,8 +28,8 @@ import gio.co.hospitales.JavaConnectDb;
  */
 @Path("/patient")
 public class PatientResource {
-    private static int hospitalNum = 1;
-    //private static int hospitalNum = JavaConnectDb.getHospNum();                                //Este va a estar cambiado para cada hospital
+    //private static int hospitalNum = 1;
+    private static int hospitalNum = JavaConnectDb.getHospNum();                                //Este va a estar cambiado para cada hospital
     protected List<Patients> patientsList = new ArrayList<Patients>();
     
     protected List<Patients> patientsList2 = new ArrayList<Patients>();
@@ -57,7 +57,7 @@ public class PatientResource {
         return Response.status(200).entity(patientsList2).build();
     }
 
-    //Insertar o Actualizar un paciente
+    //Insertar un paciente
     @POST
     @Path("/addPatient")
     @Produces(MediaType.TEXT_PLAIN)
@@ -78,10 +78,10 @@ public class PatientResource {
         answ = false;
         answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?in=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?in=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
     }
@@ -96,10 +96,10 @@ public class PatientResource {
         answ = false;
         answ = delPatient(pId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?del=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?del=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
@@ -126,11 +126,11 @@ public class PatientResource {
         answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
         if (answ) {
             //return Response.status(200).entity("Success").build();
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
         } else {
             //return Response.status(200).entity("Failure").build();
-            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospitales/pacientes_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/pacientes_h.jsp?up=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
@@ -248,10 +248,12 @@ public class PatientResource {
             if (pId != 0) {
                 //Query con el filtro
                 sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+", ID_TIPO_SEGURO = "+asegType+" WHERE paciente_id = "+pId;
+                //sql = "UPDATE PACIENTES SET NOMBRE = '"+name+"', APELLIDO = '"+lastName+"', DIR = '"+dir+"', TEL = "+tel+", F_NACIMIENTO = TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), DPI = "+dpi+", NUM_SEGURO = "+segNum+", DOCTOR_ID = "+docId+",aseguradora_id = "+asegNum+" WHERE paciente_id = "+pId;
             }
             else{
                 //Query
                 sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id, ID_TIPO_SEGURO) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"', '"+asegType+"')";
+                //sql = "INSERT INTO PACIENTES (NOMBRE, APELLIDO, DIR, TEL, F_NACIMIENTO, DPI, NUM_SEGURO, DOCTOR_ID,aseguradora_id) VALUES ('"+name+"', '"+lastName+"', '"+dir+"', '"+tel+"', TO_DATE('"+bDate+" 00:00:00', 'YYYY-MM-DD HH24:MI:SS'), '"+dpi+"', '"+segNum+"', '"+docId+"','"+asegNum+"')";
             }
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();
