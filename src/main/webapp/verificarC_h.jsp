@@ -26,25 +26,25 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="/proyectoDB2-Hospital1/verificarC_h.jsp" method="get">
-                        <h4>Nueva Cita</h4>
+                    <form class="form" action="AddCita" method="post">
+                        <h4>Confirmar Cita</h4>
                         <label>Paciente: 
-                            <select id="patients" name="pId" required>
+                            <select id="patients" name="pId" required disabled>
                             </select>
                         </label>
                         <label>Fecha: 
-                            <input id="fecha" type="date" name="fechaCita" required>
+                            <input id="fecha" type="date" name="fechaCita" required disabled>
                         </label>
                         <label>Doctor / Encargado: 
-                            <select id="doctoresData" name="docId" required>
+                            <select id="doctoresData" name="docId" required disabled>
                             </select>
                         </label>
                         <label>Servicio: 
-                            <select id="serviciosData" name="servicioId" required>
+                            <select id="serviciosData" name="servicioId" required disabled>
                             </select>
                         </label>
                         <label>Hora: 
-                            <select id="horariosData" name="hora" required>
+                            <select id="horariosData" name="hora" required disabled>
                             </select>
                         </label>
                         <br>

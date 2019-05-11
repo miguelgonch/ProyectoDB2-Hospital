@@ -63,7 +63,7 @@ public class CitasResource {
         return Response.status(200).entity(horarios).build();
     }
 
-    //Insertar una cita
+    //Insertar una cita 
     @POST
     @Path("/addCita")
     @Produces(MediaType.TEXT_PLAIN)
@@ -73,10 +73,11 @@ public class CitasResource {
             @FormParam("hora") String hora,
             @FormParam("servicioId") int sId,
             @FormParam("citaId") int citaId,
+            @FormParam("seg") int seg,
             @FormParam("docId") int docId) {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
-        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId);
+        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId,seg);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
@@ -208,8 +209,9 @@ public class CitasResource {
     }
 
     //Metodo para realizar un insert
-    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId) {
+    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId,int seg) {
         Boolean respuesta = false;
+        int res;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         try {
@@ -233,7 +235,11 @@ public class CitasResource {
             double pct = Double.parseDouble(porcentajes[1]);
             String porcentaje = porcentajes[0];
             a = "b";
-            int res = instertAuth(dateCita, servicio, DPI, monto, porcentaje, cId);
+            if(seg==1){
+                res = instertAuth(dateCita, servicio, DPI, monto, porcentaje, cId);
+            }else{
+                res = 0;
+            }
             a = "c";
             insertFactura(res, cId, monto, pct);
 
