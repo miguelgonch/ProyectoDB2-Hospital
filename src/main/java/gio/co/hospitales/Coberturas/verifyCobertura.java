@@ -1,6 +1,11 @@
-package gio.co.hospitales.citas;
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package gio.co.hospitales.Coberturas;
 
-import gio.co.hospitales.pacientes.*;
+import gio.co.hospitales.JavaConnectDb;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -14,18 +19,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class GetCita
+ *
+ * @author migue
  */
-@WebServlet("/GetCita")
-public class GetCita extends HttpServlet {
+@WebServlet("/verifyCobertura")
+public class verifyCobertura extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    public static String hospitalNum = "1";
+    private static int hospitalNum = JavaConnectDb.getHospNum(); 
 
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GetCita() {
+    public verifyCobertura() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -38,21 +44,10 @@ public class GetCita extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             String url;
-            String parPId = request.getParameter("pId");
-            String parCitaId = request.getParameter("citaId");
-            String pardocId = request.getParameter("docId");
-            if (((parPId != null) && !(parPId.equals("")))) {
-                int pId = Integer.parseInt(parPId);
-                url = "http://25.74.104.162:8080/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
-            } else if (((parCitaId != null) && !(parCitaId.equals("")))) {
-                int citaId = Integer.parseInt(parCitaId);
-                url = "http://25.74.104.162:8080/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
-            }else if (((pardocId != null) && !(pardocId.equals("")))) {
-                int docId = Integer.parseInt(pardocId);
-                url = "http://25.74.104.162:8080/proyectoDB2-Hospital1/restC/cita/getCita?docId=" + docId;
-            } else {
-                url = "http://25.74.104.162:8080/proyectoDB2-Hospital1/restC/cita/getCita";
-            }
+            String dpi = request.getParameter("dpi");
+            String servicio = request.getParameter("servicio");
+            int hospital = hospitalNum;
+            url = "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/verify?dpi=" + dpi + "&servicio=" + servicio + "&hospital=" + hospital;
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
             BufferedReader in = new BufferedReader(
@@ -78,5 +73,4 @@ public class GetCita extends HttpServlet {
         // TODO Auto-generated method stub
         doGet(request, response);
     }
-
 }

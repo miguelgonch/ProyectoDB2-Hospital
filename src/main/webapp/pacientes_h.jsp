@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
             
         }
         else{
@@ -52,7 +52,11 @@
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
                     <h1>Pacientes</h1>
-                    <a class="button" href="aggregarP_h.jsp">Agregar paciente</a>
+                    <% 
+                        if(rolNum<=3){
+                            out.println("<a class=\"button\" href=\"aggregarP_h.jsp\">Agregar paciente</a>");
+                        }
+                    %>
                     <table>
                         <thead>
                             <tr>

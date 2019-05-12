@@ -76,7 +76,8 @@ public class PatientResource {
 
         Boolean answ;                                                       //Respuesta del addUpdatePatient
         answ = false;
-        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
+        //answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, dpi, docId, asegNum,asegType);
         if (answ) {
             //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/pacientes_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
@@ -123,7 +124,8 @@ public class PatientResource {
         //Respuesta del addPatient
         Boolean answ;
         answ = false;
-        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
+        //answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, segNum, docId, asegNum,asegType);
+        answ = addUpdatePatient(pId, name, lastName, dir, tel, bDate, dpi, dpi, docId, asegNum,asegType);
         if (answ) {
             //return Response.status(200).entity("Success").build();
             //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/pacientes_h.jsp?up=1")).build();
@@ -237,7 +239,7 @@ public class PatientResource {
     }
 
     //Metodo para realizar un insert o un update dependiendo del caso
-    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, double dpi, String segNum, int docId, int asegNum, int asegType) {
+    private Boolean addUpdatePatient(int pId, String name, String lastName, String dir, int tel, String bDate, double dpi, double segNum, int docId, int asegNum, int asegType) {
         Boolean respuesta = false;
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);

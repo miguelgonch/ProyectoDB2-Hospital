@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
             
         }
         else{
@@ -61,8 +61,8 @@
     </body>
     <script src="js/infoCitas.js"></script>
     <script src="js/patientInfo.js"></script>
-    <script src="js/infoCobertura.js"></script>
 </html>
+
 
 
 
