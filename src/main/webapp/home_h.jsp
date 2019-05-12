@@ -12,7 +12,6 @@
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
                     <h3>Bienvenido <%= user%> </h3>
-                    <h3 id="uId">U Id </h3>
                     <p>rol <%= Integer.parseInt(rol)%> </p>
                     <p>Hospital # <%= hospitalNum%></p>
                     <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
@@ -31,7 +30,6 @@
             </div>
         </div>
     </body>
-    <script src="js/getCookies.js"></script>
 </html>
 
 
