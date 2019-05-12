@@ -28,6 +28,7 @@ public class UsuariosResource {
     private static int hospitalNum = JavaConnectDb.getHospNum();
     ;                                //Este va a estar cambiado para cada hospital
     protected List<Usuarios> usuariosList = new ArrayList<Usuarios>();
+    protected List<Usuarios2> usuariosListDocs = new ArrayList<Usuarios2>();
 
     //Realizar una consulta
     @GET
@@ -38,6 +39,16 @@ public class UsuariosResource {
 
         makeList(uId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(usuariosList).build();
+    }
+    
+    @GET
+    @Path("/getUsuariosTypes")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getUsuariosTypes(
+            @QueryParam("typeId") String typeId) {                                //Aquí uso @QueryParam para recibir los parametros como query
+
+        makeList2(typeId);                                                      //Crear la lista de la info solicitada
+        return Response.status(200).entity(usuariosListDocs).build();
     }
 
     //Insertar o Actualizar un paciente
@@ -174,6 +185,50 @@ public class UsuariosResource {
             System.err.println(e);
         }
     }
+    
+     protected void makeList2(String typeId) {
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        //Response info
+        try {
+            //var query sql
+            String sql;
+            //Revisar si hay un request
+            if (typeId != null) {
+                //Query con el filtro para seleccionar un paciente
+                //sql = "select * from pacientes where paciente_id ="+pId+" order by paciente_id";
+                sql = "select * from usuario where tipo_usuario_id =" + typeId + " order by usuario_id";
+            } else {
+                //Query de todos los pacientes
+                //sql = "select * from pacientes order by paciente_id";
+                sql = "select * from usuario order by usuario_id";
+            }
+            OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+            OracleResultSet rs = (OracleResultSet) pst.executeQuery();
+            while (rs.next()) {
+                //obtener parametros
+                int id = rs.getInt("USUARIO_ID");
+                String username = rs.getString("USUARIO");
+                String firstName = rs.getString("NOMBRE");
+                String lastName = rs.getString("APELLIDO");
+                int usType = rs.getInt("TIPO_USUARIO_ID");
+                int usSpecial = rs.getInt("ESPECIALIDAD_ID");
+                int phone = rs.getInt("TELEFONO");
+                
+                int state = rs.getInt("ESTADO");
+
+                //Crear clase docs
+                Usuarios2 usuariosDocs = new Usuarios2(id, username, firstName, lastName, usType, usSpecial, phone, state);
+                //Agregar paciente a la lista
+                usuariosListDocs.add(usuariosDocs);
+            }
+            rs.close();
+            pst.close();
+            conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
 
     //Metodo para realizar un insert o un update dependiendo del caso
     private Boolean addUpdateUsuarios(int uId, String username, String name, String lastName, int usType, int usSpecial, int tel, String passw) {
@@ -249,3 +304,14 @@ public class UsuariosResource {
         return respuesta;
     }
 }
+
+
+
+
+
+
+
+
+
+
+

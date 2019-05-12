@@ -70,7 +70,7 @@ public class PatientResource {
             @FormParam("bDate") String bDate,
             @FormParam("dpi") double dpi,
             @FormParam("segNum") String segNum,
-            @FormParam("docId") int docId,
+            @FormParam("docId") int docId,  
             @FormParam("asegNum") int asegNum,
             @FormParam("asegType") int asegType) {
 
@@ -290,6 +290,7 @@ public class PatientResource {
         return respuesta;
     }
 }
+
 
 
 

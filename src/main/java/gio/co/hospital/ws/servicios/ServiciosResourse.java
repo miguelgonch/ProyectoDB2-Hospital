@@ -37,6 +37,7 @@ public class ServiciosResourse {
     //private static String hospitalNum = "3";                                //Este va a estar cambiado para cada hospital
     
     protected List<Servicios> serviceList = new ArrayList<Servicios>();
+    protected List<Servicios> serviceListNames = new ArrayList<Servicios>();
     
     
      //Realizar una consulta
@@ -48,6 +49,16 @@ public class ServiciosResourse {
 
         makeList(sId);                                                      //Crear la lista de la info solicitada
         return Response.status(200).entity(serviceList).build();
+    }
+    
+    @GET
+    @Path("/getServicesName")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getServicesName(
+            @QueryParam("servicioId") String sName) {                                //Aquí uso @QueryParam para recibir los parametros como query
+
+        makeList2(sName);                                                      //Crear la lista de la info solicitada
+        return Response.status(200).entity(serviceListNames).build();
     }
     
     //Metodo para crear la lista de servicios
@@ -62,7 +73,7 @@ public class ServiciosResourse {
                 //Revisar si hay un request
                 if(sId!=null){
                     //Query con el filtro para seleccionar un paciente
-                    sql = "select * from subcategoria where id_subcat="+sId+" order by id_subcat";
+                    sql = "select * from subcategoria where id_subcat='"+sId+"' order by id_subcat";
                     
                 }
                 else{
@@ -92,8 +103,57 @@ public class ServiciosResourse {
         }
     }
     
+    protected void makeList2(String sName) {
+        //Conexion con db oracle
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+        //Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(Integer.parseInt(hospitalNum));
+            //Response info
+            try{
+                //var query sql
+                String sql;
+                //Revisar si hay un request
+                if(sName!=null){
+                    //Query con el filtro para seleccionar un paciente
+                    sql = "select * from subcategoria where subcat='"+sName+"' order by subcat";
+                    
+                }
+                else{
+                    //Query de todos los pacientes
+                    //sql = "select * from pacientes order by paciente_id";
+                    sql = "select * from subcategoria";
+                }
+                OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
+                OracleResultSet rs = (OracleResultSet) pst.executeQuery();                    
+                while(rs.next()){
+                    //obtener parametros
+                    int id = rs.getInt("ID_SUBCAT");
+                    String subcategoria = rs.getString("SUBCAT");
+                    int categoria = rs.getInt("ID_CAT");
+                    int costo = rs.getInt("COSTO");
+                  
+                    //Crear clase servicio
+                    Servicios services = new Servicios(id, subcategoria, categoria, costo);
+                    //Agregar paciente a la lista
+                    serviceListNames.add(services);
+                }
+                rs.close ();
+                pst.close ();
+                conn.close();
+        } catch (Exception e) {
+            System.err.println(e);
+        }
+    }
     
 }
+
+
+
+
+
+
+
+
+
 
 
 

@@ -11,7 +11,7 @@
         <div class="grid-container">
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
-                    <h3>Bienvenido <%= user%> </h3>
+                    <h3>Bienvenido </h3>
                     <p>rol <%= Integer.parseInt(rol)%> </p>
                     <p>Hospital # <%= hospitalNum%></p>
                     <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
@@ -29,6 +29,8 @@
         </div>
     </body>
 </html>
+
+
 
 
 

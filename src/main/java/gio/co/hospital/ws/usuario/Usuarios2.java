@@ -5,7 +5,7 @@
  */
 package gio.co.hospital.ws.usuario;
 
-public class Usuarios {
+public class Usuarios2 {
     private int uId;
     private String username;
     private String firstName;
@@ -13,10 +13,10 @@ public class Usuarios {
     private int usType;
     private int usSpecial;
     private int phone;   
-    private String pass;
+
     private int state;
 
-    public Usuarios(int uId, String username, String firstName, String lastName, int usType, int usSpecial, int phone, String pass, int state) {
+    public Usuarios2(int uId, String username, String firstName, String lastName, int usType, int usSpecial, int phone, int state) {
         this.uId = uId;
         this.username = username;
         this.firstName = firstName;
@@ -24,7 +24,6 @@ public class Usuarios {
         this.usType = usType;
         this.usSpecial = usSpecial;
         this.phone = phone;
-        this.pass = pass;
         this.state = state;
     }
 
@@ -84,14 +83,7 @@ public class Usuarios {
         this.phone = phone;
     }
 
-    public String getPass() {
-        return pass;
-    }
-
-    public void setPass(String pass) {
-        this.pass = pass;
-    }
-    
+  
         public int getState() {
         return state;
     }
@@ -105,6 +97,10 @@ public class Usuarios {
     
     
 }
+
+
+
+
 
 
 
