@@ -51,6 +51,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    
     <servlet>
         <servlet-name>WS cobertura</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>

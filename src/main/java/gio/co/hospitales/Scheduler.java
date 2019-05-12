@@ -56,7 +56,7 @@ public class Scheduler implements ServletContextListener {
                     while(true){
                         Date date = new Date();
                         String formated = dateFormat.format(date).toString();
-                        Date date2 = new Date("2016/11/16 00:00:00");
+                        Date date2 = new Date("2016/11/16 12:49:00");
                         String formated2 = dateFormat.format(date2).toString();
                         if(formated.equals(formated2)){
                             //Aqui va el metodo en vez del println
@@ -132,11 +132,15 @@ public class Scheduler implements ServletContextListener {
                 String docFN = docName+"-"+docLastName;
                 int paId = rs.getInt("paciente_id");
                 String pName = rs.getString("nombre");
+                try{pName = pName.substring(0, pName.indexOf(' '));}catch(Exception e){}
                 String pLastName = rs.getString("apellido");
+                try{pLastName = pLastName.substring(0, pLastName.indexOf(' '));}catch(Exception e){}
                 int subCatId = rs.getInt("ID_SUBCAT");
                 String subCat = rs.getString("subcat");
+                try{subCat = subCat.substring(0, subCat.indexOf(' '));}catch(Exception e){}
                 int catId = rs.getInt("ID_CAT");
                 String cat = rs.getString("categoria");
+                try{cat = cat.substring(0, cat.indexOf(' '));}catch(Exception e){}
                 double dpid = rs.getDouble("DPI");
                 long dpil = (long) dpid;
                 String dpi = Long.toString(dpil);
@@ -144,7 +148,7 @@ public class Scheduler implements ServletContextListener {
                 //Crear clase paciente
                 Citas citas = new Citas(id, diag, res, meds, pasos, observ, fecha, docId, docFN, docLastName, paId, pName, pLastName, subCatId, subCat, catId, cat);
                 //enviar historial a la aseguradora
-                int resu = mongoInsert(fecha,docFN, diag, res, meds, pasos, observ, dpi, cat, subCat, id);
+                int resu = mongoInsert(fecha,docFN, diag, res, meds, pasos, observ, dpi, cat, subCat, id, pName, pLastName);
                 String a = "a";
                 //Agregar paciente a la lista
                 citasList.add(citas);
@@ -154,11 +158,11 @@ public class Scheduler implements ServletContextListener {
         }
     }
     
-    public int mongoInsert(String fechaCita, String doctor, String diagnostico, String resultados, String medicinas, String pasos, String observaciones, String dpi, String categoria, String subcat, int idCita){
+    public int mongoInsert(String fechaCita, String doctor, String diagnostico, String resultados, String medicinas, String pasos, String observaciones, String dpi, String categoria, String subcat, int idCita, String pName, String pLastName){
         int res = 0;
         try {//b
             // Send data
-            String rStmt ="http://localhost:8080/proyectoDB2-seguro/restHist/hist/addHist?hospital="+hospitalNum+"&fecha="+fechaCita+"&doctor="+doctor+"&diagnostico="+diagnostico+"&resultados="+resultados+"&medicinas="+medicinas+"&pasos="+pasos+"&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita;
+            String rStmt ="http://localhost:8080/proyectoDB2-seguro/restHist/hist/addHist?hospital="+hospitalNum+"&fecha="+fechaCita+"&doctor="+doctor+"&diagnostico="+diagnostico+"&resultados="+resultados+"&medicinas="+medicinas+"&pasos="+pasos+"&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita+"&nCliete="+pName+"&aCliente="+pLastName;
             //String rStmt = "http://localhost:8080/proyectoDB2-seguro/restHist/hist/addHist?hospital=" + hospitalNum + "&fecha=" + fechaCita + "&doctor=" + doctor + "&diagnostico=" + diagnostico 
             //        + "&resultados=" + resultados + "&medicinas=" + medicinas + "&pasos=" + pasos + "&observaciones="+observaciones+"&dpi="+dpi+"&categoria="+categoria+"&subcat="+subcat+"&idCita="+idCita;
             URL urlr = new URL(rStmt);
