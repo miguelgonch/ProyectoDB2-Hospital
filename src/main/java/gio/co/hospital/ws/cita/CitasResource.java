@@ -46,9 +46,10 @@ public class CitasResource {
     @Produces(MediaType.APPLICATION_JSON)
     public Response getCita(
             @QueryParam("pId") String pId,
+            @QueryParam("docId") String docId,
             @QueryParam("citaId") String citaId) {                                  //Aquí uso @QueryParam para recibir los parametros como query
 
-        makeList(pId, citaId);                                                       //Crear la lista de la info solicitada
+        makeList(pId, citaId,docId);                                                       //Crear la lista de la info solicitada
         return Response.status(200).entity(citasList).build();
     }
 
@@ -133,7 +134,7 @@ public class CitasResource {
     }
 
     //Metodo para crear la lista de citas
-    protected void makeList(String pId, String citaId) {
+    protected void makeList(String pId, String citaId, String pDocId) {
         //Conexion con db oracle
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         //Response info
@@ -147,6 +148,9 @@ public class CitasResource {
             } else if (citaId != null) {
                 //Query con el filtro
                 sql = "select * from citas_full where cita_id =" + citaId + " order by CITA_ID";
+            }else if (pDocId != null) {
+                //Query con el filtro
+                sql = "select * from citas_full where doc_id =" + pDocId + " order by CITA_ID";
             } else {
                 //Query
                 sql = "select * from citas_full order by CITA_ID";

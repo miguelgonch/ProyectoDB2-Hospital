@@ -84,7 +84,6 @@ public class AddCita extends HttpServlet {
             }
             JSONObject obj = new JSONObject(response2.toString());
             int answ = obj.getInt("in");
-
             if (answ == 1) {
                 response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1");
             } else {
@@ -93,6 +92,7 @@ public class AddCita extends HttpServlet {
             wr.close();
             rd.close();
         } catch (Exception e) {
+            response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?err=1");
             System.err.println(e);
         }
     }

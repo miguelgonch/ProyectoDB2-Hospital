@@ -12,13 +12,16 @@
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
                     <h3>Bienvenido <%= user%> </h3>
+                    <h3 id="uId">U Id </h3>
                     <p>rol <%= Integer.parseInt(rol)%> </p>
                     <p>Hospital # <%= hospitalNum%></p>
                     <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                     <a class="button" href="citas_h.jsp">Ver Citas</a>
-                    <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
                     </br>
                     <% 
+                        if(rolNum<=3){
+                            out.println("<a class=\"button\" href=\"confirmarSeguro.jsp\">comprobar seguro</a>");
+                        }
                         if(rolNum==1){
                             out.println("<h2>Administracion</h2>"+
                                         "<a class=\"button\" href=\"usuarios_h.jsp\">Administracion</a>");
@@ -28,6 +31,7 @@
             </div>
         </div>
     </body>
+    <script src="js/getCookies.js"></script>
 </html>
 
 
