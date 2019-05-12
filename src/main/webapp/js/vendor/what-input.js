@@ -1,7 +1,7 @@
 /**
  * what-input - A global utility for tracking the current input method (mouse, keyboard or touch).
  * @version v5.1.2
- * @link https://github.com/ten1seven/what-input
+ * @link http://github.com/ten1seven/what-input
  * @license MIT
  */
 (function webpackUniversalModuleDefinition(root, factory) {
@@ -371,7 +371,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	  };
 
 	  // detect version of mouse wheel event to use
-	  // via https://developer.mozilla.org/en-US/docs/Web/Events/wheel
+	  // via http://developer.mozilla.org/en-US/docs/Web/Events/wheel
 	  var detectWheel = function detectWheel() {
 	    var wheelType = void 0;
 

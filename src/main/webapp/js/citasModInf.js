@@ -12,7 +12,7 @@ $(document).ready(
         function() {
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCita',
+                url: 'http://localhost:8080/proyectoDB2-Hospital1/GetCita',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 
@@ -23,7 +23,7 @@ $(document).ready(
                     //dividir la fecha en dia y hora
                     var $fecha = $fullFecha.split(" ")[0];
                     var $hora = $fullFecha.split(" ")[1];
-                    var $fechaC = 'fechaC';
+                    var $fechaC = 'fecha';
                     document.getElementById($fechaC).value= $fecha;
                     var $horariosData = 'horariosData';
                     document.getElementById($horariosData).value= $hora;

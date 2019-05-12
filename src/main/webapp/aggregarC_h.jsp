@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
         }
         else{
             response.sendRedirect("home_h.jsp");
@@ -26,36 +26,37 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="AddCita" method="post">
+                    <form class="form" action="/proyectoDB2-Hospital1/verificarC_h.jsp" method="get">
                         <h4>Nueva Cita</h4>
                         <label>Paciente: 
                             <select id="patients" name="pId" required>
                             </select>
                         </label>
                         <label>Fecha: 
-                            <input type="date" name="fechaCita" required>
+                            <input id="fecha" type="date" name="fechaCita" required>
                         </label>
-                        <label>Hora: 
-                            <select id="horariosData" name="hora" required>
+                        <label>Doctor / Encargado: 
+                            <select id="doctoresData" name="docId" required>
                             </select>
                         </label>
                         <label>Servicio: 
                             <select id="serviciosData" name="servicioId" required>
                             </select>
                         </label>
-                        <label>Doctor / Encargado: 
-                            <select id="doctoresData" name="docId" required>
+                        <label>Hora: 
+                            <select id="horariosData" name="hora" required>
                             </select>
                         </label>
                         <br>
                         <input type="submit" class="cell button medium-8" value="Agregar">
                     </form>
+                    <a href="home_h.jsp" class="button expanded">Cancelar</a>
                 </div>
             </div>
         </div>
     </body>
-    <script src="js/docInf.js"></script>
-    <script src="js/horarioInf.js"></script>
-    <script src="js/serviciosList.js"></script>
-    <script src="js/patientsList.js"></script>
+    <script type="text/javascript" src="js/docInf.js"></script>
+    <script type="text/javascript" src="js/horarioInf.js"></script>
+    <script type="text/javascript" src="js/serviciosList.js"></script>
+    <script type="text/javascript" src="js/patientsList.js"></script>
 </html>

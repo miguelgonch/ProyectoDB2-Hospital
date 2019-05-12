@@ -10,10 +10,10 @@ function query_string(variable)
 }
 $(document).ready(
         function() {
-            var $idNum = $('#idNum');
+            
             $.ajax({
                 type: 'GET',
-                url: 'http://localhost:8080/proyectoDB2-Hospitales/GetCita',
+                url: 'http://localhost:8080/proyectoDB2-Hospital1/GetCita',
                 dataType: 'json',
                 data: { 
                     citaId: query_string('citaId') 

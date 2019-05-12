@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
             
         }
         else{
@@ -52,6 +52,7 @@
                 </div>
                 <div class="cell small-10 medium-12">
                     <h3>Citas:</h3>
+                    <a class="button" href="aggregarC_h.jsp?pId=<%=request.getParameter("pId")%>">Nueva Cita</a>
                     <table>
                         <thead>
                             <tr>

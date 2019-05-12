@@ -51,21 +51,23 @@ public class AddCita extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String pId, dateCita, hora, sId, citaId, docId;
+            String pId, dateCita, hora, sId, seg, docId;
             pId = request.getParameter("pId");
             dateCita = request.getParameter("fechaCita");
             hora = request.getParameter("hora");
             sId = request.getParameter("servicioId");
             docId = request.getParameter("docId");
+            seg = request.getParameter("seg");
             // Construct data
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8")).append("&").
                     append(URLEncoder.encode("fechaCita", "UTF-8")).append('=').append(URLEncoder.encode(dateCita, "UTF-8")).append("&").
                     append(URLEncoder.encode("hora", "UTF-8")).append('=').append(URLEncoder.encode(hora, "UTF-8")).append("&").
                     append(URLEncoder.encode("servicioId", "UTF-8")).append('=').append(URLEncoder.encode(sId, "UTF-8")).append("&").
+                    append(URLEncoder.encode("seg", "UTF-8")).append('=').append(URLEncoder.encode(seg, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8080/proyectoDB2-Hospitales/restC/cita/addCita");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restC/cita/addCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");
@@ -82,16 +84,17 @@ public class AddCita extends HttpServlet {
             }
             JSONObject obj = new JSONObject(response2.toString());
             int answ = obj.getInt("in");
-
             if (answ == 1) {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=1");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1");
             } else {
-                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospitales/citas_h.jsp?in=0");
+                response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0");
             }
             wr.close();
             rd.close();
         } catch (Exception e) {
+            response.sendRedirect("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?err=1");
             System.err.println(e);
         }
     }
 }
+

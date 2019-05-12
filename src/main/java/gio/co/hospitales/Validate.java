@@ -65,6 +65,10 @@ public class Validate extends HttpServlet {
                             Cookie cookieRol = new Cookie("rol",rs.getString(5));
                             cookieRol.setMaxAge(5*6000);
                             response.addCookie(cookieRol);
+                            //Agregar su idUsuario
+                            Cookie cookieUId = new Cookie("UId",rs.getString(1));
+                            cookieUId.setMaxAge(5*6000);
+                            response.addCookie(cookieUId);
                             //Agregar el # de hospital
                             Cookie cookieHospNum = new Cookie("hospNum",hospnum);
                             cookieHospNum.setMaxAge(5*6000);

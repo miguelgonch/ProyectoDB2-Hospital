@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
         }
         else{
             response.sendRedirect("home_h.jsp");
@@ -57,8 +57,8 @@
                             <select id="asegData" name="asegNum">
                             </select>
                         </label>
-                        <label>Tipo de seguro:
-                            <select id="typeAseg" name="asegType">
+                        <label style="display:none">Tipo de seguro:
+                            <select id="typeAseg" name="asegType" style="display:none">
                             </select>
                         </label>
                         <br>

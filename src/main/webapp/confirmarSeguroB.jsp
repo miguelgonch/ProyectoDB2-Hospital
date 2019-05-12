@@ -36,6 +36,7 @@
                     <th>Nombre del Asegurado</th>
                     <th>Apellido del asegurado</th>
                     <th>Tipo de seguro</th>
+                    <th>porcentaje de cobertura</th>
                     
                 </tr>
             </thead>

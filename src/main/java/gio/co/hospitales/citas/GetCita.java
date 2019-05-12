@@ -20,7 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 public class GetCita extends HttpServlet {
 
     private static final long serialVersionUID = 1L;
-    public static String hospitalNum = "1";
+    //public static String hospitalNum = "1";
 
     /**
      * @see HttpServlet#HttpServlet()
@@ -40,14 +40,18 @@ public class GetCita extends HttpServlet {
             String url;
             String parPId = request.getParameter("pId");
             String parCitaId = request.getParameter("citaId");
+            String pardocId = request.getParameter("docId");
             if (((parPId != null) && !(parPId.equals("")))) {
                 int pId = Integer.parseInt(parPId);
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita?pId=" + pId;
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?pId=" + pId;
             } else if (((parCitaId != null) && !(parCitaId.equals("")))) {
                 int citaId = Integer.parseInt(parCitaId);
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita?citaId=" + citaId;
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?citaId=" + citaId;
+            }else if (((pardocId != null) && !(pardocId.equals("")))) {
+                int docId = Integer.parseInt(pardocId);
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita?docId=" + docId;
             } else {
-                url = "http://localhost:8080/proyectoDB2-Hospitales/restC/cita/getCita";
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restC/cita/getCita";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -76,3 +80,4 @@ public class GetCita extends HttpServlet {
     }
 
 }
+
