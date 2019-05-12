@@ -42,7 +42,7 @@ public class GetHistSeg extends HttpServlet{
         try {
             String url;
             
-            url = "http://localhost:8080/proyectoDB2-seguro/restHist/hist/getHist?hospital="+hospitalNum;
+            url = "http://25.65.236.60:8080/proyectoDB2-seguro/restHist/hist/getHist?hospital="+hospitalNum;
             
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -70,6 +70,7 @@ public class GetHistSeg extends HttpServlet{
         doGet(request, response);
     }
 }
+
 
 
 
