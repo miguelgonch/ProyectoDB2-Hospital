@@ -24,7 +24,7 @@ $(document).ready(
                     for (var i = 0; i < data.length; i++) {
                         var temp = data[i][1];
                         //if($hos == 2){
-                          $pData.append("<tr><td>" + data[i].idCita + "</td><td>" + data[i].categoria + "</td><td>" + data[i].doctor + "</td><td>" + data[i].nombre+ " " + data[i].apellido + "</td><td>" + data[i].fecha + "</td><td><a class=\"button\" href=\"cita_h.jsp?citaId=" + data[i].idCita + "&pId=" + /*data[i].pId*/ "patito" + "\">Ver detalles</a> <a class=\"button\" href=\"deleteC_h.jsp?citaId=" + data[i].idCita + "\">Eliminar Cita</a></td></tr>");
+                          $pData.append("<tr><td>" + data[i].idCita + "</td><td>" + data[i].categoria + "</td><td>" + data[i].doctor + "</td><td>" + data[i].nombre+ " " + data[i].apellido + "</td><td>" + data[i].fecha + "</td><td><a class=\"button\" href=\"cita_hs.jsp?citaId=" + data[i].idCita + "&pId=" + /*data[i].pId*/ "patito" + "\">Ver detalles</a> </td></tr>");
                         //}
                         
                     }
@@ -40,6 +40,7 @@ $(document).ready(
             });
             
 });
+
 
 
 
