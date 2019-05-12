@@ -89,9 +89,9 @@ import javax.mail.internet.MimeMessage;
  * @author manu
  */
 
-@WebServlet("/sendStuff")
+//@WebServlet("/sendStuff")
 
-public class sendStuff extends HttpServlet{
+public class sendStuff /*extends HttpServlet*/{
     
     //private static final long serialVersionUID = 1L;
     private static final long serialVersionUID = 1L;
@@ -100,13 +100,13 @@ public class sendStuff extends HttpServlet{
     //private static final long serialVersionUID = 1L;
   //  private static int hospitalNum = JavaConnectDb.getHospNum();
 
-       
+       /*
     public sendStuff(){
         super();
-    }
+    }*/
     
-    
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public static void enviar() { 
+    //protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Response info
         final String username = "gioscompanies@gmail.com";
         final String password = "gioSEGUROhospital!";
@@ -127,9 +127,9 @@ public class sendStuff extends HttpServlet{
         
         
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-        response.setContentType("application/json");
-        response.setCharacterEncoding("UTF-8");
-        PrintWriter out = response.getWriter();
+        //response.setContentType("application/json");
+        //response.setCharacterEncoding("UTF-8");
+        //PrintWriter out = response.getWriter();
         try {
             //var query sql
             
@@ -190,15 +190,19 @@ public class sendStuff extends HttpServlet{
     
     }
     
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         // TODO Auto-generated method stub
         doGet(request, response);
-    }
+    }*/
     
 }
     
 
    
+
+
+
+
 
 
 

@@ -15,7 +15,8 @@ import java.io.BufferedReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
+import java.io.OutputStreamWriter;
+import gio.co.hospital.correos.sendStuff;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.sql.Connection;
@@ -64,20 +65,17 @@ public class Scheduler implements ServletContextListener {
                             //Cada 24 horas 86400 segundos
                             Thread.sleep(86400);
                         }
-                        Thread.sleep(10000);
+                        Thread.sleep(2000);
                         Date date3 = new Date();
                         String formated3 = dateFormat.format(date3).toString();
-                        Date date4 = new Date("2016/11/16 13:58:00");
+                        Date date4 = new Date("2016/11/16 16:30:00");
                         String formated4 = dateFormat.format(date4).toString();
                         if(formated3.equals(formated4)){
-                           
-                           try {
-                            String url1 = "http://25.74.104.162:8080/proyectoDB2-Hospital1/sendStuff";
-                                URL urlr1 = new URL(url1);
-                                HttpURLConnection connr = (HttpURLConnection) urlr1.openConnection();
-                                connr.setRequestMethod("GET");
-                                connr.setDoOutput(true);
-                                
+                           String a = "A";
+                             try {
+                                 
+                                 sendStuff.enviar();
+                               
 
                                 Thread.sleep(15000);
                            } catch (Exception e){
@@ -191,6 +189,47 @@ public class Scheduler implements ServletContextListener {
     }
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
