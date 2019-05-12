@@ -55,6 +55,7 @@ public class Scheduler implements ServletContextListener {
                             //Cada 24 horas 86400 segundos
                             Thread.sleep(86400);
                         }
+                        Thread.sleep(3599000);
                     }
                 } catch (InterruptedException e) {}
             }            

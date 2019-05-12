@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
             
         }
         else{
@@ -46,6 +46,11 @@
                 out.println("<script>alert(\"No se ha logrado eliminar la cita, vuelve a intentarlo\");</script>");
             }
         }
+        if((request.getParameter("err")!=null)){
+            if(request.getParameter("err").equals("1")){
+                out.println("<script>alert(\"Hubo un error vuelve a intentarlo!\");</script>");
+            }
+        }
     %>
     <body>
         
@@ -53,7 +58,11 @@
             <div class="grid-x align-center">
                 <div class="cell small-10 medium-12">
                     <h1>Citas:</h1>
-                    <a class="button" href="aggregarC_h.jsp">Nueva Cita</a>
+                    <% 
+                        if(rolNum<=3){
+                            out.println("<a class=\"button\" href=\"aggregarC_h.jsp\">Nueva Cita</a>");
+                        }
+                    %>
                     <table>
                         <thead>
                             <tr>

@@ -16,9 +16,11 @@
                     <p>Hospital # <%= hospitalNum%></p>
                     <a class="button" href="pacientes_h.jsp">Ver pacientes</a>
                     <a class="button" href="citas_h.jsp">Ver Citas</a>
-                    <a class="button" href="confirmarSeguro.jsp">comprobar seguro</a>
                     </br>
                     <% 
+                        if(rolNum<=3){
+                            out.println("<a class=\"button\" href=\"confirmarSeguro.jsp\">comprobar seguro</a>");
+                        }
                         if(rolNum==1){
                             out.println("<h2>Administracion</h2>"+
                                         "<a class=\"button\" href=\"usuarios_h.jsp\">Administracion</a>");

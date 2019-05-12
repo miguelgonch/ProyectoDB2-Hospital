@@ -16,7 +16,7 @@
     <!--Verify if the user has access-->
     <%@ include file="partials/_getInfo.jsp"%>
     <%
-        if(rol.equals("1")||(rolNum<=3)){
+        if(rol.equals("1")||(rolNum<=4)){
         }
         else{
             response.sendRedirect("home_h.jsp");
@@ -26,7 +26,7 @@
         <div class="grid-container">
             <div class="grid-x align-center-middle">
                 <div class="cell small-10 medium-8">
-                    <form class="form" action="AddCita" method="post">
+                    <form class="form" action="/proyectoDB2-Hospital1/verificarC_h.jsp" method="get">
                         <h4>Nueva Cita</h4>
                         <label>Paciente: 
                             <select id="patients" name="pId" required>
@@ -50,6 +50,7 @@
                         <br>
                         <input type="submit" class="cell button medium-8" value="Agregar">
                     </form>
+                    <a href="home_h.jsp" class="button expanded">Cancelar</a>
                 </div>
             </div>
         </div>
