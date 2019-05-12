@@ -49,7 +49,7 @@ public class CitasResource {
             @QueryParam("docId") String docId,
             @QueryParam("citaId") String citaId) {                                  //Aquí uso @QueryParam para recibir los parametros como query
 
-        makeList(pId, citaId,docId);                                                       //Crear la lista de la info solicitada
+        makeList(pId, citaId, docId);                                                       //Crear la lista de la info solicitada
         return Response.status(200).entity(citasList).build();
     }
 
@@ -78,12 +78,12 @@ public class CitasResource {
             @FormParam("docId") int docId) {
 
         Boolean answ;                                                               //Respuesta del addUpdateCita
-        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId,seg);
+        answ = addNewCita(pId, dateCita, hora, sId, docId, citaId, seg);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?in=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"in\":0}").build();
         }
 
@@ -108,10 +108,10 @@ public class CitasResource {
         Boolean answ;                                                               //Respuesta del addUpdateCita
         answ = upCita(citaId, dateCita, hora, sId, diag, pasos, res, obsrv, meds, docId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?up=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?up=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?up=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"up\":0}").build();
         }
     }
@@ -125,10 +125,10 @@ public class CitasResource {
         Boolean answ;                                                               //Respuesta del delCita
         answ = delCita(citaId);
         if (answ) {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?del=1")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?del=1")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":1}").build();
         } else {
-            //return Response.temporaryRedirect(URI.create("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?del=0")).build();
+            //return Response.temporaryRedirect(URI.create("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?del=0")).build();
             return Response.status(200).type(MediaType.APPLICATION_JSON).entity("{\"del\":0}").build();
         }
     }
@@ -148,7 +148,7 @@ public class CitasResource {
             } else if (citaId != null) {
                 //Query con el filtro
                 sql = "select * from citas_full where cita_id =" + citaId + " order by CITA_ID";
-            }else if (pDocId != null) {
+            } else if (pDocId != null) {
                 //Query con el filtro
                 sql = "select * from citas_full where doc_id =" + pDocId;
             } else {
@@ -213,7 +213,7 @@ public class CitasResource {
     }
 
     //Metodo para realizar un insert
-    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId,int seg) {
+    private Boolean addNewCita(int pId, String dateCita, String hora, int sId, int docId, int citaId, int seg) {
         Boolean respuesta = false;
         int res;
         //Conexion con db oracle
@@ -239,9 +239,9 @@ public class CitasResource {
             double pct = Double.parseDouble(porcentajes[1]);
             String porcentaje = porcentajes[0];
             a = "b";
-            if(seg==1){
+            if (seg == 1) {
                 res = instertAuth(dateCita, servicio, DPI, monto, porcentaje, cId);
-            }else{
+            } else {
                 res = 0;
             }
             a = "c";
@@ -357,7 +357,7 @@ public class CitasResource {
         String[] porcentajes = new String[2];
         try {//a
             // Send data
-            URL url = new URL("http://25.74.104.162:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI);
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI);
             HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
             conn2.setDoOutput(true);
 
@@ -398,7 +398,7 @@ public class CitasResource {
         try {//b
             // Send data
             String rStmt = "http://localhost:8080/proyectoDB2-seguro/restAuth/auth/addAuth?hospital=" + hospitalNum + "&fecha=" + dateCita + "&servicio=" + servicio + "&dpi=" + DPI + "&monto=" + monto + "&porcentaje=" + porcentaje + "&idCita=" + cId;
-            //String rStmt="http://25.74.104.162:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI;
+            //String rStmt="http://localhost:8080/proyectoDB2-Hospital1/GetCliente?dpi=" + DPI;
             URL urlr = new URL(rStmt);
             HttpURLConnection connr = (HttpURLConnection) urlr.openConnection();
             connr.setRequestMethod("POST");
@@ -427,10 +427,11 @@ public class CitasResource {
     }
 
     private void insertFactura(int res, int cId, int monto, double pct) {
+        int hospitalNum = JavaConnectDb.getHospNum();
         if (res == 1) {
             try {
                 // Send data
-                URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId);
+                URL urlauth = new URL("http://localhost:8080/proyectoDB2-seguro/restAuth/auth/getAuth?idCita=" + cId + "&hospNum=" + hospitalNum);
                 HttpURLConnection connauth = (HttpURLConnection) urlauth.openConnection();
                 connauth.setDoOutput(true);
                 // Get the response

@@ -15,7 +15,7 @@ $(document).ready(
             if (findCookie("rol") == 4) {
                     $.ajax({
                         type: 'GET',
-                        url: 'http://25.74.104.162:8080/proyectoDB2-Hospital1/GetCita',
+                        url: 'http://localhost:8080/proyectoDB2-Hospital1/GetCita',
                         dataType: 'json',
                         data:{
                           docId:  findCookie("UId")
@@ -39,7 +39,7 @@ $(document).ready(
             }else{
                     $.ajax({
                         type: 'GET',
-                        url: 'http://25.74.104.162:8080/proyectoDB2-Hospital1/GetCita',
+                        url: 'http://localhost:8080/proyectoDB2-Hospital1/GetCita',
                         dataType: 'json',
                         success: function (data) {
                             var $pData = $('#historialData');
