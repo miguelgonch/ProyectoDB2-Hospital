@@ -6,7 +6,7 @@ import java.sql.DriverManager;
 
 public class JavaConnectDb {
 
-    public static int hospNum = 2;
+    public static int hospNum = 1;
 
     public static int getHospNum() {
         return hospNum;
@@ -14,7 +14,7 @@ public class JavaConnectDb {
 
     public static Connection connectDbH(int num) {
         Connection conn = null;
-        int numHospital = num;
+        int numHospital = 1;
         try {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             switch (numHospital) {
