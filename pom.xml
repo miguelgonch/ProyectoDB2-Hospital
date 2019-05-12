@@ -60,6 +60,21 @@
             <artifactId>jersey-servlet</artifactId>
             <version>1.19</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.mail/javax.mail-api -->
+        <dependency>
+            <groupId>javax.mail</groupId>
+            <artifactId>javax.mail-api</artifactId>
+            <version>1.6.0</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/javax.activation/javax.activation-api -->
+        <dependency>
+            <groupId>javax.activation</groupId>
+            <artifactId>javax.activation-api</artifactId>
+            <version>1.2.0</version>
+        </dependency>
+
+
+
         
         <!-- this is only required, if you are uploading file using JAX-RS by Jersey -->
         <dependency>
@@ -132,5 +147,8 @@
     </build>
 
 </project>
+
+
+
 
 
