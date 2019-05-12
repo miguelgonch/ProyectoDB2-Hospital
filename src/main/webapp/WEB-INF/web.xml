@@ -65,6 +65,20 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
+    <servlet>
+        <servlet-name>sendEmailP</servlet-name>
+        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
+        <init-param>
+            <param-name>com.sun.jersey.config.property.packages</param-name>
+            <param-value>gio.co.hospital.correos</param-value>
+        </init-param>
+        <!-- this is only required if using json -->
+        <init-param>
+                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+                <param-value>true</param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
     
     
     <servlet>
@@ -81,7 +95,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    <servlet>
+ <servlet>
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -95,7 +109,7 @@
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
+      
     
     <servlet-mapping>
         <servlet-name>WS App</servlet-name>
@@ -120,18 +134,12 @@
     <servlet-mapping>    
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <url-pattern>/restU/*</url-pattern>
-    </servlet-mapping>
+    </servlet-mapping>  
     <listener>
         <listener-class>
             gio.co.hospitales.Scheduler
         </listener-class>
   </listener>
 </web-app>
-
-
-
-
-
-
 
 

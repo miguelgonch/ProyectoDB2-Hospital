@@ -59,27 +59,14 @@ public class correoReminder extends HttpServlet{
     
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Response info
+        
+        Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
         response.setContentType("application/json");
         response.setCharacterEncoding("UTF-8");
         PrintWriter out = response.getWriter();
         try {
-            sendEmail();
-        } catch (Exception e) {
-            System.err.println(e);
-        }
-    
-    }
-    
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
-    }
-    
-    
-   public void sendEmail() {
-       Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-       try {
             //var query sql
+            
             String sql;
               
             
@@ -88,50 +75,88 @@ public class correoReminder extends HttpServlet{
             OraclePreparedStatement pst = (OraclePreparedStatement) conn.prepareStatement(sql);
             OracleResultSet rs = (OracleResultSet) pst.executeQuery();
             while (rs.next()) {
-                try{
-                String nombreP = rs.getString("panombre");
+              
+                String nombreP = rs.getString("nombre");
                 String apellidoP = rs.getString("apellido");
                 String emailP = rs.getString("email");
-                String fechaC = rs.getString("fecha");
-                //String nombreDoc = rs.getString("midoc");
-                String apellidoDoc = rs.getString("midoctor");
+                //String fechaC = rs.getString("fecha");
+                String nombreDoc = rs.getString("midoc");
+                //String apellidoDoc = rs.getString("midoctor");
                 String subcat = rs.getString("subcat");
+                
+                String[] parts = emailP.split("@");
+                String user, serverno, serversi, dotque;
+                user = parts[0];
+                serverno = parts[1];
+                //String[] parts2 = serverno.split(".");
+                //serversi = parts2[0];
+                //dotque = parts2[1];
                 
                 
                 StringBuilder dataBuilder = new StringBuilder();
                      dataBuilder.append(URLEncoder.encode("nombrep", "UTF-8")).append('=').append(URLEncoder.encode(nombreP, "UTF-8")).append("&").
                     append(URLEncoder.encode("apellidop", "UTF-8")).append('=').append(URLEncoder.encode(apellidoP, "UTF-8")).append("&").
-                    append(URLEncoder.encode("correop", "UTF-8")).append('=').append(URLEncoder.encode(emailP, "UTF-8")).append("&").
-                    append(URLEncoder.encode("fecha", "UTF-8")).append('=').append(URLEncoder.encode(fechaC, "UTF-8")).append("&").
-                    append(URLEncoder.encode("docName", "UTF-8")).append('=').append(URLEncoder.encode(apellidoDoc, "UTF-8")).append("&").
+                    append(URLEncoder.encode("correop", "UTF-8")).append('=').append(URLEncoder.encode(user, "UTF-8")).append("&").
+                             append(URLEncoder.encode("correoPserver", "UTF-8")).append('=').append(URLEncoder.encode(serverno, "UTF-8")).append("&").
+                                
+                    //append(URLEncoder.encode("fecha", "UTF-8")).append('=').append(URLEncoder.encode(fechaC, "UTF-8")).append("&").
+                    append(URLEncoder.encode("docName", "UTF-8")).append('=').append(URLEncoder.encode(nombreDoc, "UTF-8")).append("&").
                     append(URLEncoder.encode("subcat", "UTF-8")).append('=').append(URLEncoder.encode(subcat, "UTF-8"));
                
                         // Send data
               URL url = new URL("http://25.74.104.162:8080/proyectoDB2-Hospital1/sendEmailP");
-              HttpURLConnection conn = (HttpURLConnection) url.openConnection();
-              conn.setDoOutput(true);
-              conn.setRequestMethod("POST");
-              OutputStreamWriter wr = new OutputStreamWriter(conn.getOutputStream());
-              wr.write(dataBuilder.toString());
-              wr.flush();
-               }catch(SQLException e){
-                     System.err.println(e);
-                 }
+              HttpURLConnection conn2 = (HttpURLConnection) url.openConnection();
+              conn2.setDoOutput(true);
               
-              rs.close();
+              conn2.setRequestMethod("POST");
+              OutputStreamWriter wr = new OutputStreamWriter(conn2.getOutputStream());
+              wr.write(dataBuilder.toString());
+              //out.println(wr);
+              wr.flush();
+              
+              
+              
+                         
+              }
+                rs.close();
               pst.close();
               conn.close();
               
-                //sendEmailP(nombreP, apellidoP, emailP, fechaC,nombreDoc, apellidoDoc);
-                
-            }
+              
+                             
+           
 
              } catch(SQLException e){
+                  //response.sendRedirect("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp");
                      System.err.println(e);
                  }
-   }
+    
+    }
+    
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // TODO Auto-generated method stub
+        doGet(request, response);
+    }
     
 }
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

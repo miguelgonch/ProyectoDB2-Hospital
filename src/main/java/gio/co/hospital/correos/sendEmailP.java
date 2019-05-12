@@ -64,9 +64,9 @@ public class sendEmailP extends HttpServlet {
     }
 
     // Generar jsons
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
+ /*  protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+            
+    }*/
 
     /**
      * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
@@ -96,11 +96,13 @@ public class sendEmailP extends HttpServlet {
         PrintWriter out = response.getWriter();
         try {
             //Obtener parametros
-            String nombreP, apellidoP, correoP, citaId, citaFecha, docName, subcat;
+            String nombreP, apellidoP, correoP, correoPserver, correodot, citaFecha, docName, subcat;
             nombreP = request.getParameter("nombrep");
             apellidoP = request.getParameter("apellidop");
             correoP = request.getParameter("correop");
-            citaId = request.getParameter("citaid");
+            correoPserver = request.getParameter("correoPserver");
+            //correodot = request.getParameter("correodot");
+            //citaId = request.getParameter("citaid");
             citaFecha = request.getParameter("fecha");
             docName = request.getParameter("docName");
             subcat = request.getParameter("subcat");
@@ -110,10 +112,10 @@ public class sendEmailP extends HttpServlet {
             message.setFrom(new InternetAddress("gioscompanies@gmail.com"));
             message.setRecipients(
                     Message.RecipientType.TO,
-                    InternetAddress.parse(correoP)
+                    InternetAddress.parse(correoP+"@"+correoPserver)
             );
             message.setSubject("Cita del "+citaFecha);
-            message.setText("Estimado/a"+nombreP+" "+apellidoP+" ,"
+            message.setText("Estimado@: "+nombreP+" "+apellidoP+" ,"
                     + "\n\n El motivo del correo es para recordarle que tiene una cita asignada para el "+citaFecha+"."
                     +"\n\n La cita sera para "+subcat+" con el Dr. "+docName+"."
                     +"\n\n Gracias por elegir GioHospitales"
@@ -131,6 +133,17 @@ public class sendEmailP extends HttpServlet {
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 

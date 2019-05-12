@@ -54,6 +54,12 @@
             <groupId>org.glassfish.jersey.bundles</groupId>
             <artifactId>jaxrs-ri</artifactId>
             <version>2.28</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.eclipse</groupId>
+                    <artifactId>yasson</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
                 <groupId>com.sun.jersey</groupId>
@@ -137,6 +143,7 @@
     </build>
 
 </project>
+
 
 
 
