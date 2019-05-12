@@ -17,7 +17,7 @@ public class MongoConnectDB {
     public static MongoClient connectMongo() {
 		MongoClient conn = null;
                 int port_no = 27017;
-                String host_name = "25.74.104.162", db_name = "SegurosGio", db_col_name = "Usuarios";
+                String host_name = "25.65.236.60", db_name = "SegurosGio", db_col_name = "Usuarios";
                 String client_url = "mongodb://" + host_name + ":" + port_no + "/" + db_name;
                 
 		try {
@@ -34,6 +34,7 @@ public class MongoConnectDB {
     
     
 }
+
 
 
 

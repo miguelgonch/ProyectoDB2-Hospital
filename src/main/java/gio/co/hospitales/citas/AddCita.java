@@ -92,9 +92,10 @@ public class AddCita extends HttpServlet {
             wr.close();
             rd.close();
         } catch (Exception e) {
-            response.sendRedirect("http://25.74.104.162:8080/proyectoDB2-Hospital1/citas_h.jsp?err=1");
+            response.sendRedirect("http://localhost:8080/proyectoDB2-Hospital1/citas_h.jsp?err=1");
             System.err.println(e);
         }
     }
 }
+
 
