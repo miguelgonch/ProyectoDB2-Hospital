@@ -91,20 +91,13 @@ import javax.mail.internet.MimeMessage;
 
 //@WebServlet("/sendStuff")
 
-public class sendStuff /*extends HttpServlet*/{
+public class sendStuff {
     
-    //private static final long serialVersionUID = 1L;
+    ;
     private static final long serialVersionUID = 1L;
     private static int hospitalNum = JavaConnectDb.getHospNum();
     
-    //private static final long serialVersionUID = 1L;
-  //  private static int hospitalNum = JavaConnectDb.getHospNum();
 
-       /*
-    public sendStuff(){
-        super();
-    }*/
-    
     public static void enviar() { 
     //protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         //Response info
@@ -127,11 +120,9 @@ public class sendStuff /*extends HttpServlet*/{
         
         
         Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
-        //response.setContentType("application/json");
-        //response.setCharacterEncoding("UTF-8");
-        //PrintWriter out = response.getWriter();
+      
         try {
-            //var query sql
+          
             
             String sql;
               
@@ -168,7 +159,7 @@ public class sendStuff /*extends HttpServlet*/{
 
             Transport.send(message);
 
-            //out.println("Done");
+          
             
              } catch (Exception e) {
             System.err.println(e);
@@ -190,15 +181,13 @@ public class sendStuff /*extends HttpServlet*/{
     
     }
     
-    /*protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
-        doGet(request, response);
-    }*/
+  
     
 }
     
 
    
+
 
 
 

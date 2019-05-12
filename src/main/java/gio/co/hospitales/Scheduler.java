@@ -65,7 +65,7 @@ public class Scheduler implements ServletContextListener {
                             //Cada 24 horas 86400 segundos
                             Thread.sleep(86400);
                         }
-                        Thread.sleep(2000);
+                        Thread.sleep(15000);
                         Date date3 = new Date();
                         String formated3 = dateFormat.format(date3).toString();
                         Date date4 = new Date("2016/11/16 16:30:00");
@@ -77,7 +77,7 @@ public class Scheduler implements ServletContextListener {
                                  sendStuff.enviar();
                                
 
-                                Thread.sleep(15000);
+                                Thread.sleep(60000);
                            } catch (Exception e){
                                 System.err.println(e);
                            }
@@ -189,6 +189,9 @@ public class Scheduler implements ServletContextListener {
     }
 
 }
+
+
+
 
 
 
