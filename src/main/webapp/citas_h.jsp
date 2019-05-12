@@ -76,6 +76,8 @@
                         </thead>
                         <tbody id="historialData">
                         </tbody>
+                        <tbody id="historialData2">
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -83,4 +85,7 @@
     </body>
 </html>
     <script src="js/citas.js"></script>
+    <script src="js/citasSeg.js"></script>
 </html>
+
+
