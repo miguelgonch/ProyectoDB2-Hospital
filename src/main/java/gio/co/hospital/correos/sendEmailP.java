@@ -119,7 +119,6 @@ public class sendEmailP extends HttpServlet {
                     +"\n\n Gracias por elegir GioHospitales"
                     +"\n\n "
                     +"\n\n "
-                    +"\n\n "
                     +"\n\n Por favor no responder este correo.");
 
             Transport.send(message);
@@ -132,6 +131,7 @@ public class sendEmailP extends HttpServlet {
         }
     }
 }
+
 
 
 
