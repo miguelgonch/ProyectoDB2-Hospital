@@ -150,7 +150,7 @@ public class CitasResource {
                 sql = "select * from citas_full where cita_id =" + citaId + " order by CITA_ID";
             }else if (pDocId != null) {
                 //Query con el filtro
-                sql = "select * from citas_full where doc_id =" + pDocId + " order by CITA_ID";
+                sql = "select * from citas_full where doc_id =" + pDocId;
             } else {
                 //Query
                 sql = "select * from citas_full order by CITA_ID";
