@@ -47,5 +47,4 @@ pipeline{
                 to: 'gonzalez161256@unis.edu.gt'
             }
         }
-    }
 }
