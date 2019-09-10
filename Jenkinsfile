@@ -35,8 +35,8 @@ pipeline {
                        sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
                     }
                 }
+                step([$class: 'Mailer', recipients: 'gonzalez161256@unis.edu.gt'])
             }
-            step([$class: 'Mailer', recipients: 'gonzalez161256@unis.edu.gt'])
         }
     }
 }
