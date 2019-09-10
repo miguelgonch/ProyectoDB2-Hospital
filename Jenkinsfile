@@ -2,8 +2,10 @@ pipeline {
     agent any
     stages {         
         stage('--- clean ---') {
-            withEnv( ["PATH+MAVEN=${tool Maven}/bin"] ) {
-                sh "mvn clean"
+            steps{
+                withEnv( ["PATH+MAVEN=${tool Maven}/bin"] ) {
+                    sh "mvn clean"
+                }
             }
         }
         stage('-- package --') {
