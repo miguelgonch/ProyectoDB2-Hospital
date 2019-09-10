@@ -29,10 +29,8 @@ pipeline{
             }
             post{
                 success{
-                    stage('-- Merge to QA --') {
-                        steps {
-                            sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
-                        }
+                        echo '-- Merge to QA --'
+                        sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
                     }
                 }
             }
