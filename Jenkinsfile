@@ -1,12 +1,8 @@
 pipeline {
     agent any
     stages {
-        stage('first') {
-            agent { label 'master' }
-            steps {
-               sh "printenv | sort"
-            }
-        }
+        def mavenPath = tool 'Maven'
+
         stage('--- clean ---') {
             steps {
                 sh "mvn clean"
