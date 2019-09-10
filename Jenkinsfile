@@ -27,16 +27,17 @@ pipeline{
                     sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.1.37:9000/sonar -Dsonar.host.url=http://192.168.1.37:9000"
                 }
             }
-        }
-        post{
-            success{
-                stage('-- Merge to QA --') {
-                    steps {
-                        sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+            post{
+                success{
+                    stage('-- Merge to QA --') {
+                        steps {
+                            sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+                        }
                     }
                 }
             }
         }
+       
     }
     post {
         success {
