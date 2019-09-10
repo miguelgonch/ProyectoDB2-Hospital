@@ -32,10 +32,11 @@ pipeline {
         }
         stage('-- Merge to QA --') {
             steps {
-                if(!build.result.toString().equals('FAILURE')){
-                    sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+                script {
+                    if(!build.result.toString().equals('FAILURE')){
+                       sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+                    }
                 }
-                
             }
         }
     }
