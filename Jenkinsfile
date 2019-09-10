@@ -3,8 +3,8 @@ pipeline {
     stages {         
         stage('--- clean ---') {
             steps{
-                withEnv( ["JAVA_HOME=${ tool 'jdk-1.8.0_64bits' }", "PATH+MAVEN=${tool Maven}/bin"] ) {
-                    sh "echo \$JAVA_HOME"
+                withEnv( ["PATH+MAVEN=${tool Maven}/bin"] ) {
+                    sh "echo \$PATH+MAVEN"
                     sh "mvn clean"
                 }
             }
