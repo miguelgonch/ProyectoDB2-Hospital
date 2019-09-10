@@ -24,7 +24,7 @@ pipeline{
         stage('-- sonar --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                    sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.1.37:9000/sonar -Dsonar.host.url=http://192.168.1.37:9000"
+                    sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.16.72.12:9000/sonar -Dsonar.host.url=http://172.16.72.12:9000"
                 }
             }
         }
