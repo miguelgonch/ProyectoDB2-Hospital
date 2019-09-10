@@ -2,8 +2,7 @@ pipeline {
     agent any
     stages {         
         stage('--- clean ---') {
-            def mavenPath = 'Maven'
-            withEnv( ["PATH+MAVEN=${tool mavenPath}/bin"] ) {
+            withEnv( ["PATH+MAVEN=${tool Maven}/bin"] ) {
                 sh "mvn clean"
             }
         }
