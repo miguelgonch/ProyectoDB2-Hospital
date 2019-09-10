@@ -27,25 +27,19 @@ pipeline{
                     sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.1.37:9000/sonar -Dsonar.host.url=http://192.168.1.37:9000"
                 }
             }
-            post {
-                success {
-                    echo '-- Merge to QA --'
-                    //sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
-                }
-            }
         }
        
     }
     post {
         success {
-             emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
-             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
-             body: "The build was successfull with ${env.BUILD_URL}"
+            emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
+            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
+            body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-             emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
-             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
-             body: "There was a problem with ${env.BUILD_URL}"
+            emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
+            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
+            body: "There was a problem with ${env.BUILD_URL}"
         }
     }
 }
