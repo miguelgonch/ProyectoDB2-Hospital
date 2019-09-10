@@ -40,7 +40,9 @@ pipeline{
         }
         post {
         always {
-            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+             mail to: 'gonzalez161256@unis.edu.gt',
+             subject: "Finished Pipeline: ${currentBuild.fullDisplayName}",
+             body: "Something is normal with ${env.BUILD_URL}"
         }
     }
 }
