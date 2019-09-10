@@ -23,7 +23,7 @@ pipeline {
         }
         stage('-- sonar --') {
             steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH=PATH+${tool 'Node'}/bin"]) {
                     step([$class: 'Mailer', recipients: 'gonzalez161256@unis.edu.gt',content:'This is a test'])
                     sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://192.168.1.37:9000/sonar -Dsonar.host.url=http://192.168.1.37:9000"
                         
