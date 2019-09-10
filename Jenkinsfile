@@ -4,13 +4,13 @@ pipeline {
         
 
         stage('--- clean ---') {
-            steps {
-                def mavenPath = tool 'Maven'
-                withEnv( ["PATH+MAVEN=${tool mavenPath}/bin"]){
-                    sh "mvn clean"
-                }
+            
+            def mavenPath = tool 'Maven'
                 
+            withEnv( ["PATH+MAVEN=${tool mavenPath}/bin"]){
+                sh "mvn clean"
             }
+                
         }
         stage('-- package --') {
             steps {
