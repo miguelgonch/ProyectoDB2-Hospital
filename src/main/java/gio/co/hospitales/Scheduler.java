@@ -56,7 +56,7 @@ public class Scheduler implements ServletContextListener {
                     while(true){
                         Date date = new Date();
                         String formated = dateFormat.format(date).toString();
-                        Date date2 = new Date("2016/11/16 12:49:00");
+                        Date date2 = new Date("2016/11/16 18:27:00");
                         String formated2 = dateFormat.format(date2).toString();
                         if(formated.equals(formated2)){
                             //Aqui va el metodo en vez del println

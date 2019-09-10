@@ -33,7 +33,7 @@ function checkCobertura(){
             pId: query_string('pId') 
         },
         success: function(data) {
-            variable2 = "Sangre";
+            var $variable2 = getServicio(query_string('servicioId'));
             $.ajax({
                 type: 'GET',
                 url:'http://localhost:8080/proyectoDB2-Hospital1/GetCliente',
@@ -56,7 +56,7 @@ function checkCobertura(){
                 dataType: 'json',
                 data: {
                     dpi: data[0].dpi ,
-                    servicio: variable2
+                    servicio: $variable2
                 },
                 success: function(data) {
                     var $pData = $('#verifyAnsw');
