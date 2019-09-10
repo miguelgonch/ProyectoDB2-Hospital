@@ -30,7 +30,7 @@ pipeline{
             post {
                 success {
                     echo '-- Merge to QA --'
-                    sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+                    //sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
                 }
             }
         }
@@ -38,12 +38,12 @@ pipeline{
     }
     post {
         success {
-             emailext to: 'gonzalez161256@unis.edu.gt',
+             emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
              subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
              body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-             emailext to: 'gonzalez161256@unis.edu.gt',
+             emailext to: 'gonzalez161256@unis.edu.gt,septimo10intel@gmail.com',
              subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
              body: "There was a problem with ${env.BUILD_URL}"
         }
