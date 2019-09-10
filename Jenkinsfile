@@ -37,14 +37,10 @@ pipeline{
                     }
                 }
             }
-         
-        
-            stage('Email')
-            {
-                env.ForEmailPlugin = env.WORKSPACE      
-                emailext body: 'Test Notificacion 2', 
-                subject: currentBuild.currentResult + " : " + env.JOB_NAME, 
-                to: 'gonzalez161256@unis.edu.gt'
-            }
         }
+        post {
+        always {
+            emailext body: 'A Test EMail', recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']], subject: 'Test'
+        }
+    }
 }
