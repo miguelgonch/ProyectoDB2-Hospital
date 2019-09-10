@@ -1,13 +1,13 @@
 pipeline{
     agent any
     stages {  
-        stage('first') {
+        /*stage('first') {
             agent { label 'master' }
             steps {
             sh "printenv | sort"
             }
-        }       
-        /*stage('--- clean ---') {
+        }*/       
+        stage('--- clean ---') {
             steps{
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean"
@@ -36,7 +36,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
     }
     post {
         success {
