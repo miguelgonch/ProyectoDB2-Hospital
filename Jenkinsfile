@@ -41,8 +41,8 @@ pipeline{
     post {
         always {
              emailext to: 'gonzalez161256@unis.edu.gt',
-             subject: "Finished Pipeline: ${currentBuild.fullDisplayName}",
-             body: "Something is normal with ${env.BUILD_URL}"
+             subject: "Finished Pipeline: Test 1",
+             body: "Something is normal with Test 1"
         }
     }
 }
