@@ -1,4 +1,5 @@
-node ('Dev') {  
+pipeline{
+    node ('dev') {  
         try{
             stage('first') {
                 agent { label 'master' }
@@ -49,4 +50,5 @@ node ('Dev') {
                 to: 'gonzalez161256@unis.edu.gt'
             }
         }
+    }
 }
