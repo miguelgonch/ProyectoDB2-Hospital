@@ -1,9 +1,15 @@
 pipeline {
     agent any
-    stages {         
+    stages {     
+        stage('first') {
+            agent { label 'master' }
+            steps {
+               sh "printenv | sort"
+            }
+        }    
         stage('--- clean ---') {
             steps{
-                withEnv(["JAVA_HOME=${ tool 'JDK' }", "PATH+MAVEN=${tool 'Maven'}/bin:${env.JAVA_HOME}/bin"]) {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "echo \$PATH+MAVEN"
                     sh "mvn clean"
                 }
