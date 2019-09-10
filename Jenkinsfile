@@ -28,11 +28,11 @@ pipeline{
                 }
             }
         }
-        stage('-- Merge to QA --') {
-            steps {
-                script {
-                    if(!build.result.toString().equals('FAILURE')){
-                    sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
+        post{
+            success{
+                stage('-- Merge to QA --') {
+                    steps {
+                        sh "git checkout origin/QA && git merge dev && git push && git checkout dev"
                     }
                 }
             }
@@ -40,12 +40,12 @@ pipeline{
     }
     post {
         success {
-             emailext to: 'gonzalez161256@unis.edu.gt,gonzalez161256@unis.edu.gt',
+             emailext to: 'gonzalez161256@unis.edu.gt',
              subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
              body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-             emailext to: 'gonzalez161256@unis.edu.gt,gonzalez161256@unis.edu.gt',
+             emailext to: 'gonzalez161256@unis.edu.gt',
              subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
              body: "There was a problem with ${env.BUILD_URL}"
         }
