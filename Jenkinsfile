@@ -42,7 +42,7 @@ pipeline{
             stage('Email')
             {
                 env.ForEmailPlugin = env.WORKSPACE      
-                emailext body: 'Test Notificacion', 
+                emailext body: 'Test Notificacion 2', 
                 subject: currentBuild.currentResult + " : " + env.JOB_NAME, 
                 to: 'gonzalez161256@unis.edu.gt'
             }
