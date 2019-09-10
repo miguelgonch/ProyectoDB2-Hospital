@@ -1,7 +1,6 @@
 pipeline {
     agent any
     stages {
-        def mavenPath = tool 'Maven'
 
         stage('--- clean ---')  withEnv( ["PATH+MAVEN=${tool Maven}/bin"])  {
             steps {
