@@ -1,6 +1,6 @@
 pipeline {
     agent any
-    node ('Dev') {  
+    stages {  
         try{
             stage('first') {
                 agent { label 'master' }
