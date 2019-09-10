@@ -1,6 +1,6 @@
 pipeline{
-    node ('dev') {  
-        try{
+    stages {  
+        
             stage('first') {
                 agent { label 'master' }
                 steps {
@@ -37,12 +37,9 @@ pipeline{
                     }
                 }
             }
-        } 
-        catch (err){
-            throw err
-        }
-        Finally{
-                stage('Email')
+         
+        
+            stage('Email')
             {
                 env.ForEmailPlugin = env.WORKSPACE      
                 emailext body: 'Test Notificacion', 
