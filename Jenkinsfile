@@ -21,6 +21,13 @@ pipeline{
                 }
             }
         }
+        stage('-- Unit Test --') {
+            steps {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                    sh "mvn -Dtest=gio.co.hospitales.GetUsuarioTest test"
+                }
+            }
+        }
         stage('-- sonar --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
