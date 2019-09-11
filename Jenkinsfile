@@ -21,6 +21,13 @@ pipeline{
                 }
             }
         }
+        stage('-- Unit Test --') {
+            steps {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                    sh "mvn -Dtest=gio.co.hospitales.GetUsuarioTest testTrue"
+                }
+            }
+        }
         stage('-- sonar --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
@@ -36,10 +43,10 @@ pipeline{
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
             body: "The build was successfull with ${env.BUILD_URL}"
         }
-        failure {
+        /*failure {
             emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt',
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
             body: "There was a problem with ${env.BUILD_URL}"
-        }
+        }*/
     }
 }
