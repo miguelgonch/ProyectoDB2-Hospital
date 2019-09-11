@@ -45,7 +45,7 @@ public class GetUsuarioTest {
     @Test
     public void testTrue() throws Exception {
         String dato = "dato";
-        assertEquals("mTodo bien", dato, dato);
+        assertEquals("Todo bien", dato, dato);
     }
 
 

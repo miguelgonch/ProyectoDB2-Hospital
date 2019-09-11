@@ -24,7 +24,7 @@ pipeline{
         stage('-- Unit Test --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn -Dtest=gio.co.hospitales.GetUsuarioTest testTrue"
+                    sh "mvn -Dtest=gio.co.hospitales.GetUsuarioTest"
                 }
             }
         }
