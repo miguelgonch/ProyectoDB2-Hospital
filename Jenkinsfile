@@ -35,6 +35,11 @@ pipeline{
                 }
             }
         }
+        stage('-- Deploy --'){
+            steps{
+                deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.3:8080')], contextPath: null, war: '**/*.war'
+            }
+        }
        
     }
     post {
@@ -42,7 +47,6 @@ pipeline{
             emailext to: 'gonzalez161256@unis.edu.gt',
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
             body: "The build was successfull with ${env.BUILD_URL}"
-            deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.3:8080')], contextPath: null, war: '**/*.war'
         }
         failure {
             emailext to: 'gonzalez161256@unis.edu.gt',
