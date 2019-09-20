@@ -19,7 +19,7 @@ public class JavaConnectDb {
             Class.forName("oracle.jdbc.driver.OracleDriver");
             switch (numHospital) {
                 case 1:
-                    conn = DriverManager.getConnection("jdbc:oracle:thin:@25.66.75.32:1521:XE", "c##hospital1", "adminm");
+                    conn = DriverManager.getConnection("jdbc:oracle:thin:@172.10.0.5:1521:ORCL18", "c##hospital1", "adminm");
                     break;
                 case 2:
                     //conexion del abue
