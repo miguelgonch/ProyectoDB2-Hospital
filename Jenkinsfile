@@ -7,7 +7,9 @@ pipeline{
             steps{
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
-                sh "echo ${env.GIT_AUTHOR_NAME}"
+                sh "git --no-pager show -s --format='%an' $GIT_COMMIT"
+                /*GIT_NAME=$(git --no-pager show -s --format='%an' $GIT_COMMIT)
+                    GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)*/
             }
         }
         stage('-- Clean, Package & Unit Tests--') {
