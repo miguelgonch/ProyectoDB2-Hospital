@@ -1,90 +1,79 @@
-def qgErrorStat = false
-def qgError = ''
-def git_commit_email = ''
-def git_commit_name = ''
-def git_commit_date = ''
-def git_commit_subject = ''
-pipeline{
-    agent any
-    stages {      
-        stage('Get git info'){
-            steps{
-                sh "echo ${env.GIT_COMMIT}"
-                sh "echo ${env.GIT_BRANCH}"
-                script{
-                    git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%ce' $GIT_COMMIT"
-                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%cn' $GIT_COMMIT"
-                    git_commit_date = sh returnStdout: true, script: "git --no-pager show -s --format='%cD' $GIT_COMMIT"
-                    git_commit_subject = sh returnStdout: true, script: "git --no-pager show -s --format='%s' $GIT_COMMIT"
-                }
-            }
-        }
-        stage('Clean & Package') {
-            steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn clean package -Dmaven.test.skip"
-                }
-            }
-        }
-        stage('Unit Tests') {
-            steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn test"
-                }
-            }
-        }
-        stage("SonarQube Analysis") {
+pipeline {
+    
+    agent {
+		label 'master'        
+    }
+    
+    stages {
+    
+        stage('Build') {
             steps {
                 withSonarQubeEnv('sonar') {
-                    withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
-                    }
-                }   
+                	
+	                    sh "/var/jenkins_home/apache-maven-3.5.0/bin/mvn clean install sonar:sonar -P sonar"
+	                    script {
+	                        def sonarProps = readFile encoding: 'utf-8', file: 'target/sonar/report-task.txt'
+	                        echo "sonarProps: " + sonarProps
+	                        def ceTaskUrl = 'ceTaskUrl'
+	                        sonarProps.split('\n').each { line ->
+	                            if (line.startsWith(ceTaskUrl)) {
+	                                 env.SONAR_CE_TASK_URL = line.substring(ceTaskUrl.length() + 1)
+	                                 echo "env.SONAR_CE_TASK_URL: " + env.SONAR_CE_TASK_URL  
+	                            }
+	                            
+	                            if (line.startsWith('serverUrl')) {
+	                            	 def sonarServerUrl = line.split('=')[1]
+	                            	 if (!sonarServerUrl.endsWith('/')) {
+	                            	      sonarServerUrl += '/'
+	                            	 }
+
+	                                 env.SONAR_SERVER_URL = sonarServerUrl
+	                                 echo "env.SONAR_SERVER_URL: " + env.SONAR_SERVER_URL  
+	                            }
+	                        }
+	                    }
+	                
+                }
             }
         }
-        stage("Quality Gate") {
+        
+        stage('Quality Gate') {
             steps {
-                timeout(time: 10, unit: 'MINUTES') {
-                    script {
-                        def qg = waitForQualityGate()
-                        //qgError = qg['qualityGate']
-                        //sh "echo ${qgError}"
-                        //sh "echo ${qg}"
-                        if (qg.status != 'OK') {
-                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
-                            qgErrorStat = true
-                        }
-                    }
-                }
+            	
+	                script {
+	                    sleep time: 3000, unit: 'MILLISECONDS'
+	                    timeout(time: 1, unit: 'MINUTES') {
+	                        waitUntil {
+	                            def jsonOutputFile = 'target/sonar/ceTask.json'
+	                            sh 'curl $SONAR_CE_TASK_URL -o ' + jsonOutputFile
+	                            def jsonOutputFileContents = readFile encoding: 'utf-8', file: jsonOutputFile
+	                            def ceTask = new groovy.json.JsonSlurper().parseText(jsonOutputFileContents)
+	                            env.SONAR_ANALYSIS_ID = ceTask['task']['analysisId']
+	                            return 'SUCCESS'.equals(ceTask['task']['status'])
+	                        }
+	                        def qualityGateUrl = env.SONAR_SERVER_URL + 'api/qualitygates/project_status?analysisId=' + env.SONAR_ANALYSIS_ID
+	                        echo "qualityGateUrl: " + qualityGateUrl
+	                        def qualityGateJsonFile = 'target/sonar/qualityGate.json'
+	                        sh 'curl ' + qualityGateUrl + ' -o ' + qualityGateJsonFile
+	                        def qualityGateJsonFileContents = readFile encoding: 'utf-8', file: qualityGateJsonFile
+	                        def qualityGateJson = new groovy.json.JsonSlurper().parseText(qualityGateJsonFileContents)
+	                        echo 'qualityGateJson: ' + qualityGateJson
+	                        if ("ERROR".equals(qualityGateJson['projectStatus']['status'])) {
+	                               error "Quality Gate Failure"
+	                        }
+	                        echo "Quality Gate Success"
+	                    }
+	                }
+                
             }
         }
-        stage('Deploy'){
-            steps{
-                deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
-            }
+        
+        stage('Code Coverage') {
+			steps {
+				jacoco()                          
+			}
         }
-       
+
     }
-    post {
-        success {
-            emailext to: 'gonzalez161256@unis.edu.gt',
-            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
-            body: "The build was successfull with ${env.BUILD_URL}"
-        }
-        failure {
-            sh "echo ${qgError}"
-            script {
-                if (qgErrorStat){
-                    emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                    subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - Quality Gate Failure",
-                    body: "There was a problem with ${env.BUILD_URL} \n It looks like Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules \n Error: ${qgError}"            
-                }
-                else{
-                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                    subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
-                    body: "There was a problem with ${env.BUILD_URL} \n Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
-                }
-            }
-        }
-    }
+    
 }
