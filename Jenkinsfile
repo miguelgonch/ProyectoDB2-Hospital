@@ -22,23 +22,21 @@ pipeline{
                 }
             }
         }*/
-        stage("-- build & SonarQube analysis --") {
+        stage("build & SonarQube analysis") {
+            agent any
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('My SonarQube Server') {
                     sh 'mvn clean package sonar:sonar'
-                }    
+                }   
             }
         }
-        
-        stage("-- Quality Gate Status Check--"){
-            timeout(time: 1, unit: 'HOURS') {
-                def qg = waitForQualityGate()
-                if (qg.status != 'OK') {
-                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
-                    
+        stage("Quality Gate") {
+            steps {
+                timeout(time: 1, unit: 'HOURS') {
+                    waitForQualityGate abortPipeline: true
                 }
             }
-        } 
+        }
         stage('-- Deploy --'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
