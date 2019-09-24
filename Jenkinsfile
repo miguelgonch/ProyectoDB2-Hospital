@@ -44,7 +44,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
+                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME + " -Dsonar.projectKey=proyectoDB2-Hospital-"+ env.JOB_BASE_NAME
                     }
                 }  
                 script{
@@ -80,20 +80,20 @@ pipeline{
     post {
         success {
             emailext to: 'gonzalez161256@unis.edu.gt',
-            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Success",
-            body: "The build was successfull with ${env.BUILD_URL}"
+            subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - Success",
+            body: "The build was successfull with ${env.BUILD_URL} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
         }
         failure {
             script {
                 def bodyText = ''
                 if (gpError=='ERROR'){
-                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n Error: Did not followed the Quality Gate Rules"
+                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n Error: Did not followed the Quality Gate Rules"
                 }
                 else{
-                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
+                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
                 emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - ${failure_stage} Failure",
+                subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - ${failure_stage} Failure",
                 body: bodyText
             }
         }
