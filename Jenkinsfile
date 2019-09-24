@@ -10,8 +10,6 @@ pipeline{
             steps{
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
-                sh "git --no-pager show -s --format='%an' $GIT_COMMIT"
-                sh "git --no-pager show -s --format='%ae' $GIT_COMMIT"
                 script{
                     git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%ce' $GIT_COMMIT"
                     git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%cn' $GIT_COMMIT"
@@ -41,7 +39,10 @@ pipeline{
                 timeout(time: 10, unit: 'MINUTES') {
                     script {
                         def qg = waitForQualityGate()
-                        if (qg.status != 'OK') {
+                        if (qg.status == 'ERROR') {
+                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
+                            qgErrorStat = true
+                        } else if (qg.status != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qg.status}"
                             qgErrorStat = true
                         }
@@ -70,7 +71,7 @@ pipeline{
                     body: "There was a problem with ${env.BUILD_URL} \n It looks like Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules"            
                 }
                 else{
-                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
+                     emailext to: 'gonzalez161256@unis.edu.gt',
                     subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
                     body: "There was a problem with ${env.BUILD_URL} \n Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
