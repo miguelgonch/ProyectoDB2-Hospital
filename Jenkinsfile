@@ -59,7 +59,7 @@ pipeline{
             }
         }*/
         stage("Quality Gate"){
-            node("sonar") {
+            steps{
                 withSonarQubeEnv('sonar') {
                     def ceTask
                     timeout(time: 1, unit: 'MINUTES') {
