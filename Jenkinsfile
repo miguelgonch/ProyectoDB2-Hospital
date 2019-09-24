@@ -1,14 +1,6 @@
 def qgErrorStat = false
-GIT_COMMIT_EMAIL = sh (
-    script:  "git --no-pager show -s --format='%an'",
-    returnStdout: true
-).trim()
-echo "Git committer email: ${GIT_COMMIT_EMAIL}"
-GIT_NAME = sh (
-    script:  "git --no-pager show -s --format='%ae'",
-    returnStdout: true
-).trim()
-echo "Git committer email: ${GIT_NAME}"
+def git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%an' $GIT_COMMIT"
+def git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%as' $GIT_COMMIT"
 pipeline{
     agent any
     stages {      
