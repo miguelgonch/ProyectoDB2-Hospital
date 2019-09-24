@@ -1,3 +1,4 @@
+def qgErrorStat = false
 pipeline{
     agent any
     stages {      
@@ -8,14 +9,6 @@ pipeline{
                 }
             }
         }
-        /*
-        stage('-- sonar --') {
-            steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                    sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.10.0.5:9000/sonar -Dsonar.host.url=http://172.10.0.5:9000"
-                }
-            }
-        }*/
         stage("-- SonarQube Analysis --") {
             steps {
                 withSonarQubeEnv('sonar') {
@@ -32,6 +25,7 @@ pipeline{
                         def qg = waitForQualityGate()
                         if (qg.status != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qg.status}"
+                            qgErrorStat = true
                         }
                     }
                 }
@@ -51,9 +45,24 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            emailext to: 'gonzalez161256@unis.edu.gt',
+            emailext to: 'gonzalez161256@unis.edu.gt,'+GIT_COMMITTER_EMAIL,
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
-            body: "There was a problem with ${env.BUILD_URL}"
+            script{
+                when{
+                    expression{
+                        qgErrorStat
+                    }
+                }
+                body: "There was a problem with ${env.BUILD_URL} \n It looks like ${GIT_AUTHOR_NAME} with ${GIT_COMMIT} in ${GIT_BRANCH} did not followed the Quality Gate Rules"
+            }
+            script{
+                when{
+                    expression{
+                        !qgErrorStat
+                    }
+                }
+                body: "There was a problem with ${env.BUILD_URL}"
+            }
         }
     }
 }
