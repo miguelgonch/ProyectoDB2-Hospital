@@ -48,11 +48,9 @@ pipeline{
                     script {
                         def qg = waitForQualityGate()
                         qgError = qg['qualityGate']
-                        echo qg
-                        echo qgError
                         //sh "echo ${qgError}"
                         //sh "echo ${qg}"
-                        if (qgError['status'] != 'OK') {
+                        if (qg.status != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qgError}"
                             qgErrorStat = true
                         }
