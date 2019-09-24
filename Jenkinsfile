@@ -8,10 +8,6 @@ pipeline{
                 sh 'echo GIT_COMMIT'
                 sh 'echo GIT_BRANCH'
                 sh 'echo GIT_AUTHOR_NAME'
-                script{
-                    /*GIT_NAME=$(git --no-pager show -s --format='%an' $GIT_COMMIT)
-                    GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)*/
-                }
             }
         }
         stage('-- Clean, Package & Unit Tests--') {
@@ -57,7 +53,7 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            emailext to: 'gonzalez161256@unis.edu.gt,'+GIT_EMAIL,
+            emailext to: 'gonzalez161256@unis.edu.gt',
             subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
             script{
                 when{
