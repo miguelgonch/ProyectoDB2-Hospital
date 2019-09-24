@@ -9,6 +9,7 @@ pipeline{
     stages {      
         stage('Get git info'){
             steps{
+                sh "echo ${env}"
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
                 script{
