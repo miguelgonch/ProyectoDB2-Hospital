@@ -1,6 +1,8 @@
 def qgErrorStat = false
 def git_commit_email = ''
 def git_commit_name = ''
+def git_commit_date = ''
+def git_commit_subject = ''
 pipeline{
     agent any
     stages {      
@@ -11,8 +13,10 @@ pipeline{
                 sh "git --no-pager show -s --format='%an' $GIT_COMMIT"
                 sh "git --no-pager show -s --format='%ae' $GIT_COMMIT"
                 script{
-                    git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%an' $GIT_COMMIT"
-                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%ae' $GIT_COMMIT"
+                    git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%ce' $GIT_COMMIT"
+                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%cn' $GIT_COMMIT"
+                    git_commit_date = sh returnStdout: true, script: "git --no-pager show -s --format='%cD' $GIT_COMMIT"
+                    git_commit_subject = sh returnStdout: true, script: "git --no-pager show -s --format='%s' $GIT_COMMIT"
                 }
             }
         }
@@ -59,27 +63,9 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            
-            script{
-                when{
-                    expression{
-                        qgErrorStat
-                    }
-                }
-                emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
-                body: "There was a problem with ${env.BUILD_URL} \n It looks like ${git_commit_name} with ${GIT_COMMIT} in ${GIT_BRANCH} did not followed the Quality Gate Rules"
-            }
-            script{
-                when{
-                    expression{
-                        !qgErrorStat
-                    }
-                }
-                emailext to: 'gonzalez161256@unis.edu.gt',
-                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
-                body: "There was a problem with ${env.BUILD_URL}"
-            }
+            emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
+            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
+            body: "There was a problem with ${env.BUILD_URL} \n It looks like ${git_commit_name} with ${git_commit_subject} (${GIT_COMMIT}) in ${GIT_BRANCH} did not followed the Quality Gate Rules"            
         }
     }
 }
