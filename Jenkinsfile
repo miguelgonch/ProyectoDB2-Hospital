@@ -1,4 +1,5 @@
 def qgErrorStat = false
+def qgError = ''
 def git_commit_email = ''
 def git_commit_name = ''
 def git_commit_date = ''
@@ -39,8 +40,9 @@ pipeline{
                 timeout(time: 10, unit: 'MINUTES') {
                     script {
                         def qg = waitForQualityGate()
-                        if (qg.qualityGate.status != 'OK') {
-                            error "Pipeline aborted due to a quality gate failure: ${qg.qualityGate.status}"
+                        qgError = qg.qualityGate
+                        if (qg.qualityGate['status'] != 'OK') {
+                            error "Pipeline aborted due to a quality gate failure: ${qg.qualityGate['status']}"
                             qgErrorStat = true
                         }
                     }
