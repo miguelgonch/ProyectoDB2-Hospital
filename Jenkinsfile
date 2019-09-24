@@ -7,7 +7,7 @@ def git_commit_subject = ''
 pipeline{
     agent any
     stages {      
-        stage('-- Get git info --'){
+        stage('Get git info'){
             steps{
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
@@ -19,21 +19,21 @@ pipeline{
                 }
             }
         }
-        stage('-- Clean & Package --') {
+        stage('Clean & Package') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package -Dmaven.test.skip"
                 }
             }
         }
-        stage('-- Unit Tests --') {
+        stage('Unit Tests') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn test"
                 }
             }
         }
-        stage("-- SonarQube Analysis --") {
+        stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
@@ -42,23 +42,23 @@ pipeline{
                 }   
             }
         }
-        stage("-- Quality Gate --") {
+        stage("Quality Gate") {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
                     script {
                         def qg = waitForQualityGate()
-                        qgError = qg
+                        qgError = qg.qualityGate
                         //sh "echo ${qgError}"
                         //sh "echo ${qg}"
                         if (qg.status != 'OK') {
-                            error "Pipeline aborted due to a quality gate failure: ${qgError}"
+                            error "Pipeline aborted due to a quality gate failure: ${qg.status}"
                             qgErrorStat = true
                         }
                     }
                 }
             }
         }
-        stage('-- Deploy --'){
+        stage('Deploy'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
             }
