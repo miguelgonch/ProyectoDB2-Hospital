@@ -18,7 +18,7 @@ pipeline{
         }*/
         stage("-- Build & SonarQube Analysis --") {
             steps {
-                withSonarQubeEnv('sonar') {
+                withSonarQubeEnv('sonarQG') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
                         sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
                     }
