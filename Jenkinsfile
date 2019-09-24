@@ -45,17 +45,15 @@ pipeline{
         stage("Quality Gate") {
             steps {
                 timeout(time: 10, unit: 'MINUTES') {
-                    waitForQualityGate abortPipeline: true
-                    /*script {
+                    //waitForQualityGate abortPipeline: true
+                    script {
                         def qg = waitForQualityGate()
-                        //qgError = qg['qualityGate']
-                        //sh "echo ${qgError}"
-                        //sh "echo ${qg}"
                         if (qg.status != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qg.status}"
                             qgErrorStat = true
+                            gpError = qg.status
                         }
-                    }*/
+                    }
                 }
             }
         }
@@ -73,17 +71,17 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            sh "echo ${qgError}"
+            sh "echo ${qg.status}"
             script {
                 if (qgErrorStat){
                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                     subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - Quality Gate Failure",
-                    body: "There was a problem with ${env.BUILD_URL} \n It looks like Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules \n Error: ${qgError}"            
+                    body: "There was a problem with ${env.BUILD_URL} \n It looks like Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules \n Error: ${qgError}"            
                 }
                 else{
-                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
+                    emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                     subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
-                    body: "There was a problem with ${env.BUILD_URL} \n Commiter: ${git_commit_name} \n Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
+                    body: "There was a problem with ${env.BUILD_URL} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
             }
         }
