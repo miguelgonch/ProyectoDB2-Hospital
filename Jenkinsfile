@@ -1,20 +1,14 @@
 pipeline{
     agent any
     stages {      
-        stage('-- clean & package --') {
+        stage('-- clean, package & Unit Tests--') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package"
                 }
             }
         }
-        stage('-- Unit Test --') {
-            steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn -Dtest=gio.co.hospitales.GetUsuarioTest test"
-                }
-            }
-        }/*
+        /*
         stage('-- sonar --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
@@ -24,12 +18,10 @@ pipeline{
         }*/
         stage("build & SonarQube analysis") {
             steps {
-                tool name: 'Maven', type: 'maven'
-                tool name: 'Node', type: 'nodejs'
                 withSonarQubeEnv('sonar') {
-                    
+                    withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                         sh "mvn sonar:sonar"
-                    
+                    }
                 }   
             }
         }
