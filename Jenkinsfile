@@ -1,6 +1,6 @@
 def qgErrorStat = false
-def git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%an' $GIT_COMMIT"
-def git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%as' $GIT_COMMIT"
+def git_commit_email = ''
+def git_commit_name = ''
 pipeline{
     agent any
     stages {      
@@ -10,6 +10,10 @@ pipeline{
                 sh "echo ${env.GIT_BRANCH}"
                 sh "git --no-pager show -s --format='%an' $GIT_COMMIT"
                 sh "git --no-pager show -s --format='%as' $GIT_COMMIT"
+                script{
+                    git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%an' $GIT_COMMIT"
+                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%as' $GIT_COMMIT"
+                }
             }
         }
         stage('-- Clean, Package & Unit Tests--') {
