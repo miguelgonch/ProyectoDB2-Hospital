@@ -85,14 +85,12 @@ pipeline{
         }
         failure {
             script {
+                emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
+                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - ${failure_stage} Failure",
                 if (gpError=='ERROR'){
-                    emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                    subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - Quality Gate Failure",
                     body: "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n It looks like Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules"            
                 }
                 else{
-                    emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
-                    subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
                     body: "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
             }
