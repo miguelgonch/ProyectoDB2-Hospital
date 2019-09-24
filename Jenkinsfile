@@ -44,7 +44,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
+                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME + " -Dsonar.projectKey=proyectoDB2-Hospital-"+ env.JOB_BASE_NAME
                     }
                 }  
                 script{
