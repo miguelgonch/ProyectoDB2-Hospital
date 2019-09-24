@@ -57,13 +57,8 @@ public class JavaConnectDbTest {
     public void testConnectDbH() {
         System.out.println("connectDbH");
         int num = 1;
-        try{
-            Connection result = JavaConnectDb.connectDbH(num);
-            assertNotNull(result);
-            
-        }catch(Error e){
-            fail("Error en la conexion");
-        }        
+        Connection result = JavaConnectDb.connectDbH(num);
+        assertNotNull(result);
     }
     
 }
