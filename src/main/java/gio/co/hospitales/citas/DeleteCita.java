@@ -54,7 +54,7 @@ public class DeleteCita extends HttpServlet {
             StringBuilder dataBuilder = new StringBuilder();
             dataBuilder.append(URLEncoder.encode("delId", "UTF-8")).append('=').append(URLEncoder.encode(delId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8082/proyectoDB2-Hospital1/restC/cita/deleteCita");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restC/cita/deleteCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestProperty("Content-Type", "application/x-www-form-urlencoded");

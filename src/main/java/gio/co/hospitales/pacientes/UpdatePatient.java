@@ -73,7 +73,7 @@ public class UpdatePatient extends HttpServlet {
                     append(URLEncoder.encode("pId", "UTF-8")).append('=').append(URLEncoder.encode(pId, "UTF-8")).append("&").
                     append(URLEncoder.encode("asegType", "UTF-8")).append('=').append(URLEncoder.encode(asegType, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8082/proyectoDB2-Hospital1/restP/patient/updatePatient");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restP/patient/updatePatient");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("PUT");
