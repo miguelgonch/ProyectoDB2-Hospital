@@ -53,14 +53,15 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            emailext to: 'gonzalez161256@unis.edu.gt',
-            subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
+            
             script{
                 when{
                     expression{
                         qgErrorStat
                     }
                 }
+                emailext to: 'gonzalez161256@unis.edu.gt',
+                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
                 body: "There was a problem with ${env.BUILD_URL} \n It looks like ${GIT_NAME} with ${GIT_COMMIT} in ${GIT_BRANCH} did not followed the Quality Gate Rules"
             }
             script{
@@ -69,6 +70,8 @@ pipeline{
                         !qgErrorStat
                     }
                 }
+                emailext to: 'gonzalez161256@unis.edu.gt',
+                subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure",
                 body: "There was a problem with ${env.BUILD_URL}"
             }
         }
