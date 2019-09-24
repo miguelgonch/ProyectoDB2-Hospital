@@ -92,7 +92,7 @@ pipeline{
                 else{
                     bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
-                emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
+                emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,
                 subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - ${failure_stage} Failure",
                 body: bodyText
             }
