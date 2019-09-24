@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages {      
-        stage('-- clean, package & Unit Tests--') {
+        stage('-- Clean, Package & Unit Tests--') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package"
@@ -16,7 +16,7 @@ pipeline{
                 }
             }
         }*/
-        stage("build & SonarQube analysis") {
+        stage("-- Build & SonarQube Analysis --") {
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
@@ -25,10 +25,11 @@ pipeline{
                 }   
             }
         }
-        stage("Quality Gate") {
+        stage("-- Quality Gate --") {
             steps {
-                timeout(time: 30, unit: 'MINUTES') {
+                timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
+                    retry(2)
                 }
             }
         }
