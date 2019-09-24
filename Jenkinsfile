@@ -16,9 +16,9 @@ pipeline{
                 }
             }
         }*/
-        stage("-- Build & SonarQube Analysis --") {
+        stage("-- SonarQube Analysis --") {
             steps {
-                withSonarQubeEnv('sonarQG') {
+                withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
                         sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
                     }
@@ -27,7 +27,6 @@ pipeline{
         }
         stage("-- Quality Gate --") {
             steps {
-                sleep(60)
                 timeout(time: 5, unit: 'MINUTES') {
                     waitForQualityGate abortPipeline: true
                     retry(2)
