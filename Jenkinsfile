@@ -9,10 +9,10 @@ pipeline{
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
                 sh "git --no-pager show -s --format='%an' $GIT_COMMIT"
-                sh "git --no-pager show -s --format='%as' $GIT_COMMIT"
+                sh "git --no-pager show -s --format='%ae' $GIT_COMMIT"
                 script{
                     git_commit_email = sh returnStdout: true, script: "git --no-pager show -s --format='%an' $GIT_COMMIT"
-                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%as' $GIT_COMMIT"
+                    git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%ae' $GIT_COMMIT"
                 }
             }
         }

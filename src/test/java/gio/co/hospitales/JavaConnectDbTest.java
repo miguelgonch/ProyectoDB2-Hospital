@@ -48,17 +48,5 @@ public class JavaConnectDbTest {
         int expResult = 1;
         int result = JavaConnectDb.getHospNum();
         assertEquals(expResult, result);
-    }
-
-    /**
-     * Test of connectDbH method, of class JavaConnectDb.
-     */
-    @Test
-    public void testConnectDbH() {
-        System.out.println("connectDbH");
-        int num = 1;
-        Connection result = JavaConnectDb.connectDbH(num);
-        assertNotNull(result);
-    }
-    
+    }    
 }
