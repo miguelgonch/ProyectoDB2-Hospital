@@ -5,9 +5,9 @@ pipeline{
     stages {      
         stage('-- Get git info --'){
             steps{
-                sh 'echo GIT_COMMIT'
-                sh 'echo GIT_BRANCH'
-                sh 'echo GIT_AUTHOR_NAME'
+                sh "echo ${env.GIT_COMMIT}"
+                sh "echo ${env.GIT_BRANCH}"
+                sh "echo ${env.GIT_AUTHOR_NAME}"
             }
         }
         stage('-- Clean, Package & Unit Tests--') {
