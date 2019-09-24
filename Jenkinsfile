@@ -24,10 +24,12 @@ pipeline{
         }*/
         stage("build & SonarQube analysis") {
             steps {
+                tool name: 'Maven', type: 'maven'
+                tool name: 'Node', type: 'nodejs'
                 withSonarQubeEnv('sonar') {
-                    withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
+                    
                         sh "mvn sonar:sonar"
-                    }
+                    
                 }   
             }
         }
