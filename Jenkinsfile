@@ -34,7 +34,6 @@ pipeline{
                             error "Pipeline aborted due to a quality gate failure: ${qg.status}"
                         }
                     }
-                    retry(2)
                 }
             }
         }
