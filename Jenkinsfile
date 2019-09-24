@@ -1,11 +1,11 @@
 def qgErrorStat = false
 GIT_COMMIT_EMAIL = sh (
-    script:  "git --no-pager show -s --format='%an' $GIT_COMMIT",
+    script:  "git --no-pager show -s --format='%an' ${env.GIT_COMMIT}",
     returnStdout: true
 ).trim()
 echo "Git committer email: ${GIT_COMMIT_EMAIL}"
 GIT_NAME = sh (
-    script:  "git --no-pager show -s --format='%ae' $GIT_COMMIT",
+    script:  "git --no-pager show -s --format='%ae' ${env.GIT_COMMIT}",
     returnStdout: true
 ).trim()
 echo "Git committer email: ${GIT_NAME}"
