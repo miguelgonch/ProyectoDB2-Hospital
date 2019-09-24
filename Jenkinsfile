@@ -9,7 +9,6 @@ pipeline{
     stages {      
         stage('Get git info'){
             steps{
-                sh "echo ${env}"
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
                 script{
@@ -62,26 +61,32 @@ pipeline{
         stage("Quality Gate"){
             steps{
                 withSonarQubeEnv('sonar') {
-                    script{
-                        def ceTask
-                        timeout(time: 1, unit: 'MINUTES') {
-                            waitUntil {
-                                sh 'curl -u $SONAR_AUTH_TOKEN $SONAR_CE_TASK_URL -o ceTask.json'
-                                ceTask = jsonParse(readFile('ceTask.json'))
-                                echo ceTask.toString()
-                                return "SUCCESS".equals(ceTask["task"]["status"])
+                    dir('restful-microservice') {
+                        script {
+                            sleep time: 3000, unit: 'MILLISECONDS'
+                            timeout(time: 1, unit: 'MINUTES') {
+                                waitUntil {
+                                    def jsonOutputFile = 'target/sonar/ceTask.json'
+                                    sh 'curl $SONAR_CE_TASK_URL -o ' + jsonOutputFile
+                                    def jsonOutputFileContents = readFile encoding: 'utf-8', file: jsonOutputFile
+                                    def ceTask = new groovy.json.JsonSlurper().parseText(jsonOutputFileContents)
+                                    env.SONAR_ANALYSIS_ID = ceTask['task']['analysisId']
+                                    return 'SUCCESS'.equals(ceTask['task']['status'])
+                                }
+                                def qualityGateUrl = env.SONAR_SERVER_URL + 'api/qualitygates/project_status?analysisId=' + env.SONAR_ANALYSIS_ID
+                                echo "qualityGateUrl: " + qualityGateUrl
+                                def qualityGateJsonFile = 'target/sonar/qualityGate.json'
+                                sh 'curl ' + qualityGateUrl + ' -o ' + qualityGateJsonFile
+                                def qualityGateJsonFileContents = readFile encoding: 'utf-8', file: qualityGateJsonFile
+                                def qualityGateJson = new groovy.json.JsonSlurper().parseText(qualityGateJsonFileContents)
+                                echo 'qualityGateJson: ' + qualityGateJson
+                                if ("ERROR".equals(qualityGateJson['projectStatus']['status'])) {
+                                    error "Quality Gate Failure"
+                                }
+                                echo "Quality Gate Success"
                             }
                         }
-                        def qualityGateUrl = env.SONAR_HOST_URL + "/api/qualitygates/project_status?analysisId=" + ceTask["task"]["analysisId"]
-                        sh "curl -u $SONAR_AUTH_TOKEN $qualityGateUrl -o qualityGate.json"
-                        def qualitygate = jsonParse(readFile('qualityGate.json'))
-                        echo qualitygate.toString()
-                        if ("ERROR".equals(qualitygate["projectStatus"]["status"])) {
-                        error  "Quality Gate failure"
-                        }
-                        echo  "Quality Gate success"
                     }
-                    
                 }
             }
         }
