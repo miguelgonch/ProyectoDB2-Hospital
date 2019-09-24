@@ -1,17 +1,10 @@
 pipeline{
     agent any
     stages {      
-        stage('--- clean ---') {
-            steps{
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn clean"
-                }
-            }
-        }
-        stage('-- package --') {
+        /*stage('-- clean & package --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn package"
+                    sh "mvn clean package"
                 }
             }
         }
@@ -28,7 +21,25 @@ pipeline{
                     sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.10.0.5:9000/sonar -Dsonar.host.url=http://172.10.0.5:9000"
                 }
             }
+        }*/
+        stage("-- build & SonarQube analysis --") {
+            node {
+                withSonarQubeEnv('sonar') {
+                    sh 'mvn clean package sonar:sonar'
+                }    
+            }
         }
+        
+        stage("-- Quality Gate Status Check--"){
+            timeout(time: 1, unit: 'HOURS') {
+                def qg = waitForQualityGate()
+                if (qg.status != 'OK') {
+                    color: 'good',
+                    error "Pipeline aborted due to quality gate failure: ${qg.status}"
+                    
+                }
+            }
+        } 
         stage('-- Deploy --'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
