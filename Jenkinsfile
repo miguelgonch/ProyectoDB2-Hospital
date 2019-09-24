@@ -47,7 +47,7 @@ pipeline{
                 timeout(time: 10, unit: 'MINUTES') {
                     script {
                         def qg = waitForQualityGate()
-                        qgError = qg['qualityGate']
+                        qgError = qg
                         //sh "echo ${qgError}"
                         //sh "echo ${qg}"
                         if (qg.status != 'OK') {
