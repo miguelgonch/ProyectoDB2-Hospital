@@ -3,11 +3,13 @@ def git_commit_email = ''
 def git_commit_name = ''
 def git_commit_date = ''
 def git_commit_subject = ''
+def failure_stage = ''
 pipeline{
     agent any
     stages {      
         stage('Get git info'){
             steps{
+                failure_stage=env.STAGE_NAME
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
                 script{
@@ -20,6 +22,7 @@ pipeline{
         }
         stage('Clean & Package') {
             steps {
+                failure_stage=env.STAGE_NAME
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package -Dmaven.test.skip"
                 }
@@ -27,6 +30,7 @@ pipeline{
         }
         stage('Unit Tests') {
             steps {
+                failure_stage=env.STAGE_NAME
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn test"
                 }
@@ -34,6 +38,7 @@ pipeline{
         }
         stage("SonarQube Analysis") {
             steps {
+                failure_stage=env.STAGE_NAME
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
                         sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
@@ -43,6 +48,7 @@ pipeline{
         }
         stage("Quality Gate") {
             steps {
+                failure_stage=env.STAGE_NAME
                 timeout(time: 10, unit: 'MINUTES') {
                     //waitForQualityGate abortPipeline: true
                     script {
@@ -57,6 +63,7 @@ pipeline{
         }
         stage('Deploy'){
             steps{
+                failure_stage=env.STAGE_NAME
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
             }
         }
@@ -73,12 +80,12 @@ pipeline{
                 if (gpError=='ERROR'){
                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                     subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date} - Quality Gate Failure",
-                    body: "There was a problem with ${env.BUILD_URL} \n It looks like Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules"            
+                    body: "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n It looks like Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n did not followed the Quality Gate Rules"            
                 }
                 else{
                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                     subject: "Finished Pipeline: ${currentBuild.fullDisplayName} - Failure - ${git_commit_date}",
-                    body: "There was a problem with ${env.BUILD_URL} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
+                    body: "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 }
             }
         }
