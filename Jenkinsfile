@@ -19,10 +19,17 @@ pipeline{
                 }
             }
         }
-        stage('-- Clean, Package & Unit Tests--') {
+        stage('-- Clean & Package --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn clean package"
+                    sh "mvn clean package -Dmaven.test.skip"
+                }
+            }
+        }
+        stage('-- Unit Tests --') {
+            steps {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                    sh "mvn test"
                 }
             }
         }
