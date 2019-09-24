@@ -9,7 +9,6 @@ pipeline{
     stages {      
         stage('Get git info'){
             steps{
-                failure_stage=env.STAGE_NAME
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
                 script{
@@ -17,38 +16,44 @@ pipeline{
                     git_commit_name = sh returnStdout: true, script: "git --no-pager show -s --format='%cn' $GIT_COMMIT"
                     git_commit_date = sh returnStdout: true, script: "git --no-pager show -s --format='%cD' $GIT_COMMIT"
                     git_commit_subject = sh returnStdout: true, script: "git --no-pager show -s --format='%s' $GIT_COMMIT"
+                    failure_stage=env.STAGE_NAME
                 }
             }
         }
         stage('Clean & Package') {
-            steps {
-                failure_stage=env.STAGE_NAME
+            steps {                
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package -Dmaven.test.skip"
+                }
+                script{
+                    failure_stage=env.STAGE_NAME
                 }
             }
         }
         stage('Unit Tests') {
             steps {
-                failure_stage=env.STAGE_NAME
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn test"
+                }
+                script{
+                    failure_stage=env.STAGE_NAME
                 }
             }
         }
         stage("SonarQube Analysis") {
             steps {
-                failure_stage=env.STAGE_NAME
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
                         sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME
                     }
-                }   
+                }  
+                script{
+                    failure_stage=env.STAGE_NAME
+                } 
             }
         }
         stage("Quality Gate") {
             steps {
-                failure_stage=env.STAGE_NAME
                 timeout(time: 10, unit: 'MINUTES') {
                     //waitForQualityGate abortPipeline: true
                     script {
@@ -57,14 +62,17 @@ pipeline{
                         if (qg.status != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qg.status}"
                         }
+                        failure_stage=env.STAGE_NAME
                     }
                 }
             }
         }
         stage('Deploy'){
             steps{
-                failure_stage=env.STAGE_NAME
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
+                script{
+                    failure_stage=env.STAGE_NAME
+                }
             }
         }
        
