@@ -1,5 +1,5 @@
 /target/*
-/src/main/java/gio/co/hospitales/JavaConnectDb.java
+#/src/main/java/gio/co/hospitales/JavaConnectDb.java
 /pom.xml
 /.settings/*
 /nbproject/
