@@ -131,6 +131,6 @@ public class PatientResourceTest {
         System.out.println("makeList");
         String pId = "1";
         PatientResource instance = new PatientResource();
-        instance.makeList(pId);
+        //instance.makeList(pId);
     }
 }
