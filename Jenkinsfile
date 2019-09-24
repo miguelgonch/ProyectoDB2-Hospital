@@ -20,7 +20,7 @@ pipeline{
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                        sh "mvn sonar:sonar -Dsonar.branch.name="+ env.BRANCH_NAME
+                        sh "mvn sonar:sonar -Dsonar.projectName="+ env.JOB_BASE_NAME
                     }
                 }   
             }
