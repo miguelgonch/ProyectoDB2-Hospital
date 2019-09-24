@@ -48,7 +48,8 @@ pipeline{
                     script {
                         def qg = waitForQualityGate()
                         qgError = qg['qualityGate']
-                        echo "hola"
+                        echo qg
+                        echo qgError
                         //sh "echo ${qgError}"
                         //sh "echo ${qg}"
                         if (qgError['status'] != 'OK') {
