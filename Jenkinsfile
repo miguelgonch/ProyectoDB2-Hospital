@@ -48,9 +48,9 @@ pipeline{
                     script {
                         def qg = waitForQualityGate()
                         qgError = qg['qualityGate']
-                        sh "echo ${qgError}"
-                        sh "echo ${qg}"
-                        if (qg['qualityGate']['status'] != 'OK') {
+                        //sh "echo ${qgError}"
+                        //sh "echo ${qg}"
+                        if (qgError['status'] != 'OK') {
                             error "Pipeline aborted due to a quality gate failure: ${qgError}"
                             qgErrorStat = true
                         }
@@ -72,6 +72,7 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
+            sh "echo ${qgError}"
             script {
                 if (qgErrorStat){
                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
