@@ -71,7 +71,7 @@ pipeline{
             body: "The build was successfull with ${env.BUILD_URL}"
         }
         failure {
-            sh "echo ${qg.status}"
+            sh "echo ${gpError}"
             script {
                 if (qgErrorStat){
                     emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
