@@ -1,9 +1,16 @@
 def qgErrorStat = false
-GIT_NAME=$(git --no-pager show -s --format='%an' $GIT_COMMIT)
-GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)
+
 pipeline{
     agent any
     stages {      
+        stage('-- Get git info --'){
+            steps{
+                script{
+                    GIT_NAME=$(git --no-pager show -s --format='%an' $GIT_COMMIT)
+                    GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)
+                }
+            }
+        }
         stage('-- Clean, Package & Unit Tests--') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
