@@ -25,7 +25,9 @@ pipeline{
         stage("build & SonarQube analysis") {
             steps {
                 withSonarQubeEnv('sonar') {
-                    sh 'mvn sonar:sonar'
+                    withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
+                        sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.10.0.5:9000/sonar -Dsonar.host.url=http://172.10.0.5:9000"
+                    }
                 }   
             }
         }
