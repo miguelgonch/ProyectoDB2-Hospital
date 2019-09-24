@@ -1,7 +1,7 @@
 pipeline{
     agent any
     stages {      
-        /*stage('-- clean & package --') {
+        stage('-- clean & package --') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn clean package"
@@ -20,13 +20,6 @@ pipeline{
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
                     sh "mvn sonar:sonar -Dsonar.jdbc.url=jdbc:h2:tcp://172.10.0.5:9000/sonar -Dsonar.host.url=http://172.10.0.5:9000"
                 }
-            }
-        }*/
-        stage("build & SonarQube analysis") {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    sh 'mvn clean package sonar:sonar'
-                }   
             }
         }
         stage("Quality Gate") {
