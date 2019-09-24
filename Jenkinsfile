@@ -5,6 +5,9 @@ pipeline{
     stages {      
         stage('-- Get git info --'){
             steps{
+                sh 'echo GIT_COMMIT'
+                sh 'echo GIT_BRANCH'
+                sh 'echo GIT_AUTHOR_NAME'
                 script{
                     GIT_NAME=$(git --no-pager show -s --format='%an' $GIT_COMMIT)
                     GIT_EMAIL=$(git --no-pager show -s --format='%ae' $GIT_COMMIT)
