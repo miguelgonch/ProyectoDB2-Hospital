@@ -53,10 +53,6 @@ public class GetPatient extends HttpServlet {
             while ((inputLine = in.readLine()) != null) {
                 response2.append(inputLine);
             }
-            if(true){
-                int num = 0;
-                int res = num *100;
-            }
             in.close();
             //print in String
             out.println(response2.toString());
