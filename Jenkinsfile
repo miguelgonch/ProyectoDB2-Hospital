@@ -81,16 +81,13 @@ pipeline{
         success {
             emailext to: 'gonzalez161256@unis.edu.gt',
             subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - Success",
-            body: "The build was successfull with ${env.BUILD_URL} \n Commiter: ${git_commit_name} Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
+            body: "The build was successfull with ${env.BUILD_URL} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
         }
         failure {
             script {
-                def bodyText = ''
+                def bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
                 if (gpError=='ERROR'){
-                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH} \n Error: Did not followed the Quality Gate Rules"
-                }
-                else{
-                    bodyText = "There was a problem with ${env.BUILD_URL} \n Failure in stage: ${failure_stage} \n Commiter: ${git_commit_name} (${git_commit_email}) Commit: ${git_commit_subject} (${GIT_COMMIT}) \n Branch: ${GIT_BRANCH}"
+                    bodyText = bodyText + " \n Error: Did not followed the Quality Gate Rules"
                 }
                 emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,
                 subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - ${failure_stage} Failure",
