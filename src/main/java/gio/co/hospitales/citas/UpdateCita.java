@@ -30,7 +30,7 @@ public class UpdateCita extends HttpServlet {
      */
     public UpdateCita() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons

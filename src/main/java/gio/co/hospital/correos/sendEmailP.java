@@ -60,7 +60,7 @@ public class sendEmailP extends HttpServlet {
      */
     public sendEmailP() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons

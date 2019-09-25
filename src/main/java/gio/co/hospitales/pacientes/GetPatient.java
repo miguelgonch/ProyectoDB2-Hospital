@@ -26,7 +26,7 @@ public class GetPatient extends HttpServlet {
      */
     public GetPatient() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
@@ -66,7 +66,7 @@ public class GetPatient extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        
         doGet(request, response);
     }
 

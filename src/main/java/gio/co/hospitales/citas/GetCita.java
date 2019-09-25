@@ -27,7 +27,7 @@ public class GetCita extends HttpServlet {
      */
     public GetCita() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
@@ -75,7 +75,7 @@ public class GetCita extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        
         doGet(request, response);
     }
 

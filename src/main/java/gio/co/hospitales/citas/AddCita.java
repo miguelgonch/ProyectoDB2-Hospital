@@ -32,7 +32,7 @@ public class AddCita extends HttpServlet {
      */
     public AddCita() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons

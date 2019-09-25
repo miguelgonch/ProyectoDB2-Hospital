@@ -33,7 +33,7 @@ public class AddPatient extends HttpServlet {
      */
     public AddPatient() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons

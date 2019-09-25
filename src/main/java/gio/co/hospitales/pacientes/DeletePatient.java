@@ -29,7 +29,7 @@ public class DeletePatient extends HttpServlet {
      */
     public DeletePatient() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons

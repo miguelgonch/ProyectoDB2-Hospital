@@ -27,7 +27,7 @@ public class GetServicios extends HttpServlet {
      */
     public GetServicios() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	// Generar jsons
@@ -78,7 +78,7 @@ public class GetServicios extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
         

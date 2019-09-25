@@ -30,7 +30,7 @@ public class DeleteCita extends HttpServlet {
      */
     public DeleteCita() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
