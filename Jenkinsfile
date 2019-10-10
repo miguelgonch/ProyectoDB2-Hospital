@@ -4,6 +4,7 @@ def git_commit_name = ''
 def git_commit_date = ''
 def git_commit_subject = ''
 def failure_stage = ''
+def magicMail = 'emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,'
 pipeline{
     agent any
     stages {      
@@ -89,7 +90,7 @@ pipeline{
                 if (gpError=='ERROR'){
                     bodyText = bodyText + " \n Error: Did not followed the Quality Gate Rules"
                 }
-                emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,
+                emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                 subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - ${failure_stage} Failure",
                 body: bodyText
             }
