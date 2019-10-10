@@ -89,7 +89,7 @@ pipeline{
                 if (gpError=='ERROR'){
                     bodyText = bodyText + " \n Error: Did not followed the Quality Gate Rules"
                 }
-                emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,
+                emailext to: 'gonzalez161256@unis.edu.gt,'+git_commit_email,
                 subject: "${currentBuild.fullDisplayName} - ${git_commit_date} - ${failure_stage} Failure",
                 body: bodyText
             }
