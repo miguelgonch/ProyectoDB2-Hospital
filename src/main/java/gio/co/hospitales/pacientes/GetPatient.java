@@ -26,7 +26,7 @@ public class GetPatient extends HttpServlet {
      */
     public GetPatient() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
@@ -40,9 +40,9 @@ public class GetPatient extends HttpServlet {
             String parPId = request.getParameter("pId");
             if ((parPId != null) && !(parPId.equals(""))) {
                 int pId = Integer.parseInt(request.getParameter("pId"));
-                url = "http://localhost:8082/proyectoDB2-Hospital1/restP/patient/getPatient?pId=" + pId;
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restP/patient/getPatient?pId=" + pId;
             } else {
-                url = "http://localhost:8082/proyectoDB2-Hospital1/restP/patient/getPatient";
+                url = "http://localhost:8080/proyectoDB2-Hospital1/restP/patient/getPatient";
             }
             URL obj = new URL(url);
             HttpURLConnection con = (HttpURLConnection) obj.openConnection();
@@ -66,7 +66,7 @@ public class GetPatient extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        
         doGet(request, response);
     }
 

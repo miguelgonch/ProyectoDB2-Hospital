@@ -32,7 +32,7 @@ public class AddCita extends HttpServlet {
      */
     public AddCita() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
@@ -67,7 +67,7 @@ public class AddCita extends HttpServlet {
                     append(URLEncoder.encode("seg", "UTF-8")).append('=').append(URLEncoder.encode(seg, "UTF-8")).append("&").
                     append(URLEncoder.encode("docId", "UTF-8")).append('=').append(URLEncoder.encode(docId, "UTF-8"));
             // Send data
-            URL url = new URL("http://localhost:8082/proyectoDB2-Hospital1/restC/cita/addCita");
+            URL url = new URL("http://localhost:8080/proyectoDB2-Hospital1/restC/cita/addCita");
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setDoOutput(true);
             conn.setRequestMethod("POST");

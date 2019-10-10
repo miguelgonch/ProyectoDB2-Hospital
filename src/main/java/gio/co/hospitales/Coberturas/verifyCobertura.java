@@ -33,7 +33,7 @@ public class verifyCobertura extends HttpServlet {
      */
     public verifyCobertura() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
     // Generar jsons
@@ -70,7 +70,7 @@ public class verifyCobertura extends HttpServlet {
      * response)
      */
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // TODO Auto-generated method stub
+        
         doGet(request, response);
     }
 }

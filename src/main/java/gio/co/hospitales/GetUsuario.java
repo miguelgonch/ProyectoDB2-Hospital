@@ -25,14 +25,14 @@ public class GetUsuario extends HttpServlet {
      */
     public GetUsuario() {
         super();
-        // TODO Auto-generated constructor stub
+        
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
                 getInfoCookies(request,response);
                 Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
                 response.setContentType("text/html");
@@ -59,7 +59,7 @@ public class GetUsuario extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 		doGet(request, response);
 	}
         
