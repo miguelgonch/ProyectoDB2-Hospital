@@ -4,7 +4,6 @@ def git_commit_name = ''
 def git_commit_date = ''
 def git_commit_subject = ''
 def failure_stage = ''
-def magicMail = 'emailext to: 'gonzalez161256@unis.edu.gt,jflores@unis.edu.gt,'+git_commit_email,'
 pipeline{
     agent any
     stages {      
