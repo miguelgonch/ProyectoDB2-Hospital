@@ -34,7 +34,8 @@ public class GetUsuario extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
                 getInfoCookies(request,response);
-                Connection conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
+                Connection conn;
+                conn = gio.co.hospitales.JavaConnectDb.connectDbH(hospitalNum);
                 response.setContentType("text/html");
                 PrintWriter out = response.getWriter();
                 try{
