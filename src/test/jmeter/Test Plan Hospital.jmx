@@ -29,7 +29,7 @@
           <collectionProp name="CookieManager.cookies">
             <elementProp name="user" elementType="Cookie" testname="user">
               <stringProp name="Cookie.value">mg</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/proyectoDB2-Hospital1</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -38,7 +38,7 @@
             </elementProp>
             <elementProp name="rol" elementType="Cookie" testname="rol">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/proyectoDB2-Hospital1</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -47,7 +47,7 @@
             </elementProp>
             <elementProp name="UId" elementType="Cookie" testname="UId">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/proyectoDB2-Hospital1</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -56,7 +56,7 @@
             </elementProp>
             <elementProp name="hospNum" elementType="Cookie" testname="hospNum">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/proyectoDB2-Hospital1</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -65,7 +65,7 @@
             </elementProp>
             <elementProp name="user" elementType="Cookie" testname="user">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -74,7 +74,7 @@
             </elementProp>
             <elementProp name="rol" elementType="Cookie" testname="rol">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -83,7 +83,7 @@
             </elementProp>
             <elementProp name="hospNum" elementType="Cookie" testname="hospNum">
               <stringProp name="Cookie.value">1</stringProp>
-              <stringProp name="Cookie.domain">localhost</stringProp>
+              <stringProp name="Cookie.domain">tomcat</stringProp>
               <stringProp name="Cookie.path">/</stringProp>
               <boolProp name="Cookie.secure">false</boolProp>
               <longProp name="Cookie.expires">0</longProp>
@@ -98,7 +98,7 @@
           <elementProp name="HTTPsampler.Arguments" elementType="Arguments" guiclass="HTTPArgumentsPanel" testclass="Arguments" testname="User Defined Variables" enabled="true">
             <collectionProp name="Arguments.arguments"/>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">tomcat</stringProp>
           <stringProp name="HTTPSampler.port">8082</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
@@ -139,7 +139,7 @@
               </elementProp>
             </collectionProp>
           </elementProp>
-          <stringProp name="HTTPSampler.domain">localhost</stringProp>
+          <stringProp name="HTTPSampler.domain">tomcat</stringProp>
           <stringProp name="HTTPSampler.port">8082</stringProp>
           <stringProp name="HTTPSampler.protocol"></stringProp>
           <stringProp name="HTTPSampler.contentEncoding"></stringProp>
