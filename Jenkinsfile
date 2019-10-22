@@ -30,10 +30,20 @@ pipeline{
                 }
             }
         }
-        stage('Unit Tests') {
+        /*stage('Unit Tests') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn test"
+                }
+                script{
+                    failure_stage=env.STAGE_NAME
+                }
+            }
+        }*/
+        stage('Stress Test') {
+            steps {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                    sh "mvn verify"
                 }
                 script{
                     failure_stage=env.STAGE_NAME
@@ -74,8 +84,7 @@ pipeline{
                     failure_stage=env.STAGE_NAME
                 }
             }
-        }
-       
+        }       
     }
     post {
         success {
