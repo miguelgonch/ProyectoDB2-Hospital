@@ -42,7 +42,7 @@ public class Prometheus {
     @Produces(MediaType.TEXT_HTML)
     public Response getPrometheus() {
         PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-        return Response.status(200).entity(prometheusRegistry.scrape().getBytes()).build();
+        return Response.status(200).entity(prometheusRegistry.scrape()).build();
 
     }
 }
