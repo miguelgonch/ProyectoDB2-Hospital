@@ -30,7 +30,7 @@ pipeline{
                 }
             }
         }
-        /*stage('Unit Tests') {
+        stage('Unit Tests') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn test"
@@ -39,7 +39,7 @@ pipeline{
                     failure_stage=env.STAGE_NAME
                 }
             }
-        }*/
+        }
         stage('Stress Test') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
@@ -51,7 +51,7 @@ pipeline{
                 }
             }
         }
-        /*stage("SonarQube Analysis") {
+        stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv('sonar') {
                     withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
@@ -77,7 +77,7 @@ pipeline{
                     }
                 }
             }
-        }*/
+        }
         stage('Deploy'){
             steps{
                 deploy adapters: [tomcat9(credentialsId: '3', path: '', url: 'http://172.10.0.4:8080')], contextPath: null, war: '**/*.war'
