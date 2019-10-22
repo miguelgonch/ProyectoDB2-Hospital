@@ -1,4 +1,3 @@
-
 package gio.co.hospital.ws.cita;
 
 import java.sql.Connection;
