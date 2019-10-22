@@ -64,7 +64,7 @@ public class CitasResourceTest {
         String result = sw.getBuffer().toString().trim();
         assertThat(result, CoreMatchers.containsString(expResult));
     }
-
+/*
     @Test
     public void testGetDisp() {
         System.out.println("getDisp");
@@ -130,5 +130,5 @@ public class CitasResourceTest {
         CitasResource instance = new CitasResource();
         instance.makeList(pId, citaId, pDocId);
     }
-    
+    */
 }
