@@ -28,6 +28,7 @@ public class Prometheus {
      * Creates a new instance of Prometheus
      */
     public Prometheus() {
+        //todavia no se ha configurado esta funcion
     }
 
     /**
