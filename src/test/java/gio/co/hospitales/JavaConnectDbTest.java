@@ -3,8 +3,13 @@
  */
 package gio.co.hospitales;
 
+import static org.hamcrest.CoreMatchers.instanceOf;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import java.sql.Connection;
 import java.sql.SQLException;
+
 import javax.sql.DataSource;
 
 import org.junit.After;
@@ -12,12 +17,9 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-import static org.junit.Assert.*;
 import org.junit.runner.RunWith;
-
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
 /**
@@ -74,7 +76,7 @@ public class JavaConnectDbTest {
         System.out.println("connectDbH");
 
         Connection conn = javaConnectDb.connectDbH(1);
-        assertNull(conn);
+        assertThat(conn, instanceOf(Connection.class));
     }
 
 }
