@@ -7,7 +7,7 @@ def failure_stage = ''
 pipeline{
     agent any
     stages {      
-        stage('Get git info'){
+        stage('Git info'){
             steps{
                 sh "echo ${env.GIT_COMMIT}"
                 sh "echo ${env.GIT_BRANCH}"
