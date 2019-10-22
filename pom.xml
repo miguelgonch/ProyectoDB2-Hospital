@@ -12,6 +12,8 @@
     <properties>
         <endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <timestamp>${maven.build.timestamp}</timestamp>
+        <maven.build.timestamp.format>yyyyMMdd</maven.build.timestamp.format>
     </properties>
     
     <dependencies>
@@ -192,7 +194,7 @@
                 <artifactId>jmeter-graph-maven-plugin</artifactId>
                 <version>0.1.0</version>
                 <configuration>
-                    <inputFile>${project.build.directory}/jmeter/results/20191022-Test Plan Hospital.jtl</inputFile>	
+                    <inputFile>${project.build.directory}/jmeter/results/${timestamp}-Test Plan Hospital.jtl</inputFile>	
                     <graphs>
                         <graph>
                         <pluginType>ResponseTimesOverTime</pluginType>
