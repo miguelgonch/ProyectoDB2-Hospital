@@ -60,7 +60,7 @@ public class CitasResourceTest {
 
         CitasResource instance = new CitasResource();
         instance.getCita(pId, docId, citaId);
-        String expResult = "id=\"1\"";
+        String expResult = "";
         String result = sw.getBuffer().toString().trim();
         assertThat(result, CoreMatchers.containsString(expResult));
     }
