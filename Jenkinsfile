@@ -40,17 +40,6 @@ pipeline{
                 }
             }
         }
-        stage('Stress Test') {
-            steps {
-                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn jmeter:jmeter"
-                    sh "mvn jmeter-graph:create-graph"                    
-                }
-                script{
-                    failure_stage=env.STAGE_NAME
-                }
-            }
-        }
         stage("SonarQube Analysis") {
             steps {
                 withSonarQubeEnv('sonar') {
@@ -85,7 +74,18 @@ pipeline{
                     failure_stage=env.STAGE_NAME
                 }
             }
-        }       
+        } 
+        stage('Stress Test') {
+            steps {
+                withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
+                    sh "mvn jmeter:jmeter"
+                    sh "mvn jmeter-graph:create-graph"                    
+                }
+                script{
+                    failure_stage=env.STAGE_NAME
+                }
+            }
+        }      
     }
     post {
         success {
