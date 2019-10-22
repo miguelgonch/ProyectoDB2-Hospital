@@ -44,6 +44,7 @@ pipeline{
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
                     sh "mvn jmeter:jmeter"
+                    sh "mvn jmeter-graph:create-graph"                    
                 }
                 script{
                     failure_stage=env.STAGE_NAME
