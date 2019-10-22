@@ -18,8 +18,8 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -32,8 +32,8 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -46,12 +46,11 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
     <servlet>
         <servlet-name>WS cobertura</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -61,8 +60,8 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -75,13 +74,11 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
-    
-    
     <servlet>
         <servlet-name>WS factura</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
@@ -91,21 +88,12 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet>
-        <servlet-name>prometheus</servlet-name>
-        <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>gio.co.hospital.ws.prometheus</param-value>
-        </init-param>
-        <load-on-startup>1</load-on-startup>
-    </servlet>
- <servlet>
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <servlet-class>com.sun.jersey.spi.container.servlet.ServletContainer</servlet-class>
         <init-param>
@@ -114,8 +102,8 @@
         </init-param>
         <!-- this is only required if using json -->
         <init-param>
-                <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-                <param-value>true</param-value>
+            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
+            <param-value>true</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>
@@ -124,10 +112,6 @@
     <servlet-mapping>
         <servlet-name>WS App</servlet-name>
         <url-pattern>/rest/*</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>prometheus</servlet-name>
-        <url-pattern>/prometheus/*</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>WS Hospital</servlet-name>
@@ -149,11 +133,25 @@
         <servlet-name>WS Hospital Usuarios</servlet-name>
         <url-pattern>/restU/*</url-pattern>
     </servlet-mapping>  
+    <filter>
+	<filter-name>javamelody</filter-name>
+	<filter-class>net.bull.javamelody.MonitoringFilter</filter-class>
+	<async-supported>true</async-supported>
+    </filter>
+    <filter-mapping>
+            <filter-name>javamelody</filter-name>
+            <url-pattern>/*</url-pattern>
+            <dispatcher>REQUEST</dispatcher>
+            <dispatcher>ASYNC</dispatcher>
+    </filter-mapping>
+    <listener>
+            <listener-class>net.bull.javamelody.SessionListener</listener-class>
+    </listener>
     <listener>
         <listener-class>
             gio.co.hospitales.Scheduler
         </listener-class>
-  </listener>
+    </listener>
 </web-app>
 
 
