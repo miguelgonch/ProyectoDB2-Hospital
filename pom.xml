@@ -20,17 +20,25 @@
             <groupId>junit</groupId>
             <artifactId>junit</artifactId> 
             <scope>test</scope>
+            <version>4.12</version>
         </dependency>
         <dependency>
             <groupId>org.mockito</groupId>
             <artifactId>mockito-core</artifactId> 
             <scope>test</scope>
+            <version>3.1.0</version>
         </dependency>
     <!-- App dependencies -->
+        <dependency>
+            <groupId>net.bull.javamelody</groupId>
+            <artifactId>javamelody-core</artifactId>
+            <version>1.45.0</version>
+        </dependency>
         <dependency>
             <groupId>org.mongodb</groupId>
             <artifactId>mongo-java-driver</artifactId>
             <type>jar</type>
+            <version>3.11.1</version>
         </dependency>
         <dependency>
             <groupId>com.oracle</groupId>
@@ -53,6 +61,7 @@
         <dependency>
             <groupId>com.sun.mail</groupId>
             <artifactId>javax.mail</artifactId>
+            <version>1.6.2</version>
         </dependency>
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
@@ -114,6 +123,7 @@
         <dependency>
             <groupId>com.fasterxml.jackson.core</groupId>
             <artifactId>jackson-databind</artifactId>
+            <version>2.10.0</version>
         </dependency>
     </dependencies>
 
