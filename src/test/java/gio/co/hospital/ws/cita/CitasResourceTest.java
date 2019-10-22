@@ -1,7 +1,6 @@
 package gio.co.hospital.ws.cita;
 
 import java.io.IOException;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
@@ -10,8 +9,6 @@ import java.io.StringWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.core.Response;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
