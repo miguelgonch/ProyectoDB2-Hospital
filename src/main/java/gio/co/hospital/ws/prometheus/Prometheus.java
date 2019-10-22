@@ -11,6 +11,8 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 /**
@@ -36,6 +38,8 @@ public class Prometheus {
      * @return Response type
      */
     @GET
+    @Path("/get")
+    @Produces(MediaType.TEXT_HTML)
     public Response getPrometheus() {
         PrometheusMeterRegistry prometheusRegistry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
         return Response.status(200).entity(prometheusRegistry.scrape().getBytes()).build();
