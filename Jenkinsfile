@@ -43,7 +43,7 @@ pipeline{
         stage('Stress Test') {
             steps {
                 withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin"]) {
-                    sh "mvn verify"
+                    sh "mvn jmeter:jmeter"
                 }
                 script{
                     failure_stage=env.STAGE_NAME
