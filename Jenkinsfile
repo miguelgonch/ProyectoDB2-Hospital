@@ -40,18 +40,18 @@ pipeline{
                 }
             }
         }
-        stage("SonarQube Analysis") {
-            steps {
-                withSonarQubeEnv('sonar') {
-                    withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
-                        sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME + " -Dsonar.projectKey=proyectoDB2-Hospital-"+ env.JOB_BASE_NAME
-                    }
-                }  
-                script{
-                    failure_stage=env.STAGE_NAME
-                } 
-            }
-        }
+        #stage("SonarQube Analysis") {
+         #   steps {
+          #      withSonarQubeEnv('sonar') {
+           #         withEnv(["PATH+MAVEN=${tool 'Maven'}/bin:JAVA_HOME/bin","PATH+NODE=${tool 'Node'}/bin"]) {
+            #            sh "mvn sonar:sonar -Dsonar.projectName=ProyectoDB2-Hospital-"+ env.JOB_BASE_NAME + " -Dsonar.projectKey=proyectoDB2-Hospital-"+ env.JOB_BASE_NAME
+             #       }
+              #  }  
+               # script{
+                #    failure_stage=env.STAGE_NAME
+                #} 
+         #   }
+        #}
         stage("Quality Gate") {
             steps {
                 timeout(time: 15, unit: 'MINUTES') {
