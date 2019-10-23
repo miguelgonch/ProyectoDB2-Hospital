@@ -194,7 +194,7 @@
                 <artifactId>jmeter-graph-maven-plugin</artifactId>
                 <version>0.1.0</version>
                 <configuration>
-                    <inputFile>${project.build.directory}/jmeter/results/${timestamp}-Test Plan Hospital.jtl</inputFile>	
+                    <inputFile>${project.build.directory}/jmeter/results/20191022-Test Plan Hospital.jtl</inputFile>	
                     <graphs>
                         <graph>
                         <pluginType>ResponseTimesOverTime</pluginType>
