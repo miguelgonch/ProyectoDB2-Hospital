@@ -465,6 +465,10 @@ public class CitasResource {
                 rsFac.close();
                 pstFac.close();
                 connFac.close();
+                while(true){
+                    int number = 1;
+                    int result = number + number;                    
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
