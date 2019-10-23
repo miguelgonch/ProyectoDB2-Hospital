@@ -1,14 +1,18 @@
 package gio.co.hospital.ws.cita;
 
-import java.io.IOException;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
+import java.sql.Connection;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.core.Response;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.After;
 import org.junit.Before;
@@ -61,18 +65,17 @@ public class CitasResourceTest {
         String result = sw.getBuffer().toString().trim();
         assertThat(result, CoreMatchers.containsString(expResult));
     }
-/*
+
     @Test
     public void testGetDisp() {
         System.out.println("getDisp");
         String fecha = "";
         int docId = 0;
         CitasResource instance = new CitasResource();
-        Response expResult = null;
         Response result = instance.getDisp(fecha, docId);
-        assertEquals(expResult, result);
+        assertThat(result, instanceOf(Connection.class));
     }
-
+/*
     @Test
     public void testAddCita() {
         System.out.println("addCita");
